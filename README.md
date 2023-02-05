@@ -4,9 +4,9 @@ FastAPI based movies&tv shows database application.
 
 ## Features
 
-- Search titles
-- Search actors and actresses by name, awards
-- Search tv shows and movies by genre
+- Get titles
+- Get actors and actresses by name, awards
+- Get tv shows and movies by genre
 - Get top 5 movies by ratings and reviews
 - Get episode information
 - Get all reviews
@@ -55,7 +55,7 @@ Use the package manager [pip](https://pip.pypa.io/en/stable/) to install depende
 ```bash
 pip install -r requirements.txt
 ```
-### Databse
+### Database
 Start MySQL server and execute all commands in **_init_db/init_db.sql_**
 
 ### Environment variables

@@ -1,0 +1,22 @@
+from sqlalchemy.orm import relationship
+from app.db.database import Base
+from sqlalchemy import INT, Column, ForeignKey, String, UniqueConstraint
+
+
+class MovieRatingAndReview(Base):
+    __tablename__ = "movies_rating_and_review"
+    grade = Column(INT)
+    comment = Column(String(200))
+
+    movie_id = Column(String(50), ForeignKey("movies.id"))
+    movie = relationship("Movie", lazy='subquery')
+
+    user_id = Column(String(50), ForeignKey("users.id"))
+    user = relationship("User", lazy='subquery')
+    __table_args__ = (UniqueConstraint("movie_id", "user_id", name="movie_user_uc"),)
+
+    def __init__(self, grade, comment, movie_id, user_id):
+        self.grade = grade
+        self.comment = comment
+        self.movie_id = movie_id
+        self.user_id = user_id

@@ -11,10 +11,12 @@ class User(Base):
     surname = Column(String(50))
     email = Column(String(100), unique=True)
     password = Column(String(100))
-    is_active = Column(Boolean)
+    is_active = Column(Boolean, default=True)
     is_superuser = Column(Boolean, default=False)
 
-    def __init__(self, name, surname, email, password, is_active=True, is_superuser=False):
+    def __init__(
+        self, name, surname, email, password, is_active=True, is_superuser=False
+    ):
         self.name = name
         self.surname = surname
         self.email = email

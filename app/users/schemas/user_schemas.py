@@ -4,7 +4,7 @@ from typing import Optional
 
 class UserSchema(BaseModel):
     id: UUID4
-    name: Optional[str]
+    name: str
     surname: str
     email: str
     password: str

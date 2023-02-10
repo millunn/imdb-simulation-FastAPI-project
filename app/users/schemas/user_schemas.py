@@ -1,5 +1,4 @@
 from pydantic import UUID4, BaseModel, EmailStr
-from typing import Optional
 
 
 class UserSchema(BaseModel):

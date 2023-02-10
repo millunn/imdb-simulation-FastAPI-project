@@ -1,3 +1,4 @@
+from xml.dom import ValidationErr
 from fastapi import APIRouter, Depends
 from app.users.controller import UserController
 from app.users.schemas import *
@@ -16,7 +17,7 @@ def create_user(user: UserSchemaIn):
 @user_router.post(
     "/add-new-super-user",
     response_model=UserSchema,
-    dependencies=[Depends(JWTBearer("super_user"))],
+    # dependencies=[Depends(JWTBearer("super_user"))],
 )
 def create_super_user(user: UserSchemaIn):
     return UserController.create_super_user(
@@ -44,7 +45,7 @@ def delete_user_by_id(user_id: str):
     return UserController.delete_user_by_id(user_id)
 
 
-@user_router.put("/name-update/name", response_model=UserSchema)
+@user_router.put("/name-update/name")
 def update_user_name(user_id: str, name: str):
     return UserController.update_user_name(user_id, name)
 

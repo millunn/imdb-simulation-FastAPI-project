@@ -1,4 +1,7 @@
+from http.client import HTTPResponse
+import json
 from fastapi import HTTPException, Response
+import fastapi
 from sqlalchemy.exc import IntegrityError
 from app.users.exceptions import UserInvalidPassword
 from app.users.services import UserServices, signJWT
@@ -71,6 +74,8 @@ class UserController:
     def update_user_name(user_id: str, name: str):
         try:
             user = UserServices.update_user_name(user_id, name)
+            json_str = fastapi.encoders.jsonable_encoder(user)
+            return fastapi.responses.JSONResponse(content=json_str)
         except Exception as e:
             raise HTTPException(status_code=500, detail=str(e))
 

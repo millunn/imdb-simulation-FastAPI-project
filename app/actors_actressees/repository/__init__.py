@@ -1,1 +1,2 @@
 from .actor_actress_repository import ActorActressRepository
+from .actor_actress_award_repository import ActorActressAwardRepository

@@ -1,4 +1,5 @@
 from fastapi import HTTPException, Response
+from app.awards.exceptions import AwardNotFoundException
 from app.awards.services import AwardServices
 
 
@@ -13,14 +14,17 @@ class AwardController:
 
     @staticmethod
     def get_award_by_id(award_id: str):
-        award = AwardServices.get_award_by_id(award_id)
-        if award:
-            return award
-        else:
-            raise HTTPException(
-                status_code=400,
-                detail=f"Award with provided id {award_id} does not exist",
-            )
+        try:
+            award = AwardServices.get_award_by_id(award_id)
+            if award:
+                return award
+            else:
+                raise HTTPException(
+                    status_code=400,
+                    detail=f"Award with provided id {award_id} does not exist",
+                )
+        except AwardNotFoundException as e:
+            raise HTTPException(status_code=e.code, detail=e.message)
 
     @staticmethod
     def get_award_by_category(category: str):
@@ -52,7 +56,12 @@ class AwardController:
     @staticmethod
     def delete_award_by_id(award_id: str):
         try:
-            AwardServices.delete_award_by_id(award_id)
-            return Response(content=f"Award with provided id - {award_id} is deleted")
+            if AwardServices.delete_study_programme_by_id(award_id):
+                return Response(
+                    content=f"Award with provided ID: {award_id} deleted.",
+                    status_code=200,
+                )
+        except AwardNotFoundException as e:
+            raise HTTPException(status_code=e.code, detail=e.message)
         except Exception as e:
             raise HTTPException(status_code=400, detail=str(e))

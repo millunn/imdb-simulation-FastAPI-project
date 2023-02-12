@@ -30,3 +30,24 @@ class UserSchemaLogIn(BaseModel):
 
     class Config:
         orm_mode = True
+
+
+class UserSchemaUpdateName(BaseModel):
+    name: str
+
+    class Config:
+        orm_mode = True
+
+
+class UserSchemaUpdateSurname(BaseModel):
+    surname: str
+
+    class Config:
+        orm_mode = True
+
+
+class UserSchemaUpdateActivity(BaseModel):
+    is_active: bool
+
+    class Config:
+        orm_mode = True

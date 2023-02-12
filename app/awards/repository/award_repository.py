@@ -1,5 +1,6 @@
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
+from app.awards.exceptions import AwardNotFoundException
 from app.awards.models import Award
 
 
@@ -38,6 +39,8 @@ class AwardRepository:
     def delete_award_by_id(self, award_id: str):
         try:
             award = self.db.query(Award).filter(Award.id == award_id).first()
+            if award is None:
+                raise AwardNotFoundException(code=400, message="Award not found")
             self.db.delete(award)
             self.db.commit()
             return True

@@ -1,4 +1,3 @@
-from xml.dom import ValidationErr
 from fastapi import APIRouter, Depends
 from app.users.controller import UserController
 from app.users.schemas import *
@@ -17,7 +16,7 @@ def create_user(user: UserSchemaIn):
 @user_router.post(
     "/add-new-super-user",
     response_model=UserSchema,
-    # dependencies=[Depends(JWTBearer("super_user"))],
+    dependencies=[Depends(JWTBearer("super_user"))],
 )
 def create_super_user(user: UserSchemaIn):
     return UserController.create_super_user(
@@ -45,16 +44,16 @@ def delete_user_by_id(user_id: str):
     return UserController.delete_user_by_id(user_id)
 
 
-@user_router.put("/name-update/name")
-def update_user_name(user_id: str, name: str):
-    return UserController.update_user_name(user_id, name)
+@user_router.put("/name-update/name", response_model=UserSchema)
+def update_user_name(user_id: str, update_data: UserSchemaUpdateName):
+    return UserController.update_user_name(user_id, update_data.name)
 
 
-@user_router.put("/update/surname", response_model=UserSchema)
-def update_user_surname(user_id: str, surname: str):
-    return UserController.update_user_surname(user_id, surname)
+@user_router.put("/surname-update/surname", response_model=UserSchema)
+def update_user_surname(user_id: str, update_data: UserSchemaUpdateSurname):
+    return UserController.update_user_surname(user_id, update_data.surname)
 
 
-@user_router.put("/update/is_active", response_model=UserSchema)
-def update_user_is_active(user_id: str, is_active: bool):
-    return UserController.update_user_is_active(user_id, is_active)
+@user_router.put("/is-active-update/is_active", response_model=UserSchema)
+def update_user_is_active(user_id: str, update_data: UserSchemaUpdateActivity):
+    return UserController.update_user_is_active(user_id, update_data.is_active)

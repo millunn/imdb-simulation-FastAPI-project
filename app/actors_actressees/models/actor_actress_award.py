@@ -1,18 +1,31 @@
 from sqlalchemy.orm import relationship
 from app.db.database import Base
-from sqlalchemy import Column, ForeignKey, String, UniqueConstraint
+from sqlalchemy import (
+    Column,
+    ForeignKeyConstraint,
+    PrimaryKeyConstraint,
+    String,
+)
 
 
 class ActorActressAward(Base):
     __tablename__ = "actor_actress_award"
-    actor_actress_id = Column(String(50), ForeignKey("actors_actresses.id"))
-    actor_actress = relationship("ActorActress", lazy="subquery")
+    actor_actress_id = Column(String(50), nullable=False)
+    actor_actress = relationship(
+        "ActorActress",
+        lazy="subquery",
+    )
 
-    award_id = Column(String(50), ForeignKey("awards.id"))
-    award = relationship("Award", lazy="subquery")
+    award_id = Column(String(50), nullable=False)
+    award = relationship(
+        "Award",
+        lazy="subquery",
+    )
 
     __table_args__ = (
-        UniqueConstraint("actor_actress_id", "award_id", name="actor_actress_award_uc"),
+        ForeignKeyConstraint(["actor_actress_id"], ["actors_actresses.id"]),
+        ForeignKeyConstraint(["award_id"], ["awards.id"]),
+        PrimaryKeyConstraint("actor_actress_id", "award_id"),
     )
 
     def __init__(self, actor_actress_id, award_id):

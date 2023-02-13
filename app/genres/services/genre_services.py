@@ -5,30 +5,39 @@ from app.genres.repository import GenreRepository
 class GenreServices:
     @staticmethod
     def create_genre(category, description):
-        with SessionLocal() as db:
-            try:
+        try:
+            with SessionLocal() as db:
                 genre_repository = GenreRepository(db)
                 return genre_repository.create_genre(category, description)
-            except Exception as e:
-                raise e
+        except Exception as e:
+            raise e
 
     @staticmethod
     def get_genre_by_id(genre_id: str):
-        with SessionLocal() as db:
-            genre_repository = GenreRepository(db)
-            return genre_repository.get_genre_by_id(genre_id)
+        try:
+            with SessionLocal() as db:
+                genre_repository = GenreRepository(db)
+                return genre_repository.get_genre_by_id(genre_id)
+        except Exception as e:
+            raise e
 
     @staticmethod
     def get_genre_by_category(category: str):
-        with SessionLocal() as db:
-            genre_repository = GenreRepository(db)
-            return genre_repository.get_genre_by_category(category)
+        try:
+            with SessionLocal() as db:
+                genre_repository = GenreRepository(db)
+                return genre_repository.get_genre_by_category(category)
+        except Exception as e:
+            raise e
 
     @staticmethod
     def get_all_genres():
-        with SessionLocal() as db:
-            genre_repository = GenreRepository(db)
-            return genre_repository.get_all_genres()
+        try:
+            with SessionLocal() as db:
+                genre_repository = GenreRepository(db)
+                return genre_repository.get_all_genres()
+        except Exception as e:
+            raise e
 
     @staticmethod
     def delete_genre_by_id(genre_id: str):

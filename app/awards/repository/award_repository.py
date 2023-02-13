@@ -21,14 +21,27 @@ class AwardRepository:
 
     def get_award_by_id(self, award_id: str):
         award = self.db.query(Award).filter(Award.id == award_id).first()
+        if award is None:
+            raise AwardNotFoundException(
+                message=f"Award with provided id: {award_id} not found.", code=400
+            )
         return award
 
     def get_award_by_category(self, category: str):
         award = self.db.query(Award).filter(Award.category == category).first()
+        if award is None:
+            raise AwardNotFoundException(
+                message=f"Award with provided category: {category} not found.", code=400
+            )
         return award
 
     def get_award_by_subcategory(self, subcategory: str):
         award = self.db.query(Award).filter(Award.subcategory == subcategory).first()
+        if award is None:
+            raise AwardNotFoundException(
+                message=f"Award with provided subcategory: {subcategory} not found.",
+                code=400,
+            )
         return award
 
     def get_all_awards(self):

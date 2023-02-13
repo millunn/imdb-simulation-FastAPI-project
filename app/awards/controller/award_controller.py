@@ -1,6 +1,7 @@
 from fastapi import HTTPException, Response
 from app.awards.exceptions import AwardNotFoundException
 from app.awards.services import AwardServices
+from sqlalchemy.exc import IntegrityError
 
 
 class AwardController:
@@ -9,6 +10,11 @@ class AwardController:
         try:
             award = AwardServices.create_award(category, subcategory)
             return award
+        except IntegrityError as e:
+            raise HTTPException(
+                status_code=400,
+                detail=f"Award with provided category - {category} and subcategory - {subcategory} already exists.",
+            )
         except Exception as e:
             raise HTTPException(status_code=500, detail=str(e))
 
@@ -16,42 +22,48 @@ class AwardController:
     def get_award_by_id(award_id: str):
         try:
             award = AwardServices.get_award_by_id(award_id)
-            if award:
-                return award
-            else:
-                raise HTTPException(
-                    status_code=400,
-                    detail=f"Award with provided id {award_id} does not exist",
-                )
+            return award
         except AwardNotFoundException as e:
-            raise HTTPException(status_code=e.code, detail=e.message)
+            raise HTTPException(
+                status_code=e.code,
+                detail=e.message,
+            )
+        except Exception as e:
+            raise HTTPException(status_code=500, detail=str(e))
 
     @staticmethod
     def get_award_by_category(category: str):
-        award = AwardServices.get_award_by_category(category)
-        if award:
+        try:
+            award = AwardServices.get_award_by_category(category)
             return award
-        else:
+        except AwardNotFoundException as e:
             raise HTTPException(
-                status_code=400,
-                detail=f"Award with provided category {category} does not exist",
+                status_code=e.code,
+                detail=e.message,
             )
+        except Exception as e:
+            raise HTTPException(status_code=500, detail=str(e))
 
     @staticmethod
     def get_award_by_subcategory(subcategory: str):
-        award = AwardServices.get_award_by_subcategory(subcategory)
-        if award:
+        try:
+            award = AwardServices.get_award_by_subcategory(subcategory)
             return award
-        else:
+        except AwardNotFoundException as e:
             raise HTTPException(
-                status_code=400,
-                detail=f"Award with provided subcategory {subcategory} does not exist",
+                status_code=e.code,
+                detail=e.message,
             )
+        except Exception as e:
+            raise HTTPException(status_code=500, detail=str(e))
 
     @staticmethod
     def get_all_awards():
-        awards = AwardServices.get_all_awards()
-        return awards
+        try:
+            awards = AwardServices.get_all_awards()
+            return awards
+        except Exception as e:
+            raise HTTPException(status_code=500, detail=str(e))
 
     @staticmethod
     def delete_award_by_id(award_id: str):

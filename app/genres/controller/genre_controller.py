@@ -1,5 +1,6 @@
 from fastapi import HTTPException, Response
-
+from sqlalchemy.exc import IntegrityError
+from app.genres.exceptions import GenreNotFoundException
 from app.genres.services import GenreServices
 
 
@@ -9,40 +10,57 @@ class GenreController:
         try:
             genre = GenreServices.create_genre(category, description)
             return genre
+        except IntegrityError as e:
+            raise HTTPException(
+                status_code=400,
+                detail=f"Genre with provided category - {category} already exists.",
+            )
         except Exception as e:
             raise HTTPException(status_code=500, detail=str(e))
 
     @staticmethod
     def get_genre_by_id(genre_id: str):
-        genre = GenreServices.get_genre_by_id(genre_id)
-        if genre:
+        try:
+            genre = GenreServices.get_genre_by_id(genre_id)
             return genre
-        else:
+        except GenreNotFoundException as e:
             raise HTTPException(
-                status_code=400,
-                detail=f"Genre with provided id {genre_id} does not exist",
+                status_code=e.code,
+                detail=e.message,
             )
+        except Exception as e:
+            raise HTTPException(status_code=500, detail=str(e))
 
     @staticmethod
     def get_genre_by_category(category: str):
-        genre = GenreServices.get_genre_by_category(category)
-        if genre:
+        try:
+            genre = GenreServices.get_genre_by_category(category)
             return genre
-        else:
+        except GenreNotFoundException as e:
             raise HTTPException(
-                status_code=400,
-                detail=f"Genre with provided category {category} does not exist",
+                status_code=e.code,
+                detail=e.message,
             )
+        except Exception as e:
+            raise HTTPException(status_code=500, detail=str(e))
 
     @staticmethod
     def get_all_genres():
-        genres = GenreServices.get_all_genres()
-        return genres
+        try:
+            genres = GenreServices.get_all_genres()
+            return genres
+        except Exception as e:
+            raise HTTPException(status_code=500, detail=str(e))
 
     @staticmethod
     def delete_genre_by_id(genre_id: str):
         try:
             GenreServices.delete_genre_by_id(genre_id)
             return Response(content=f"Genre with provided id - {genre_id} is deleted")
+        except GenreNotFoundException as e:
+            raise HTTPException(
+                status_code=e.code,
+                detail=e.message,
+            )
         except Exception as e:
             raise HTTPException(status_code=400, detail=str(e))

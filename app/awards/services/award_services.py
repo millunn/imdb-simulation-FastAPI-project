@@ -6,36 +6,48 @@ from app.db.database import SessionLocal
 class AwardServices:
     @staticmethod
     def create_award(category, subcategory):
-        with SessionLocal() as db:
-            try:
+        try:
+            with SessionLocal() as db:
                 award_repository = AwardRepository(db)
                 return award_repository.create_award(category, subcategory)
-            except Exception as e:
-                raise e
+        except Exception as e:
+            raise e
 
     @staticmethod
     def get_award_by_id(award_id: str):
-        with SessionLocal() as db:
-            award_repository = AwardRepository(db)
-            return award_repository.get_award_by_id(award_id)
+        try:
+            with SessionLocal() as db:
+                award_repository = AwardRepository(db)
+                return award_repository.get_award_by_id(award_id)
+        except Exception as e:
+            raise e
 
     @staticmethod
     def get_award_by_category(category: str):
-        with SessionLocal() as db:
-            award_repository = AwardRepository(db)
-            return award_repository.get_award_by_category(category)
+        try:
+            with SessionLocal() as db:
+                award_repository = AwardRepository(db)
+                return award_repository.get_award_by_category(category)
+        except Exception as e:
+            raise e
 
     @staticmethod
     def get_award_by_subcategory(subcategory: str):
-        with SessionLocal() as db:
-            award_repository = AwardRepository(db)
-            return award_repository.get_award_by_subcategory(subcategory)
+        try:
+            with SessionLocal() as db:
+                award_repository = AwardRepository(db)
+                return award_repository.get_award_by_subcategory(subcategory)
+        except Exception as e:
+            raise e
 
     @staticmethod
     def get_all_awards():
-        with SessionLocal() as db:
-            award_repository = AwardRepository(db)
-            return award_repository.get_all_awards()
+        try:
+            with SessionLocal() as db:
+                award_repository = AwardRepository(db)
+                return award_repository.get_all_awards()
+        except Exception as e:
+            raise e
 
     @staticmethod
     def delete_award_by_id(award_id: str):

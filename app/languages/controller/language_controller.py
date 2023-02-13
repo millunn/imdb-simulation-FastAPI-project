@@ -1,5 +1,6 @@
 from fastapi import HTTPException, Response
-
+from sqlalchemy.exc import IntegrityError
+from app.languages.exceptions import LanguageNotFoundException
 from app.languages.services import LanguageServices
 
 
@@ -9,46 +10,60 @@ class LanguageController:
         try:
             language = LanguageServices.create_language(name, abbreviation)
             return language
+        except IntegrityError as e:
+            raise HTTPException(
+                status_code=400,
+                detail=f"Language with provided name - {name} already exists.",
+            )
         except Exception as e:
             raise HTTPException(status_code=500, detail=str(e))
 
     @staticmethod
     def get_language_by_id(language_id: str):
-        language = LanguageServices.get_language_by_id(language_id)
-        if language:
+        try:
+            language = LanguageServices.get_language_by_id(language_id)
             return language
-        else:
+        except LanguageNotFoundException as e:
             raise HTTPException(
-                status_code=400,
-                detail=f"Language with provided id {language_id} does not exist",
+                status_code=e.code,
+                detail=e.message,
             )
+        except Exception as e:
+            raise HTTPException(status_code=500, detail=str(e))
 
     @staticmethod
     def get_language_by_name(name: str):
-        language = LanguageServices.get_language_by_name(name)
-        if language:
+        try:
+            language = LanguageServices.get_language_by_name(name)
             return language
-        else:
+        except LanguageNotFoundException as e:
             raise HTTPException(
-                status_code=400,
-                detail=f"Language with provided name {name} does not exist",
+                status_code=e.code,
+                detail=e.message,
             )
+        except Exception as e:
+            raise HTTPException(status_code=500, detail=str(e))
 
     @staticmethod
     def get_language_by_abbreviation(abbreviation: str):
-        language = LanguageServices.get_language_by_abbreviation(abbreviation)
-        if language:
+        try:
+            language = LanguageServices.get_language_by_abbreviation(abbreviation)
             return language
-        else:
+        except LanguageNotFoundException as e:
             raise HTTPException(
-                status_code=400,
-                detail=f"Language with provided abbreviation {abbreviation} does not exist",
+                status_code=e.code,
+                detail=e.message,
             )
+        except Exception as e:
+            raise HTTPException(status_code=500, detail=str(e))
 
     @staticmethod
     def get_all_languages():
-        languages = LanguageServices.get_all_languages()
-        return languages
+        try:
+            languages = LanguageServices.get_all_languages()
+            return languages
+        except Exception as e:
+            raise HTTPException(status_code=500, detail=str(e))
 
     @staticmethod
     def delete_language_by_id(language_id: str):
@@ -56,6 +71,11 @@ class LanguageController:
             LanguageServices.delete_language_by_id(language_id)
             return Response(
                 content=f"Language with provided id - {language_id} is deleted"
+            )
+        except LanguageNotFoundException as e:
+            raise HTTPException(
+                status_code=e.code,
+                detail=e.message,
             )
         except Exception as e:
             raise HTTPException(status_code=400, detail=str(e))

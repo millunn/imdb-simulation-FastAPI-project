@@ -1,5 +1,6 @@
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
+from app.languages.exceptions import LanguageNotFoundException
 
 from app.languages.models import Language
 
@@ -21,10 +22,18 @@ class LanguageRepository:
 
     def get_language_by_id(self, language_id: str):
         language = self.db.query(Language).filter(Language.id == language_id).first()
+        if language is None:
+            raise LanguageNotFoundException(
+                f"Language with provided id: {language_id} not found.", 400
+            )
         return language
 
     def get_language_by_name(self, name: str):
         language = self.db.query(Language).filter(Language.name == name).first()
+        if language is None:
+            raise LanguageNotFoundException(
+                f"Language with provided category: {name} not found.", 400
+            )
         return language
 
     def get_language_by_abbreviation(self, abbreviation: str):
@@ -33,6 +42,10 @@ class LanguageRepository:
             .filter(Language.abbreviation == abbreviation)
             .first()
         )
+        if language is None:
+            raise LanguageNotFoundException(
+                f"Language with provided abbreviation: {abbreviation} not found.", 400
+            )
         return language
 
     def get_all_languages(self):
@@ -45,6 +58,10 @@ class LanguageRepository:
             language = (
                 self.db.query(Language).filter(Language.id == language_id).first()
             )
+            if language is None:
+                raise LanguageNotFoundException(
+                    f"Language with provided id: {language_id} not found.", 400
+                )
             self.db.delete(language)
             self.db.commit()
             return True

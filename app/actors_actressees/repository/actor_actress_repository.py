@@ -1,5 +1,6 @@
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
+from app.actors_actressees.exceptions import ActorActressNotFoundException
 
 from app.actors_actressees.models import ActorActress
 
@@ -25,6 +26,11 @@ class ActorActressRepository:
             .filter(ActorActress.id == actor_actress_id)
             .first()
         )
+        if actor_actress is None:
+            raise ActorActressNotFoundException(
+                message=f"Actor/actress with provided id: {actor_actress_id} not found.",
+                code=400,
+            )
         return actor_actress
 
     # lista
@@ -32,6 +38,10 @@ class ActorActressRepository:
         actor_actress = (
             self.db.query(ActorActress).filter(ActorActress.name == name).all()
         )
+        if actor_actress is None:
+            raise ActorActressNotFoundException(
+                message=f"Actor/actress with provided name: {name} not found.", code=400
+            )
         return actor_actress
 
     # lista
@@ -39,6 +49,11 @@ class ActorActressRepository:
         actor_actress = (
             self.db.query(ActorActress).filter(ActorActress.surname == surname).all()
         )
+        if actor_actress is None:
+            raise ActorActressNotFoundException(
+                message=f"Actor/actress with provided surname: {surname} not found.",
+                code=400,
+            )
         return actor_actress
 
     def get_all_actor_actresss(self):
@@ -53,6 +68,11 @@ class ActorActressRepository:
                 .filter(ActorActress.id == actor_actress_id)
                 .first()
             )
+            if actor_actress is None:
+                raise ActorActressNotFoundException(
+                    message=f"Actor/actress with provided id: {actor_actress_id} not found.",
+                    code=400,
+                )
             self.db.delete(actor_actress)
             self.db.commit()
             return True

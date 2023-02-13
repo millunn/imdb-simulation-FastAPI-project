@@ -8,6 +8,8 @@ from app.actors_actressees.schemas import (
     ActorActressSchemaIn,
     ActorActressAwardSchema,
     ActorActressAwardSchemaIn,
+    AwardByActorActressSchemaOut,
+    ActorActressByAwardSchemaOut,
 )
 
 
@@ -19,7 +21,12 @@ actor_actress_award_router = APIRouter(
 )
 
 
-@actor_actress_router.post("/add-new-actor-actress", response_model=ActorActressSchema)
+# superuser
+@actor_actress_router.post(
+    "/add-new-actor-actress",
+    response_model=ActorActressSchema,
+    dependencies=[Depends(JWTBearer("super_user"))],
+)
 def create_actor_actress(actor_actress: ActorActressSchemaIn):
     return ActorActressController.create_actor_actress(
         actor_actress.name,
@@ -51,13 +58,17 @@ def get_all_actor_actresss():
     return ActorActressController.get_all_actor_actresss()
 
 
+# superuser
 @actor_actress_router.delete("/", dependencies=[Depends(JWTBearer("super_user"))])
 def delete_actor_actress_by_id(actor_actress_id: str):
     return ActorActressController.delete_actor_actress_by_id(actor_actress_id)
 
 
+# superuser
 @actor_actress_award_router.post(
-    "/add-new-actor-actress-award", response_model=ActorActressAwardSchema
+    "/add-new-actor-actress-award",
+    response_model=ActorActressAwardSchema,
+    dependencies=[Depends(JWTBearer("super_user"))],
 )
 def create_actor_actress_award(actor_actress_award: ActorActressAwardSchemaIn):
     return ActorActressAwardController.create_actor_actress_award(
@@ -67,14 +78,14 @@ def create_actor_actress_award(actor_actress_award: ActorActressAwardSchemaIn):
 
 
 @actor_actress_award_router.get(
-    "/actor-actress-id", response_model=list[ActorActressAwardSchema]
+    "/actor-actress-id", response_model=list[AwardByActorActressSchemaOut]
 )
 def get_award_by_actor_actress_id(actor_actress_id: str):
     return ActorActressAwardController.get_award_by_actor_actress_id(actor_actress_id)
 
 
 @actor_actress_award_router.get(
-    "/award-id", response_model=list[ActorActressAwardSchema]
+    "/award-id/", response_model=list[ActorActressByAwardSchemaOut]
 )
 def get_actor_actress_by_award_id(award_id: str):
     return ActorActressAwardController.get_actor_actress_by_award_id(award_id)

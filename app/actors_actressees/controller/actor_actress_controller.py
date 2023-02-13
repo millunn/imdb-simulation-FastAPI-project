@@ -1,5 +1,8 @@
 from fastapi import HTTPException, Response
-
+from sqlalchemy.exc import IntegrityError
+from app.actors_actressees.exceptions import (
+    ActorActressNotFoundException,
+)
 from app.actors_actressees.services import ActorActressServices
 
 
@@ -11,53 +14,74 @@ class ActorActressController:
                 name, surname, gender, about
             )
             return actor_actress
+        except IntegrityError as e:
+            raise HTTPException(
+                status_code=400,
+                detail=f"Actor/actress with provided data already exists.",
+            )
         except Exception as e:
             raise HTTPException(status_code=500, detail=str(e))
 
     @staticmethod
     def get_actor_actress_by_id(actor_actress_id: str):
-        actor_actress = ActorActressServices.get_actor_actress_by_id(actor_actress_id)
-        if actor_actress:
-            return actor_actress
-        else:
-            raise HTTPException(
-                status_code=400,
-                detail=f"Actor/actress with provided id {actor_actress_id} does not exist",
+        try:
+            actor_actress = ActorActressServices.get_actor_actress_by_id(
+                actor_actress_id
             )
+            return actor_actress
+        except ActorActressNotFoundException as e:
+            raise HTTPException(
+                status_code=e.code,
+                detail=e.message,
+            )
+        except Exception as e:
+            raise HTTPException(status_code=500, detail=str(e))
 
     @staticmethod
     def get_actor_actress_by_name(name: str):
-        actor_actress = ActorActressServices.get_actor_actress_by_name(name)
-        if actor_actress:
+        try:
+            actor_actress = ActorActressServices.get_actor_actress_by_name(name)
             return actor_actress
-        else:
+        except ActorActressNotFoundException as e:
             raise HTTPException(
-                status_code=400,
-                detail=f"Actor/actress with provided name {name} does not exist",
+                status_code=e.code,
+                detail=e.message,
             )
+        except Exception as e:
+            raise HTTPException(status_code=500, detail=str(e))
 
     @staticmethod
     def get_actor_actress_by_surname(surname: str):
-        actor_actress = ActorActressServices.get_actor_actress_by_surname(surname)
-        if actor_actress:
+        try:
+            actor_actress = ActorActressServices.get_actor_actress_by_surname(surname)
             return actor_actress
-        else:
+        except ActorActressNotFoundException as e:
             raise HTTPException(
-                status_code=400,
-                detail=f"Actor/actress with provided surname {surname} does not exist",
+                status_code=e.code,
+                detail=e.message,
             )
+        except Exception as e:
+            raise HTTPException(status_code=500, detail=str(e))
 
     @staticmethod
     def get_all_actor_actresss():
-        actor_actresss = ActorActressServices.get_all_actor_actresss()
-        return actor_actresss
+        try:
+            actor_actresss = ActorActressServices.get_all_actor_actresss()
+            return actor_actresss
+        except Exception as e:
+            raise HTTPException(status_code=500, detail=str(e))
 
     @staticmethod
     def delete_actor_actress_by_id(actor_actress_id: str):
         try:
             ActorActressServices.delete_actor_actress_by_id(actor_actress_id)
             return Response(
-                content=f"actor_actress with provided id - {actor_actress_id} is deleted"
+                content=f"Actor/actress with provided id - {actor_actress_id} is deleted"
+            )
+        except ActorActressNotFoundException as e:
+            raise HTTPException(
+                status_code=e.code,
+                detail=e.message,
             )
         except Exception as e:
-            raise HTTPException(status_code=400, detail=str(e))
+            raise HTTPException(status_code=500, detail=str(e))

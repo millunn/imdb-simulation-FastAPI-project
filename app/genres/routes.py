@@ -7,7 +7,11 @@ from app.users.controller.user_auth_controller import JWTBearer
 genre_router = APIRouter(tags=["genres"], prefix="/api/genres")
 
 
-@genre_router.post("/add-new-genre", response_model=GenreSchema)
+@genre_router.post(
+    "/add-new-genre",
+    response_model=GenreSchema,
+    dependencies=[Depends(JWTBearer("super_user"))],
+)
 def create_genre(genre: GenreSchemaIn):
     return GenreController.create_genre(genre.category, genre.description)
 

@@ -1,5 +1,6 @@
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
+from app.genres.exceptions import GenreNotFoundException
 
 from app.genres.models import Genre
 
@@ -21,10 +22,18 @@ class GenreRepository:
 
     def get_genre_by_id(self, genre_id: str):
         genre = self.db.query(Genre).filter(Genre.id == genre_id).first()
+        if genre is None:
+            raise GenreNotFoundException(
+                f"Genre with provided id: {genre_id} not found.", 400
+            )
         return genre
 
     def get_genre_by_category(self, category: str):
         genre = self.db.query(Genre).filter(Genre.category == category).first()
+        if genre is None:
+            raise GenreNotFoundException(
+                f"Genre with provided category: {category} not found.", 400
+            )
         return genre
 
     def get_all_genres(self):
@@ -35,6 +44,10 @@ class GenreRepository:
     def delete_genre_by_id(self, genre_id: str):
         try:
             genre = self.db.query(Genre).filter(Genre.id == genre_id).first()
+            if genre is None:
+                raise GenreNotFoundException(
+                    f"Genre with provided id: {genre_id} not found.", 400
+                )
             self.db.delete(genre)
             self.db.commit()
             return True

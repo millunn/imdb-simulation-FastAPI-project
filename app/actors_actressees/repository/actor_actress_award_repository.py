@@ -1,7 +1,10 @@
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
-
+from app.actors_actressees.exceptions import ActorActressNotFoundException
 from app.actors_actressees.models import ActorActressAward
+from app.actors_actressees.models import ActorActress
+from app.awards.exceptions import AwardNotFoundException
+from app.awards.models import Award
 
 
 class ActorActressAwardRepository:
@@ -19,20 +22,31 @@ class ActorActressAwardRepository:
             raise e
 
     def get_award_by_actor_actress_id(self, actor_actress_id: str):
-        award = (
+        award_by_actor_actress_id = (
             self.db.query(ActorActressAward)
             .filter(ActorActressAward.actor_actress_id == actor_actress_id)
             .all()
         )
-        return award
+        print(award_by_actor_actress_id)
+        if award_by_actor_actress_id is None:
+            raise AwardNotFoundException(
+                message=f"Award with provided actor/actress id: {actor_actress_id} not found",
+                code=400,
+            )
+        return award_by_actor_actress_id
 
     def get_actor_actress_by_award_id(self, award_id: str):
-        actor_actress = (
+        actor_actress_by_award_id = (
             self.db.query(ActorActressAward)
             .filter(ActorActressAward.award_id == award_id)
             .all()
         )
-        return actor_actress
+        if actor_actress_by_award_id is None:
+            raise ActorActressNotFoundException(
+                message=f"Actor/actress with provided award id: {award_id} not found",
+                code=400,
+            )
+        return actor_actress_by_award_id
 
     def get_all_actor_actresss_with_all_awards(self):
         actor_actresss_award = self.db.query(ActorActressAward).all()

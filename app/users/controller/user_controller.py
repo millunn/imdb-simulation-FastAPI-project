@@ -1,6 +1,6 @@
 from fastapi import HTTPException, Response
 from sqlalchemy.exc import IntegrityError
-from app.users.exceptions import UserInvalidPassword
+from app.users.exceptions import UserInvalidPasswordException, UserNotFoundException
 from app.users.services import UserServices, signJWT
 
 
@@ -38,32 +38,42 @@ class UserController:
             if user.is_superuser:
                 return signJWT(user.id, "super_user")
             return signJWT(user.id, "classic_user")
-        except UserInvalidPassword as e:
+        except UserInvalidPasswordException as e:
             raise HTTPException(status_code=e.code, detail=e.message)
         except Exception as e:
             raise HTTPException(status_code=500, detail=str(e))
 
     @staticmethod
     def get_user_by_id(user_id: str):
-        user = UserServices.get_user_by_id(user_id)
-        if user:
+        try:
+            user = UserServices.get_user_by_id(user_id)
             return user
-        else:
+        except UserNotFoundException as e:
             raise HTTPException(
-                status_code=400,
-                detail=f"User with provided id {user_id} does not exist",
+                status_code=e.code,
+                detail=e.message,
             )
+        except Exception as e:
+            raise HTTPException(status_code=500, detail=str(e))
 
     @staticmethod
     def get_all_users():
-        users = UserServices.get_all_users()
-        return users
+        try:
+            users = UserServices.get_all_users()
+            return users
+        except Exception as e:
+            print(e)
 
     @staticmethod
     def delete_user_by_id(user_id: str):
         try:
             UserServices.delete_user_by_id(user_id)
             return Response(content=f"User with id - {user_id} is deleted")
+        except UserNotFoundException as e:
+            raise HTTPException(
+                status_code=e.code,
+                detail=e.message,
+            )
         except Exception as e:
             raise HTTPException(status_code=400, detail=str(e))
 
@@ -72,6 +82,11 @@ class UserController:
         try:
             user = UserServices.update_user_name(user_id, name)
             return user
+        except UserNotFoundException as e:
+            raise HTTPException(
+                status_code=e.code,
+                detail=e.message,
+            )
         except Exception as e:
             raise HTTPException(status_code=500, detail=str(e))
 
@@ -80,6 +95,11 @@ class UserController:
         try:
             user = UserServices.update_user_surname(user_id, surname)
             return user
+        except UserNotFoundException as e:
+            raise HTTPException(
+                status_code=e.code,
+                detail=e.message,
+            )
         except Exception as e:
             raise HTTPException(status_code=500, detail=str(e))
 
@@ -88,5 +108,10 @@ class UserController:
         try:
             user = UserServices.update_user_is_active(user_id, is_active)
             return user
+        except UserNotFoundException as e:
+            raise HTTPException(
+                status_code=e.code,
+                detail=e.message,
+            )
         except Exception as e:
             raise HTTPException(status_code=500, detail=str(e))

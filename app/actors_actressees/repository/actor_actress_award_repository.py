@@ -53,7 +53,7 @@ class ActorActressAwardRepository:
         return actor_actresss_award
 
     # # lista
-    # def get_actor_actress_by_name(self, name: str):
+    # def get_all_awards_by_actor_actress_name(self, name: str):
     #     actor_actress = (
     #         self.db.query(ActorActressAward)
     #         .filter(ActorActressAward.name == name)
@@ -62,7 +62,16 @@ class ActorActressAwardRepository:
     #     return actor_actress
 
     # # lista
-    # def get_actor_actress_by_surname(self, surname: str):
+    # def get_all_awards_by_actor_actress_surname(self, surname: str):
+    #     actor_actress = (
+    #         self.db.query(ActorActressAward)
+    #         .filter(ActorActressAward.surname == surname)
+    #         .all()
+    #     )
+    #     return actor_actress
+
+    # # lista
+    # def get_all_actors_actresses_by_award_name(self, surname: str):
     #     actor_actress = (
     #         self.db.query(ActorActressAward)
     #         .filter(ActorActressAward.surname == surname)

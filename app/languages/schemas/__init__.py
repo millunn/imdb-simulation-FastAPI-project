@@ -1,2 +1,1 @@
-import imp
-from .language_schemas import *
+from .language_schema import *

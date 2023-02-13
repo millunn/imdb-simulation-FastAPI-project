@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Depends
 from app.genres.controller import GenreController
-from app.genres.schemas.genre_schemas import GenreSchema, GenreSchemaIn
+from app.genres.schemas.genre_schema import GenreSchema, GenreSchemaIn
 
 from app.users.controller.user_auth_controller import JWTBearer
 

@@ -1,1 +1,1 @@
-from .user_schemas import *
+from .user_schema import *

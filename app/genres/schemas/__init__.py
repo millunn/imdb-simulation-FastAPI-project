@@ -1,1 +1,1 @@
-from .genre_schemas import *
+from .genre_schema import *

@@ -15,7 +15,7 @@ from app.actors_actressees.schemas import (
 
 from app.users.controller.user_auth_controller import JWTBearer
 
-actor_actress_router = APIRouter(tags=["actor_actress"], prefix="/api/actor_actresss")
+actor_actress_router = APIRouter(tags=["actors_actresses"], prefix="/api/actor_actress")
 actor_actress_award_router = APIRouter(
     tags=["actor_actress_award"], prefix="/api/actor_actress_award"
 )

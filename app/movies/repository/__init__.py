@@ -1,1 +1,2 @@
 from .movie_repository import MovieRepository
+from .movie_actor_actress_repository import MovieActorActressRepository

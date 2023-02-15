@@ -56,21 +56,3 @@ class ActorActressByMovieSchemaOut(BaseModel):
 
     class Config:
         orm_mode = True
-
-
-class MovieByActorActressSchemaOut(BaseModel):
-    award: AwardSchema
-    movie: MovieSchema
-    actor_actress_id: UUID4
-
-    class Config:
-        orm_mode = True
-
-
-class MovieByAwardSchemaOut(BaseModel):
-    actor_actress: ActorActressSchema
-    movie: MovieSchema
-    award_id: UUID4
-
-    class Config:
-        orm_mode = True

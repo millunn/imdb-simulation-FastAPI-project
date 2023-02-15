@@ -1,10 +1,22 @@
 from fastapi import APIRouter, Depends
+
 from app.movies.controller import MovieController
+from app.movies.controller import MovieActorActressController
 from app.movies.schemas import MovieSchema, MovieSchemaSchemaIn
+from app.movies.schemas import (
+    MovieActorActressSchema,
+    MovieActorActressSchemaIn,
+    MovieByActorActressSchemaOut,
+    ActorActressByMovieSchemaOut,
+)
+
 
 from app.users.controller.user_auth_controller import JWTBearer
 
 movie_router = APIRouter(tags=["movies"], prefix="/api/movie")
+movie_actor_actress_router = APIRouter(
+    tags=["movie_actor_actress"], prefix="/api/movie_actor_actress"
+)
 
 
 # superuser
@@ -59,6 +71,44 @@ def get_all_movies():
 
 
 # superuser
-@movie_router.delete("/", dependencies=[Depends(JWTBearer("super_user"))])
+@movie_router.delete(
+    "/",
+)  # dependencies=[Depends(JWTBearer("super_user"))])
 def delete_movie_by_id(movie_id: str):
     return MovieController.delete_movie_by_id(movie_id)
+
+
+# superuser
+@movie_actor_actress_router.post(
+    "/add-new-movie-actor-actress",
+    response_model=MovieActorActressSchema,
+    # dependencies=[Depends(JWTBearer("super_user"))],
+)
+def create_movie_actor_actress(
+    movie_actor_actress_award: MovieActorActressSchemaIn,
+):
+    return MovieActorActressController.create_movie_actor_actress(
+        movie_actor_actress_award.movie_id, movie_actor_actress_award.actor_actress_id
+    )
+
+
+@movie_actor_actress_router.get(
+    "/actor-actress-id", response_model=list[MovieByActorActressSchemaOut]
+)
+def get_movie_by_actor_actress_id(actor_actress_id: str):
+    return MovieActorActressController.get_movie_by_actor_actress_id(actor_actress_id)
+
+
+@movie_actor_actress_router.get(
+    "/actor-actress/movie-id", response_model=list[ActorActressByMovieSchemaOut]
+)
+def get_actor_actress_by_movie_id(movie_id: str):
+    return MovieActorActressController.get_actor_actress_by_movie_id(movie_id)
+
+
+@movie_actor_actress_router.get(
+    "/get-all-actor_actresses-with-all-awards",
+    response_model=list[MovieActorActressSchema],
+)
+def get_all_movies_with_all_actors_actresses():
+    return MovieActorActressController.get_all_movies_with_all_actors_actresses()

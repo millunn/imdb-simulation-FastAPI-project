@@ -1,2 +1,2 @@
 from .actor_actress_controller import ActorActressController
-from .actor_actress_award_controller import ActorActressAwardController
+from .actor_actress_award_movie_controller import ActorActressAwardMovieController

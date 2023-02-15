@@ -1,5 +1,7 @@
 from fastapi import HTTPException, Response
 from sqlalchemy.exc import IntegrityError
+from app.genres.exceptions import GenreNotFoundException
+from app.languages.exceptions import LanguageNotFoundException
 from app.movies.exceptions import MovieNotFoundException
 
 from app.movies.services import MovieServices
@@ -16,8 +18,8 @@ class MovieController:
         writer,
         producer,
         synopsis,
-        language_id,
-        genre_id,
+        language_name,
+        genre_category,
     ):
         try:
             movie = MovieServices.create_movie(
@@ -29,10 +31,20 @@ class MovieController:
                 writer,
                 producer,
                 synopsis,
-                language_id,
-                genre_id,
+                language_name,
+                genre_category,
             )
             return movie
+        except LanguageNotFoundException as e:
+            raise HTTPException(
+                status_code=e.code,
+                detail=e.message,
+            )
+        except GenreNotFoundException as e:
+            raise HTTPException(
+                status_code=e.code,
+                detail=e.message,
+            )
         except IntegrityError as e:
             raise HTTPException(
                 status_code=400,
@@ -58,6 +70,45 @@ class MovieController:
     def get_movie_by_title(title: str):
         try:
             movie = MovieServices.get_movie_by_title(title)
+            return movie
+        except MovieNotFoundException as e:
+            raise HTTPException(
+                status_code=e.code,
+                detail=e.message,
+            )
+        except Exception as e:
+            raise HTTPException(status_code=500, detail=str(e))
+
+    @staticmethod
+    def get_movie_by_language(language: str):
+        try:
+            movie = MovieServices.get_movie_by_language(language)
+            return movie
+        except MovieNotFoundException as e:
+            raise HTTPException(
+                status_code=e.code,
+                detail=e.message,
+            )
+        except Exception as e:
+            raise HTTPException(status_code=500, detail=str(e))
+
+    @staticmethod
+    def get_movie_by_genre(genre: str):
+        try:
+            movie = MovieServices.get_movie_by_genre(genre)
+            return movie
+        except MovieNotFoundException as e:
+            raise HTTPException(
+                status_code=e.code,
+                detail=e.message,
+            )
+        except Exception as e:
+            raise HTTPException(status_code=500, detail=str(e))
+
+    @staticmethod
+    def get_movie_by_release_year(release_year: str):
+        try:
+            movie = MovieServices.get_movie_by_release_year(release_year)
             return movie
         except MovieNotFoundException as e:
             raise HTTPException(

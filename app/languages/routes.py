@@ -11,7 +11,7 @@ language_router = APIRouter(tags=["languages"], prefix="/api/languages")
 @language_router.post(
     "/add-new-language",
     response_model=LanguageSchema,
-    dependencies=[Depends(JWTBearer("super_user"))],
+    # dependencies=[Depends(JWTBearer("super_user"))],
 )
 def create_language(language: LanguageSchemaIn):
     return LanguageController.create_language(language.name, language.abbreviation)

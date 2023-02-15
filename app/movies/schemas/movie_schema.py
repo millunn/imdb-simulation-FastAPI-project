@@ -1,4 +1,4 @@
-from datetime import date, time
+from datetime import time
 from pydantic import UUID4, BaseModel
 
 
@@ -7,11 +7,13 @@ class MovieSchema(BaseModel):
     title: str
     plot: str
     duration: time
-    release_year: date
+    release_year: str
     director: str
     writer: str
     producer: str
     synopsis: str
+    language_name: str
+    genre_category: str
 
     class Config:
         orm_mode = True
@@ -26,6 +28,8 @@ class MovieSchemaSchemaIn(BaseModel):
     writer: str
     producer: str
     synopsis: str
+    language_name: str
+    genre_category: str
 
     class Config:
         orm_mode = True

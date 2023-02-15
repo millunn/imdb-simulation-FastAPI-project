@@ -20,8 +20,8 @@ class MovieRepository:
         writer,
         producer,
         synopsis,
-        language_id,
-        genre_id,
+        language_name,
+        genre_category,
     ):
         try:
             movie = Movie(
@@ -33,8 +33,8 @@ class MovieRepository:
                 writer,
                 producer,
                 synopsis,
-                language_id,
-                genre_id,
+                language_name,
+                genre_category,
             )
             self.db.add(movie)
             self.db.commit()
@@ -54,10 +54,46 @@ class MovieRepository:
 
     # lista
     def get_movie_by_title(self, title: str):
-        movie = self.db.query(Movie).filter(Movie.title == title).all()
-        if movie is None:
+        movie = self.db.query(Movie).filter(Movie.title.ilike(f"%{title}%")).all()
+        if (movie is None) or (movie == []):
             raise MovieNotFoundException(
                 message=f"Movie with provided title: {title} not found.",
+                code=400,
+            )
+        return movie
+
+    # lista
+    def get_movie_by_language(self, language: str):
+        movie = (
+            self.db.query(Movie)
+            .filter(Movie.language_name.ilike(f"%{language}%"))
+            .all()
+        )
+        if (movie is None) or (movie == []):
+            raise MovieNotFoundException(
+                message=f"Movie with provided language: {language} not found.",
+                code=400,
+            )
+        return movie
+
+    # lista
+    def get_movie_by_genre(self, genre: str):
+        movie = (
+            self.db.query(Movie).filter(Movie.genre_category.ilike(f"%{genre}%")).all()
+        )
+        if (movie is None) or (movie == []):
+            raise MovieNotFoundException(
+                message=f"Movie with provided genre: {genre} not found.",
+                code=400,
+            )
+        return movie
+
+    # lista
+    def get_movie_by_release_year(self, release_year: str):
+        movie = self.db.query(Movie).filter(Movie.release_year == release_year).all()
+        if (movie is None) or (movie == []):
+            raise MovieNotFoundException(
+                message=f"Movie with provided release_year: {release_year} not found.",
                 code=400,
             )
         return movie

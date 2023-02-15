@@ -1,2 +1,2 @@
 from .actor_actress_services import ActorActressServices
-from .actor_actress_award_services import ActorActressAwardServices
+from .actor_actress_award_movie_services import ActorActressAwardMovieServices

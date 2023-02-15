@@ -8,7 +8,7 @@ from app.genres.routes import genre_router
 from app.languages.routes import language_router
 from app.actors_actressees.routes import (
     actor_actress_router,
-    actor_actress_award_router,
+    actor_actress_award_movie_router,
 )
 from app.movies.routes import movie_router
 
@@ -22,7 +22,7 @@ def init_app():
     app.include_router(genre_router)
     app.include_router(language_router)
     app.include_router(actor_actress_router)
-    app.include_router(actor_actress_award_router)
+    app.include_router(actor_actress_award_movie_router)
     app.include_router(movie_router)
     return app
 

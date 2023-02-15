@@ -1,7 +1,7 @@
 from fastapi import HTTPException
 from sqlalchemy.exc import IntegrityError
-from app.actors_actressees.exceptions import ActorActressNotFoundException
-from app.actors_actressees.services import ActorActressAwardMovieServices
+from app.actors_actresses.exceptions import ActorActressNotFoundException
+from app.actors_actresses.services import ActorActressAwardMovieServices
 from app.awards.exceptions import AwardNotFoundException
 from app.movies.exceptions import MovieNotFoundException
 

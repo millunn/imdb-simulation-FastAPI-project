@@ -1,27 +1,23 @@
 from fastapi import HTTPException
 from sqlalchemy.exc import IntegrityError
-from app.actors_actresses.exceptions import ActorActressNotFoundException
+from app.awards.exceptions import AwardNotFoundException
 from app.movies.exceptions import MovieNotFoundException
-from app.movies.services import MovieActorActressServices
+from app.movies.services import MovieAwardServices
 
 
-class MovieActorActressController:
+class MovieAwardController:
     @staticmethod
-    def create_movie_actor_actress(movie_id, actor_actress_id):
+    def create_movie_award(movie_id, award_id):
         try:
-            movie_actor_actress_award = (
-                MovieActorActressServices.create_movie_actor_actress(
-                    movie_id, actor_actress_id
-                )
-            )
-            return movie_actor_actress_award
+            movie_award = MovieAwardServices.create_movie_award(movie_id, award_id)
+            return movie_award
 
         except MovieNotFoundException as e:
             raise HTTPException(
                 status_code=e.code,
                 detail=e.message,
             )
-        except ActorActressNotFoundException as e:
+        except AwardNotFoundException as e:
             raise HTTPException(
                 status_code=e.code,
                 detail=e.message,
@@ -33,11 +29,9 @@ class MovieActorActressController:
             raise HTTPException(status_code=500, detail=str(e))
 
     @staticmethod
-    def get_movie_by_actor_actress_id(actor_actress_id: str):
+    def get_movie_by_award_id(award_id: str):
         try:
-            movie = MovieActorActressServices.get_movie_by_actor_actress_id(
-                actor_actress_id
-            )
+            movie = MovieAwardServices.get_movie_by_award_id(award_id)
             return movie
         except MovieNotFoundException as e:
             raise HTTPException(
@@ -48,13 +42,11 @@ class MovieActorActressController:
             raise HTTPException(status_code=500, detail=str(e))
 
     @staticmethod
-    def get_actor_actress_by_movie_id(movie_id: str):
+    def get_award_by_movie_id(movie_id: str):
         try:
-            actor_actress = MovieActorActressServices.get_actor_actress_by_movie_id(
-                movie_id
-            )
-            return actor_actress
-        except ActorActressNotFoundException as e:
+            award = MovieAwardServices.get_award_by_movie_id(movie_id)
+            return award
+        except AwardNotFoundException as e:
             raise HTTPException(
                 status_code=e.code,
                 detail=e.message,
@@ -63,11 +55,9 @@ class MovieActorActressController:
             raise HTTPException(status_code=500, detail=str(e))
 
     @staticmethod
-    def get_all_movies_with_all_actors_actresses():
+    def get_all_movies_with_all_awards():
         try:
-            movie_actor_actress_repository = (
-                MovieActorActressServices.get_all_movies_with_all_actors_actresses()
-            )
-            return movie_actor_actress_repository
+            movie_award_repository = MovieAwardServices.get_all_movies_with_all_awards()
+            return movie_award_repository
         except Exception as e:
             raise HTTPException(status_code=500, detail=str(e))

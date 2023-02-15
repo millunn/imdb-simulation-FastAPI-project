@@ -1,6 +1,6 @@
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
-from app.actors_actressees.exceptions import ActorActressNotFoundException
+from app.actors_actresses.exceptions import ActorActressNotFoundException
 from app.movies.exceptions import MovieNotFoundException
 
 from app.movies.models import MovieActorActress
@@ -26,7 +26,6 @@ class MovieActorActressRepository:
             .filter(MovieActorActress.actor_actress_id == actor_actress_id)
             .all()
         )
-        print(movie_by_actor_actress_id)
         if movie_by_actor_actress_id is None:
             raise MovieNotFoundException(
                 message=f"Movie with provided actor/actress id: {actor_actress_id} not found",

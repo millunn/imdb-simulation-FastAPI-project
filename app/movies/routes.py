@@ -1,13 +1,23 @@
 from fastapi import APIRouter, Depends
+from pydantic import UUID4
 
-from app.movies.controller import MovieController
-from app.movies.controller import MovieActorActressController
-from app.movies.schemas import MovieSchema, MovieSchemaSchemaIn
+from app.movies.controller import (
+    MovieController,
+    MovieActorActressController,
+    MovieAwardController,
+)
+
 from app.movies.schemas import (
+    MovieSchema,
+    MovieSchemaSchemaIn,
     MovieActorActressSchema,
     MovieActorActressSchemaIn,
     MovieByActorActressSchemaOut,
     ActorActressByMovieSchemaOut,
+    AwardByMovieSchemaOut,
+    MovieByAwardSchemaOut,
+    MovieAwardSchema,
+    MovieAwardSchemaIn,
 )
 
 
@@ -17,6 +27,7 @@ movie_router = APIRouter(tags=["movies"], prefix="/api/movie")
 movie_actor_actress_router = APIRouter(
     tags=["movie_actor_actress"], prefix="/api/movie_actor_actress"
 )
+movie_award_router = APIRouter(tags=["movie_award"], prefix="/api/movie_award")
 
 
 # superuser
@@ -107,8 +118,40 @@ def get_actor_actress_by_movie_id(movie_id: str):
 
 
 @movie_actor_actress_router.get(
-    "/get-all-actor_actresses-with-all-awards",
+    "/get-all-movies-with-all-actor-actresses",
     response_model=list[MovieActorActressSchema],
 )
 def get_all_movies_with_all_actors_actresses():
     return MovieActorActressController.get_all_movies_with_all_actors_actresses()
+
+
+# superuser
+@movie_award_router.post(
+    "/add-new-movie-award",
+    response_model=MovieAwardSchema,
+    # dependencies=[Depends(JWTBearer("super_user"))],
+)
+def create_movie_award(
+    movie_award_award: MovieAwardSchemaIn,
+):
+    return MovieAwardController.create_movie_award(
+        movie_award_award.movie_id, movie_award_award.award_id
+    )
+
+
+@movie_award_router.get("/award-id", response_model=list[MovieByAwardSchemaOut])
+def get_movie_by_award_id(award_id: str):
+    return MovieAwardController.get_movie_by_award_id(award_id)
+
+
+@movie_award_router.get("/award/movie-id", response_model=list[AwardByMovieSchemaOut])
+def get_award_by_movie_id(movie_id: str):
+    return MovieAwardController.get_award_by_movie_id(movie_id)
+
+
+@movie_award_router.get(
+    "/get-all-movies-with-all-awards",
+    response_model=list[MovieActorActressSchema],
+)
+def get_all_movies_with_all_awards():
+    return MovieAwardController.get_all_movies_with_all_awards()

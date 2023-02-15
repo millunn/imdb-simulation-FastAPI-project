@@ -1,4 +1,4 @@
-from app.actors_actressees.repository import ActorActressRepository
+from app.actors_actresses.repository import ActorActressRepository
 from app.db.database import SessionLocal
 
 

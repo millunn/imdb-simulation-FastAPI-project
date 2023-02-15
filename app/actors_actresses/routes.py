@@ -1,9 +1,9 @@
 from fastapi import APIRouter, Depends
-from app.actors_actressees.controller import (
+from app.actors_actresses.controller import (
     ActorActressController,
     ActorActressAwardMovieController,
 )
-from app.actors_actressees.schemas import (
+from app.actors_actresses.schemas import (
     ActorActressSchema,
     ActorActressSchemaIn,
     ActorActressAwardMovieSchema,

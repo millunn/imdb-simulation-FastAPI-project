@@ -1,7 +1,7 @@
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
-from app.actors_actressees.exceptions import ActorActressNotFoundException
-from app.actors_actressees.models import ActorActressAwardMovie
+from app.actors_actresses.exceptions import ActorActressNotFoundException
+from app.actors_actresses.models import ActorActressAwardMovie
 from app.awards.exceptions import AwardNotFoundException
 
 
@@ -27,7 +27,6 @@ class ActorActressAwardMovieRepository:
             .filter(ActorActressAwardMovie.actor_actress_id == actor_actress_id)
             .all()
         )
-        print(award_by_actor_actress_id)
         if award_by_actor_actress_id is None:
             raise AwardNotFoundException(
                 message=f"Award with provided actor/actress id: {actor_actress_id} not found",

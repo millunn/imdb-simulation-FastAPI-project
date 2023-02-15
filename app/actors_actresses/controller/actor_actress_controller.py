@@ -1,9 +1,9 @@
 from fastapi import HTTPException, Response
 from sqlalchemy.exc import IntegrityError
-from app.actors_actressees.exceptions import (
+from app.actors_actresses.exceptions import (
     ActorActressNotFoundException,
 )
-from app.actors_actressees.services import ActorActressServices
+from app.actors_actresses.services import ActorActressServices
 
 
 class ActorActressController:

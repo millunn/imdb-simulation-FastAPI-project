@@ -1,6 +1,6 @@
 from sqlalchemy.exc import IntegrityError
-from app.actors_actressees.exceptions import ActorActressNotFoundException
-from app.actors_actressees.repository import (
+from app.actors_actresses.exceptions import ActorActressNotFoundException
+from app.actors_actresses.repository import (
     ActorActressRepository,
 )
 from app.db.database import SessionLocal

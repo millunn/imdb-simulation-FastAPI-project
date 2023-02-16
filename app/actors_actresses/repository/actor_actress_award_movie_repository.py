@@ -27,7 +27,7 @@ class ActorActressAwardMovieRepository:
             .filter(ActorActressAwardMovie.actor_actress_id == actor_actress_id)
             .all()
         )
-        if award_by_actor_actress_id is None:
+        if (award_by_actor_actress_id is None) or (award_by_actor_actress_id == []):
             raise AwardNotFoundException(
                 message=f"Award with provided actor/actress id: {actor_actress_id} not found",
                 code=400,
@@ -40,7 +40,7 @@ class ActorActressAwardMovieRepository:
             .filter(ActorActressAwardMovie.movie_id == movie_id)
             .all()
         )
-        if award_by_movie_id is None:
+        if (award_by_movie_id is None) or (award_by_movie_id == []):
             raise AwardNotFoundException(
                 message=f"Award with provided movie id: {movie_id} not found",
                 code=400,
@@ -53,7 +53,7 @@ class ActorActressAwardMovieRepository:
             .filter(ActorActressAwardMovie.award_id == award_id)
             .all()
         )
-        if actor_actress_by_award_id is None:
+        if (actor_actress_by_award_id is None) or (actor_actress_by_award_id == []):
             raise ActorActressNotFoundException(
                 message=f"Actor/actress with provided award id: {award_id} not found",
                 code=400,
@@ -66,7 +66,7 @@ class ActorActressAwardMovieRepository:
             .filter(ActorActressAwardMovie.movie_id == movie_id)
             .all()
         )
-        if actor_actress_by_movie_id is None:
+        if (actor_actress_by_movie_id is None) or (actor_actress_by_movie_id == []):
             raise ActorActressNotFoundException(
                 message=f"Actor/actress with provided movie id: {movie_id} not found",
                 code=400,

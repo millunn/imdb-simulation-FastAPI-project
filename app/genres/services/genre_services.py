@@ -1,3 +1,4 @@
+import uuid
 from app.db.database import SessionLocal
 from app.genres.repository import GenreRepository
 
@@ -15,9 +16,12 @@ class GenreServices:
     @staticmethod
     def get_genre_by_id(genre_id: str):
         try:
+            uuid.UUID(str(genre_id))
             with SessionLocal() as db:
                 genre_repository = GenreRepository(db)
                 return genre_repository.get_genre_by_id(genre_id)
+        except ValueError:
+            raise Exception(f"Provided id: {genre_id} not uuid")
         except Exception as e:
             raise e
 

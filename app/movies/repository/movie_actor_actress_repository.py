@@ -26,7 +26,7 @@ class MovieActorActressRepository:
             .filter(MovieActorActress.actor_actress_id == actor_actress_id)
             .all()
         )
-        if movie_by_actor_actress_id is None:
+        if (movie_by_actor_actress_id is None) or (movie_by_actor_actress_id == []):
             raise MovieNotFoundException(
                 message=f"Movie with provided actor/actress id: {actor_actress_id} not found",
                 code=400,
@@ -39,7 +39,7 @@ class MovieActorActressRepository:
             .filter(MovieActorActress.movie_id == movie_id)
             .all()
         )
-        if actor_actress_by_movie_id is None:
+        if (actor_actress_by_movie_id is None) or (actor_actress_by_movie_id == []):
             raise ActorActressNotFoundException(
                 message=f"Actor/actress with provided movie id: {movie_id} not found",
                 code=400,

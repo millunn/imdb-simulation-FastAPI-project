@@ -1,3 +1,4 @@
+import uuid
 from sqlalchemy.exc import IntegrityError
 from app.actors_actresses.exceptions import ActorActressNotFoundException
 from app.actors_actresses.repository import (
@@ -55,26 +56,33 @@ class ActorActressAwardMovieServices:
     @staticmethod
     def get_award_by_actor_actress_id(actor_actress_id: str):
         try:
+            uuid.UUID(str(actor_actress_id))
             with SessionLocal() as db:
                 award_actor_actress_repository = ActorActressAwardMovieRepository(db)
                 return award_actor_actress_repository.get_award_by_actor_actress_id(
                     actor_actress_id
                 )
+        except ValueError:
+            raise Exception(f"Provided id: {actor_actress_id} not uuid")
         except Exception as e:
             raise e
 
     @staticmethod
     def get_award_by_movie_id(movie_id: str):
         try:
+            uuid.UUID(str(movie_id))
             with SessionLocal() as db:
                 award_movie_repository = ActorActressAwardMovieRepository(db)
                 return award_movie_repository.get_award_by_movie_id(movie_id)
+        except ValueError:
+            raise Exception(f"Provided id: {movie_id} not uuid")
         except Exception as e:
             raise e
 
     @staticmethod
     def get_actor_actress_by_award_id(award_id: str):
         try:
+            uuid.UUID(str(award_id))
             with SessionLocal() as db:
                 actor_actress_award_movie_repository = ActorActressAwardMovieRepository(
                     db
@@ -84,17 +92,22 @@ class ActorActressAwardMovieServices:
                         award_id
                     )
                 )
+        except ValueError:
+            raise Exception(f"Provided id: {award_id} not uuid")
         except Exception as e:
             raise e
 
     @staticmethod
     def get_actor_actress_by_movie_id(movie_id: str):
         try:
+            uuid.UUID(str(movie_id))
             with SessionLocal() as db:
                 actor_actress_movie_repository = ActorActressAwardMovieRepository(db)
                 return actor_actress_movie_repository.get_actor_actress_by_movie_id(
                     movie_id
                 )
+        except ValueError:
+            raise Exception(f"Provided id: {movie_id} not uuid")
         except Exception as e:
             raise e
 

@@ -1,3 +1,5 @@
+import uuid
+from pydantic import UUID4
 from sqlalchemy.exc import IntegrityError
 from app.awards.exceptions import AwardNotFoundException
 from app.awards.repository.award_repository import AwardRepository
@@ -36,18 +38,24 @@ class MovieAwardServices:
     @staticmethod
     def get_movie_by_award_id(award_id: str):
         try:
+            uuid.UUID(str(award_id))
             with SessionLocal() as db:
                 movie_award_repository = MovieAwardRepository(db)
                 return movie_award_repository.get_movie_by_award_id(award_id)
+        except ValueError:
+            raise Exception(f"Provided id: {award_id} not uuid")
         except Exception as e:
             raise e
 
     @staticmethod
     def get_award_by_movie_id(movie_id: str):
         try:
+            uuid.UUID(str(movie_id))
             with SessionLocal() as db:
                 award_movie_repository = MovieAwardRepository(db)
                 return award_movie_repository.get_award_by_movie_id(movie_id)
+        except ValueError:
+            raise Exception(f"Provided id: {movie_id} not uuid")
         except Exception as e:
             raise e
 

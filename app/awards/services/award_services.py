@@ -1,3 +1,4 @@
+import uuid
 from app.awards.exceptions import AwardNotFoundException
 from app.awards.repository import AwardRepository
 from app.db.database import SessionLocal
@@ -16,9 +17,12 @@ class AwardServices:
     @staticmethod
     def get_award_by_id(award_id: str):
         try:
+            uuid.UUID(str(award_id))
             with SessionLocal() as db:
                 award_repository = AwardRepository(db)
                 return award_repository.get_award_by_id(award_id)
+        except ValueError:
+            raise Exception(f"Provided id: {award_id} not uuid")
         except Exception as e:
             raise e
 

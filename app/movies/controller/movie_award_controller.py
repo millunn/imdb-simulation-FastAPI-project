@@ -1,4 +1,6 @@
+import uuid
 from fastapi import HTTPException
+from pydantic import UUID4
 from sqlalchemy.exc import IntegrityError
 from app.awards.exceptions import AwardNotFoundException
 from app.movies.exceptions import MovieNotFoundException

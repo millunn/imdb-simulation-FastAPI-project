@@ -12,14 +12,6 @@ class MovieAwardServices:
     @staticmethod
     def create_movie_award(movie_id, award_id):
         try:
-            uuid.UUID(str(movie_id))
-        except ValueError:
-            raise Exception(f"Provided id: {movie_id} not uuid")
-        try:
-            uuid.UUID(str(award_id))
-        except ValueError:
-            raise Exception(f"Provided id: {award_id} not uuid")
-        try:
             with SessionLocal() as db:
                 movie_repository = MovieRepository(db)
                 movie = movie_repository.get_movie_by_id(movie_id)
@@ -45,24 +37,18 @@ class MovieAwardServices:
     @staticmethod
     def get_movie_by_award_id(award_id: str):
         try:
-            uuid.UUID(str(award_id))
             with SessionLocal() as db:
                 movie_award_repository = MovieAwardRepository(db)
                 return movie_award_repository.get_movie_by_award_id(award_id)
-        except ValueError:
-            raise Exception(f"Provided id: {award_id} not uuid")
         except Exception as e:
             raise e
 
     @staticmethod
     def get_award_by_movie_id(movie_id: str):
         try:
-            uuid.UUID(str(movie_id))
             with SessionLocal() as db:
                 award_movie_repository = MovieAwardRepository(db)
                 return award_movie_repository.get_award_by_movie_id(movie_id)
-        except ValueError:
-            raise Exception(f"Provided id: {movie_id} not uuid")
         except Exception as e:
             raise e
 

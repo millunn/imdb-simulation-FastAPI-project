@@ -28,16 +28,20 @@ class AwardRepository:
         return award
 
     def get_award_by_category(self, category: str):
-        award = self.db.query(Award).filter(Award.category == category).first()
-        if award is None:
+        award = self.db.query(Award).filter(Award.category.ilike(f"%{category}%")).all()
+        if (award is None) or (award == []):
             raise AwardNotFoundException(
                 message=f"Award with provided category: {category} not found.", code=400
             )
         return award
 
     def get_award_by_subcategory(self, subcategory: str):
-        award = self.db.query(Award).filter(Award.subcategory == subcategory).first()
-        if award is None:
+        award = (
+            self.db.query(Award)
+            .filter(Award.subcategory.ilike(f"%{subcategory}%"))
+            .all()
+        )
+        if (award is None) or (award == []):
             raise AwardNotFoundException(
                 message=f"Award with provided subcategory: {subcategory} not found.",
                 code=400,

@@ -56,12 +56,9 @@ class MovieServices:
     @staticmethod
     def get_movie_by_id(movie_id: str):
         try:
-            uuid.UUID(str(movie_id))
             with SessionLocal() as db:
                 movie_repository = MovieRepository(db)
                 return movie_repository.get_movie_by_id(movie_id)
-        except ValueError:
-            raise Exception(f"Provided id: {movie_id} not uuid")
         except Exception as e:
             raise e
 

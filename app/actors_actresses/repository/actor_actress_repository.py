@@ -36,9 +36,11 @@ class ActorActressRepository:
     # lista
     def get_actor_actress_by_name(self, name: str):
         actor_actress = (
-            self.db.query(ActorActress).filter(ActorActress.name == name).all()
+            self.db.query(ActorActress)
+            .filter(ActorActress.name.ilike(f"%{name}%"))
+            .all()
         )
-        if actor_actress is None:
+        if (actor_actress is None) or (actor_actress == []):
             raise ActorActressNotFoundException(
                 message=f"Actor/actress with provided name: {name} not found.", code=400
             )
@@ -47,9 +49,11 @@ class ActorActressRepository:
     # lista
     def get_actor_actress_by_surname(self, surname: str):
         actor_actress = (
-            self.db.query(ActorActress).filter(ActorActress.surname == surname).all()
+            self.db.query(ActorActress)
+            .filter(ActorActress.surname.ilike(f"%{surname}%"))
+            .all()
         )
-        if actor_actress is None:
+        if (actor_actress is None) or (actor_actress == []):
             raise ActorActressNotFoundException(
                 message=f"Actor/actress with provided surname: {surname} not found.",
                 code=400,

@@ -1,27 +1,31 @@
 from datetime import datetime
 from sqlalchemy.orm import relationship
 from app.db.database import Base
-from sqlalchemy import Column, ForeignKey, String, Date, Time
+from sqlalchemy import Column, ForeignKey, String, Date, Time, UniqueConstraint
 from uuid import uuid4
 
 
 class Movie(Base):
     __tablename__ = "movies"
     id = Column(String(50), primary_key=True, default=uuid4, autoincrement=False)
-    title = Column(String(50), unique=True)
-    plot = Column(String(100))
-    duration = Column(Time)
-    release_year = Column(String(4))
-    director = Column(String(50))
-    writer = Column(String(50))
-    producer = Column(String(50))
-    synopsis = Column(String(180))
+    title = Column(String(50), nullable=False)
+    plot = Column(String(100), nullable=False)
+    duration = Column(Time, nullable=False)
+    release_year = Column(String(4), nullable=False)
+    director = Column(String(50), nullable=False)
+    writer = Column(String(50), nullable=False)
+    producer = Column(String(50), nullable=False)
+    synopsis = Column(String(180), nullable=False)
 
-    language_name = Column(String(30), ForeignKey("languages.name"))
+    language_name = Column(String(30), ForeignKey("languages.name"), nullable=False)
     language = relationship("Language", lazy="subquery")
 
-    genre_category = Column(String(30), ForeignKey("genres.category"))
+    genre_category = Column(String(30), ForeignKey("genres.category"), nullable=False)
     genre = relationship("Genre", lazy="subquery")
+
+    __table_args__ = (
+        UniqueConstraint("title", "release_year", name="title_release_year_uc"),
+    )
 
     def __init__(
         self,

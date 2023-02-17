@@ -21,7 +21,7 @@ def get_genre_by_id(genre_id: str):
     return GenreController.get_genre_by_id(genre_id)
 
 
-@genre_router.get("/category", response_model=GenreSchema)
+@genre_router.get("/category", response_model=list[GenreSchema])
 def get_genre_by_category(category: str):
     return GenreController.get_genre_by_category(category)
 

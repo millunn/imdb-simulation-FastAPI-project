@@ -29,8 +29,8 @@ class GenreRepository:
         return genre
 
     def get_genre_by_category(self, category: str):
-        genre = self.db.query(Genre).filter(Genre.category == category).first()
-        if genre is None:
+        genre = self.db.query(Genre).filter(Genre.category.ilike(f"%{category}%")).all()
+        if (genre is None) or (genre == []):
             raise GenreNotFoundException(
                 f"Genre with provided category: {category} not found.", 400
             )

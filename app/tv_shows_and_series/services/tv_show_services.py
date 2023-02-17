@@ -54,12 +54,9 @@ class TvShowServices:
     @staticmethod
     def get_tv_show_by_id(tv_show_id: str):
         try:
-            uuid.UUID(str(tv_show_id))
             with SessionLocal() as db:
                 tv_show_repository = TVShowRepository(db)
                 return tv_show_repository.get_tv_show_by_id(tv_show_id)
-        except ValueError:
-            raise Exception(f"Provided id: {tv_show_id} not uuid")
         except Exception as e:
             raise e
 

@@ -20,12 +20,12 @@ def get_award_by_id(award_id: str):
     return AwardController.get_award_by_id(award_id)
 
 
-@award_router.get("/category", response_model=AwardSchema)
+@award_router.get("/category", response_model=list[AwardSchema])
 def get_award_by_category(category: str):
     return AwardController.get_award_by_category(category)
 
 
-@award_router.get("/subcategory", response_model=AwardSchema)
+@award_router.get("/subcategory", response_model=list[AwardSchema])
 def get_award_by_subcategory(subcategory: str):
     return AwardController.get_award_by_subcategory(subcategory)
 

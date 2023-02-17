@@ -22,12 +22,12 @@ def get_language_by_id(language_id: str):
     return LanguageController.get_language_by_id(language_id)
 
 
-@language_router.get("/name", response_model=LanguageSchema)
+@language_router.get("/name", response_model=list[LanguageSchema])
 def get_language_by_name(name: str):
     return LanguageController.get_language_by_name(name)
 
 
-@language_router.get("/abbreviation", response_model=LanguageSchema)
+@language_router.get("/abbreviation", response_model=list[LanguageSchema])
 def get_language_by_abbreviation(abbreviation: str):
     return LanguageController.get_language_by_abbreviation(abbreviation)
 

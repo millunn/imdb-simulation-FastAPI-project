@@ -18,14 +18,11 @@ class ActorActressServices:
     @staticmethod
     def get_actor_actress_by_id(actor_actress_id: str):
         try:
-            uuid.UUID(str(actor_actress_id))
             with SessionLocal() as db:
                 actor_actress_repository = ActorActressRepository(db)
                 return actor_actress_repository.get_actor_actress_by_id(
                     actor_actress_id
                 )
-        except ValueError:
-            raise Exception(f"Provided id: {actor_actress_id} not uuid")
         except Exception as e:
             raise e
 

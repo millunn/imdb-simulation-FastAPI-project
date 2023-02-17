@@ -10,10 +10,10 @@ from sqlalchemy import (
 
 class MovieAward(Base):
     __tablename__ = "movie_award"
-    movie_id = Column(String(50), ForeignKey("movies.id"))
+    movie_id = Column(String(50), ForeignKey("movies.id"), nullable=False)
     movie = relationship("Movie", lazy="subquery")
 
-    award_id = Column(String(50), ForeignKey("awards.id"))
+    award_id = Column(String(50), ForeignKey("awards.id"), nullable=False)
     award = relationship("Award", lazy="subquery")
 
     __table_args__ = (PrimaryKeyConstraint("movie_id", "award_id"),)

@@ -5,10 +5,12 @@ from sqlalchemy import Column, ForeignKey, PrimaryKeyConstraint, String
 
 class TvShowAward(Base):
     __tablename__ = "tv_show_award"
-    tv_show_id = Column(String(50), ForeignKey("tv_shows_and_series.id"))
+    tv_show_id = Column(
+        String(50), ForeignKey("tv_shows_and_series.id"), nullable=False
+    )
     tv_show = relationship("TVShow", lazy="subquery")
 
-    award_id = Column(String(50), ForeignKey("awards.id"))
+    award_id = Column(String(50), ForeignKey("awards.id"), nullable=False)
     award = relationship("Award", lazy="subquery")
 
     __table_args__ = (PrimaryKeyConstraint("tv_show_id", "award_id"),)

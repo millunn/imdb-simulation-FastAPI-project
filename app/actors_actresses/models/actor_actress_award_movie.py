@@ -9,7 +9,7 @@ from sqlalchemy import (
 
 
 class ActorActressAwardMovie(Base):
-    __tablename__ = "actor_actress_award"
+    __tablename__ = "actor_actress_award_movie"
 
     actor_actress_id = Column(String(50), nullable=False)
     actor_actress = relationship(

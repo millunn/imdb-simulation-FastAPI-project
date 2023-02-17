@@ -9,6 +9,7 @@ from app.languages.routes import language_router
 from app.actors_actresses.routes import (
     actor_actress_router,
     actor_actress_award_movie_router,
+    actor_actress_award_tv_show_router,
 )
 from app.movies.routes import (
     movie_router,
@@ -33,6 +34,7 @@ def init_app():
     app.include_router(language_router)
     app.include_router(actor_actress_router)
     app.include_router(actor_actress_award_movie_router)
+    app.include_router(actor_actress_award_tv_show_router)
     app.include_router(movie_router)
     app.include_router(movie_actor_actress_router)
     app.include_router(movie_award_router)

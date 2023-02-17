@@ -29,8 +29,10 @@ class LanguageRepository:
         return language
 
     def get_language_by_name(self, name: str):
-        language = self.db.query(Language).filter(Language.name == name).first()
-        if language is None:
+        language = (
+            self.db.query(Language).filter(Language.name.ilike(f"%{name}%")).all()
+        )
+        if (language is None) or (language == []):
             raise LanguageNotFoundException(
                 f"Language with provided category: {name} not found.", 400
             )
@@ -39,10 +41,10 @@ class LanguageRepository:
     def get_language_by_abbreviation(self, abbreviation: str):
         language = (
             self.db.query(Language)
-            .filter(Language.abbreviation == abbreviation)
-            .first()
+            .filter(Language.abbreviation.ilike(f"%{abbreviation}%"))
+            .all()
         )
-        if language is None:
+        if (language is None) or (language == []):
             raise LanguageNotFoundException(
                 f"Language with provided abbreviation: {abbreviation} not found.", 400
             )

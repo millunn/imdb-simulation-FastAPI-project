@@ -5,7 +5,7 @@ from sqlalchemy import INT, Column, ForeignKey, String, Time, Date
 from uuid import uuid4
 
 
-class TVShowAndSerie(Base):
+class TVShow(Base):
     __tablename__ = "tv_shows_and_series"
     id = Column(String(50), primary_key=True, default=uuid4, autoincrement=False)
     title = Column(String(50), unique=True, nullable=False)
@@ -16,10 +16,10 @@ class TVShowAndSerie(Base):
     episodes = Column(INT, nullable=False)
     episode_duration = Column(Time, nullable=False)
 
-    language_id = Column(String(50), ForeignKey("languages.id"))
+    language_name = Column(String(30), ForeignKey("languages.name"))
     language = relationship("Language", lazy="subquery")
 
-    genre_id = Column(String(50), ForeignKey("genres.id"))
+    genre_category = Column(String(30), ForeignKey("genres.category"))
     genre = relationship("Genre", lazy="subquery")
 
     def __init__(
@@ -31,8 +31,8 @@ class TVShowAndSerie(Base):
         seasons,
         episodes,
         episode_duration,
-        language_id,
-        genre_id,
+        language_name,
+        genre_category,
     ):
         self.title = title
         self.plot = plot
@@ -41,5 +41,5 @@ class TVShowAndSerie(Base):
         self.seasons = seasons
         self.episodes = episodes
         self.episode_duration = episode_duration
-        self.language_id = language_id
-        self.genre_id = genre_id
+        self.language_name = language_name
+        self.genre_category = genre_category

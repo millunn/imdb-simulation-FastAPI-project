@@ -1,1 +1,3 @@
-from .tv_show_and_serie import TVShowAndSerie
+from .tv_show import TVShow
+from .tv_show_actor_actress import TvShowActorActress
+from .tv_show_award import TvShowAward

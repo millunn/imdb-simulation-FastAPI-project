@@ -12,8 +12,8 @@ class TvShowAwardSchema(BaseModel):
 
 
 class TvShowAwardSchemaIn(BaseModel):
-    tv_show_id: UUID4
-    award_id: UUID4
+    tv_show_id: str
+    award_id: str
 
     class Config:
         orm_mode = True

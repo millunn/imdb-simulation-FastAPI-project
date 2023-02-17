@@ -14,9 +14,9 @@ class ActorActressAwardMovieSchema(BaseModel):
 
 
 class ActorActressAwardMovieSchemaIn(BaseModel):
-    actor_actress_id: UUID4
-    award_id: UUID4
-    movie_id: UUID4
+    actor_actress_id: str
+    award_id: str
+    movie_id: str
 
     class Config:
         orm_mode = True

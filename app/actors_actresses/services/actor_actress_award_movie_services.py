@@ -16,6 +16,18 @@ class ActorActressAwardMovieServices:
     @staticmethod
     def create_actor_actress_award_movie(actor_actress_id, award_id, movie_id):
         try:
+            uuid.UUID(str(actor_actress_id))
+        except ValueError:
+            raise Exception(f"Provided id: {actor_actress_id} not uuid")
+        try:
+            uuid.UUID(str(award_id))
+        except ValueError:
+            raise Exception(f"Provided id: {award_id} not uuid")
+        try:
+            uuid.UUID(str(movie_id))
+        except ValueError:
+            raise Exception(f"Provided id: {movie_id} not uuid")
+        try:
             with SessionLocal() as db:
                 actor_actress_repository = ActorActressRepository(db)
                 actor_actress = actor_actress_repository.get_actor_actress_by_id(

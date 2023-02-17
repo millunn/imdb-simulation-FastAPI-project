@@ -14,6 +14,14 @@ class MovieActorActressServices:
     @staticmethod
     def create_movie_actor_actress(movie_id, actor_actress_id):
         try:
+            uuid.UUID(str(movie_id))
+        except ValueError:
+            raise Exception(f"Provided id: {movie_id} not uuid")
+        try:
+            uuid.UUID(str(actor_actress_id))
+        except ValueError:
+            raise Exception(f"Provided id: {actor_actress_id} not uuid")
+        try:
             with SessionLocal() as db:
                 movie_repository = MovieRepository(db)
                 movie = movie_repository.get_movie_by_id(movie_id)

@@ -11,6 +11,14 @@ class TvShowAwardServices:
     @staticmethod
     def create_tv_show_award(tv_show_id, award_id):
         try:
+            uuid.UUID(str(tv_show_id))
+        except ValueError:
+            raise Exception(f"Provided id: {tv_show_id} not uuid")
+        try:
+            uuid.UUID(str(award_id))
+        except ValueError:
+            raise Exception(f"Provided id: {award_id} not uuid")
+        try:
             with SessionLocal() as db:
                 tv_show_repository = TVShowRepository(db)
                 tv_show = tv_show_repository.get_tv_show_by_id(tv_show_id)

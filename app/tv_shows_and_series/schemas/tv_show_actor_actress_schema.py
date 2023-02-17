@@ -12,8 +12,8 @@ class TvShowActorActressSchema(BaseModel):
 
 
 class TvShowActorActressSchemaIn(BaseModel):
-    tv_show_id: UUID4
-    actor_actress_id: UUID4
+    tv_show_id: str
+    actor_actress_id: str
 
     class Config:
         orm_mode = True

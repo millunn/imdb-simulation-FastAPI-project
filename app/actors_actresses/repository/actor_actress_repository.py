@@ -82,3 +82,15 @@ class ActorActressRepository:
             return True
         except Exception as e:
             raise e
+
+    def order_actor_actress_by_name_decs(self):
+        order_by_name_desc = (
+            self.db.query(ActorActress).order_by(ActorActress.name.desc()).all()
+        )
+        return order_by_name_desc
+
+    def order_actor_actress_by_name_asc(self):
+        order_by_name_asc = (
+            self.db.query(ActorActress).order_by(ActorActress.name.asc()).all()
+        )
+        return order_by_name_asc

@@ -137,3 +137,29 @@ class TVShowController:
             )
         except Exception as e:
             raise HTTPException(status_code=500, detail=str(e))
+
+    @staticmethod
+    def order_tv_show_by_title_decs():
+        try:
+            order_by_title_desc = TVShowServices.order_tv_show_by_title_decs()
+            return order_by_title_desc
+        except TVShowNotFoundException as e:
+            raise HTTPException(
+                status_code=e.code,
+                detail=e.message,
+            )
+        except Exception as e:
+            raise HTTPException(status_code=500, detail=str(e))
+
+    @staticmethod
+    def order_tv_show_by_title_asc():
+        try:
+            order_by_title_asc = TVShowServices.order_tv_show_by_title_asc()
+            return order_by_title_asc
+        except TVShowNotFoundException as e:
+            raise HTTPException(
+                status_code=e.code,
+                detail=e.message,
+            )
+        except Exception as e:
+            raise HTTPException(status_code=500, detail=str(e))

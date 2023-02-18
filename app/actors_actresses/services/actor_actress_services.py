@@ -63,3 +63,21 @@ class ActorActressServices:
                 )
         except Exception as e:
             raise e
+
+    @staticmethod
+    def order_actor_actress_by_name_decs():
+        try:
+            with SessionLocal() as db:
+                actor_actress_repository = ActorActressRepository(db)
+                return actor_actress_repository.order_actor_actress_by_name_decs()
+        except Exception as e:
+            raise e
+
+    @staticmethod
+    def order_actor_actress_by_name_asc():
+        try:
+            with SessionLocal() as db:
+                actor_actress_repository = ActorActressRepository(db)
+                return actor_actress_repository.order_actor_actress_by_name_asc()
+        except Exception as e:
+            raise e

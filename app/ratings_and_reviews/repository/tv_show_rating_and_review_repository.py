@@ -97,3 +97,25 @@ class TVShowRatingAndReviewRepository:
             return True
         except Exception as e:
             raise e
+
+    def update_tv_show_rating_and_review_comment(
+        self, tv_show_rating_and_review_id: str, comment: str
+    ):
+        try:
+            tv_show_rating_and_review = (
+                self.db.query(TVShowRatingAndReview)
+                .filter(TVShowRatingAndReview.id == tv_show_rating_and_review_id)
+                .first()
+            )
+            if tv_show_rating_and_review is None:
+                raise TVShowRatingAndReviewNotFoundException(
+                    f"TV show rating with provided id: {tv_show_rating_and_review_id} not found.",
+                    400,
+                )
+            tv_show_rating_and_review.comment = comment
+            self.db.add(tv_show_rating_and_review)
+            self.db.commit()
+            self.db.refresh(tv_show_rating_and_review)
+            return tv_show_rating_and_review
+        except Exception as e:
+            raise e

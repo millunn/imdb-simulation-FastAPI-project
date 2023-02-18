@@ -29,3 +29,10 @@ class TVShowRatingAndReviewBySchemaOut(BaseModel):
 
     class Config:
         orm_mode = True
+
+
+class TVShowRatingAndReviewSchemaUpdateComment(BaseModel):
+    comment: str
+
+    class Config:
+        orm_mode = True

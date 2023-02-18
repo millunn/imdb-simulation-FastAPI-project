@@ -29,3 +29,10 @@ class MovieRatingAndReviewBySchemaOut(BaseModel):
 
     class Config:
         orm_mode = True
+
+
+class MovieRatingAndReviewSchemaUpdateComment(BaseModel):
+    comment: str
+
+    class Config:
+        orm_mode = True

@@ -97,3 +97,25 @@ class MovieRatingAndReviewRepository:
             return True
         except Exception as e:
             raise e
+
+    def update_movie_rating_and_review_comment(
+        self, movie_rating_and_review_id: str, comment: str
+    ):
+        try:
+            movie_rating_and_review = (
+                self.db.query(MovieRatingAndReview)
+                .filter(MovieRatingAndReview.id == movie_rating_and_review_id)
+                .first()
+            )
+            if movie_rating_and_review is None:
+                raise MovieRatingAndReviewNotFoundException(
+                    f"Movie rating with provided id: {movie_rating_and_review_id} not found.",
+                    400,
+                )
+            movie_rating_and_review.comment = comment
+            self.db.add(movie_rating_and_review)
+            self.db.commit()
+            self.db.refresh(movie_rating_and_review)
+            return movie_rating_and_review
+        except Exception as e:
+            raise e

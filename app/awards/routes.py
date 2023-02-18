@@ -38,3 +38,13 @@ def get_all_awards():
 @award_router.delete("/", dependencies=[Depends(JWTBearer("super_user"))])
 def delete_award_by_id(award_id: str):
     return AwardController.delete_award_by_id(award_id)
+
+
+@award_router.get("/order-by-category/desc", response_model=list[AwardSchema])
+def order_awards_by_category_decs():
+    return AwardController.order_awards_by_category_decs()
+
+
+@award_router.get("/order-by-category/asc", response_model=list[AwardSchema])
+def order_awards_by_category_asc():
+    return AwardController.order_awards_by_category_asc()

@@ -63,3 +63,15 @@ class AwardRepository:
             return True
         except Exception as e:
             raise e
+
+    def order_awards_by_category_decs(self):
+        order_by_category_desc = (
+            self.db.query(Award).order_by(Award.category.desc()).all()
+        )
+        return order_by_category_desc
+
+    def order_awards_by_category_asc(self):
+        order_by_category_asc = (
+            self.db.query(Award).order_by(Award.category.asc()).all()
+        )
+        return order_by_category_asc

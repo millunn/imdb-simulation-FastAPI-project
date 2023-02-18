@@ -134,3 +134,22 @@ class TVShowRatingAndReviewController:
             )
         except Exception as e:
             raise HTTPException(status_code=500, detail=str(e))
+
+    @staticmethod
+    def update_tv_show_rating_and_review_comment(
+        tv_show_rating_and_review_id: str, comment: str
+    ):
+        try:
+            tv_show_rating_and_review = (
+                TVShowRatingAndReviewServices.update_tv_show_rating_and_review_comment(
+                    tv_show_rating_and_review_id, comment
+                )
+            )
+            return tv_show_rating_and_review
+        except TVShowRatingAndReviewNotFoundException as e:
+            raise HTTPException(
+                status_code=e.code,
+                detail=e.message,
+            )
+        except Exception as e:
+            raise HTTPException(status_code=500, detail=str(e))

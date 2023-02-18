@@ -87,6 +87,16 @@ def delete_tv_show_by_id(tv_show_id: str):
     return TVShowController.delete_tv_show_by_id(tv_show_id)
 
 
+@tv_show_router.get("/order-by-title/desc", response_model=list[TVShowSchema])
+def order_tv_show_by_title_decs():
+    return TVShowController.order_tv_show_by_title_decs()
+
+
+@tv_show_router.get("/order-by-title/asc", response_model=list[TVShowSchema])
+def order_tv_show_by_title_asc():
+    return TVShowController.order_tv_show_by_title_asc()
+
+
 # superuser
 @tv_show_actor_actress_router.post(
     "/add-new-tv_show-actor-actress",

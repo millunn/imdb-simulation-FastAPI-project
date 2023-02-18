@@ -8,11 +8,13 @@ from app.ratings_and_reviews.schemas import (
     MovieRatingAndReviewSchema,
     MovieRatingAndReviewSchemaIn,
     MovieRatingAndReviewBySchemaOut,
+    MovieRatingAndReviewSchemaUpdateComment,
 )
 from app.ratings_and_reviews.schemas import (
     TVShowRatingAndReviewSchema,
     TVShowRatingAndReviewSchemaIn,
     TVShowRatingAndReviewBySchemaOut,
+    TVShowRatingAndReviewSchemaUpdateComment,
 )
 
 
@@ -88,7 +90,16 @@ def delete_movie_rating_and_review_by_id(movie_id: str):
     return MovieRatingAndReviewController.delete_movie_rating_and_review_by_id(movie_id)
 
 
-# -------------------
+@movie_rating_and_review_router.put(
+    "/comment-update/comment", response_model=MovieRatingAndReviewSchema
+)
+def update_movie_rating_and_review_comment(
+    movie_rating_and_review_id: str,
+    update_data: MovieRatingAndReviewSchemaUpdateComment,
+):
+    return MovieRatingAndReviewController.update_movie_rating_and_review_comment(
+        movie_rating_and_review_id, update_data.comment
+    )
 
 
 # superuser
@@ -154,4 +165,16 @@ def get_all_tv_shows_ratings_and_reviews():
 def delete_tv_show_rating_and_review_by_id(tv_show_id: str):
     return TVShowRatingAndReviewController.delete_tv_show_rating_and_review_by_id(
         tv_show_id
+    )
+
+
+@tv_show_rating_and_review_router.put(
+    "/comment-update/comment", response_model=TVShowRatingAndReviewSchema
+)
+def update_tv_show_rating_and_review_comment(
+    tv_show_rating_and_review_id: str,
+    update_data: TVShowRatingAndReviewSchemaUpdateComment,
+):
+    return TVShowRatingAndReviewController.update_tv_show_rating_and_review_comment(
+        tv_show_rating_and_review_id, update_data.comment
     )

@@ -1,6 +1,3 @@
-from uuid import UUID, uuid4
-import uuid
-from pydantic import UUID4
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 from app.awards.exceptions import AwardNotFoundException

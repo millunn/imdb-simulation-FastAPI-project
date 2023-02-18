@@ -74,6 +74,18 @@ def delete_actor_actress_by_id(actor_actress_id: str):
     return ActorActressController.delete_actor_actress_by_id(actor_actress_id)
 
 
+@actor_actress_router.get(
+    "/order-by-name/desc", response_model=list[ActorActressSchema]
+)
+def order_actor_actress_by_name_decs():
+    return ActorActressController.order_actor_actress_by_name_decs()
+
+
+@actor_actress_router.get("/order-by-name/asc", response_model=list[ActorActressSchema])
+def order_actor_actress_by_name_asc():
+    return ActorActressController.order_actor_actress_by_name_asc()
+
+
 # superuser
 @actor_actress_award_movie_router.post(
     "/add-new-actor-actress-award-movie",

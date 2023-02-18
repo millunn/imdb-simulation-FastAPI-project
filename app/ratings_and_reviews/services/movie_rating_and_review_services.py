@@ -109,3 +109,16 @@ class MovieRatingAndReviewServices:
                 )
         except Exception as e:
             raise e
+
+    @staticmethod
+    def update_movie_rating_and_review_comment(
+        movie_rating_and_review_id: str, comment: str
+    ):
+        try:
+            with SessionLocal() as db:
+                movie_rating_and_review_repository = MovieRatingAndReviewRepository(db)
+                return movie_rating_and_review_repository.update_movie_rating_and_review_comment(
+                    movie_rating_and_review_id, comment
+                )
+        except Exception as e:
+            raise e

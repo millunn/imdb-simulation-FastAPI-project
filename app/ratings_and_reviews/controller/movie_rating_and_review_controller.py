@@ -134,3 +134,22 @@ class MovieRatingAndReviewController:
             )
         except Exception as e:
             raise HTTPException(status_code=500, detail=str(e))
+
+    @staticmethod
+    def update_movie_rating_and_review_comment(
+        movie_rating_and_review_id: str, comment: str
+    ):
+        try:
+            movie_rating_and_review = (
+                MovieRatingAndReviewServices.update_movie_rating_and_review_comment(
+                    movie_rating_and_review_id, comment
+                )
+            )
+            return movie_rating_and_review
+        except MovieRatingAndReviewNotFoundException as e:
+            raise HTTPException(
+                status_code=e.code,
+                detail=e.message,
+            )
+        except Exception as e:
+            raise HTTPException(status_code=500, detail=str(e))

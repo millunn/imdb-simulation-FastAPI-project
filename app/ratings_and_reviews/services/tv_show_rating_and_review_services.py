@@ -117,3 +117,18 @@ class TVShowRatingAndReviewServices:
                 )
         except Exception as e:
             raise e
+
+    @staticmethod
+    def update_tv_show_rating_and_review_comment(
+        tv_show_rating_and_review_id: str, comment: str
+    ):
+        try:
+            with SessionLocal() as db:
+                tv_show_rating_and_review_repository = TVShowRatingAndReviewRepository(
+                    db
+                )
+                return tv_show_rating_and_review_repository.update_tv_show_rating_and_review_comment(
+                    tv_show_rating_and_review_id, comment
+                )
+        except Exception as e:
+            raise e

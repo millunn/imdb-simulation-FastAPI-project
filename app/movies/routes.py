@@ -86,6 +86,16 @@ def delete_movie_by_id(movie_id: str):
     return MovieController.delete_movie_by_id(movie_id)
 
 
+@movie_router.get("/order-by-title/desc", response_model=list[MovieSchema])
+def order_movies_by_title_decs():
+    return MovieController.order_movies_by_title_decs()
+
+
+@movie_router.get("/order-by-title/asc", response_model=list[MovieSchema])
+def order_movies_by_title_asc():
+    return MovieController.order_movies_by_title_asc()
+
+
 # superuser
 @movie_actor_actress_router.post(
     "/add-new-movie-actor-actress",

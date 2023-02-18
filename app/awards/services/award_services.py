@@ -60,3 +60,21 @@ class AwardServices:
                 raise AwardNotFoundException(code=400, message="Award doesn't exist.")
         except Exception as e:
             raise e
+
+    @staticmethod
+    def order_awards_by_category_decs():
+        try:
+            with SessionLocal() as db:
+                award_repository = AwardRepository(db)
+                return award_repository.order_awards_by_category_decs()
+        except Exception as e:
+            raise e
+
+    @staticmethod
+    def order_awards_by_category_asc():
+        try:
+            with SessionLocal() as db:
+                award_repository = AwardRepository(db)
+                return award_repository.order_awards_by_category_asc()
+        except Exception as e:
+            raise e

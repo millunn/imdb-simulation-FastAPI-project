@@ -77,3 +77,29 @@ class AwardController:
             raise HTTPException(status_code=e.code, detail=e.message)
         except Exception as e:
             raise HTTPException(status_code=400, detail=str(e))
+
+    @staticmethod
+    def order_awards_by_category_decs():
+        try:
+            order_by_title_desc = AwardServices.order_awards_by_category_decs()
+            return order_by_title_desc
+        except AwardNotFoundException as e:
+            raise HTTPException(
+                status_code=e.code,
+                detail=e.message,
+            )
+        except Exception as e:
+            raise HTTPException(status_code=500, detail=str(e))
+
+    @staticmethod
+    def order_awards_by_category_asc():
+        try:
+            order_by_category_asc = AwardServices.order_awards_by_category_asc()
+            return order_by_category_asc
+        except AwardNotFoundException as e:
+            raise HTTPException(
+                status_code=e.code,
+                detail=e.message,
+            )
+        except Exception as e:
+            raise HTTPException(status_code=500, detail=str(e))

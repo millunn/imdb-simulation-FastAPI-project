@@ -114,3 +114,21 @@ class MovieServices:
                 return movie_repository.delete_movie_by_id(movie_id)
         except Exception as e:
             raise e
+
+    @staticmethod
+    def order_movies_by_title_decs():
+        try:
+            with SessionLocal() as db:
+                movie_repository = MovieRepository(db)
+                return movie_repository.order_movies_by_title_decs()
+        except Exception as e:
+            raise e
+
+    @staticmethod
+    def order_movies_by_title_asc():
+        try:
+            with SessionLocal() as db:
+                movie_repository = MovieRepository(db)
+                return movie_repository.order_movies_by_title_asc()
+        except Exception as e:
+            raise e

@@ -85,3 +85,29 @@ class ActorActressController:
             )
         except Exception as e:
             raise HTTPException(status_code=500, detail=str(e))
+
+    @staticmethod
+    def order_actor_actress_by_name_decs():
+        try:
+            order_by_name_desc = ActorActressServices.order_actor_actress_by_name_decs()
+            return order_by_name_desc
+        except ActorActressNotFoundException as e:
+            raise HTTPException(
+                status_code=e.code,
+                detail=e.message,
+            )
+        except Exception as e:
+            raise HTTPException(status_code=500, detail=str(e))
+
+    @staticmethod
+    def order_actor_actress_by_name_asc():
+        try:
+            order_by_title_asc = ActorActressServices.order_actor_actress_by_name_asc()
+            return order_by_title_asc
+        except ActorActressNotFoundException as e:
+            raise HTTPException(
+                status_code=e.code,
+                detail=e.message,
+            )
+        except Exception as e:
+            raise HTTPException(status_code=500, detail=str(e))

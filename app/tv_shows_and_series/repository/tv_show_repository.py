@@ -117,3 +117,11 @@ class TVShowRepository:
             return True
         except Exception as e:
             raise e
+
+    def order_tv_show_by_title_decs(self):
+        order_by_title_desc = self.db.query(TVShow).order_by(TVShow.title.desc()).all()
+        return order_by_title_desc
+
+    def order_tv_show_by_title_asc(self):
+        order_by_title_asc = self.db.query(TVShow).order_by(TVShow.title.asc()).all()
+        return order_by_title_asc

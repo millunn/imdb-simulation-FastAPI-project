@@ -1,10 +1,10 @@
 from pydantic import UUID4, BaseModel
 from app.awards.schemas import AwardSchema
 from app.actors_actresses.schemas import ActorActressSchema
-from app.tv_shows_and_series.schemas import TvShowSchema
+from app.tv_shows_and_series.schemas import TVShowSchema
 
 
-class ActorActressAwardTvShowSchema(BaseModel):
+class ActorActressAwardTVShowSchema(BaseModel):
     actor_actress_id: UUID4
     award_id: UUID4
     tv_show_id: UUID4
@@ -13,7 +13,7 @@ class ActorActressAwardTvShowSchema(BaseModel):
         orm_mode = True
 
 
-class ActorActressAwardTvShowSchemaIn(BaseModel):
+class ActorActressAwardTVShowSchemaIn(BaseModel):
     actor_actress_id: str
     award_id: str
     tv_show_id: str
@@ -24,14 +24,14 @@ class ActorActressAwardTvShowSchemaIn(BaseModel):
 
 class AwardByActorActressSchemaOut(BaseModel):
     award: AwardSchema
-    tv_show: TvShowSchema
+    tv_show: TVShowSchema
     actor_actress_id: UUID4
 
     class Config:
         orm_mode = True
 
 
-class AwardByTvShowSchemaOut(BaseModel):
+class AwardByTVShowSchemaOut(BaseModel):
     actor_actress: ActorActressSchema
     award: AwardSchema
     tv_show_id: UUID4
@@ -42,14 +42,14 @@ class AwardByTvShowSchemaOut(BaseModel):
 
 class ActorActressByAwardSchemaOut(BaseModel):
     actor_actress: ActorActressSchema
-    tv_show: TvShowSchema
+    tv_show: TVShowSchema
     award_id: UUID4
 
     class Config:
         orm_mode = True
 
 
-class ActorActressByTvShowSchemaOut(BaseModel):
+class ActorActressByTVShowSchemaOut(BaseModel):
     award: AwardSchema
     actor_actress: ActorActressSchema
     tv_show_id: UUID4

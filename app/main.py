@@ -23,6 +23,11 @@ from app.tv_shows_and_series.routes import (
     tv_show_award_router,
 )
 
+from app.ratings_and_reviews.routes import (
+    movie_rating_and_review_router,
+    tv_show_rating_and_review_router,
+)
+
 Base.metadata.create_all(bind=engine)
 
 
@@ -41,6 +46,8 @@ def init_app():
     app.include_router(tv_show_router)
     app.include_router(tv_show_actor_actress_router)
     app.include_router(tv_show_award_router)
+    app.include_router(movie_rating_and_review_router)
+    app.include_router(tv_show_rating_and_review_router)
     return app
 
 

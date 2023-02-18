@@ -7,7 +7,7 @@ from app.languages.repository import LanguageRepository
 from app.tv_shows_and_series.repository import TVShowRepository
 
 
-class TvShowServices:
+class TVShowServices:
     @staticmethod
     def create_tv_show(
         title,

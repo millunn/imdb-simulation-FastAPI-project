@@ -2,7 +2,7 @@ from datetime import time
 from pydantic import UUID4, BaseModel
 
 
-class TvShowSchema(BaseModel):
+class TVShowSchema(BaseModel):
     id: UUID4
     title: str
     plot: str
@@ -18,7 +18,7 @@ class TvShowSchema(BaseModel):
         orm_mode = True
 
 
-class TvShowSchemaSchemaIn(BaseModel):
+class TVShowSchemaSchemaIn(BaseModel):
     title: str
     plot: str
     release_year: str

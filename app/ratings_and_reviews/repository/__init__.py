@@ -1,0 +1,2 @@
+from .movie_rating_and_review_repository import MovieRatingAndReviewRepository
+from .tv_show_rating_and_review_repository import TVShowRatingAndReviewRepository

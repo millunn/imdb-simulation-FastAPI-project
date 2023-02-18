@@ -1,3 +1,3 @@
-from .tv_show_controller import TvShowController
-from .tv_show_actor_actress_controller import TvShowActorActressController
-from .tv_show_award_controller import TvShowAwardController
+from .tv_show_controller import TVShowController
+from .tv_show_actor_actress_controller import TVShowActorActressController
+from .tv_show_award_controller import TVShowAwardController

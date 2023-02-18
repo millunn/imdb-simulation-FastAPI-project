@@ -3,7 +3,7 @@ from app.db.database import Base
 from sqlalchemy import Column, ForeignKey, PrimaryKeyConstraint, String
 
 
-class TvShowAward(Base):
+class TVShowAward(Base):
     __tablename__ = "tv_show_award"
     tv_show_id = Column(
         String(50), ForeignKey("tv_shows_and_series.id"), nullable=False

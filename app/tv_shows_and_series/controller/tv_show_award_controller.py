@@ -2,14 +2,14 @@ from fastapi import HTTPException
 from sqlalchemy.exc import IntegrityError
 from app.awards.exceptions import AwardNotFoundException
 from app.tv_shows_and_series.exceptions import TVShowNotFoundException
-from app.tv_shows_and_series.services import TvShowAwardServices
+from app.tv_shows_and_series.services import TVShowAwardServices
 
 
-class TvShowAwardController:
+class TVShowAwardController:
     @staticmethod
     def create_tv_show_award(tv_show_id, award_id):
         try:
-            tv_show_award = TvShowAwardServices.create_tv_show_award(
+            tv_show_award = TVShowAwardServices.create_tv_show_award(
                 tv_show_id, award_id
             )
             return tv_show_award
@@ -33,7 +33,7 @@ class TvShowAwardController:
     @staticmethod
     def get_tv_show_by_award_id(award_id: str):
         try:
-            tv_show = TvShowAwardServices.get_tv_show_by_award_id(award_id)
+            tv_show = TVShowAwardServices.get_tv_show_by_award_id(award_id)
             return tv_show
         except TVShowNotFoundException as e:
             raise HTTPException(
@@ -46,7 +46,7 @@ class TvShowAwardController:
     @staticmethod
     def get_award_by_tv_show_id(tv_show_id: str):
         try:
-            award = TvShowAwardServices.get_award_by_tv_show_id(tv_show_id)
+            award = TVShowAwardServices.get_award_by_tv_show_id(tv_show_id)
             return award
         except AwardNotFoundException as e:
             raise HTTPException(
@@ -60,7 +60,7 @@ class TvShowAwardController:
     def get_all_tv_shows_with_all_awards():
         try:
             tv_show_award_repository = (
-                TvShowAwardServices.get_all_tv_shows_with_all_awards()
+                TVShowAwardServices.get_all_tv_shows_with_all_awards()
             )
             return tv_show_award_repository
         except Exception as e:

@@ -1,4 +1,3 @@
-import uuid
 from app.db.database import SessionLocal
 from app.genres.exceptions import GenreNotFoundException
 from app.genres.repository import GenreRepository

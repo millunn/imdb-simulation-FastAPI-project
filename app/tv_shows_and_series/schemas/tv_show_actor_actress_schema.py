@@ -1,9 +1,9 @@
 from pydantic import UUID4, BaseModel
 from app.actors_actresses.schemas import ActorActressSchema
-from app.tv_shows_and_series.schemas import TvShowSchema
+from app.tv_shows_and_series.schemas import TVShowSchema
 
 
-class TvShowActorActressSchema(BaseModel):
+class TVShowActorActressSchema(BaseModel):
     tv_show_id: UUID4
     actor_actress_id: UUID4
 
@@ -11,7 +11,7 @@ class TvShowActorActressSchema(BaseModel):
         orm_mode = True
 
 
-class TvShowActorActressSchemaIn(BaseModel):
+class TVShowActorActressSchemaIn(BaseModel):
     tv_show_id: str
     actor_actress_id: str
 
@@ -19,7 +19,7 @@ class TvShowActorActressSchemaIn(BaseModel):
         orm_mode = True
 
 
-class ActorActressByTvShowSchemaOut(BaseModel):
+class ActorActressByTVShowSchemaOut(BaseModel):
     actor_actress: ActorActressSchema
     tv_show_id: UUID4
 
@@ -27,8 +27,8 @@ class ActorActressByTvShowSchemaOut(BaseModel):
         orm_mode = True
 
 
-class TvShowByActorActressSchemaOut(BaseModel):
-    tv_show: TvShowSchema
+class TVShowByActorActressSchemaOut(BaseModel):
+    tv_show: TVShowSchema
     actor_actress_id: UUID4
 
     class Config:

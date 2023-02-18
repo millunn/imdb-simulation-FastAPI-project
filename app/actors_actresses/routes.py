@@ -13,10 +13,10 @@ from app.actors_actresses.schemas import (
     ActorActressByAwardSchemaOut,
     ActorActressByMovieSchemaOut,
     AwardByMovieSchemaOut,
-    ActorActressAwardTvShowSchema,
-    ActorActressAwardTvShowSchemaIn,
-    ActorActressByTvShowSchemaOut,
-    AwardByTvShowSchemaOut,
+    ActorActressAwardTVShowSchema,
+    ActorActressAwardTVShowSchemaIn,
+    ActorActressByTVShowSchemaOut,
+    AwardByTVShowSchemaOut,
 )
 
 
@@ -133,11 +133,11 @@ def get_all_actor_actress_with_all_awards_all_movies():
 # superuser
 @actor_actress_award_tv_show_router.post(
     "/add-new-actor-actress-award-tv-show",
-    response_model=ActorActressAwardTvShowSchema,
+    response_model=ActorActressAwardTVShowSchema,
     # dependencies=[Depends(JWTBearer("super_user"))],
 )
 def create_actor_actress_award_tv_show(
-    actor_actress_award_tv_show: ActorActressAwardTvShowSchemaIn,
+    actor_actress_award_tv_show: ActorActressAwardTVShowSchemaIn,
 ):
     return ActorActressAwardTvShowController.create_actor_actress_award_tv_show(
         actor_actress_award_tv_show.actor_actress_id,
@@ -156,7 +156,7 @@ def get_award_by_actor_actress_id(actor_actress_id: str):
 
 
 @actor_actress_award_tv_show_router.get(
-    "/award/tv-show-id", response_model=list[AwardByTvShowSchemaOut]
+    "/award/tv-show-id", response_model=list[AwardByTVShowSchemaOut]
 )
 def get_award_by_tv_show_id(tv_show_id: str):
     return ActorActressAwardTvShowController.get_award_by_tv_show_id(tv_show_id)
@@ -170,7 +170,7 @@ def get_actor_actress_by_award_id(award_id: str):
 
 
 @actor_actress_award_tv_show_router.get(
-    "/actor-actress/tv-show-id", response_model=list[ActorActressByTvShowSchemaOut]
+    "/actor-actress/tv-show-id", response_model=list[ActorActressByTVShowSchemaOut]
 )
 def get_actor_actress_by_tv_show_id(tv_show_id: str):
     return ActorActressAwardTvShowController.get_actor_actress_by_tv_show_id(tv_show_id)
@@ -178,7 +178,7 @@ def get_actor_actress_by_tv_show_id(tv_show_id: str):
 
 @actor_actress_award_tv_show_router.get(
     "/get-all-actor_actresses-with-all-awards-all-tv-shows",
-    response_model=list[ActorActressAwardTvShowSchema],
+    response_model=list[ActorActressAwardTVShowSchema],
 )
 def get_all_actor_actress_with_all_awards_all_tv_shows():
     return (

@@ -1,3 +1,4 @@
+from uuid import uuid4
 from sqlalchemy.orm import relationship
 from app.db.database import Base
 from sqlalchemy import INT, Column, ForeignKey, String, UniqueConstraint
@@ -5,11 +6,12 @@ from sqlalchemy import INT, Column, ForeignKey, String, UniqueConstraint
 
 class TVShowRatingAndReview(Base):
     __tablename__ = "tv_shows_rating_and_review"
+    id = Column(String(50), primary_key=True, default=uuid4, autoincrement=False)
     grade = Column(INT, nullable=False)
     comment = Column(String(200))
 
     tv_show_id = Column(String(50), ForeignKey("tv_shows_and_series.id"))
-    tv_show = relationship("TVShowAndSerie", lazy="subquery")
+    tv_show = relationship("TVShow", lazy="subquery")
 
     user_id = Column(String(50), ForeignKey("users.id"))
     user = relationship("User", lazy="subquery")

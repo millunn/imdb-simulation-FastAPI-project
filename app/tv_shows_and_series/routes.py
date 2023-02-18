@@ -1,22 +1,22 @@
 from fastapi import APIRouter, Depends
 from app.tv_shows_and_series.controller import (
-    TvShowController,
-    TvShowActorActressController,
-    TvShowAwardController,
+    TVShowController,
+    TVShowActorActressController,
+    TVShowAwardController,
 )
 
 
 from app.tv_shows_and_series.schemas import (
-    TvShowSchema,
-    TvShowSchemaSchemaIn,
-    TvShowActorActressSchema,
-    TvShowActorActressSchemaIn,
-    TvShowByActorActressSchemaOut,
-    ActorActressByTvShowSchemaOut,
-    AwardByTvShowSchemaOut,
-    TvShowByAwardSchemaOut,
-    TvShowAwardSchema,
-    TvShowAwardSchemaIn,
+    TVShowSchema,
+    TVShowSchemaSchemaIn,
+    TVShowActorActressSchema,
+    TVShowActorActressSchemaIn,
+    TVShowByActorActressSchemaOut,
+    ActorActressByTVShowSchemaOut,
+    AwardByTVShowSchemaOut,
+    TVShowByAwardSchemaOut,
+    TVShowAwardSchema,
+    TVShowAwardSchemaIn,
 )
 
 
@@ -32,11 +32,11 @@ tv_show_award_router = APIRouter(tags=["tv_show_award"], prefix="/api/tv_show_aw
 # superuser
 @tv_show_router.post(
     "/add-new-tv_show",
-    response_model=TvShowSchema,
+    response_model=TVShowSchema,
     # dependencies=[Depends(JWTBearer("super_user"))],
 )
-def create_tv_show(tv_show: TvShowSchemaSchemaIn):
-    return TvShowController.create_tv_show(
+def create_tv_show(tv_show: TVShowSchemaSchemaIn):
+    return TVShowController.create_tv_show(
         tv_show.title,
         tv_show.plot,
         tv_show.release_year,
@@ -49,34 +49,34 @@ def create_tv_show(tv_show: TvShowSchemaSchemaIn):
     )
 
 
-@tv_show_router.get("/id", response_model=TvShowSchema)
+@tv_show_router.get("/id", response_model=TVShowSchema)
 def get_tv_show_by_id(tv_show_id: str):
-    return TvShowController.get_tv_show_by_id(tv_show_id)
+    return TVShowController.get_tv_show_by_id(tv_show_id)
 
 
-@tv_show_router.get("/title", response_model=list[TvShowSchema])
+@tv_show_router.get("/title", response_model=list[TVShowSchema])
 def get_tv_show_by_title(title: str):
-    return TvShowController.get_tv_show_by_title(title)
+    return TVShowController.get_tv_show_by_title(title)
 
 
-@tv_show_router.get("/language", response_model=list[TvShowSchema])
+@tv_show_router.get("/language", response_model=list[TVShowSchema])
 def get_tv_show_by_language(language: str):
-    return TvShowController.get_tv_show_by_language(language)
+    return TVShowController.get_tv_show_by_language(language)
 
 
-@tv_show_router.get("/genre", response_model=list[TvShowSchema])
+@tv_show_router.get("/genre", response_model=list[TVShowSchema])
 def get_tv_show_by_genre(genre: str):
-    return TvShowController.get_tv_show_by_genre(genre)
+    return TVShowController.get_tv_show_by_genre(genre)
 
 
-@tv_show_router.get("/release_year", response_model=list[TvShowSchema])
+@tv_show_router.get("/release_year", response_model=list[TVShowSchema])
 def get_tv_show_by_release_year(release_year: str):
-    return TvShowController.get_tv_show_by_release_year(release_year)
+    return TVShowController.get_tv_show_by_release_year(release_year)
 
 
-@tv_show_router.get("/get-all-tv_shows", response_model=list[TvShowSchema])
+@tv_show_router.get("/get-all-tv_shows", response_model=list[TVShowSchema])
 def get_all_tv_shows():
-    return TvShowController.get_all_tv_shows()
+    return TVShowController.get_all_tv_shows()
 
 
 # superuser
@@ -84,77 +84,77 @@ def get_all_tv_shows():
     "/",
 )  # dependencies=[Depends(JWTBearer("super_user"))])
 def delete_tv_show_by_id(tv_show_id: str):
-    return TvShowController.delete_tv_show_by_id(tv_show_id)
+    return TVShowController.delete_tv_show_by_id(tv_show_id)
 
 
 # superuser
 @tv_show_actor_actress_router.post(
     "/add-new-tv_show-actor-actress",
-    response_model=TvShowActorActressSchema,
+    response_model=TVShowActorActressSchema,
     # dependencies=[Depends(JWTBearer("super_user"))],
 )
 def create_tv_show_actor_actress(
-    tv_show_actor_actress_award: TvShowActorActressSchemaIn,
+    tv_show_actor_actress_award: TVShowActorActressSchemaIn,
 ):
-    return TvShowActorActressController.create_tv_show_actor_actress(
+    return TVShowActorActressController.create_tv_show_actor_actress(
         tv_show_actor_actress_award.tv_show_id,
         tv_show_actor_actress_award.actor_actress_id,
     )
 
 
 @tv_show_actor_actress_router.get(
-    "/actor-actress-id", response_model=list[TvShowByActorActressSchemaOut]
+    "/actor-actress-id", response_model=list[TVShowByActorActressSchemaOut]
 )
 def get_tv_show_by_actor_actress_id(actor_actress_id: str):
-    return TvShowActorActressController.get_tv_show_by_actor_actress_id(
+    return TVShowActorActressController.get_tv_show_by_actor_actress_id(
         actor_actress_id
     )
 
 
 @tv_show_actor_actress_router.get(
-    "/actor-actress/tv_show-id", response_model=list[ActorActressByTvShowSchemaOut]
+    "/actor-actress/tv_show-id", response_model=list[ActorActressByTVShowSchemaOut]
 )
 def get_actor_actress_by_tv_show_id(tv_show_id: str):
-    return TvShowActorActressController.get_actor_actress_by_tv_show_id(tv_show_id)
+    return TVShowActorActressController.get_actor_actress_by_tv_show_id(tv_show_id)
 
 
 @tv_show_actor_actress_router.get(
     "/get-all-tv_shows-with-all-actor-actresses",
-    response_model=list[TvShowActorActressSchema],
+    response_model=list[TVShowActorActressSchema],
 )
 def get_all_tv_shows_with_all_actors_actresses():
-    return TvShowActorActressController.get_all_tv_shows_with_all_actors_actresses()
+    return TVShowActorActressController.get_all_tv_shows_with_all_actors_actresses()
 
 
 # superuser
 @tv_show_award_router.post(
     "/add-new-tv_show-award",
-    response_model=TvShowAwardSchema,
+    response_model=TVShowAwardSchema,
     # dependencies=[Depends(JWTBearer("super_user"))],
 )
 def create_tv_show_award(
-    tv_show_award_award: TvShowAwardSchemaIn,
+    tv_show_award_award: TVShowAwardSchemaIn,
 ):
-    return TvShowAwardController.create_tv_show_award(
+    return TVShowAwardController.create_tv_show_award(
         tv_show_award_award.tv_show_id, tv_show_award_award.award_id
     )
 
 
-@tv_show_award_router.get("/award-id", response_model=list[TvShowByAwardSchemaOut])
+@tv_show_award_router.get("/award-id", response_model=list[TVShowByAwardSchemaOut])
 def get_tv_show_by_award_id(award_id: str):
-    return TvShowAwardController.get_tv_show_by_award_id(award_id)
+    return TVShowAwardController.get_tv_show_by_award_id(award_id)
 
 
 @tv_show_award_router.get(
-    "/award/tv_show-id", response_model=list[AwardByTvShowSchemaOut]
+    "/award/tv_show-id", response_model=list[AwardByTVShowSchemaOut]
 )
 def get_award_by_tv_show_id(tv_show_id: str):
-    return TvShowAwardController.get_award_by_tv_show_id(tv_show_id)
+    return TVShowAwardController.get_award_by_tv_show_id(tv_show_id)
 
 
 @tv_show_award_router.get(
     "/get-all-tv_shows-with-all-awards",
-    response_model=list[TvShowAwardSchemaIn],
+    response_model=list[TVShowAwardSchemaIn],
 )
 def get_all_tv_shows_with_all_awards():
-    return TvShowAwardController.get_all_tv_shows_with_all_awards()
+    return TVShowAwardController.get_all_tv_shows_with_all_awards()

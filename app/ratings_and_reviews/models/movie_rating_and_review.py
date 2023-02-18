@@ -1,3 +1,4 @@
+from uuid import uuid4
 from sqlalchemy.orm import relationship
 from app.db.database import Base
 from sqlalchemy import INT, Column, ForeignKey, String, UniqueConstraint
@@ -5,6 +6,7 @@ from sqlalchemy import INT, Column, ForeignKey, String, UniqueConstraint
 
 class MovieRatingAndReview(Base):
     __tablename__ = "movies_rating_and_review"
+    id = Column(String(50), primary_key=True, default=uuid4, autoincrement=False)
     grade = Column(INT, nullable=False)
     comment = Column(String(200))
 

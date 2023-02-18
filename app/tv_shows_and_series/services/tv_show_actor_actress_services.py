@@ -8,11 +8,11 @@ from app.db.database import SessionLocal
 from app.tv_shows_and_series.exceptions import TVShowNotFoundException
 from app.tv_shows_and_series.repository import (
     TVShowRepository,
-    TvShowActorActressRepository,
+    TVShowActorActressRepository,
 )
 
 
-class TvShowActorActressServices:
+class TVShowActorActressServices:
     @staticmethod
     def create_tv_show_actor_actress(tv_show_id, actor_actress_id):
         try:
@@ -33,7 +33,7 @@ class TvShowActorActressServices:
                         message=f"Actor/actress with provided id: {actor_actress_id} not found.",
                         code=400,
                     )
-                tv_show_actor_actress_repository = TvShowActorActressRepository(db)
+                tv_show_actor_actress_repository = TVShowActorActressRepository(db)
                 return tv_show_actor_actress_repository.create_tv_show_actor_actress(
                     tv_show_id, actor_actress_id
                 )
@@ -46,7 +46,7 @@ class TvShowActorActressServices:
     def get_tv_show_by_actor_actress_id(actor_actress_id: str):
         try:
             with SessionLocal() as db:
-                award_actor_actress_repository = TvShowActorActressRepository(db)
+                award_actor_actress_repository = TVShowActorActressRepository(db)
                 return award_actor_actress_repository.get_tv_show_by_actor_actress_id(
                     actor_actress_id
                 )
@@ -57,7 +57,7 @@ class TvShowActorActressServices:
     def get_actor_actress_by_tv_show_id(tv_show_id: str):
         try:
             with SessionLocal() as db:
-                actor_actress_tv_show_repository = TvShowActorActressRepository(db)
+                actor_actress_tv_show_repository = TVShowActorActressRepository(db)
                 return actor_actress_tv_show_repository.get_actor_actress_by_tv_show_id(
                     tv_show_id
                 )
@@ -68,7 +68,7 @@ class TvShowActorActressServices:
     def get_all_tv_shows_with_all_actors_actresses():
         try:
             with SessionLocal() as db:
-                tv_show_actor_actress_repository = TvShowActorActressRepository(db)
+                tv_show_actor_actress_repository = TVShowActorActressRepository(db)
                 return (
                     tv_show_actor_actress_repository.get_all_tv_shows_with_all_actors_actresses()
                 )

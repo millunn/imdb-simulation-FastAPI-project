@@ -1,6 +1,4 @@
-import uuid
-from fastapi import APIRouter, Depends
-from pydantic import UUID4
+from fastapi import APIRouter
 
 from app.movies.controller import (
     MovieController,
@@ -10,7 +8,7 @@ from app.movies.controller import (
 
 from app.movies.schemas import (
     MovieSchema,
-    MovieSchemaSchemaIn,
+    MovieSchemaIn,
     MovieActorActressSchema,
     MovieActorActressSchemaIn,
     MovieByActorActressSchemaOut,
@@ -21,8 +19,6 @@ from app.movies.schemas import (
     MovieAwardSchemaIn,
 )
 
-
-from app.users.controller.user_auth_controller import JWTBearer
 
 movie_router = APIRouter(tags=["movies"], prefix="/api/movie")
 movie_actor_actress_router = APIRouter(
@@ -37,7 +33,7 @@ movie_award_router = APIRouter(tags=["movie_award"], prefix="/api/movie_award")
     response_model=MovieSchema,
     # dependencies=[Depends(JWTBearer("super_user"))],
 )
-def create_movie(movie: MovieSchemaSchemaIn):
+def create_movie(movie: MovieSchemaIn):
     return MovieController.create_movie(
         movie.title,
         movie.plot,

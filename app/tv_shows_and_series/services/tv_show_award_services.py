@@ -1,13 +1,12 @@
-import uuid
 from sqlalchemy.exc import IntegrityError
 from app.awards.exceptions import AwardNotFoundException
 from app.awards.repository.award_repository import AwardRepository
 from app.db.database import SessionLocal
 from app.tv_shows_and_series.exceptions import TVShowNotFoundException
-from app.tv_shows_and_series.repository import TVShowRepository, TvShowAwardRepository
+from app.tv_shows_and_series.repository import TVShowRepository, TVShowAwardRepository
 
 
-class TvShowAwardServices:
+class TVShowAwardServices:
     @staticmethod
     def create_tv_show_award(tv_show_id, award_id):
         try:
@@ -26,7 +25,7 @@ class TvShowAwardServices:
                         message=f"Award with provided id: {award_id} not found.",
                         code=400,
                     )
-                tv_show_award_repository = TvShowAwardRepository(db)
+                tv_show_award_repository = TVShowAwardRepository(db)
                 return tv_show_award_repository.create_tv_show_award(
                     tv_show_id, award_id
                 )
@@ -39,7 +38,7 @@ class TvShowAwardServices:
     def get_tv_show_by_award_id(award_id: str):
         try:
             with SessionLocal() as db:
-                tv_show_award_repository = TvShowAwardRepository(db)
+                tv_show_award_repository = TVShowAwardRepository(db)
                 return tv_show_award_repository.get_tv_show_by_award_id(award_id)
         except Exception as e:
             raise e
@@ -48,7 +47,7 @@ class TvShowAwardServices:
     def get_award_by_tv_show_id(tv_show_id: str):
         try:
             with SessionLocal() as db:
-                award_tv_show_repository = TvShowAwardRepository(db)
+                award_tv_show_repository = TVShowAwardRepository(db)
                 return award_tv_show_repository.get_award_by_tv_show_id(tv_show_id)
         except Exception as e:
             raise e
@@ -57,7 +56,7 @@ class TvShowAwardServices:
     def get_all_tv_shows_with_all_awards():
         try:
             with SessionLocal() as db:
-                tv_show_award_repository = TvShowAwardRepository(db)
+                tv_show_award_repository = TVShowAwardRepository(db)
                 return tv_show_award_repository.get_all_tv_shows_with_all_awards()
         except Exception as e:
             raise e

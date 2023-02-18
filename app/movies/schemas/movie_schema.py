@@ -19,7 +19,7 @@ class MovieSchema(BaseModel):
         orm_mode = True
 
 
-class MovieSchemaSchemaIn(BaseModel):
+class MovieSchemaIn(BaseModel):
     title: str
     plot: str
     duration: str

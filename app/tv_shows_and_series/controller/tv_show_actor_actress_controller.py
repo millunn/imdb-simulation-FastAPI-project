@@ -2,15 +2,15 @@ from fastapi import HTTPException
 from sqlalchemy.exc import IntegrityError
 from app.actors_actresses.exceptions import ActorActressNotFoundException
 from app.tv_shows_and_series.exceptions import TVShowNotFoundException
-from app.tv_shows_and_series.services import TvShowActorActressServices
+from app.tv_shows_and_series.services import TVShowActorActressServices
 
 
-class TvShowActorActressController:
+class TVShowActorActressController:
     @staticmethod
     def create_tv_show_actor_actress(tv_show_id, actor_actress_id):
         try:
             tv_show_actor_actress_award = (
-                TvShowActorActressServices.create_tv_show_actor_actress(
+                TVShowActorActressServices.create_tv_show_actor_actress(
                     tv_show_id, actor_actress_id
                 )
             )
@@ -35,7 +35,7 @@ class TvShowActorActressController:
     @staticmethod
     def get_tv_show_by_actor_actress_id(actor_actress_id: str):
         try:
-            tv_show = TvShowActorActressServices.get_tv_show_by_actor_actress_id(
+            tv_show = TVShowActorActressServices.get_tv_show_by_actor_actress_id(
                 actor_actress_id
             )
             return tv_show
@@ -50,7 +50,7 @@ class TvShowActorActressController:
     @staticmethod
     def get_actor_actress_by_tv_show_id(tv_show_id: str):
         try:
-            actor_actress = TvShowActorActressServices.get_actor_actress_by_tv_show_id(
+            actor_actress = TVShowActorActressServices.get_actor_actress_by_tv_show_id(
                 tv_show_id
             )
             return actor_actress
@@ -66,7 +66,7 @@ class TvShowActorActressController:
     def get_all_tv_shows_with_all_actors_actresses():
         try:
             tv_show_actor_actress_repository = (
-                TvShowActorActressServices.get_all_tv_shows_with_all_actors_actresses()
+                TVShowActorActressServices.get_all_tv_shows_with_all_actors_actresses()
             )
             return tv_show_actor_actress_repository
         except Exception as e:

@@ -131,3 +131,21 @@ class TVShowServices:
                 return tv_show_repository.order_tv_show_by_title_asc()
         except Exception as e:
             raise e
+
+    @staticmethod
+    def get_top_five_tv_shows_by_ratings():
+        try:
+            with SessionLocal() as db:
+                tv_show_repository = TVShowRepository(db)
+                return tv_show_repository.get_top_five_tv_shows_by_ratings()
+        except Exception as e:
+            raise e
+
+    @staticmethod
+    def get_five_most_rated_tv_shows():
+        try:
+            with SessionLocal() as db:
+                tv_show_repository = TVShowRepository(db)
+                return tv_show_repository.get_five_most_rated_tv_shows()
+        except Exception as e:
+            raise e

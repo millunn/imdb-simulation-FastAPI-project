@@ -1,8 +1,10 @@
+from sqlalchemy import desc, func, select
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 from app.movies.exceptions import MovieNotFoundException
 
 from app.movies.models import Movie
+from app.ratings_and_reviews.models import MovieRatingAndReview
 
 
 class MovieRepository:
@@ -52,7 +54,6 @@ class MovieRepository:
             )
         return movie
 
-    # lista
     def get_movie_by_title(self, title: str):
         movie = self.db.query(Movie).filter(Movie.title.ilike(f"%{title}%")).all()
         if (movie is None) or (movie == []):
@@ -62,7 +63,6 @@ class MovieRepository:
             )
         return movie
 
-    # lista
     def get_movie_by_language(self, language: str):
         movie = (
             self.db.query(Movie)
@@ -76,7 +76,6 @@ class MovieRepository:
             )
         return movie
 
-    # lista
     def get_movie_by_genre(self, genre: str):
         movie = (
             self.db.query(Movie).filter(Movie.genre_category.ilike(f"%{genre}%")).all()
@@ -88,7 +87,6 @@ class MovieRepository:
             )
         return movie
 
-    # lista
     def get_movie_by_release_year(self, release_year: str):
         movie = self.db.query(Movie).filter(Movie.release_year == release_year).all()
         if (movie is None) or (movie == []):
@@ -124,3 +122,29 @@ class MovieRepository:
     def order_movies_by_title_asc(self):
         order_by_title_asc = self.db.query(Movie).order_by(Movie.title.asc()).all()
         return order_by_title_asc
+
+    def get_top_five_movies_by_ratings(self):
+        movie_rating_and_review = (
+            self.db.query(MovieRatingAndReview)
+            .group_by(MovieRatingAndReview.movie_id)
+            .order_by(desc("average_rating"))
+            .limit(5)
+            .values(
+                MovieRatingAndReview.movie_id.label("movie_id"),
+                func.avg(MovieRatingAndReview.grade).label("average_rating"),
+            )
+        )
+        return movie_rating_and_review
+
+    def get_five_most_rated_movies(self):
+        movie_rating_and_review = (
+            self.db.query(MovieRatingAndReview)
+            .group_by(MovieRatingAndReview.movie_id)
+            .order_by(desc("number_of_ratings"))
+            .limit(5)
+            .values(
+                MovieRatingAndReview.movie_id.label("movie_id"),
+                func.count(MovieRatingAndReview.grade).label("number_of_ratings"),
+            )
+        )
+        return movie_rating_and_review

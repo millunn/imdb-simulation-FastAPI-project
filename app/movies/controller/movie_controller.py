@@ -164,3 +164,19 @@ class MovieController:
             )
         except Exception as e:
             raise HTTPException(status_code=500, detail=str(e))
+
+    @staticmethod
+    def get_top_five_movies_by_ratings():
+        try:
+            movies = MovieServices.get_top_five_movies_by_ratings()
+            return movies
+        except Exception as e:
+            raise HTTPException(status_code=500, detail=str(e))
+
+    @staticmethod
+    def get_five_most_rated_movies():
+        try:
+            movies = MovieServices.get_five_most_rated_movies()
+            return movies
+        except Exception as e:
+            raise HTTPException(status_code=500, detail=str(e))

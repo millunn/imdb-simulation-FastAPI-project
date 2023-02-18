@@ -18,6 +18,10 @@ from app.movies.schemas import (
     MovieAwardSchema,
     MovieAwardSchemaIn,
 )
+from app.ratings_and_reviews.schemas import (
+    MostRatedMoviesSchema,
+    TopFiveMovieSchema,
+)
 
 
 movie_router = APIRouter(tags=["movies"], prefix="/api/movie")
@@ -94,6 +98,16 @@ def order_movies_by_title_decs():
 @movie_router.get("/order-by-title/asc", response_model=list[MovieSchema])
 def order_movies_by_title_asc():
     return MovieController.order_movies_by_title_asc()
+
+
+@movie_router.get("/get-top-five-movies", response_model=list[TopFiveMovieSchema])
+def get_top_five_movies_by_ratings():
+    return MovieController.get_top_five_movies_by_ratings()
+
+
+@movie_router.get("/most-rated-movies", response_model=list[MostRatedMoviesSchema])
+def get_five_most_rated_movies():
+    return MovieController.get_five_most_rated_movies()
 
 
 # superuser

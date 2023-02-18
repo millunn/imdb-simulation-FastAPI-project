@@ -36,3 +36,19 @@ class MovieRatingAndReviewSchemaUpdateComment(BaseModel):
 
     class Config:
         orm_mode = True
+
+
+class TopFiveMovieSchema(BaseModel):
+    movie_id: str
+    average_rating: float
+
+    class Config:
+        orm_mode = True
+
+
+class MostRatedMoviesSchema(BaseModel):
+    movie_id: str
+    number_of_ratings: int
+
+    class Config:
+        orm_mode = True

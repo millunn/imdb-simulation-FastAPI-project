@@ -163,3 +163,19 @@ class TVShowController:
             )
         except Exception as e:
             raise HTTPException(status_code=500, detail=str(e))
+
+    @staticmethod
+    def get_top_five_tv_shows_by_ratings():
+        try:
+            tv_shows = TVShowServices.get_top_five_tv_shows_by_ratings()
+            return tv_shows
+        except Exception as e:
+            raise HTTPException(status_code=500, detail=str(e))
+
+    @staticmethod
+    def get_five_most_rated_tv_shows():
+        try:
+            tv_shows = TVShowServices.get_five_most_rated_tv_shows()
+            return tv_shows
+        except Exception as e:
+            raise HTTPException(status_code=500, detail=str(e))

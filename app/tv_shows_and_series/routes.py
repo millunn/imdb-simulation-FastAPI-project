@@ -1,4 +1,8 @@
 from fastapi import APIRouter, Depends
+from app.ratings_and_reviews.schemas import (
+    MostRatedTVShowSchema,
+    TopFiveTVShowSchema,
+)
 from app.tv_shows_and_series.controller import (
     TVShowController,
     TVShowActorActressController,
@@ -95,6 +99,16 @@ def order_tv_show_by_title_decs():
 @tv_show_router.get("/order-by-title/asc", response_model=list[TVShowSchema])
 def order_tv_show_by_title_asc():
     return TVShowController.order_tv_show_by_title_asc()
+
+
+@tv_show_router.get("/get-top-five-tv_shows", response_model=list[TopFiveTVShowSchema])
+def get_top_five_tv_shows_by_ratings():
+    return TVShowController.get_top_five_tv_shows_by_ratings()
+
+
+@tv_show_router.get("/most-rated-tv_shows", response_model=list[MostRatedTVShowSchema])
+def get_five_most_rated_tv_shows():
+    return TVShowController.get_five_most_rated_tv_shows()
 
 
 # superuser

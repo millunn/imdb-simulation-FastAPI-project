@@ -1,5 +1,7 @@
+from sqlalchemy import desc, func
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
+from app.ratings_and_reviews.models import TVShowRatingAndReview
 from app.tv_shows_and_series.exceptions import TVShowNotFoundException
 from app.tv_shows_and_series.models import TVShow
 
@@ -125,3 +127,29 @@ class TVShowRepository:
     def order_tv_show_by_title_asc(self):
         order_by_title_asc = self.db.query(TVShow).order_by(TVShow.title.asc()).all()
         return order_by_title_asc
+
+    def get_top_five_tv_shows_by_ratings(self):
+        tv_show_rating_and_review = (
+            self.db.query(TVShowRatingAndReview)
+            .group_by(TVShowRatingAndReview.tv_show_id)
+            .order_by(desc("average_rating"))
+            .limit(5)
+            .values(
+                TVShowRatingAndReview.tv_show_id.label("tv_show_id"),
+                func.avg(TVShowRatingAndReview.grade).label("average_rating"),
+            )
+        )
+        return tv_show_rating_and_review
+
+    def get_five_most_rated_tv_shows(self):
+        tv_show_rating_and_review = (
+            self.db.query(TVShowRatingAndReview)
+            .group_by(TVShowRatingAndReview.tv_show_id)
+            .order_by(desc("number_of_ratings"))
+            .limit(5)
+            .values(
+                TVShowRatingAndReview.tv_show_id.label("tv_show_id"),
+                func.count(TVShowRatingAndReview.grade).label("number_of_ratings"),
+            )
+        )
+        return tv_show_rating_and_review

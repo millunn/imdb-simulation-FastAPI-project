@@ -132,3 +132,21 @@ class MovieServices:
                 return movie_repository.order_movies_by_title_asc()
         except Exception as e:
             raise e
+
+    @staticmethod
+    def get_top_five_movies_by_ratings():
+        try:
+            with SessionLocal() as db:
+                movie_repository = MovieRepository(db)
+                return movie_repository.get_top_five_movies_by_ratings()
+        except Exception as e:
+            raise e
+
+    @staticmethod
+    def get_five_most_rated_movies():
+        try:
+            with SessionLocal() as db:
+                movie_repository = MovieRepository(db)
+                return movie_repository.get_five_most_rated_movies()
+        except Exception as e:
+            raise e

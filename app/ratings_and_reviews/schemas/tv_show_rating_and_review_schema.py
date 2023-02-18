@@ -36,3 +36,19 @@ class TVShowRatingAndReviewSchemaUpdateComment(BaseModel):
 
     class Config:
         orm_mode = True
+
+
+class TopFiveTVShowSchema(BaseModel):
+    tv_show_id: str
+    average_rating: float
+
+    class Config:
+        orm_mode = True
+
+
+class MostRatedTVShowSchema(BaseModel):
+    tv_show_id: str
+    number_of_ratings: int
+
+    class Config:
+        orm_mode = True

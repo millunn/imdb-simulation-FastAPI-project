@@ -29,7 +29,11 @@ def login_user(user: UserSchemaLogIn):
     return UserController.login_user(user.email, user.password)
 
 
-@user_router.get("/id", response_model=UserSchema)
+@user_router.get(
+    "/id",
+    response_model=UserSchema,
+    # dependencies=[Depends(JWTBearer("super_user"))],
+)
 def get_user_by_id(user_id: str):
     return UserController.get_user_by_id(user_id)
 

@@ -1,5 +1,4 @@
 import hashlib
-import uuid
 from app.db.database import SessionLocal
 from app.users.exceptions.exceptions import UserInvalidPasswordException
 from app.users.repository import UserRepository
@@ -32,12 +31,9 @@ class UserServices:
     @staticmethod
     def get_user_by_id(user_id: str):
         try:
-            uuid.UUID(str(user_id))
             with SessionLocal() as db:
                 user_repository = UserRepository(db)
                 return user_repository.get_user_by_id(user_id)
-        except ValueError:
-            raise Exception(f"Provided id: {user_id} not uuid")
         except Exception as e:
             raise e
 

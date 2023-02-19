@@ -1,3 +1,4 @@
+from sqlalchemy import desc, func
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 from app.awards.exceptions import AwardNotFoundException
@@ -45,3 +46,16 @@ class MovieAwardRepository:
     def get_all_movies_with_all_awards(self):
         movie_award = self.db.query(MovieAward).all()
         return movie_award
+
+    def get_top_five_most_awarded_movies(self):
+        movie_rating_and_review = (
+            self.db.query(MovieAward)
+            .group_by(MovieAward.movie_id)
+            .order_by(desc("number_of_awards"))
+            .limit(5)
+            .values(
+                MovieAward.movie_id.label("movie_id"),
+                func.count(MovieAward.award_id).label("number_of_awards"),
+            )
+        )
+        return movie_rating_and_review

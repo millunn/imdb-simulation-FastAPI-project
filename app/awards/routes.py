@@ -9,7 +9,7 @@ award_router = APIRouter(tags=["awards"], prefix="/api/awards")
 @award_router.post(
     "/add-new-award",
     response_model=AwardSchema,
-    dependencies=[Depends(JWTBearer("super_user"))],
+    # dependencies=[Depends(JWTBearer("super_user"))],
 )
 def create_award(award: AwardSchemaIn):
     return AwardController.create_award(award.category, award.subcategory)

@@ -21,12 +21,13 @@ from app.tv_shows_and_series.schemas import (
     TVShowByAwardSchemaOut,
     TVShowAwardSchema,
     TVShowAwardSchemaIn,
+    MostAwardedTVShowsSchema,
 )
 
 
 from app.users.controller.user_auth_controller import JWTBearer
 
-tv_show_router = APIRouter(tags=["tv_shows"], prefix="/api/tv_show")
+tv_show_router = APIRouter(tags=["tv_shows_and_series"], prefix="/api/tv_show")
 tv_show_actor_actress_router = APIRouter(
     tags=["tv_show_actor_actress"], prefix="/api/tv_show_actor_actress"
 )
@@ -182,3 +183,10 @@ def get_award_by_tv_show_id(tv_show_id: str):
 )
 def get_all_tv_shows_with_all_awards():
     return TVShowAwardController.get_all_tv_shows_with_all_awards()
+
+
+@tv_show_award_router.get(
+    "/most-awarded-tv-shows", response_model=list[MostAwardedTVShowsSchema]
+)
+def get_top_five_most_awarded_tv_shows():
+    return TVShowAwardController.get_top_five_most_awarded_tv_shows()

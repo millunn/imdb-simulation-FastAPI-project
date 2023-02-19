@@ -60,3 +60,12 @@ class TVShowAwardServices:
                 return tv_show_award_repository.get_all_tv_shows_with_all_awards()
         except Exception as e:
             raise e
+
+    @staticmethod
+    def get_top_five_most_awarded_tv_shows():
+        try:
+            with SessionLocal() as db:
+                tv_show_repository = TVShowAwardRepository(db)
+                return tv_show_repository.get_top_five_most_awarded_tv_shows()
+        except Exception as e:
+            raise e

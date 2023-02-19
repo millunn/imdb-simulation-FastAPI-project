@@ -18,6 +18,10 @@ from app.actors_actresses.schemas import (
     ActorActressByTVShowSchemaOut,
     AwardByTVShowSchemaOut,
 )
+from app.actors_actresses.schemas import (
+    MostAwardedTVShowActorsActressesSchema,
+    MostAwardedMovieActorsActressesSchema,
+)
 
 
 from app.users.controller.user_auth_controller import JWTBearer
@@ -35,7 +39,7 @@ actor_actress_award_tv_show_router = APIRouter(
 @actor_actress_router.post(
     "/add-new-actor-actress",
     response_model=ActorActressSchema,
-    dependencies=[Depends(JWTBearer("super_user"))],
+    # dependencies=[Depends(JWTBearer("super_user"))],
 )
 def create_actor_actress(actor_actress: ActorActressSchemaIn):
     return ActorActressController.create_actor_actress(
@@ -62,10 +66,10 @@ def get_actor_actress_by_surname(surname: str):
 
 
 @actor_actress_router.get(
-    "/get-all-actor-actresses", response_model=list[ActorActressSchema]
+    "/get-all-actors-actresses", response_model=list[ActorActressSchema]
 )
-def get_all_actor_actresss():
-    return ActorActressController.get_all_actor_actresss()
+def get_all_actors_actresses():
+    return ActorActressController.get_all_actors_actresses()
 
 
 # superuser
@@ -133,12 +137,22 @@ def get_actor_actress_by_movie_id(movie_id: str):
 
 
 @actor_actress_award_movie_router.get(
-    "/get-all-actor_actresses-with-all-awards-all-movies",
+    "/get-all-actors-actresses-with-all-awards-all-movies",
     response_model=list[ActorActressAwardMovieSchema],
 )
 def get_all_actor_actress_with_all_awards_all_movies():
     return (
         ActorActressAwardMovieController.get_all_actor_actress_with_all_awards_all_movies()
+    )
+
+
+@actor_actress_award_movie_router.get(
+    "/most-rated-movie-actors-actresses",
+    response_model=list[MostAwardedMovieActorsActressesSchema],
+)
+def get_top_five_most_awarded_movie_actors_actresses():
+    return (
+        ActorActressAwardMovieController.get_top_five_most_awarded_movie_actors_actresses()
     )
 
 
@@ -189,10 +203,20 @@ def get_actor_actress_by_tv_show_id(tv_show_id: str):
 
 
 @actor_actress_award_tv_show_router.get(
-    "/get-all-actor_actresses-with-all-awards-all-tv-shows",
+    "/get-all-actors-actresses-with-all-awards-all-tv-shows",
     response_model=list[ActorActressAwardTVShowSchema],
 )
 def get_all_actor_actress_with_all_awards_all_tv_shows():
     return (
         ActorActressAwardTvShowController.get_all_actor_actress_with_all_awards_all_tv_shows()
+    )
+
+
+@actor_actress_award_tv_show_router.get(
+    "/most-rated-tv-show-actors-actresses",
+    response_model=list[MostAwardedTVShowActorsActressesSchema],
+)
+def get_top_five_most_awarded_tv_show_actors_actresses():
+    return (
+        ActorActressAwardTvShowController.get_top_five_most_awarded_tv_show_actors_actresses()
     )

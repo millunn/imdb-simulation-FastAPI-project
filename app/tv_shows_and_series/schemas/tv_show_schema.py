@@ -1,5 +1,5 @@
 from datetime import time
-from pydantic import UUID4, BaseModel
+from pydantic import UUID4, BaseModel, PositiveInt
 
 
 class TVShowSchema(BaseModel):
@@ -23,8 +23,8 @@ class TVShowSchemaSchemaIn(BaseModel):
     plot: str
     release_year: str
     creator: str
-    seasons: int
-    episodes: int
+    seasons: PositiveInt
+    episodes: PositiveInt
     episode_duration: str
     language_name: str
     genre_category: str

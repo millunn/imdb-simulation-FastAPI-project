@@ -56,3 +56,11 @@ class ActorActressByMovieSchemaOut(BaseModel):
 
     class Config:
         orm_mode = True
+
+
+class MostAwardedMovieActorsActressesSchema(BaseModel):
+    actor_actress_id: str
+    number_of_awards: int
+
+    class Config:
+        orm_mode = True

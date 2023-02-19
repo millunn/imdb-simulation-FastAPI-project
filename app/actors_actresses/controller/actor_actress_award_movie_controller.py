@@ -105,3 +105,13 @@ class ActorActressAwardMovieController:
             return actor_actress_award_movie
         except Exception as e:
             raise HTTPException(status_code=500, detail=str(e))
+
+    @staticmethod
+    def get_top_five_most_awarded_movie_actors_actresses():
+        try:
+            actor_actress_award_movie = (
+                ActorActressAwardMovieServices.get_top_five_most_awarded_movie_actors_actresses()
+            )
+            return actor_actress_award_movie
+        except Exception as e:
+            raise HTTPException(status_code=500, detail=str(e))

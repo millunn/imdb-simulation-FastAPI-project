@@ -111,3 +111,16 @@ class ActorActressAwardMovieServices:
                 )
         except Exception as e:
             raise e
+
+    @staticmethod
+    def get_top_five_most_awarded_movie_actors_actresses():
+        try:
+            with SessionLocal() as db:
+                actor_actress_award_movie_repository = ActorActressAwardMovieRepository(
+                    db
+                )
+                return (
+                    actor_actress_award_movie_repository.get_top_five_most_awarded_movie_actors_actresses()
+                )
+        except Exception as e:
+            raise e

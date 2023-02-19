@@ -74,6 +74,10 @@ class UserRepository:
                 raise UserNotFoundException(
                     f"User with provided id: {user_id} not found.", 400
                 )
+            if user.is_superuser:
+                raise UserNotFoundException(
+                    f"User with provided id: {user_id} not found.", 400
+                )
             user.name = name
             self.db.add(user)
             self.db.commit()
@@ -89,6 +93,10 @@ class UserRepository:
                 raise UserNotFoundException(
                     f"User with provided id: {user_id} not found.", 400
                 )
+            if user.is_superuser:
+                raise UserNotFoundException(
+                    f"User with provided id: {user_id} not found.", 400
+                )
             user.surname = surname
             self.db.add(user)
             self.db.commit()
@@ -101,6 +109,10 @@ class UserRepository:
         try:
             user = self.db.query(User).filter(User.id == user_id).first()
             if user is None:
+                raise UserNotFoundException(
+                    f"User with provided id: {user_id} not found.", 400
+                )
+            if user.is_superuser:
                 raise UserNotFoundException(
                     f"User with provided id: {user_id} not found.", 400
                 )

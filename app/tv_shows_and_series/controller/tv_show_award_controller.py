@@ -65,3 +65,11 @@ class TVShowAwardController:
             return tv_show_award_repository
         except Exception as e:
             raise HTTPException(status_code=500, detail=str(e))
+
+    @staticmethod
+    def get_top_five_most_awarded_tv_shows():
+        try:
+            tv_shows = TVShowAwardServices.get_top_five_most_awarded_tv_shows()
+            return tv_shows
+        except Exception as e:
+            raise HTTPException(status_code=500, detail=str(e))

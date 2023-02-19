@@ -143,10 +143,10 @@ class MovieServices:
             raise e
 
     @staticmethod
-    def get_five_most_rated_movies():
+    def get_top_five_most_rated_movies():
         try:
             with SessionLocal() as db:
                 movie_repository = MovieRepository(db)
-                return movie_repository.get_five_most_rated_movies()
+                return movie_repository.get_top_five_most_rated_movies()
         except Exception as e:
             raise e

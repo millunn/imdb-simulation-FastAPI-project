@@ -33,3 +33,11 @@ class TVShowByAwardSchemaOut(BaseModel):
 
     class Config:
         orm_mode = True
+
+
+class MostAwardedTVShowsSchema(BaseModel):
+    tv_show_id: str
+    number_of_awards: int
+
+    class Config:
+        orm_mode = True

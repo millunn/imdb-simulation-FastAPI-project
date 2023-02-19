@@ -1,6 +1,4 @@
-import uuid
 from fastapi import HTTPException
-from pydantic import UUID4
 from sqlalchemy.exc import IntegrityError
 from app.awards.exceptions import AwardNotFoundException
 from app.movies.exceptions import MovieNotFoundException
@@ -61,5 +59,13 @@ class MovieAwardController:
         try:
             movie_award_repository = MovieAwardServices.get_all_movies_with_all_awards()
             return movie_award_repository
+        except Exception as e:
+            raise HTTPException(status_code=500, detail=str(e))
+
+    @staticmethod
+    def get_top_five_most_awarded_movies():
+        try:
+            movies = MovieAwardServices.get_top_five_most_awarded_movies()
+            return movies
         except Exception as e:
             raise HTTPException(status_code=500, detail=str(e))

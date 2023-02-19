@@ -17,6 +17,7 @@ from app.movies.schemas import (
     MovieByAwardSchemaOut,
     MovieAwardSchema,
     MovieAwardSchemaIn,
+    MostAwardedMoviesSchema,
 )
 from app.ratings_and_reviews.schemas import (
     MostRatedMoviesSchema,
@@ -106,8 +107,8 @@ def get_top_five_movies_by_ratings():
 
 
 @movie_router.get("/most-rated-movies", response_model=list[MostRatedMoviesSchema])
-def get_five_most_rated_movies():
-    return MovieController.get_five_most_rated_movies()
+def get_top_five_most_rated_movies():
+    return MovieController.get_top_five_most_rated_movies()
 
 
 # superuser
@@ -176,3 +177,10 @@ def get_award_by_movie_id(movie_id: str):
 )
 def get_all_movies_with_all_awards():
     return MovieAwardController.get_all_movies_with_all_awards()
+
+
+@movie_award_router.get(
+    "/most-awarded-movies", response_model=list[MostAwardedMoviesSchema]
+)
+def get_top_five_most_awarded_movies():
+    return MovieAwardController.get_top_five_most_awarded_movies()

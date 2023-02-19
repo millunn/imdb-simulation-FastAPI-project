@@ -136,7 +136,7 @@ class MovieRepository:
         )
         return movie_rating_and_review
 
-    def get_five_most_rated_movies(self):
+    def get_top_five_most_rated_movies(self):
         movie_rating_and_review = (
             self.db.query(MovieRatingAndReview)
             .group_by(MovieRatingAndReview.movie_id)

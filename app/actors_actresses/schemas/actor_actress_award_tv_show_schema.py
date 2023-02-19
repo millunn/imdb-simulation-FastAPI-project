@@ -56,3 +56,11 @@ class ActorActressByTVShowSchemaOut(BaseModel):
 
     class Config:
         orm_mode = True
+
+
+class MostAwardedTVShowActorsActressesSchema(BaseModel):
+    actor_actress_id: str
+    number_of_awards: int
+
+    class Config:
+        orm_mode = True

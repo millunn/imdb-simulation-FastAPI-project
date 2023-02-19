@@ -45,11 +45,11 @@ class ActorActressServices:
             raise e
 
     @staticmethod
-    def get_all_actor_actresss():
+    def get_all_actors_actresses():
         try:
             with SessionLocal() as db:
                 actor_actress_repository = ActorActressRepository(db)
-                return actor_actress_repository.get_all_actor_actresss()
+                return actor_actress_repository.get_all_actors_actresses()
         except Exception as e:
             raise e
 

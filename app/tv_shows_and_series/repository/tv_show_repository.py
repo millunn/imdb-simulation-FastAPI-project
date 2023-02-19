@@ -51,7 +51,6 @@ class TVShowRepository:
             )
         return tv_show
 
-    # lista
     def get_tv_show_by_title(self, title: str):
         tv_show = self.db.query(TVShow).filter(TVShow.title.ilike(f"%{title}%")).all()
         if (tv_show is None) or (tv_show == []):
@@ -61,7 +60,6 @@ class TVShowRepository:
             )
         return tv_show
 
-    # lista
     def get_tv_show_by_language(self, language: str):
         tv_show = (
             self.db.query(TVShow)
@@ -75,7 +73,6 @@ class TVShowRepository:
             )
         return tv_show
 
-    # lista
     def get_tv_show_by_genre(self, genre: str):
         tv_show = (
             self.db.query(TVShow)
@@ -89,7 +86,6 @@ class TVShowRepository:
             )
         return tv_show
 
-    # lista
     def get_tv_show_by_release_year(self, release_year: str):
         tv_show = (
             self.db.query(TVShow).filter(TVShow.release_year == release_year).all()

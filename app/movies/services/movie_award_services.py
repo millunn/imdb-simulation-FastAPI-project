@@ -1,4 +1,3 @@
-import uuid
 from sqlalchemy.exc import IntegrityError
 from app.awards.exceptions import AwardNotFoundException
 from app.awards.repository.award_repository import AwardRepository
@@ -58,5 +57,14 @@ class MovieAwardServices:
             with SessionLocal() as db:
                 movie_award_repository = MovieAwardRepository(db)
                 return movie_award_repository.get_all_movies_with_all_awards()
+        except Exception as e:
+            raise e
+
+    @staticmethod
+    def get_top_five_most_awarded_movies():
+        try:
+            with SessionLocal() as db:
+                movie_repository = MovieAwardRepository(db)
+                return movie_repository.get_top_five_most_awarded_movies()
         except Exception as e:
             raise e

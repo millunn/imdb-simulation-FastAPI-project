@@ -60,9 +60,9 @@ class ActorActressRepository:
             )
         return actor_actress
 
-    def get_all_actor_actresss(self):
-        actor_actresss = self.db.query(ActorActress).all()
-        return actor_actresss
+    def get_all_actors_actresses(self):
+        actors_actresses = self.db.query(ActorActress).all()
+        return actors_actresses
 
     ##superuser
     def delete_actor_actress_by_id(self, actor_actress_id: str):

@@ -1,3 +1,4 @@
+from sqlalchemy import desc, func
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 from app.actors_actresses.exceptions import ActorActressNotFoundException
@@ -75,4 +76,17 @@ class ActorActressAwardMovieRepository:
 
     def get_all_actor_actress_with_all_awards_all_movies(self):
         actor_actress_award_movie = self.db.query(ActorActressAwardMovie).all()
+        return actor_actress_award_movie
+
+    def get_top_five_most_awarded_movie_actors_actresses(self):
+        actor_actress_award_movie = (
+            self.db.query(ActorActressAwardMovie)
+            .group_by(ActorActressAwardMovie.actor_actress_id)
+            .order_by(desc("number_of_awards"))
+            .limit(5)
+            .values(
+                ActorActressAwardMovie.actor_actress_id.label("actor_actress_id"),
+                func.count(ActorActressAwardMovie.award_id).label("number_of_awards"),
+            )
+        )
         return actor_actress_award_movie

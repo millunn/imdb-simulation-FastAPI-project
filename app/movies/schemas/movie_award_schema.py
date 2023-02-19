@@ -33,3 +33,11 @@ class MovieByAwardSchemaOut(BaseModel):
 
     class Config:
         orm_mode = True
+
+
+class MostAwardedMoviesSchema(BaseModel):
+    movie_id: str
+    number_of_awards: int
+
+    class Config:
+        orm_mode = True

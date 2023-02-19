@@ -1,3 +1,4 @@
+from sqlalchemy import desc, func
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 from app.awards.exceptions import AwardNotFoundException
@@ -46,3 +47,16 @@ class TVShowAwardRepository:
     def get_all_tv_shows_with_all_awards(self):
         tv_show_award = self.db.query(TVShowAward).all()
         return tv_show_award
+
+    def get_top_five_most_awarded_tv_shows(self):
+        tv_show_rating_and_review = (
+            self.db.query(TVShowAward)
+            .group_by(TVShowAward.tv_show_id)
+            .order_by(desc("number_of_awards"))
+            .limit(5)
+            .values(
+                TVShowAward.tv_show_id.label("tv_show_id"),
+                func.count(TVShowAward.award_id).label("number_of_awards"),
+            )
+        )
+        return tv_show_rating_and_review

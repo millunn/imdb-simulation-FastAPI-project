@@ -4,6 +4,10 @@ from app.genres.exceptions import GenreNotFoundException
 from app.genres.repository import GenreRepository
 from app.languages.exceptions import LanguageNotFoundException
 from app.languages.repository import LanguageRepository
+from app.tv_shows_and_series.exceptions import (
+    TVShowReleaseYearDigitException,
+    TVShowReleaseYearLenghtException,
+)
 from app.tv_shows_and_series.repository import TVShowRepository
 
 
@@ -21,6 +25,16 @@ class TVShowServices:
         genre_category,
     ):
         try:
+            if not release_year.isdigit():
+                raise TVShowReleaseYearDigitException(
+                    message=f"Release year not an integer!",
+                    code=400,
+                )
+            if len(release_year) > 4:
+                raise TVShowReleaseYearLenghtException(
+                    message=f"Release year must have 4 digits!",
+                    code=400,
+                )
             with SessionLocal() as db:
                 language_repository = LanguageRepository(db)
                 language = language_repository.get_language_by_name(language_name)

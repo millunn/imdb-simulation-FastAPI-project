@@ -3,6 +3,10 @@ from sqlalchemy.exc import IntegrityError
 from app.genres.exceptions import GenreNotFoundException
 from app.languages.exceptions import LanguageNotFoundException
 from app.tv_shows_and_series.exceptions import TVShowNotFoundException
+from app.tv_shows_and_series.exceptions import (
+    TVShowReleaseYearDigitException,
+    TVShowReleaseYearLenghtException,
+)
 from app.tv_shows_and_series.services import TVShowServices
 
 
@@ -32,6 +36,16 @@ class TVShowController:
                 genre_category,
             )
             return tv_show
+        except TVShowReleaseYearDigitException as e:
+            raise HTTPException(
+                status_code=e.code,
+                detail=e.message,
+            )
+        except TVShowReleaseYearLenghtException as e:
+            raise HTTPException(
+                status_code=e.code,
+                detail=e.message,
+            )
         except LanguageNotFoundException as e:
             raise HTTPException(
                 status_code=e.code,

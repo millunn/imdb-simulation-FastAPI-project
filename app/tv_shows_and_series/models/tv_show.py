@@ -10,7 +10,7 @@ class TVShow(Base):
     id = Column(String(50), primary_key=True, default=uuid4, autoincrement=False)
     title = Column(String(50), unique=True, nullable=False)
     plot = Column(String(100), nullable=False)
-    release_year = Column(Date, nullable=False)
+    release_year = Column(String(4), nullable=False)
     creator = Column(String(50), nullable=False)
     seasons = Column(INT, nullable=False)
     episodes = Column(INT, nullable=False)

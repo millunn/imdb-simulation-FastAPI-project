@@ -2,7 +2,12 @@ from fastapi import HTTPException, Response
 from sqlalchemy.exc import IntegrityError
 from app.genres.exceptions import GenreNotFoundException
 from app.languages.exceptions import LanguageNotFoundException
-from app.movies.exceptions import MovieNotFoundException, MovieIntegrityException
+from app.movies.exceptions import (
+    MovieNotFoundException,
+    MovieIntegrityException,
+    MovieReleaseYearDigitException,
+    MovieReleaseYearLenghtException,
+)
 
 from app.movies.services import MovieServices
 
@@ -35,6 +40,16 @@ class MovieController:
                 genre_category,
             )
             return movie
+        except MovieReleaseYearDigitException as e:
+            raise HTTPException(
+                status_code=e.code,
+                detail=e.message,
+            )
+        except MovieReleaseYearLenghtException as e:
+            raise HTTPException(
+                status_code=e.code,
+                detail=e.message,
+            )
         except LanguageNotFoundException as e:
             raise HTTPException(
                 status_code=e.code,

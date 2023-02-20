@@ -2,7 +2,7 @@ from fastapi import HTTPException, Response
 from sqlalchemy.exc import IntegrityError
 from app.users.exceptions import UserInvalidPasswordException, UserNotFoundException
 from app.users.services import UserServices, signJWT
-from app.users.services import send_email
+from app.users.services import send_email_login_alert, send_confirmation_email
 
 
 class UserController:
@@ -10,6 +10,7 @@ class UserController:
     def create_user(name, surname, email, password):
         try:
             user = UserServices.create_user(name, surname, email, password)
+            send_confirmation_email(email)
             return user
         except IntegrityError as e:
             raise HTTPException(
@@ -23,6 +24,7 @@ class UserController:
     def create_super_user(name, surname, email, password):
         try:
             user = UserServices.create_super_user(name, surname, email, password)
+            send_confirmation_email(email)
             return user
         except IntegrityError as e:
             raise HTTPException(
@@ -36,7 +38,7 @@ class UserController:
     def login_user(email, password):
         try:
             user = UserServices.login_user(email, password)
-            send_email(email)
+            send_email_login_alert(email)
             if user.is_superuser:
                 return signJWT(user.id, "super_user")
             return signJWT(user.id, "classic_user")

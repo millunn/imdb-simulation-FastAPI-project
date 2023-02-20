@@ -53,7 +53,11 @@ def create_movie(movie: MovieSchemaIn):
     )
 
 
-@movie_router.get("/id", response_model=MovieSchema)
+@movie_router.get(
+    "/id",
+    response_model=MovieSchema,
+    # dependencies=[Depends(JWTBearer("super_user"))],
+)
 def get_movie_by_id(movie_id: str):
     return MovieController.get_movie_by_id(movie_id)
 

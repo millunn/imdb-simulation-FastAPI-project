@@ -69,5 +69,10 @@ class MovieActorActressController:
                 MovieActorActressServices.get_all_movies_with_all_actors_actresses()
             )
             return movie_actor_actress_repository
+        except ActorActressNotFoundException as e:
+            raise HTTPException(
+                status_code=e.code,
+                detail=e.message,
+            )
         except Exception as e:
             raise HTTPException(status_code=500, detail=str(e))

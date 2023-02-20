@@ -77,6 +77,13 @@ class TVShowRatingAndReviewRepository:
 
     def get_all_tv_shows_ratings_and_reviews(self):
         tv_shows_ratings_and_reviews = self.db.query(TVShowRatingAndReview).all()
+        if (tv_shows_ratings_and_reviews is None) or (
+            tv_shows_ratings_and_reviews == []
+        ):
+            raise TVShowRatingAndReviewNotFoundException(
+                message=f"The list is empty!",
+                code=400,
+            )
         return tv_shows_ratings_and_reviews
 
     # superuser

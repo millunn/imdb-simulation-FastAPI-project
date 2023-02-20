@@ -52,6 +52,8 @@ class LanguageRepository:
 
     def get_all_languages(self):
         languages = self.db.query(Language).all()
+        if (languages is None) or (languages == []):
+            raise LanguageNotFoundException(f"The list is empty!", 400)
         return languages
 
     ##superuser

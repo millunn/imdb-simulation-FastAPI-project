@@ -97,12 +97,17 @@ class ActorActressAwardMovieController:
             raise HTTPException(status_code=500, detail=str(e))
 
     @staticmethod
-    def get_all_actor_actress_with_all_awards_all_movies():
+    def get_all_actors_actresses_with_all_awards_all_movies():
         try:
             actor_actress_award_movie = (
-                ActorActressAwardMovieServices.get_all_actor_actress_with_all_awards_all_movies()
+                ActorActressAwardMovieServices.get_all_actors_actresses_with_all_awards_all_movies()
             )
             return actor_actress_award_movie
+        except ActorActressNotFoundException as e:
+            raise HTTPException(
+                status_code=e.code,
+                detail=e.message,
+            )
         except Exception as e:
             raise HTTPException(status_code=500, detail=str(e))
 

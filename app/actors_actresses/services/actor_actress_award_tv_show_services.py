@@ -98,14 +98,14 @@ class ActorActressAwardTvShowServices:
             raise e
 
     @staticmethod
-    def get_all_actor_actress_with_all_awards_all_tv_shows():
+    def get_all_actors_actresses_with_all_awards_all_tv_shows():
         try:
             with SessionLocal() as db:
                 actor_actress_award_tv_show_repository = (
                     ActorActressAwardTvShowRepository(db)
                 )
                 return (
-                    actor_actress_award_tv_show_repository.get_all_actor_actress_with_all_awards_all_tv_shows()
+                    actor_actress_award_tv_show_repository.get_all_actors_actresses_with_all_awards_all_tv_shows()
                 )
         except Exception as e:
             raise e

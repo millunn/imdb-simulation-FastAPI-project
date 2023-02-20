@@ -62,13 +62,18 @@ class AwardController:
         try:
             awards = AwardServices.get_all_awards()
             return awards
+        except AwardNotFoundException as e:
+            raise HTTPException(
+                status_code=e.code,
+                detail=e.message,
+            )
         except Exception as e:
             raise HTTPException(status_code=500, detail=str(e))
 
     @staticmethod
     def delete_award_by_id(award_id: str):
         try:
-            if AwardServices.delete_study_programme_by_id(award_id):
+            if AwardServices.delete_award_by_id(award_id):
                 return Response(
                     content=f"Award with provided ID: {award_id} deleted.",
                     status_code=200,

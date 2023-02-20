@@ -77,6 +77,11 @@ class MovieRatingAndReviewRepository:
 
     def get_all_movies_ratings_and_reviews(self):
         movies_ratings_and_reviews = self.db.query(MovieRatingAndReview).all()
+        if (movies_ratings_and_reviews is None) or (movies_ratings_and_reviews == []):
+            raise MovieRatingAndReviewNotFoundException(
+                message=f"The list is empty!",
+                code=400,
+            )
         return movies_ratings_and_reviews
 
     # superuser

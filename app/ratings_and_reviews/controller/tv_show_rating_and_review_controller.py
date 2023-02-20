@@ -115,6 +115,11 @@ class TVShowRatingAndReviewController:
                 TVShowRatingAndReviewServices.get_all_tv_shows_ratings_and_reviews()
             )
             return tv_shows_ratings_and_reviews
+        except TVShowRatingAndReviewNotFoundException as e:
+            raise HTTPException(
+                status_code=e.code,
+                detail=e.message,
+            )
         except Exception as e:
             raise HTTPException(status_code=500, detail=str(e))
 

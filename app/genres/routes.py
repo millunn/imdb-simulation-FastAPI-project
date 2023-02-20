@@ -16,7 +16,11 @@ def create_genre(genre: GenreSchemaIn):
     return GenreController.create_genre(genre.category, genre.description)
 
 
-@genre_router.get("/id", response_model=GenreSchema)
+@genre_router.get(
+    "/id",
+    response_model=GenreSchema,
+    # dependencies=[Depends(JWTBearer("super_user"))],
+)
 def get_genre_by_id(genre_id: str):
     return GenreController.get_genre_by_id(genre_id)
 

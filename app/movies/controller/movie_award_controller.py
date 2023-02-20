@@ -59,6 +59,11 @@ class MovieAwardController:
         try:
             movie_award_repository = MovieAwardServices.get_all_movies_with_all_awards()
             return movie_award_repository
+        except AwardNotFoundException as e:
+            raise HTTPException(
+                status_code=e.code,
+                detail=e.message,
+            )
         except Exception as e:
             raise HTTPException(status_code=500, detail=str(e))
 

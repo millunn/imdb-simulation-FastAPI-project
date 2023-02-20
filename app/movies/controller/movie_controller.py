@@ -2,7 +2,7 @@ from fastapi import HTTPException, Response
 from sqlalchemy.exc import IntegrityError
 from app.genres.exceptions import GenreNotFoundException
 from app.languages.exceptions import LanguageNotFoundException
-from app.movies.exceptions import MovieNotFoundException
+from app.movies.exceptions import MovieNotFoundException, MovieIntegrityException
 
 from app.movies.services import MovieServices
 
@@ -123,6 +123,11 @@ class MovieController:
         try:
             movies = MovieServices.get_all_movies()
             return movies
+        except MovieNotFoundException as e:
+            raise HTTPException(
+                status_code=e.code,
+                detail=e.message,
+            )
         except Exception as e:
             raise HTTPException(status_code=500, detail=str(e))
 
@@ -132,6 +137,11 @@ class MovieController:
             MovieServices.delete_movie_by_id(movie_id)
             return Response(content=f"Movie with provided id - {movie_id} is deleted")
         except MovieNotFoundException as e:
+            raise HTTPException(
+                status_code=e.code,
+                detail=e.message,
+            )
+        except MovieIntegrityException as e:
             raise HTTPException(
                 status_code=e.code,
                 detail=e.message,

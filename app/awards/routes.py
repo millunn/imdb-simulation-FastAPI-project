@@ -15,7 +15,11 @@ def create_award(award: AwardSchemaIn):
     return AwardController.create_award(award.category, award.subcategory)
 
 
-@award_router.get("/id", response_model=AwardSchema)
+@award_router.get(
+    "/id",
+    response_model=AwardSchema,
+    # dependencies=[Depends(JWTBearer("super_user"))],
+)
 def get_award_by_id(award_id: str):
     return AwardController.get_award_by_id(award_id)
 
@@ -35,7 +39,9 @@ def get_all_awards():
     return AwardController.get_all_awards()
 
 
-@award_router.delete("/", dependencies=[Depends(JWTBearer("super_user"))])
+@award_router.delete(
+    "/",  # dependencies=[Depends(JWTBearer("super_user"))]
+)
 def delete_award_by_id(award_id: str):
     return AwardController.delete_award_by_id(award_id)
 

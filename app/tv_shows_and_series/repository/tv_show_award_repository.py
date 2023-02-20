@@ -46,6 +46,11 @@ class TVShowAwardRepository:
 
     def get_all_tv_shows_with_all_awards(self):
         tv_show_award = self.db.query(TVShowAward).all()
+        if (tv_show_award is None) or (tv_show_award == []):
+            raise AwardNotFoundException(
+                message=f"The list is empty!",
+                code=400,
+            )
         return tv_show_award
 
     def get_top_five_most_awarded_tv_shows(self):

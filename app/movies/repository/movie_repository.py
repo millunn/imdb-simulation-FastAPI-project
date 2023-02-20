@@ -1,7 +1,8 @@
-from sqlalchemy import desc, func, select
+from sqlalchemy import desc, func
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 from app.movies.exceptions import MovieNotFoundException
+from app.movies.exceptions import MovieIntegrityException
 
 from app.movies.models import Movie
 from app.ratings_and_reviews.models import MovieRatingAndReview
@@ -98,6 +99,11 @@ class MovieRepository:
 
     def get_all_movies(self):
         movies = self.db.query(Movie).all()
+        if (movies is None) or (movies == []):
+            raise MovieNotFoundException(
+                message=f"The list is empty!",
+                code=400,
+            )
         return movies
 
     ##superuser
@@ -112,6 +118,11 @@ class MovieRepository:
             self.db.delete(movie)
             self.db.commit()
             return True
+        except IntegrityError as e:
+            raise MovieIntegrityException(
+                message=f"Cannot delete a parent row!",
+                code=400,
+            )
         except Exception as e:
             raise e
 

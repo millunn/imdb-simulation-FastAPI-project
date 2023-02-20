@@ -48,4 +48,9 @@ class TVShowActorActressRepository:
 
     def get_all_tv_shows_with_all_actors_actresses(self):
         tv_show_actor_actress = self.db.query(TVShowActorActress).all()
+        if (tv_show_actor_actress is None) or (tv_show_actor_actress == []):
+            raise ActorActressNotFoundException(
+                message=f"The list is empty!",
+                code=400,
+            )
         return tv_show_actor_actress

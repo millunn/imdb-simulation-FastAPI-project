@@ -50,6 +50,11 @@ class AwardRepository:
 
     def get_all_awards(self):
         awards = self.db.query(Award).all()
+        if (awards is None) or (awards == []):
+            raise AwardNotFoundException(
+                message=f"The list is empty!",
+                code=400,
+            )
         return awards
 
     ##superuser

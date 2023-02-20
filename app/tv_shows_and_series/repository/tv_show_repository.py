@@ -99,9 +99,13 @@ class TVShowRepository:
 
     def get_all_tv_shows(self):
         tv_shows = self.db.query(TVShow).all()
+        if (tv_shows is None) or (tv_shows == []):
+            raise TVShowNotFoundException(
+                message=f"The list is empty!",
+                code=400,
+            )
         return tv_shows
 
-    ##superuser
     def delete_tv_show_by_id(self, tv_show_id: str):
         try:
             tv_show = self.db.query(TVShow).filter(TVShow.id == tv_show_id).first()

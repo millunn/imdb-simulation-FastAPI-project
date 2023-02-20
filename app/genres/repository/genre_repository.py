@@ -38,6 +38,8 @@ class GenreRepository:
 
     def get_all_genres(self):
         genres = self.db.query(Genre).all()
+        if (genres is None) or (genres == []):
+            raise GenreNotFoundException(f"The list is empty!", 400)
         return genres
 
     ##superuser

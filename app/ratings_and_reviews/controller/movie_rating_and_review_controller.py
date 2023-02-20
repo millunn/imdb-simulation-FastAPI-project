@@ -115,6 +115,11 @@ class MovieRatingAndReviewController:
                 MovieRatingAndReviewServices.get_all_movies_ratings_and_reviews()
             )
             return movies_ratings_and_reviews
+        except MovieRatingAndReviewNotFoundException as e:
+            raise HTTPException(
+                status_code=e.code,
+                detail=e.message,
+            )
         except Exception as e:
             raise HTTPException(status_code=500, detail=str(e))
 

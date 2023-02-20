@@ -63,6 +63,11 @@ class TVShowAwardController:
                 TVShowAwardServices.get_all_tv_shows_with_all_awards()
             )
             return tv_show_award_repository
+        except AwardNotFoundException as e:
+            raise HTTPException(
+                status_code=e.code,
+                detail=e.message,
+            )
         except Exception as e:
             raise HTTPException(status_code=500, detail=str(e))
 

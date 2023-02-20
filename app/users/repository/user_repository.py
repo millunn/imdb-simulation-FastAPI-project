@@ -52,6 +52,8 @@ class UserRepository:
 
     def get_all_users(self):
         users = self.db.query(User).all()
+        if users is None:
+            raise UserNotFoundException(f"The list is empty!", 400)
         return users
 
     def delete_user_by_id(self, user_id: str):

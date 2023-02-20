@@ -68,6 +68,11 @@ class ActorActressController:
         try:
             actor_actresss = ActorActressServices.get_all_actors_actresses()
             return actor_actresss
+        except ActorActressNotFoundException as e:
+            raise HTTPException(
+                status_code=e.code,
+                detail=e.message,
+            )
         except Exception as e:
             raise HTTPException(status_code=500, detail=str(e))
 

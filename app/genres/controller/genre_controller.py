@@ -49,6 +49,11 @@ class GenreController:
         try:
             genres = GenreServices.get_all_genres()
             return genres
+        except GenreNotFoundException as e:
+            raise HTTPException(
+                status_code=e.code,
+                detail=e.message,
+            )
         except Exception as e:
             raise HTTPException(status_code=500, detail=str(e))
 

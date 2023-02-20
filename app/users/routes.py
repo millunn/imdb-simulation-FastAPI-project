@@ -6,7 +6,11 @@ from app.users.controller.user_auth_controller import JWTBearer
 user_router = APIRouter(tags=["users"], prefix="/api/users")
 
 
-@user_router.post("/add-new-user", response_model=UserSchema)
+@user_router.post(
+    "/add-new-user",
+    response_model=UserSchema,
+    # dependencies=[Depends(JWTBearer("classic_user"))],
+)
 def create_user(user: UserSchemaIn):
     return UserController.create_user(
         user.name, user.surname, user.email, user.password
@@ -38,12 +42,19 @@ def get_user_by_id(user_id: str):
     return UserController.get_user_by_id(user_id)
 
 
-@user_router.get("/get-all-users", response_model=list[UserSchema])
+@user_router.get(
+    "/get-all-users",
+    response_model=list[UserSchema],
+    # dependencies=[Depends(JWTBearer("super_user"))],
+)
 def get_all_users():
     return UserController.get_all_users()
 
 
-@user_router.delete("/")
+@user_router.delete(
+    "/",
+    # dependencies=[Depends(JWTBearer("super_user"))],
+)
 def delete_user_by_id(user_id: str):
     return UserController.delete_user_by_id(user_id)
 

@@ -48,4 +48,9 @@ class MovieActorActressRepository:
 
     def get_all_movies_with_all_actors_actresses(self):
         movie_actor_actress = self.db.query(MovieActorActress).all()
+        if (movie_actor_actress is None) or (movie_actor_actress == []):
+            raise ActorActressNotFoundException(
+                message=f"The list is empty!",
+                code=400,
+            )
         return movie_actor_actress

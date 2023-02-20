@@ -63,6 +63,11 @@ class UserController:
         try:
             users = UserServices.get_all_users()
             return users
+        except UserNotFoundException as e:
+            raise HTTPException(
+                status_code=e.code,
+                detail=e.message,
+            )
         except Exception as e:
             print(e)
 

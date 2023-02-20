@@ -140,9 +140,9 @@ def get_actor_actress_by_movie_id(movie_id: str):
     "/get-all-actors-actresses-with-all-awards-all-movies",
     response_model=list[ActorActressAwardMovieSchema],
 )
-def get_all_actor_actress_with_all_awards_all_movies():
+def get_all_actors_actresses_with_all_awards_all_movies():
     return (
-        ActorActressAwardMovieController.get_all_actor_actress_with_all_awards_all_movies()
+        ActorActressAwardMovieController.get_all_actors_actresses_with_all_awards_all_movies()
     )
 
 
@@ -206,9 +206,9 @@ def get_actor_actress_by_tv_show_id(tv_show_id: str):
     "/get-all-actors-actresses-with-all-awards-all-tv-shows",
     response_model=list[ActorActressAwardTVShowSchema],
 )
-def get_all_actor_actress_with_all_awards_all_tv_shows():
+def get_all_actors_actresses_with_all_awards_all_tv_shows():
     return (
-        ActorActressAwardTvShowController.get_all_actor_actress_with_all_awards_all_tv_shows()
+        ActorActressAwardTvShowController.get_all_actors_actresses_with_all_awards_all_tv_shows()
     )
 
 

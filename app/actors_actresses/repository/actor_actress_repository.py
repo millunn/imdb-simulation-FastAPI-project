@@ -62,6 +62,11 @@ class ActorActressRepository:
 
     def get_all_actors_actresses(self):
         actors_actresses = self.db.query(ActorActress).all()
+        if (actors_actresses is None) or (actors_actresses == []):
+            raise ActorActressNotFoundException(
+                message=f"The list is empty!",
+                code=400,
+            )
         return actors_actresses
 
     ##superuser

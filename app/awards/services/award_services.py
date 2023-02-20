@@ -55,7 +55,7 @@ class AwardServices:
         try:
             with SessionLocal() as db:
                 award_repository = AwardRepository(db)
-                if award_repository.delete_study_programme_by_id(award_id):
+                if award_repository.delete_award_by_id(award_id):
                     return True
                 raise AwardNotFoundException(code=400, message="Award doesn't exist.")
         except Exception as e:

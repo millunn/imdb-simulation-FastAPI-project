@@ -17,7 +17,11 @@ def create_language(language: LanguageSchemaIn):
     return LanguageController.create_language(language.name, language.abbreviation)
 
 
-@language_router.get("/id", response_model=LanguageSchema)
+@language_router.get(
+    "/id",
+    response_model=LanguageSchema,
+    # dependencies=[Depends(JWTBearer("super_user"))],
+)
 def get_language_by_id(language_id: str):
     return LanguageController.get_language_by_id(language_id)
 

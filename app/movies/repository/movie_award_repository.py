@@ -45,6 +45,11 @@ class MovieAwardRepository:
 
     def get_all_movies_with_all_awards(self):
         movie_award = self.db.query(MovieAward).all()
+        if (movie_award is None) or (movie_award == []):
+            raise AwardNotFoundException(
+                message=f"The list is empty!",
+                code=400,
+            )
         return movie_award
 
     def get_top_five_most_awarded_movies(self):

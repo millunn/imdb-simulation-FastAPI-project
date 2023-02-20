@@ -120,6 +120,11 @@ class TVShowController:
         try:
             tv_shows = TVShowServices.get_all_tv_shows()
             return tv_shows
+        except TVShowNotFoundException as e:
+            raise HTTPException(
+                status_code=e.code,
+                detail=e.message,
+            )
         except Exception as e:
             raise HTTPException(status_code=500, detail=str(e))
 

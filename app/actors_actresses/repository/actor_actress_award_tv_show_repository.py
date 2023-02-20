@@ -76,8 +76,13 @@ class ActorActressAwardTvShowRepository:
             )
         return actor_actress_by_tv_show_id
 
-    def get_all_actor_actress_with_all_awards_all_tv_shows(self):
+    def get_all_actors_actresses_with_all_awards_all_tv_shows(self):
         actor_actress_award_tv_show = self.db.query(ActorActressAwardTvShow).all()
+        if (actor_actress_award_tv_show is None) or (actor_actress_award_tv_show == []):
+            raise ActorActressNotFoundException(
+                message=f"The list is empty!",
+                code=400,
+            )
         return actor_actress_award_tv_show
 
     def get_top_five_most_awarded_tv_show_actors_actresses(self):

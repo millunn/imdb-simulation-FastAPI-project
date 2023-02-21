@@ -21,6 +21,8 @@ from app.actors_actresses.schemas import (
 from app.actors_actresses.schemas import (
     MostAwardedTVShowActorsActressesSchema,
     MostAwardedMovieActorsActressesSchema,
+    ActorActressGenderStatisticsSchema,
+    ActorActressSchemaUpdateAboutSection,
 )
 
 
@@ -60,6 +62,11 @@ def get_actor_actress_by_name(name: str):
     return ActorActressController.get_actor_actress_by_name(name)
 
 
+@actor_actress_router.get("/gender", response_model=list[ActorActressSchema])
+def get_actor_actress_by_gender(gender: str):
+    return ActorActressController.get_actor_actress_by_gender(gender)
+
+
 @actor_actress_router.get("/surname", response_model=list[ActorActressSchema])
 def get_actor_actress_by_surname(surname: str):
     return ActorActressController.get_actor_actress_by_surname(surname)
@@ -88,6 +95,23 @@ def order_actor_actress_by_name_decs():
 @actor_actress_router.get("/order-by-name/asc", response_model=list[ActorActressSchema])
 def order_actor_actress_by_name_asc():
     return ActorActressController.order_actor_actress_by_name_asc()
+
+
+@actor_actress_router.get(
+    "/gender/statistics", response_model=list[ActorActressGenderStatisticsSchema]
+)
+def get_gender_statistics():
+    return ActorActressController.get_gender_statistics()
+
+
+@actor_actress_router.put("/about-update/about", response_model=ActorActressSchema)
+def update_actor_actress_about_section(
+    actor_actress_id: str,
+    update_data: ActorActressSchemaUpdateAboutSection,
+):
+    return ActorActressController.update_actor_actress_about_section(
+        actor_actress_id, update_data.about
+    )
 
 
 # superuser

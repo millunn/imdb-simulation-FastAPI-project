@@ -74,3 +74,23 @@ class TVShowActorActressServices:
                 )
         except Exception as e:
             raise e
+
+    @staticmethod
+    def get_actors_by_tv_show_id(tv_show_id: str):
+        try:
+            with SessionLocal() as db:
+                actor_tv_show_repository = TVShowActorActressRepository(db)
+                return actor_tv_show_repository.get_actors_by_tv_show_id(tv_show_id)
+        except Exception as e:
+            raise e
+
+    @staticmethod
+    def get_actresses_by_tv_show_id(tv_show_id: str):
+        try:
+            with SessionLocal() as db:
+                actress_tv_show_repository = TVShowActorActressRepository(db)
+                return actress_tv_show_repository.get_actresses_by_tv_show_id(
+                    tv_show_id
+                )
+        except Exception as e:
+            raise e

@@ -76,3 +76,31 @@ class MovieActorActressController:
             )
         except Exception as e:
             raise HTTPException(status_code=500, detail=str(e))
+
+    @staticmethod
+    def get_actors_by_movie_id(movie_id: str):
+        try:
+            actor_actress = MovieActorActressServices.get_actors_by_movie_id(movie_id)
+            return actor_actress
+        except ActorActressNotFoundException as e:
+            raise HTTPException(
+                status_code=e.code,
+                detail=e.message,
+            )
+        except Exception as e:
+            raise HTTPException(status_code=500, detail=str(e))
+
+    @staticmethod
+    def get_actresses_by_movie_id(movie_id: str):
+        try:
+            actresses_by_movie_id = MovieActorActressServices.get_actresses_by_movie_id(
+                movie_id
+            )
+            return actresses_by_movie_id
+        except ActorActressNotFoundException as e:
+            raise HTTPException(
+                status_code=e.code,
+                detail=e.message,
+            )
+        except Exception as e:
+            raise HTTPException(status_code=500, detail=str(e))

@@ -31,3 +31,19 @@ class TVShowSchemaSchemaIn(BaseModel):
 
     class Config:
         orm_mode = True
+
+
+class TVShowGenreStatisticsSchema(BaseModel):
+    genre_category: str
+    category_count: int
+
+    class Config:
+        orm_mode = True
+
+
+class TVShowLanguageStatisticsSchema(BaseModel):
+    language_name: str
+    language_count: int
+
+    class Config:
+        orm_mode = True

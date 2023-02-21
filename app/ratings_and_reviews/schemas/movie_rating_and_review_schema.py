@@ -5,6 +5,7 @@ class MovieRatingAndReviewSchema(BaseModel):
     id: UUID4
     grade: int
     comment: str
+    comment_date: str
     movie_id: str
     user_id: str
 
@@ -25,6 +26,7 @@ class MovieRatingAndReviewSchemaIn(BaseModel):
 class MovieRatingAndReviewBySchemaOut(BaseModel):
     grade: int
     comment: str
+    comment_date: str
     movie_id: str
 
     class Config:

@@ -1,6 +1,7 @@
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 from app.actors_actresses.exceptions import ActorActressNotFoundException
+from app.actors_actresses.models.actor_actress import ActorActress
 
 from app.tv_shows_and_series.exceptions import TVShowNotFoundException
 from app.tv_shows_and_series.models import TVShowActorActress
@@ -54,3 +55,41 @@ class TVShowActorActressRepository:
                 code=400,
             )
         return tv_show_actor_actress
+
+    def get_actors_by_tv_show_id(self, tv_show_id: str):
+        actors_by_tv_show_id = (
+            self.db.query(ActorActress)
+            .join(
+                TVShowActorActress,
+                ActorActress.id == TVShowActorActress.actor_actress_id,
+            )
+            .filter(
+                ActorActress.gender == "m", TVShowActorActress.tv_show_id == tv_show_id
+            )
+            .all()
+        )
+        if (actors_by_tv_show_id is None) or (actors_by_tv_show_id == []):
+            raise ActorActressNotFoundException(
+                message=f"Actors with provided movie id: {tv_show_id} not found",
+                code=400,
+            )
+        return actors_by_tv_show_id
+
+    def get_actresses_by_tv_show_id(self, tv_show_id: str):
+        actresses_by_tv_show_id = (
+            self.db.query(ActorActress)
+            .join(
+                TVShowActorActress,
+                ActorActress.id == TVShowActorActress.actor_actress_id,
+            )
+            .filter(
+                ActorActress.gender == "f", TVShowActorActress.tv_show_id == tv_show_id
+            )
+            .all()
+        )
+        if (actresses_by_tv_show_id is None) or (actresses_by_tv_show_id == []):
+            raise ActorActressNotFoundException(
+                message=f"Actresses with provided movie id: {tv_show_id} not found",
+                code=400,
+            )
+        return actresses_by_tv_show_id

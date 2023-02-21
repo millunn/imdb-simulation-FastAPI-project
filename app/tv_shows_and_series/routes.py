@@ -23,6 +23,10 @@ from app.tv_shows_and_series.schemas import (
     TVShowAwardSchemaIn,
     MostAwardedTVShowsSchema,
 )
+from app.tv_shows_and_series.schemas import (
+    TVShowGenreStatisticsSchema,
+    TVShowLanguageStatisticsSchema,
+)
 
 
 from app.users.controller.user_auth_controller import JWTBearer
@@ -112,6 +116,20 @@ def get_five_most_rated_tv_shows():
     return TVShowController.get_five_most_rated_tv_shows()
 
 
+@tv_show_router.get(
+    "/statistics-genre", response_model=list[TVShowGenreStatisticsSchema]
+)
+def get_genre_statistics():
+    return TVShowController.get_genre_statistics()
+
+
+@tv_show_router.get(
+    "/language/statistics", response_model=list[TVShowLanguageStatisticsSchema]
+)
+def get_language_statistics():
+    return TVShowController.get_language_statistics()
+
+
 # superuser
 @tv_show_actor_actress_router.post(
     "/add-new-tv_show-actor-actress",
@@ -149,6 +167,16 @@ def get_actor_actress_by_tv_show_id(tv_show_id: str):
 )
 def get_all_tv_shows_with_all_actors_actresses():
     return TVShowActorActressController.get_all_tv_shows_with_all_actors_actresses()
+
+
+@tv_show_actor_actress_router.get("/actor-gender/tv-show-id", response_model=None)
+def get_actors_by_tv_show_id(tv_show_id: str):
+    return TVShowActorActressController.get_actors_by_tv_show_id(tv_show_id)
+
+
+@tv_show_actor_actress_router.get("/actress-gender/tv-show-id", response_model=None)
+def get_actresses_by_tv_show_id(tv_show_id: str):
+    return TVShowActorActressController.get_actresses_by_tv_show_id(tv_show_id)
 
 
 # superuser

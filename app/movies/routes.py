@@ -19,6 +19,11 @@ from app.movies.schemas import (
     MovieAwardSchemaIn,
     MostAwardedMoviesSchema,
 )
+from app.movies.schemas import (
+    MovieGenreStatisticsSchema,
+    MovieLanguageStatisticsSchema,
+    MovieDurationPerYearsSchema,
+)
 from app.ratings_and_reviews.schemas import (
     MostRatedMoviesSchema,
     TopFiveMovieSchema,
@@ -115,6 +120,26 @@ def get_top_five_most_rated_movies():
     return MovieController.get_top_five_most_rated_movies()
 
 
+@movie_router.get("/statistics-genre", response_model=list[MovieGenreStatisticsSchema])
+def get_genre_statistics():
+    return MovieController.get_genre_statistics()
+
+
+@movie_router.get(
+    "/language/statistics", response_model=list[MovieLanguageStatisticsSchema]
+)
+def get_language_statistics():
+    return MovieController.get_language_statistics()
+
+
+@movie_router.get(
+    "/duration-per-release-years-desc",
+    response_model=list[MovieDurationPerYearsSchema],
+)
+def order_movie_duration_by_release_year_desc():
+    return MovieController.order_movie_duration_by_release_year_desc()
+
+
 # superuser
 @movie_actor_actress_router.post(
     "/add-new-movie-actor-actress",
@@ -149,6 +174,16 @@ def get_actor_actress_by_movie_id(movie_id: str):
 )
 def get_all_movies_with_all_actors_actresses():
     return MovieActorActressController.get_all_movies_with_all_actors_actresses()
+
+
+@movie_actor_actress_router.get("/actor-gender/movie-id", response_model=None)
+def get_actors_by_movie_id(movie_id: str):
+    return MovieActorActressController.get_actors_by_movie_id(movie_id)
+
+
+@movie_actor_actress_router.get("/actress-gender/movie-id", response_model=None)
+def get_actresses_by_movie_id(movie_id: str):
+    return MovieActorActressController.get_actresses_by_movie_id(movie_id)
 
 
 # superuser

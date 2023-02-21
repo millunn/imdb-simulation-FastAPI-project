@@ -5,6 +5,7 @@ class TVShowRatingAndReviewSchema(BaseModel):
     id: UUID4
     grade: int
     comment: str
+    comment_date: str
     tv_show_id: str
     user_id: str
 
@@ -25,6 +26,7 @@ class TVShowRatingAndReviewSchemaIn(BaseModel):
 class TVShowRatingAndReviewBySchemaOut(BaseModel):
     grade: int
     comment: str
+    comment_date: str
     tv_show_id: str
 
     class Config:

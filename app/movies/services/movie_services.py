@@ -164,3 +164,30 @@ class MovieServices:
                 return movie_repository.get_top_five_most_rated_movies()
         except Exception as e:
             raise e
+
+    @staticmethod
+    def get_genre_statistics():
+        try:
+            with SessionLocal() as db:
+                movie_repository = MovieRepository(db)
+                return movie_repository.get_genre_statistics()
+        except Exception as e:
+            raise e
+
+    @staticmethod
+    def get_language_statistics():
+        try:
+            with SessionLocal() as db:
+                movie_repository = MovieRepository(db)
+                return movie_repository.get_language_statistics()
+        except Exception as e:
+            raise e
+
+    # @staticmethod
+    # def order_movie_duration_by_release_year_desc():
+    #     try:
+    #         with SessionLocal() as db:
+    #             movie_repository = MovieRepository(db)
+    #             return movie_repository.order_movie_duration_by_release_year_desc()
+    #     except Exception as e:
+    #         raise e

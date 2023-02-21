@@ -153,3 +153,27 @@ class TVShowRepository:
             )
         )
         return tv_show_rating_and_review
+
+    def get_genre_statistics(self):
+        genre_statistics = (
+            self.db.query(TVShow)
+            .group_by(TVShow.genre_category)
+            .order_by(desc("category_count"))
+            .values(
+                TVShow.genre_category.label("genre_category"),
+                func.count(TVShow.genre_category).label("category_count"),
+            )
+        )
+        return genre_statistics
+
+    def get_language_statistics(self):
+        language_statistics = (
+            self.db.query(TVShow)
+            .group_by(TVShow.language_name)
+            .order_by(desc("language_count"))
+            .values(
+                TVShow.language_name.label("language_name"),
+                func.count(TVShow.language_name).label("language_count"),
+            )
+        )
+        return language_statistics

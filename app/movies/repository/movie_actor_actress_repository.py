@@ -1,6 +1,7 @@
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 from app.actors_actresses.exceptions import ActorActressNotFoundException
+from app.actors_actresses.models.actor_actress import ActorActress
 from app.movies.exceptions import MovieNotFoundException
 
 from app.movies.models import MovieActorActress
@@ -54,3 +55,35 @@ class MovieActorActressRepository:
                 code=400,
             )
         return movie_actor_actress
+
+    def get_actors_by_movie_id(self, movie_id: str):
+        actors_by_movie_id = (
+            self.db.query(ActorActress)
+            .join(
+                MovieActorActress, ActorActress.id == MovieActorActress.actor_actress_id
+            )
+            .filter(ActorActress.gender == "m", MovieActorActress.movie_id == movie_id)
+            .all()
+        )
+        if (actors_by_movie_id is None) or (actors_by_movie_id == []):
+            raise ActorActressNotFoundException(
+                message=f"Actors with provided movie id: {movie_id} not found",
+                code=400,
+            )
+        return actors_by_movie_id
+
+    def get_actresses_by_movie_id(self, movie_id: str):
+        actresses_by_movie_id = (
+            self.db.query(ActorActress)
+            .join(
+                MovieActorActress, ActorActress.id == MovieActorActress.actor_actress_id
+            )
+            .filter(ActorActress.gender == "f", MovieActorActress.movie_id == movie_id)
+            .all()
+        )
+        if (actresses_by_movie_id is None) or (actresses_by_movie_id == []):
+            raise ActorActressNotFoundException(
+                message=f"Actresses with provided movie id: {movie_id} not found",
+                code=400,
+            )
+        return actresses_by_movie_id

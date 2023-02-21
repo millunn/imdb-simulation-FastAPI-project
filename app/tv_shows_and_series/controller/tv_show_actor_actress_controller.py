@@ -76,3 +76,33 @@ class TVShowActorActressController:
             )
         except Exception as e:
             raise HTTPException(status_code=500, detail=str(e))
+
+    @staticmethod
+    def get_actors_by_tv_show_id(tv_show_id: str):
+        try:
+            actor_actress = TVShowActorActressServices.get_actors_by_tv_show_id(
+                tv_show_id
+            )
+            return actor_actress
+        except ActorActressNotFoundException as e:
+            raise HTTPException(
+                status_code=e.code,
+                detail=e.message,
+            )
+        except Exception as e:
+            raise HTTPException(status_code=500, detail=str(e))
+
+    @staticmethod
+    def get_actresses_by_tv_show_id(tv_show_id: str):
+        try:
+            actresses_by_tv_show_id = (
+                TVShowActorActressServices.get_actresses_by_tv_show_id(tv_show_id)
+            )
+            return actresses_by_tv_show_id
+        except ActorActressNotFoundException as e:
+            raise HTTPException(
+                status_code=e.code,
+                detail=e.message,
+            )
+        except Exception as e:
+            raise HTTPException(status_code=500, detail=str(e))

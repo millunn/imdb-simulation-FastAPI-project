@@ -198,3 +198,19 @@ class TVShowController:
             return tv_shows
         except Exception as e:
             raise HTTPException(status_code=500, detail=str(e))
+
+    @staticmethod
+    def get_genre_statistics():
+        try:
+            tv_shows = TVShowServices.get_genre_statistics()
+            return tv_shows
+        except Exception as e:
+            raise HTTPException(status_code=500, detail=str(e))
+
+    @staticmethod
+    def get_language_statistics():
+        try:
+            tv_shows = TVShowServices.get_language_statistics()
+            return tv_shows
+        except Exception as e:
+            raise HTTPException(status_code=500, detail=str(e))

@@ -1,3 +1,4 @@
+from datetime import datetime
 from uuid import uuid4
 from sqlalchemy.orm import relationship
 from app.db.database import Base
@@ -9,6 +10,10 @@ class MovieRatingAndReview(Base):
     id = Column(String(50), primary_key=True, default=uuid4, autoincrement=False)
     grade = Column(INT, nullable=False)
     comment = Column(String(200))
+    comment_date = Column(
+        String(50),
+        default=datetime.strftime(datetime.now(), "%Y-%m-%d, %H:%M:%S"),
+    )
 
     movie_id = Column(String(50), ForeignKey("movies.id"))
     movie = relationship("Movie", lazy="subquery")

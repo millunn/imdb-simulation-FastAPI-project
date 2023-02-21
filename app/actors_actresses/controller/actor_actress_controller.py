@@ -2,6 +2,7 @@ from fastapi import HTTPException, Response
 from sqlalchemy.exc import IntegrityError
 from app.actors_actresses.exceptions import (
     ActorActressNotFoundException,
+    ActorActressGenderException,
 )
 from app.actors_actresses.services import ActorActressServices
 
@@ -14,6 +15,11 @@ class ActorActressController:
                 name, surname, gender, about
             )
             return actor_actress
+        except ActorActressGenderException as e:
+            raise HTTPException(
+                status_code=e.code,
+                detail=e.message,
+            )
         except IntegrityError as e:
             raise HTTPException(
                 status_code=400,
@@ -55,6 +61,24 @@ class ActorActressController:
         try:
             actor_actress = ActorActressServices.get_actor_actress_by_surname(surname)
             return actor_actress
+        except ActorActressNotFoundException as e:
+            raise HTTPException(
+                status_code=e.code,
+                detail=e.message,
+            )
+        except Exception as e:
+            raise HTTPException(status_code=500, detail=str(e))
+
+    @staticmethod
+    def get_actor_actress_by_gender(gender: str):
+        try:
+            actor_actress = ActorActressServices.get_actor_actress_by_gender(gender)
+            return actor_actress
+        except ActorActressGenderException as e:
+            raise HTTPException(
+                status_code=e.code,
+                detail=e.message,
+            )
         except ActorActressNotFoundException as e:
             raise HTTPException(
                 status_code=e.code,
@@ -109,6 +133,29 @@ class ActorActressController:
         try:
             order_by_title_asc = ActorActressServices.order_actor_actress_by_name_asc()
             return order_by_title_asc
+        except ActorActressNotFoundException as e:
+            raise HTTPException(
+                status_code=e.code,
+                detail=e.message,
+            )
+        except Exception as e:
+            raise HTTPException(status_code=500, detail=str(e))
+
+    @staticmethod
+    def get_gender_statistics():
+        try:
+            gender_statistics = ActorActressServices.get_gender_statistics()
+            return gender_statistics
+        except Exception as e:
+            raise HTTPException(status_code=500, detail=str(e))
+
+    @staticmethod
+    def update_actor_actress_about_section(actor_actress_id: str, about: str):
+        try:
+            actor_actress = ActorActressServices.update_actor_actress_about_section(
+                actor_actress_id, about
+            )
+            return actor_actress
         except ActorActressNotFoundException as e:
             raise HTTPException(
                 status_code=e.code,

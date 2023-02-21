@@ -72,3 +72,21 @@ class MovieActorActressServices:
                 )
         except Exception as e:
             raise e
+
+    @staticmethod
+    def get_actors_by_movie_id(movie_id: str):
+        try:
+            with SessionLocal() as db:
+                actor_movie_repository = MovieActorActressRepository(db)
+                return actor_movie_repository.get_actors_by_movie_id(movie_id)
+        except Exception as e:
+            raise e
+
+    @staticmethod
+    def get_actresses_by_movie_id(movie_id: str):
+        try:
+            with SessionLocal() as db:
+                actress_movie_repository = MovieActorActressRepository(db)
+                return actress_movie_repository.get_actresses_by_movie_id(movie_id)
+        except Exception as e:
+            raise e

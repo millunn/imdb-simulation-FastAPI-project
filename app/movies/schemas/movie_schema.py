@@ -33,3 +33,27 @@ class MovieSchemaIn(BaseModel):
 
     class Config:
         orm_mode = True
+
+
+class MovieGenreStatisticsSchema(BaseModel):
+    genre_category: str
+    category_count: int
+
+    class Config:
+        orm_mode = True
+
+
+class MovieLanguageStatisticsSchema(BaseModel):
+    language_name: str
+    language_count: int
+
+    class Config:
+        orm_mode = True
+
+
+class MovieDurationPerYearsSchema(BaseModel):
+    release_year: str
+    average_duration: time
+
+    class Config:
+        orm_mode = True

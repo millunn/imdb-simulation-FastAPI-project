@@ -1,3 +1,4 @@
+from datetime import datetime
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 from app.ratings_and_reviews.exceptions import TVShowRatingAndReviewNotFoundException
@@ -120,6 +121,9 @@ class TVShowRatingAndReviewRepository:
                     400,
                 )
             tv_show_rating_and_review.comment = comment
+            tv_show_rating_and_review.comment_date = datetime.strftime(
+                datetime.now(), "%Y-%m-%d, %H:%M:%S"
+            )
             self.db.add(tv_show_rating_and_review)
             self.db.commit()
             self.db.refresh(tv_show_rating_and_review)

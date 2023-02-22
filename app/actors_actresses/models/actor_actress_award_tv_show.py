@@ -1,4 +1,11 @@
-from sqlalchemy import Column, ForeignKey, PrimaryKeyConstraint, String
+from uuid import uuid4
+from sqlalchemy import (
+    Column,
+    ForeignKey,
+    PrimaryKeyConstraint,
+    String,
+    UniqueConstraint,
+)
 from sqlalchemy.orm import relationship
 
 from app.db.database import Base
@@ -6,7 +13,7 @@ from app.db.database import Base
 
 class ActorActressAwardTvShow(Base):
     __tablename__ = "actor_actress_award_tv_show"
-
+    id = Column(String(50), primary_key=True, default=uuid4, autoincrement=False)
     actor_actress_id = Column(
         String(50), ForeignKey("actors_actresses.id"), nullable=False
     )
@@ -30,10 +37,11 @@ class ActorActressAwardTvShow(Base):
     )
 
     __table_args__ = (
-        PrimaryKeyConstraint(
+        UniqueConstraint(
             "actor_actress_id",
             "award_id",
             "tv_show_id",
+            name="actor_actress_award_tv_show_uc",
         ),
     )
 

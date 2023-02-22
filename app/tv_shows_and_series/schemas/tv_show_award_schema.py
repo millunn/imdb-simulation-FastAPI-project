@@ -5,6 +5,7 @@ from app.tv_shows_and_series.schemas.tv_show_schema import TVShowSchema
 
 
 class TVShowAwardSchema(BaseModel):
+    id: UUID4
     tv_show_id: UUID4
     award_id: UUID4
 

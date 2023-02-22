@@ -1,8 +1,8 @@
-from fastapi import HTTPException
+from fastapi import HTTPException, Response
 from sqlalchemy.exc import IntegrityError
 
 from app.awards.exceptions import AwardNotFoundException
-from app.movies.exceptions import MovieNotFoundException
+from app.movies.exceptions import MovieNotFoundException, MovieAwardNotFoundException
 from app.movies.services import MovieAwardServices
 
 
@@ -72,5 +72,20 @@ class MovieAwardController:
         try:
             movies = MovieAwardServices.get_top_five_most_awarded_movies()
             return movies
+        except Exception as e:
+            raise HTTPException(status_code=500, detail=str(e)) from e
+
+    @staticmethod
+    def delete_movie_award_by_id(movie_award_id: str):
+        try:
+            MovieAwardServices.delete_movie_award_by_id(movie_award_id)
+            return Response(
+                content=f"Pair with provided id - {movie_award_id} is deleted"
+            )
+        except MovieAwardNotFoundException as e:
+            raise HTTPException(
+                status_code=e.code,
+                detail=e.message,
+            ) from e
         except Exception as e:
             raise HTTPException(status_code=500, detail=str(e)) from e

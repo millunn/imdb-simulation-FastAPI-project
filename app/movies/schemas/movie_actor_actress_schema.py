@@ -5,6 +5,7 @@ from app.movies.schemas.movie_schema import MovieSchema
 
 
 class MovieActorActressSchema(BaseModel):
+    id: UUID4
     movie_id: UUID4
     actor_actress_id: UUID4
 

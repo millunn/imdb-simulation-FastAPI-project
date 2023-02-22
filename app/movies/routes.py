@@ -180,6 +180,16 @@ def get_actresses_by_movie_id(movie_id: str):
 
 
 # superuser
+@movie_actor_actress_router.delete(
+    "/",
+)  # dependencies=[Depends(JWTBearer("super_user"))])
+def delete_movie_actor_actress_by_id(movie_actor_actress_id: str):
+    return MovieActorActressController.delete_movie_actor_actress_by_id(
+        movie_actor_actress_id
+    )
+
+
+# superuser
 @movie_award_router.post(
     "/add-new-movie-award",
     response_model=MovieAwardSchema,
@@ -205,7 +215,7 @@ def get_award_by_movie_id(movie_id: str):
 
 @movie_award_router.get(
     "/get-all-movies-with-all-awards",
-    response_model=list[MovieActorActressSchema],
+    response_model=list[MovieAwardSchema],
 )
 def get_all_movies_with_all_awards():
     return MovieAwardController.get_all_movies_with_all_awards()
@@ -216,3 +226,11 @@ def get_all_movies_with_all_awards():
 )
 def get_top_five_most_awarded_movies():
     return MovieAwardController.get_top_five_most_awarded_movies()
+
+
+# superuser
+@movie_award_router.delete(
+    "/",
+)  # dependencies=[Depends(JWTBearer("super_user"))])
+def delete_movie_award_by_id(movie_award_id: str):
+    return MovieAwardController.delete_movie_award_by_id(movie_award_id)

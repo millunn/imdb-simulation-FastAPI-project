@@ -177,6 +177,15 @@ def get_top_five_most_awarded_movie_actors_actresses():
     )
 
 
+@actor_actress_award_movie_router.delete(
+    "/",  # dependencies=[Depends(JWTBearer("super_user"))]
+)
+def delete_actor_actress_award_movie_by_id(actor_actress_award_movie_id: str):
+    return ActorActressAwardMovieController.delete_actor_actress_award_movie_by_id(
+        actor_actress_award_movie_id
+    )
+
+
 # superuser
 @actor_actress_award_tv_show_router.post(
     "/add-new-actor-actress-award-tv-show",
@@ -240,4 +249,13 @@ def get_all_actors_actresses_with_all_awards_all_tv_shows():
 def get_top_five_most_awarded_tv_show_actors_actresses():
     return (
         ActorActressAwardTvShowController.get_top_five_most_awarded_tv_show_actors_actresses()
+    )
+
+
+@actor_actress_award_tv_show_router.delete(
+    "/",  # dependencies=[Depends(JWTBearer("super_user"))]
+)
+def delete_actor_actress_award_tv_show_by_id(actor_actress_award_tv_show_id: str):
+    return ActorActressAwardTvShowController.delete_actor_actress_award_tv_show_by_id(
+        actor_actress_award_tv_show_id
     )

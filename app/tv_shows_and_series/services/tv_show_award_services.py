@@ -66,7 +66,18 @@ class TVShowAwardServices:
     def get_top_five_most_awarded_tv_shows():
         try:
             with SessionLocal() as db:
-                tv_show_repository = TVShowAwardRepository(db)
-                return tv_show_repository.get_top_five_most_awarded_tv_shows()
+                tv_show_award_repository = TVShowAwardRepository(db)
+                return tv_show_award_repository.get_top_five_most_awarded_tv_shows()
+        except Exception as e:
+            raise e from e
+
+    @staticmethod
+    def delete_tv_show_award_by_id(tv_show_award_id: str):
+        try:
+            with SessionLocal() as db:
+                tv_show_award_repository = TVShowAwardRepository(db)
+                return tv_show_award_repository.delete_tv_show_award_by_id(
+                    tv_show_award_id
+                )
         except Exception as e:
             raise e from e

@@ -172,6 +172,16 @@ def get_actresses_by_tv_show_id(tv_show_id: str):
 
 
 # superuser
+@tv_show_actor_actress_router.delete(
+    "/",
+)  # dependencies=[Depends(JWTBearer("super_user"))])
+def delete_tv_show_actor_actress_by_id(tv_show_actor_actress_id: str):
+    return TVShowActorActressController.delete_tv_show_actor_actress_by_id(
+        tv_show_actor_actress_id
+    )
+
+
+# superuser
 @tv_show_award_router.post(
     "/add-new-tv_show-award",
     response_model=TVShowAwardSchema,
@@ -199,7 +209,7 @@ def get_award_by_tv_show_id(tv_show_id: str):
 
 @tv_show_award_router.get(
     "/get-all-tv_shows-with-all-awards",
-    response_model=list[TVShowAwardSchemaIn],
+    response_model=list[TVShowAwardSchema],
 )
 def get_all_tv_shows_with_all_awards():
     return TVShowAwardController.get_all_tv_shows_with_all_awards()
@@ -210,3 +220,11 @@ def get_all_tv_shows_with_all_awards():
 )
 def get_top_five_most_awarded_tv_shows():
     return TVShowAwardController.get_top_five_most_awarded_tv_shows()
+
+
+# superuser
+@tv_show_award_router.delete(
+    "/",
+)  # dependencies=[Depends(JWTBearer("super_user"))])
+def delete_tv_show_award_by_id(tv_show_award_id: str):
+    return TVShowAwardController.delete_tv_show_award_by_id(tv_show_award_id)

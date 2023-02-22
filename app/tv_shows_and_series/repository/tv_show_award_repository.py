@@ -3,7 +3,10 @@ from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 
 from app.awards.exceptions import AwardNotFoundException
-from app.tv_shows_and_series.exceptions import TVShowNotFoundException
+from app.tv_shows_and_series.exceptions import (
+    TVShowNotFoundException,
+    TVShowAwardNotFoundException,
+)
 from app.tv_shows_and_series.models import TVShowAward
 
 
@@ -66,3 +69,21 @@ class TVShowAwardRepository:
             )
         )
         return tv_show_rating_and_review
+
+    def delete_tv_show_award_by_id(self, tv_show_award_id: str):
+        try:
+            tv_show_award = (
+                self.db.query(TVShowAward)
+                .filter(TVShowAward.id == tv_show_award_id)
+                .first()
+            )
+            if tv_show_award is None:
+                raise TVShowAwardNotFoundException(
+                    code=400,
+                    message=f"Pair with provided id: {tv_show_award_id} not found.",
+                )
+            self.db.delete(tv_show_award)
+            self.db.commit()
+            return True
+        except Exception as e:
+            raise e from e

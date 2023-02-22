@@ -3,7 +3,10 @@ from sqlalchemy.orm import Session
 
 from app.actors_actresses.exceptions import ActorActressNotFoundException
 from app.actors_actresses.models.actor_actress import ActorActress
-from app.movies.exceptions import MovieNotFoundException
+from app.movies.exceptions import (
+    MovieNotFoundException,
+    MovieActorActressNotFoundException,
+)
 from app.movies.models import MovieActorActress
 
 
@@ -87,3 +90,21 @@ class MovieActorActressRepository:
                 code=400,
             )
         return actresses_by_movie_id
+
+    def delete_movie_actor_actress_by_id(self, movie_actor_actress_id: str):
+        try:
+            movie_actor_actress = (
+                self.db.query(MovieActorActress)
+                .filter(MovieActorActress.id == movie_actor_actress_id)
+                .first()
+            )
+            if movie_actor_actress is None:
+                raise MovieActorActressNotFoundException(
+                    code=400,
+                    message=f"Pair with provided id: {movie_actor_actress_id} not found.",
+                )
+            self.db.delete(movie_actor_actress)
+            self.db.commit()
+            return True
+        except Exception as e:
+            raise e from e

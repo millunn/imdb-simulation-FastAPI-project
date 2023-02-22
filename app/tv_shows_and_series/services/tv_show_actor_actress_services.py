@@ -92,3 +92,16 @@ class TVShowActorActressServices:
                 )
         except Exception as e:
             raise e from e
+
+    @staticmethod
+    def delete_tv_show_actor_actress_by_id(tv_show_actor_actress_id: str):
+        try:
+            with SessionLocal() as db:
+                tv_show_actor_actress_repository = TVShowActorActressRepository(db)
+                return (
+                    tv_show_actor_actress_repository.delete_tv_show_actor_actress_by_id(
+                        tv_show_actor_actress_id
+                    )
+                )
+        except Exception as e:
+            raise e from e

@@ -68,3 +68,12 @@ class MovieAwardServices:
                 return movie_repository.get_top_five_most_awarded_movies()
         except Exception as e:
             raise e from e
+
+    @staticmethod
+    def delete_movie_award_by_id(movie_award_id: str):
+        try:
+            with SessionLocal() as db:
+                movie_award_repository = MovieAwardRepository(db)
+                return movie_award_repository.delete_movie_award_by_id(movie_award_id)
+        except Exception as e:
+            raise e from e

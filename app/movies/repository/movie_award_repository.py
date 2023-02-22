@@ -4,6 +4,7 @@ from sqlalchemy.orm import Session
 
 from app.awards.exceptions import AwardNotFoundException
 from app.movies.exceptions import MovieNotFoundException
+from app.movies.exceptions import MovieAwardNotFoundException
 from app.movies.models import MovieAward
 
 
@@ -64,3 +65,21 @@ class MovieAwardRepository:
             )
         )
         return movie_rating_and_review
+
+    def delete_movie_award_by_id(self, movie_award_id: str):
+        try:
+            movie_award = (
+                self.db.query(MovieAward)
+                .filter(MovieAward.id == movie_award_id)
+                .first()
+            )
+            if movie_award is None:
+                raise MovieAwardNotFoundException(
+                    code=400,
+                    message=f"Pair with provided id: {movie_award_id} not found.",
+                )
+            self.db.delete(movie_award)
+            self.db.commit()
+            return True
+        except Exception as e:
+            raise e from e

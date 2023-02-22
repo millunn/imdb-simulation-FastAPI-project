@@ -2,9 +2,12 @@ from sqlalchemy import desc, func
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 
-from app.actors_actresses.exceptions import ActorActressNotFoundException
+from app.actors_actresses.exceptions import (
+    ActorActressNotFoundException,
+    ActorActressAwardMovieNotFoundException,
+)
+
 from app.actors_actresses.models import ActorActressAwardMovie
-from app.actors_actresses.models.actor_actress import ActorActress
 from app.awards.exceptions import AwardNotFoundException
 
 
@@ -97,3 +100,21 @@ class ActorActressAwardMovieRepository:
             )
         )
         return actor_actress_award_movie
+
+    def delete_actor_actress_award_movie_by_id(self, actor_actress_award_movie_id: str):
+        try:
+            actor_actress_award_movie = (
+                self.db.query(ActorActressAwardMovie)
+                .filter(ActorActressAwardMovie.id == actor_actress_award_movie_id)
+                .first()
+            )
+            if actor_actress_award_movie is None:
+                raise ActorActressAwardMovieNotFoundException(
+                    message=f"Pair with provided id: {actor_actress_award_movie_id} not found.",
+                    code=400,
+                )
+            self.db.delete(actor_actress_award_movie)
+            self.db.commit()
+            return True
+        except Exception as e:
+            raise e from e

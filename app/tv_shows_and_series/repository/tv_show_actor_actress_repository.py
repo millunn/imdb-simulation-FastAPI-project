@@ -3,7 +3,10 @@ from sqlalchemy.orm import Session
 
 from app.actors_actresses.exceptions import ActorActressNotFoundException
 from app.actors_actresses.models.actor_actress import ActorActress
-from app.tv_shows_and_series.exceptions import TVShowNotFoundException
+from app.tv_shows_and_series.exceptions import (
+    TVShowNotFoundException,
+    TVShowActorActressNotFoundException,
+)
 from app.tv_shows_and_series.models import TVShowActorActress
 
 
@@ -70,7 +73,7 @@ class TVShowActorActressRepository:
         )
         if (actors_by_tv_show_id is None) or (actors_by_tv_show_id == []):
             raise ActorActressNotFoundException(
-                message=f"Actors with provided movie id: {tv_show_id} not found",
+                message=f"Actors with provided tv_show id: {tv_show_id} not found",
                 code=400,
             )
         return actors_by_tv_show_id
@@ -89,7 +92,25 @@ class TVShowActorActressRepository:
         )
         if (actresses_by_tv_show_id is None) or (actresses_by_tv_show_id == []):
             raise ActorActressNotFoundException(
-                message=f"Actresses with provided movie id: {tv_show_id} not found",
+                message=f"Actresses with provided tv_show id: {tv_show_id} not found",
                 code=400,
             )
         return actresses_by_tv_show_id
+
+    def delete_tv_show_actor_actress_by_id(self, tv_show_actor_actress_id: str):
+        try:
+            tv_show_actor_actress = (
+                self.db.query(TVShowActorActress)
+                .filter(TVShowActorActress.id == tv_show_actor_actress_id)
+                .first()
+            )
+            if tv_show_actor_actress is None:
+                raise TVShowActorActressNotFoundException(
+                    code=400,
+                    message=f"Pair with provided id: {tv_show_actor_actress_id} not found.",
+                )
+            self.db.delete(tv_show_actor_actress)
+            self.db.commit()
+            return True
+        except Exception as e:
+            raise e from e

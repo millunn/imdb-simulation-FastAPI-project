@@ -1,7 +1,11 @@
-from fastapi import HTTPException
+from fastapi import HTTPException, Response
 from sqlalchemy.exc import IntegrityError
 
-from app.actors_actresses.exceptions import ActorActressNotFoundException
+from app.actors_actresses.exceptions import (
+    ActorActressNotFoundException,
+    ActorActressAwardTVShowNotFoundException,
+)
+
 from app.actors_actresses.services import ActorActressAwardTvShowServices
 from app.awards.exceptions import AwardNotFoundException
 from app.tv_shows_and_series.exceptions import TVShowNotFoundException
@@ -121,5 +125,22 @@ class ActorActressAwardTvShowController:
                 ActorActressAwardTvShowServices.get_top_five_most_awarded_tv_show_actors_actresses()
             )
             return actor_actress_award_tv_show
+        except Exception as e:
+            raise HTTPException(status_code=500, detail=str(e)) from e
+
+    @staticmethod
+    def delete_actor_actress_award_tv_show_by_id(actor_actress_award_tv_show_id: str):
+        try:
+            ActorActressAwardTvShowServices.delete_actor_actress_award_tv_show_by_id(
+                actor_actress_award_tv_show_id
+            )
+            return Response(
+                content=f"Pair with provided id - {actor_actress_award_tv_show_id} is deleted"
+            )
+        except ActorActressAwardTVShowNotFoundException as e:
+            raise HTTPException(
+                status_code=e.code,
+                detail=e.message,
+            ) from e
         except Exception as e:
             raise HTTPException(status_code=500, detail=str(e)) from e

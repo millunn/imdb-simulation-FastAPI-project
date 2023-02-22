@@ -19,17 +19,16 @@ class TVShowAwardController:
             raise HTTPException(
                 status_code=e.code,
                 detail=e.message,
-            )
+            ) from e
         except AwardNotFoundException as e:
             raise HTTPException(
                 status_code=e.code,
                 detail=e.message,
-            )
-
+            ) from e
         except IntegrityError:
             raise HTTPException(status_code=400, detail="Already in database")
         except Exception as e:
-            raise HTTPException(status_code=500, detail=str(e))
+            raise HTTPException(status_code=500, detail=str(e)) from e
 
     @staticmethod
     def get_tv_show_by_award_id(award_id: str):
@@ -40,9 +39,9 @@ class TVShowAwardController:
             raise HTTPException(
                 status_code=e.code,
                 detail=e.message,
-            )
+            ) from e
         except Exception as e:
-            raise HTTPException(status_code=500, detail=str(e))
+            raise HTTPException(status_code=500, detail=str(e)) from e
 
     @staticmethod
     def get_award_by_tv_show_id(tv_show_id: str):
@@ -53,9 +52,9 @@ class TVShowAwardController:
             raise HTTPException(
                 status_code=e.code,
                 detail=e.message,
-            )
+            ) from e
         except Exception as e:
-            raise HTTPException(status_code=500, detail=str(e))
+            raise HTTPException(status_code=500, detail=str(e)) from e
 
     @staticmethod
     def get_all_tv_shows_with_all_awards():
@@ -68,9 +67,9 @@ class TVShowAwardController:
             raise HTTPException(
                 status_code=e.code,
                 detail=e.message,
-            )
+            ) from e
         except Exception as e:
-            raise HTTPException(status_code=500, detail=str(e))
+            raise HTTPException(status_code=500, detail=str(e)) from e
 
     @staticmethod
     def get_top_five_most_awarded_tv_shows():
@@ -78,4 +77,4 @@ class TVShowAwardController:
             tv_shows = TVShowAwardServices.get_top_five_most_awarded_tv_shows()
             return tv_shows
         except Exception as e:
-            raise HTTPException(status_code=500, detail=str(e))
+            raise HTTPException(status_code=500, detail=str(e)) from e

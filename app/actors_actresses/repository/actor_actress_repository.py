@@ -18,7 +18,7 @@ class ActorActressRepository:
             self.db.refresh(actor_actress)
             return actor_actress
         except IntegrityError as e:
-            raise e
+            raise e from e
 
     def get_actor_actress_by_id(self, actor_actress_id: str):
         actor_actress = (
@@ -73,7 +73,7 @@ class ActorActressRepository:
         actors_actresses = self.db.query(ActorActress).all()
         if (actors_actresses is None) or (actors_actresses == []):
             raise ActorActressNotFoundException(
-                message=f"The list is empty!",
+                message="The list is empty!",
                 code=400,
             )
         return actors_actresses
@@ -94,7 +94,7 @@ class ActorActressRepository:
             self.db.commit()
             return True
         except Exception as e:
-            raise e
+            raise e from e
 
     def order_actor_actress_by_name_decs(self):
         order_by_name_desc = (
@@ -138,4 +138,4 @@ class ActorActressRepository:
             self.db.refresh(actor_actress)
             return actor_actress
         except Exception as e:
-            raise e
+            raise e from e

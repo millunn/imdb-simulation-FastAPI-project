@@ -1,6 +1,4 @@
-from datetime import datetime
-
-from sqlalchemy import Time, desc, func
+from sqlalchemy import desc, func
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 
@@ -45,7 +43,7 @@ class MovieRepository:
             self.db.refresh(movie)
             return movie
         except IntegrityError as e:
-            raise e
+            raise e from e
 
     def get_movie_by_id(self, movie_id: str):
         movie = self.db.query(Movie).filter(Movie.id == movie_id).first()
@@ -102,7 +100,7 @@ class MovieRepository:
         movies = self.db.query(Movie).all()
         if (movies is None) or (movies == []):
             raise MovieNotFoundException(
-                message=f"The list is empty!",
+                message="The list is empty!",
                 code=400,
             )
         return movies
@@ -121,11 +119,11 @@ class MovieRepository:
             return True
         except IntegrityError as e:
             raise MovieIntegrityException(
-                message=f"Cannot delete a parent row!",
+                message="Cannot delete a parent row!",
                 code=400,
-            )
+            ) from e
         except Exception as e:
-            raise e
+            raise e from e
 
     def order_movies_by_title_decs(self):
         order_by_title_desc = self.db.query(Movie).order_by(Movie.title.desc()).all()

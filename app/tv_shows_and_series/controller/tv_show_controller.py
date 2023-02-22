@@ -42,34 +42,34 @@ class TVShowController:
             raise HTTPException(
                 status_code=e.code,
                 detail=e.message,
-            )
+            ) from e
         except TVShowReleaseYearDigitException as e:
             raise HTTPException(
                 status_code=e.code,
                 detail=e.message,
-            )
+            ) from e
         except TVShowReleaseYearLenghtException as e:
             raise HTTPException(
                 status_code=e.code,
                 detail=e.message,
-            )
+            ) from e
         except LanguageNotFoundException as e:
             raise HTTPException(
                 status_code=e.code,
                 detail=e.message,
-            )
+            ) from e
         except GenreNotFoundException as e:
             raise HTTPException(
                 status_code=e.code,
                 detail=e.message,
-            )
+            ) from e
         except IntegrityError as e:
             raise HTTPException(
                 status_code=400,
-                detail=f"Tv show with provided data already exists.",
-            )
+                detail="Tv show with provided data already exists.",
+            ) from e
         except Exception as e:
-            raise HTTPException(status_code=500, detail=str(e))
+            raise HTTPException(status_code=500, detail=str(e)) from e
 
     @staticmethod
     def get_tv_show_by_id(tv_show_id: str):
@@ -80,9 +80,9 @@ class TVShowController:
             raise HTTPException(
                 status_code=e.code,
                 detail=e.message,
-            )
+            ) from e
         except Exception as e:
-            raise HTTPException(status_code=500, detail=str(e))
+            raise HTTPException(status_code=500, detail=str(e)) from e
 
     @staticmethod
     def get_tv_show_by_title(title: str):
@@ -93,9 +93,9 @@ class TVShowController:
             raise HTTPException(
                 status_code=e.code,
                 detail=e.message,
-            )
+            ) from e
         except Exception as e:
-            raise HTTPException(status_code=500, detail=str(e))
+            raise HTTPException(status_code=500, detail=str(e)) from e
 
     @staticmethod
     def get_tv_show_by_language(language: str):
@@ -106,9 +106,9 @@ class TVShowController:
             raise HTTPException(
                 status_code=e.code,
                 detail=e.message,
-            )
+            ) from e
         except Exception as e:
-            raise HTTPException(status_code=500, detail=str(e))
+            raise HTTPException(status_code=500, detail=str(e)) from e
 
     @staticmethod
     def get_tv_show_by_genre(genre: str):
@@ -119,9 +119,9 @@ class TVShowController:
             raise HTTPException(
                 status_code=e.code,
                 detail=e.message,
-            )
+            ) from e
         except Exception as e:
-            raise HTTPException(status_code=500, detail=str(e))
+            raise HTTPException(status_code=500, detail=str(e)) from e
 
     @staticmethod
     def get_tv_show_by_release_year(release_year: str):
@@ -132,9 +132,9 @@ class TVShowController:
             raise HTTPException(
                 status_code=e.code,
                 detail=e.message,
-            )
+            ) from e
         except Exception as e:
-            raise HTTPException(status_code=500, detail=str(e))
+            raise HTTPException(status_code=500, detail=str(e)) from e
 
     @staticmethod
     def get_all_tv_shows():
@@ -145,9 +145,9 @@ class TVShowController:
             raise HTTPException(
                 status_code=e.code,
                 detail=e.message,
-            )
+            ) from e
         except Exception as e:
-            raise HTTPException(status_code=500, detail=str(e))
+            raise HTTPException(status_code=500, detail=str(e)) from e
 
     @staticmethod
     def delete_tv_show_by_id(tv_show_id: str):
@@ -160,9 +160,9 @@ class TVShowController:
             raise HTTPException(
                 status_code=e.code,
                 detail=e.message,
-            )
+            ) from e
         except Exception as e:
-            raise HTTPException(status_code=500, detail=str(e))
+            raise HTTPException(status_code=500, detail=str(e)) from e
 
     @staticmethod
     def order_tv_show_by_title_decs():
@@ -173,9 +173,9 @@ class TVShowController:
             raise HTTPException(
                 status_code=e.code,
                 detail=e.message,
-            )
+            ) from e
         except Exception as e:
-            raise HTTPException(status_code=500, detail=str(e))
+            raise HTTPException(status_code=500, detail=str(e)) from e
 
     @staticmethod
     def order_tv_show_by_title_asc():
@@ -186,9 +186,9 @@ class TVShowController:
             raise HTTPException(
                 status_code=e.code,
                 detail=e.message,
-            )
+            ) from e
         except Exception as e:
-            raise HTTPException(status_code=500, detail=str(e))
+            raise HTTPException(status_code=500, detail=str(e)) from e
 
     @staticmethod
     def get_top_five_tv_shows_by_ratings():
@@ -196,7 +196,7 @@ class TVShowController:
             tv_shows = TVShowServices.get_top_five_tv_shows_by_ratings()
             return tv_shows
         except Exception as e:
-            raise HTTPException(status_code=500, detail=str(e))
+            raise HTTPException(status_code=500, detail=str(e)) from e
 
     @staticmethod
     def get_five_most_rated_tv_shows():
@@ -204,7 +204,7 @@ class TVShowController:
             tv_shows = TVShowServices.get_five_most_rated_tv_shows()
             return tv_shows
         except Exception as e:
-            raise HTTPException(status_code=500, detail=str(e))
+            raise HTTPException(status_code=500, detail=str(e)) from e
 
     @staticmethod
     def get_genre_statistics():
@@ -212,7 +212,7 @@ class TVShowController:
             tv_shows = TVShowServices.get_genre_statistics()
             return tv_shows
         except Exception as e:
-            raise HTTPException(status_code=500, detail=str(e))
+            raise HTTPException(status_code=500, detail=str(e)) from e
 
     @staticmethod
     def get_language_statistics():
@@ -220,4 +220,4 @@ class TVShowController:
             tv_shows = TVShowServices.get_language_statistics()
             return tv_shows
         except Exception as e:
-            raise HTTPException(status_code=500, detail=str(e))
+            raise HTTPException(status_code=500, detail=str(e)) from e

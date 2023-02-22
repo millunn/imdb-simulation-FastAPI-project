@@ -18,7 +18,7 @@ class AwardRepository:
             self.db.refresh(award)
             return award
         except IntegrityError as e:
-            raise e
+            raise e from e
 
     def get_award_by_id(self, award_id: str):
         award = self.db.query(Award).filter(Award.id == award_id).first()
@@ -53,7 +53,7 @@ class AwardRepository:
         awards = self.db.query(Award).all()
         if (awards is None) or (awards == []):
             raise AwardNotFoundException(
-                message=f"The list is empty!",
+                message="The list is empty!",
                 code=400,
             )
         return awards
@@ -68,7 +68,7 @@ class AwardRepository:
             self.db.commit()
             return True
         except Exception as e:
-            raise e
+            raise e from e
 
     def order_awards_by_category_decs(self):
         order_by_category_desc = (

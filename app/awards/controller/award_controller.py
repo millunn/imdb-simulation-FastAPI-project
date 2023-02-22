@@ -15,9 +15,9 @@ class AwardController:
             raise HTTPException(
                 status_code=400,
                 detail=f"Award with provided category - {category} and subcategory - {subcategory} already exists.",
-            )
+            ) from e
         except Exception as e:
-            raise HTTPException(status_code=500, detail=str(e))
+            raise HTTPException(status_code=500, detail=str(e)) from e
 
     @staticmethod
     def get_award_by_id(award_id: str):
@@ -28,9 +28,9 @@ class AwardController:
             raise HTTPException(
                 status_code=e.code,
                 detail=e.message,
-            )
+            ) from e
         except Exception as e:
-            raise HTTPException(status_code=500, detail=str(e))
+            raise HTTPException(status_code=500, detail=str(e)) from e
 
     @staticmethod
     def get_award_by_category(category: str):
@@ -41,9 +41,9 @@ class AwardController:
             raise HTTPException(
                 status_code=e.code,
                 detail=e.message,
-            )
+            ) from e
         except Exception as e:
-            raise HTTPException(status_code=500, detail=str(e))
+            raise HTTPException(status_code=500, detail=str(e)) from e
 
     @staticmethod
     def get_award_by_subcategory(subcategory: str):
@@ -54,9 +54,9 @@ class AwardController:
             raise HTTPException(
                 status_code=e.code,
                 detail=e.message,
-            )
+            ) from e
         except Exception as e:
-            raise HTTPException(status_code=500, detail=str(e))
+            raise HTTPException(status_code=500, detail=str(e)) from e
 
     @staticmethod
     def get_all_awards():
@@ -67,9 +67,9 @@ class AwardController:
             raise HTTPException(
                 status_code=e.code,
                 detail=e.message,
-            )
+            ) from e
         except Exception as e:
-            raise HTTPException(status_code=500, detail=str(e))
+            raise HTTPException(status_code=500, detail=str(e)) from e
 
     @staticmethod
     def delete_award_by_id(award_id: str):
@@ -80,9 +80,9 @@ class AwardController:
                     status_code=200,
                 )
         except AwardNotFoundException as e:
-            raise HTTPException(status_code=e.code, detail=e.message)
+            raise HTTPException(status_code=e.code, detail=e.message) from e
         except Exception as e:
-            raise HTTPException(status_code=400, detail=str(e))
+            raise HTTPException(status_code=400, detail=str(e)) from e
 
     @staticmethod
     def order_awards_by_category_decs():
@@ -93,9 +93,9 @@ class AwardController:
             raise HTTPException(
                 status_code=e.code,
                 detail=e.message,
-            )
+            ) from e
         except Exception as e:
-            raise HTTPException(status_code=500, detail=str(e))
+            raise HTTPException(status_code=500, detail=str(e)) from e
 
     @staticmethod
     def order_awards_by_category_asc():
@@ -106,6 +106,6 @@ class AwardController:
             raise HTTPException(
                 status_code=e.code,
                 detail=e.message,
-            )
+            ) from e
         except Exception as e:
-            raise HTTPException(status_code=500, detail=str(e))
+            raise HTTPException(status_code=500, detail=str(e)) from e

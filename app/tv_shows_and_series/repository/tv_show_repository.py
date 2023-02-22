@@ -41,7 +41,7 @@ class TVShowRepository:
             self.db.refresh(tv_show)
             return tv_show
         except IntegrityError as e:
-            raise e
+            raise e from e
 
     def get_tv_show_by_id(self, tv_show_id: str):
         tv_show = self.db.query(TVShow).filter(TVShow.id == tv_show_id).first()
@@ -102,7 +102,7 @@ class TVShowRepository:
         tv_shows = self.db.query(TVShow).all()
         if (tv_shows is None) or (tv_shows == []):
             raise TVShowNotFoundException(
-                message=f"The list is empty!",
+                message="The list is empty!",
                 code=400,
             )
         return tv_shows
@@ -119,7 +119,7 @@ class TVShowRepository:
             self.db.commit()
             return True
         except Exception as e:
-            raise e
+            raise e from e
 
     def order_tv_show_by_title_decs(self):
         order_by_title_desc = self.db.query(TVShow).order_by(TVShow.title.desc()).all()

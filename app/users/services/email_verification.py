@@ -1,5 +1,6 @@
 def send_email_login_alert(email) -> None:
-    """Creates mail subject and body for a security alert mail upon log in, sends if it's called"""
+    """Creates mail subject and body for a security alert mail
+    upon log in, sends if it's called"""
     import smtplib
     import ssl
     from email.message import EmailMessage
@@ -8,7 +9,7 @@ def send_email_login_alert(email) -> None:
     email_password = "vfsk dpsh piqi ztbg"
     email_receiver = email
     subject = "Security alert - Did you just log in?"
-    body = f"Someone've just logged into your account! Please check activity log."
+    body = "Someone've just logged into your account! Please check activity log."
     em = EmailMessage()
     em["From"] = email_sender
     em["To"] = email_receiver
@@ -28,7 +29,8 @@ def send_email_login_alert(email) -> None:
 
 
 def send_confirmation_email(email) -> None:
-    """Creates mail subject and body for a confirmation mail upon registration, sends if it's called"""
+    """Creates mail subject and body for a confirmation mail upon registration,
+    sends if it's called"""
     import smtplib
     import ssl
     from email.message import EmailMessage

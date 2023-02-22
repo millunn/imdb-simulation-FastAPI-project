@@ -19,7 +19,7 @@ class MovieAwardRepository:
             self.db.refresh(movie_award)
             return movie_award
         except IntegrityError as e:
-            raise e
+            raise e from e
 
     def get_movie_by_award_id(self, award_id: str):
         movie_by_award_id = (

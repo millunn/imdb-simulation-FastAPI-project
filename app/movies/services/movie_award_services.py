@@ -29,9 +29,9 @@ class MovieAwardServices:
                 movie_award_repository = MovieAwardRepository(db)
                 return movie_award_repository.create_movie_award(movie_id, award_id)
         except IntegrityError as e:
-            raise e
+            raise e from e
         except Exception as e:
-            raise e
+            raise e from e
 
     @staticmethod
     def get_movie_by_award_id(award_id: str):
@@ -40,7 +40,7 @@ class MovieAwardServices:
                 movie_award_repository = MovieAwardRepository(db)
                 return movie_award_repository.get_movie_by_award_id(award_id)
         except Exception as e:
-            raise e
+            raise e from e
 
     @staticmethod
     def get_award_by_movie_id(movie_id: str):
@@ -49,7 +49,7 @@ class MovieAwardServices:
                 award_movie_repository = MovieAwardRepository(db)
                 return award_movie_repository.get_award_by_movie_id(movie_id)
         except Exception as e:
-            raise e
+            raise e from e
 
     @staticmethod
     def get_all_movies_with_all_awards():
@@ -58,7 +58,7 @@ class MovieAwardServices:
                 movie_award_repository = MovieAwardRepository(db)
                 return movie_award_repository.get_all_movies_with_all_awards()
         except Exception as e:
-            raise e
+            raise e from e
 
     @staticmethod
     def get_top_five_most_awarded_movies():
@@ -67,4 +67,4 @@ class MovieAwardServices:
                 movie_repository = MovieAwardRepository(db)
                 return movie_repository.get_top_five_most_awarded_movies()
         except Exception as e:
-            raise e
+            raise e from e

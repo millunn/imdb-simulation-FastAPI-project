@@ -18,7 +18,7 @@ class LanguageRepository:
             self.db.refresh(language)
             return language
         except IntegrityError as e:
-            raise e
+            raise e from e
 
     def get_language_by_id(self, language_id: str):
         language = self.db.query(Language).filter(Language.id == language_id).first()
@@ -70,4 +70,4 @@ class LanguageRepository:
             self.db.commit()
             return True
         except Exception as e:
-            raise e
+            raise e from e

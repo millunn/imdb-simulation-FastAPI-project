@@ -31,9 +31,9 @@ class TVShowAwardServices:
                     tv_show_id, award_id
                 )
         except IntegrityError as e:
-            raise e
+            raise e from e
         except Exception as e:
-            raise e
+            raise e from e
 
     @staticmethod
     def get_tv_show_by_award_id(award_id: str):
@@ -42,7 +42,7 @@ class TVShowAwardServices:
                 tv_show_award_repository = TVShowAwardRepository(db)
                 return tv_show_award_repository.get_tv_show_by_award_id(award_id)
         except Exception as e:
-            raise e
+            raise e from e
 
     @staticmethod
     def get_award_by_tv_show_id(tv_show_id: str):
@@ -51,7 +51,7 @@ class TVShowAwardServices:
                 award_tv_show_repository = TVShowAwardRepository(db)
                 return award_tv_show_repository.get_award_by_tv_show_id(tv_show_id)
         except Exception as e:
-            raise e
+            raise e from e
 
     @staticmethod
     def get_all_tv_shows_with_all_awards():
@@ -60,7 +60,7 @@ class TVShowAwardServices:
                 tv_show_award_repository = TVShowAwardRepository(db)
                 return tv_show_award_repository.get_all_tv_shows_with_all_awards()
         except Exception as e:
-            raise e
+            raise e from e
 
     @staticmethod
     def get_top_five_most_awarded_tv_shows():
@@ -69,4 +69,4 @@ class TVShowAwardServices:
                 tv_show_repository = TVShowAwardRepository(db)
                 return tv_show_repository.get_top_five_most_awarded_tv_shows()
         except Exception as e:
-            raise e
+            raise e from e

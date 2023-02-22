@@ -20,14 +20,14 @@ class ActorActressController:
             raise HTTPException(
                 status_code=e.code,
                 detail=e.message,
-            )
+            ) from e
         except IntegrityError as e:
             raise HTTPException(
                 status_code=400,
-                detail=f"Actor/actress with provided data already exists.",
-            )
+                detail="Actor/actress with provided data already exists.",
+            ) from e
         except Exception as e:
-            raise HTTPException(status_code=500, detail=str(e))
+            raise HTTPException(status_code=500, detail=str(e)) from e
 
     @staticmethod
     def get_actor_actress_by_id(actor_actress_id: str):
@@ -40,9 +40,9 @@ class ActorActressController:
             raise HTTPException(
                 status_code=e.code,
                 detail=e.message,
-            )
+            ) from e
         except Exception as e:
-            raise HTTPException(status_code=500, detail=str(e))
+            raise HTTPException(status_code=500, detail=str(e)) from e
 
     @staticmethod
     def get_actor_actress_by_name(name: str):
@@ -53,9 +53,9 @@ class ActorActressController:
             raise HTTPException(
                 status_code=e.code,
                 detail=e.message,
-            )
+            ) from e
         except Exception as e:
-            raise HTTPException(status_code=500, detail=str(e))
+            raise HTTPException(status_code=500, detail=str(e)) from e
 
     @staticmethod
     def get_actor_actress_by_surname(surname: str):
@@ -66,9 +66,9 @@ class ActorActressController:
             raise HTTPException(
                 status_code=e.code,
                 detail=e.message,
-            )
+            ) from e
         except Exception as e:
-            raise HTTPException(status_code=500, detail=str(e))
+            raise HTTPException(status_code=500, detail=str(e)) from e
 
     @staticmethod
     def get_actor_actress_by_gender(gender: str):
@@ -79,14 +79,14 @@ class ActorActressController:
             raise HTTPException(
                 status_code=e.code,
                 detail=e.message,
-            )
+            ) from e
         except ActorActressNotFoundException as e:
             raise HTTPException(
                 status_code=e.code,
                 detail=e.message,
-            )
+            ) from e
         except Exception as e:
-            raise HTTPException(status_code=500, detail=str(e))
+            raise HTTPException(status_code=500, detail=str(e)) from e
 
     @staticmethod
     def get_all_actors_actresses():
@@ -97,9 +97,9 @@ class ActorActressController:
             raise HTTPException(
                 status_code=e.code,
                 detail=e.message,
-            )
+            ) from e
         except Exception as e:
-            raise HTTPException(status_code=500, detail=str(e))
+            raise HTTPException(status_code=500, detail=str(e)) from e
 
     @staticmethod
     def delete_actor_actress_by_id(actor_actress_id: str):
@@ -112,9 +112,9 @@ class ActorActressController:
             raise HTTPException(
                 status_code=e.code,
                 detail=e.message,
-            )
+            ) from e
         except Exception as e:
-            raise HTTPException(status_code=500, detail=str(e))
+            raise HTTPException(status_code=500, detail=str(e)) from e
 
     @staticmethod
     def order_actor_actress_by_name_decs():
@@ -125,9 +125,9 @@ class ActorActressController:
             raise HTTPException(
                 status_code=e.code,
                 detail=e.message,
-            )
+            ) from e
         except Exception as e:
-            raise HTTPException(status_code=500, detail=str(e))
+            raise HTTPException(status_code=500, detail=str(e)) from e
 
     @staticmethod
     def order_actor_actress_by_name_asc():
@@ -138,9 +138,9 @@ class ActorActressController:
             raise HTTPException(
                 status_code=e.code,
                 detail=e.message,
-            )
+            ) from e
         except Exception as e:
-            raise HTTPException(status_code=500, detail=str(e))
+            raise HTTPException(status_code=500, detail=str(e)) from e
 
     @staticmethod
     def get_gender_statistics():
@@ -148,7 +148,7 @@ class ActorActressController:
             gender_statistics = ActorActressServices.get_gender_statistics()
             return gender_statistics
         except Exception as e:
-            raise HTTPException(status_code=500, detail=str(e))
+            raise HTTPException(status_code=500, detail=str(e)) from e
 
     @staticmethod
     def update_actor_actress_about_section(actor_actress_id: str, about: str):
@@ -161,6 +161,6 @@ class ActorActressController:
             raise HTTPException(
                 status_code=e.code,
                 detail=e.message,
-            )
+            ) from e
         except Exception as e:
-            raise HTTPException(status_code=500, detail=str(e))
+            raise HTTPException(status_code=500, detail=str(e)) from e

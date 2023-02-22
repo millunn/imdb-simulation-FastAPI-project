@@ -21,17 +21,17 @@ class TVShowActorActressController:
             raise HTTPException(
                 status_code=e.code,
                 detail=e.message,
-            )
+            ) from e
         except ActorActressNotFoundException as e:
             raise HTTPException(
                 status_code=e.code,
                 detail=e.message,
-            )
+            ) from e
 
-        except IntegrityError:
-            raise HTTPException(status_code=400, detail="Already in database")
+        except IntegrityError as e:
+            raise HTTPException(status_code=400, detail="Already in database") from e
         except Exception as e:
-            raise HTTPException(status_code=500, detail=str(e))
+            raise HTTPException(status_code=500, detail=str(e)) from e
 
     @staticmethod
     def get_tv_show_by_actor_actress_id(actor_actress_id: str):
@@ -44,9 +44,9 @@ class TVShowActorActressController:
             raise HTTPException(
                 status_code=e.code,
                 detail=e.message,
-            )
+            ) from e
         except Exception as e:
-            raise HTTPException(status_code=500, detail=str(e))
+            raise HTTPException(status_code=500, detail=str(e)) from e
 
     @staticmethod
     def get_actor_actress_by_tv_show_id(tv_show_id: str):
@@ -59,9 +59,9 @@ class TVShowActorActressController:
             raise HTTPException(
                 status_code=e.code,
                 detail=e.message,
-            )
+            ) from e
         except Exception as e:
-            raise HTTPException(status_code=500, detail=str(e))
+            raise HTTPException(status_code=500, detail=str(e)) from e
 
     @staticmethod
     def get_all_tv_shows_with_all_actors_actresses():
@@ -74,9 +74,9 @@ class TVShowActorActressController:
             raise HTTPException(
                 status_code=e.code,
                 detail=e.message,
-            )
+            ) from e
         except Exception as e:
-            raise HTTPException(status_code=500, detail=str(e))
+            raise HTTPException(status_code=500, detail=str(e)) from e
 
     @staticmethod
     def get_actors_by_tv_show_id(tv_show_id: str):
@@ -89,9 +89,9 @@ class TVShowActorActressController:
             raise HTTPException(
                 status_code=e.code,
                 detail=e.message,
-            )
+            ) from e
         except Exception as e:
-            raise HTTPException(status_code=500, detail=str(e))
+            raise HTTPException(status_code=500, detail=str(e)) from e
 
     @staticmethod
     def get_actresses_by_tv_show_id(tv_show_id: str):
@@ -104,6 +104,6 @@ class TVShowActorActressController:
             raise HTTPException(
                 status_code=e.code,
                 detail=e.message,
-            )
+            ) from e
         except Exception as e:
-            raise HTTPException(status_code=500, detail=str(e))
+            raise HTTPException(status_code=500, detail=str(e)) from e

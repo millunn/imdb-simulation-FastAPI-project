@@ -19,7 +19,7 @@ class TVShowAwardRepository:
             self.db.refresh(tv_show_award)
             return tv_show_award
         except IntegrityError as e:
-            raise e
+            raise e from e
 
     def get_tv_show_by_award_id(self, award_id: str):
         tv_show_by_award_id = (
@@ -49,7 +49,7 @@ class TVShowAwardRepository:
         tv_show_award = self.db.query(TVShowAward).all()
         if (tv_show_award is None) or (tv_show_award == []):
             raise AwardNotFoundException(
-                message=f"The list is empty!",
+                message="The list is empty!",
                 code=400,
             )
         return tv_show_award

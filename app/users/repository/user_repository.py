@@ -17,7 +17,7 @@ class UserRepository:
             self.db.refresh(user)
             return user
         except IntegrityError as e:
-            raise e
+            raise e from e
 
     def create_super_user(self, name, surname, email, password):
         try:
@@ -33,7 +33,7 @@ class UserRepository:
             self.db.refresh(user)
             return user
         except IntegrityError as e:
-            raise e
+            raise e from e
 
     def get_user_by_id(self, user_id: str):
         user = self.db.query(User).filter(User.id == user_id).first()
@@ -54,7 +54,7 @@ class UserRepository:
     def get_all_users(self):
         users = self.db.query(User).all()
         if users is None:
-            raise UserNotFoundException(f"The list is empty!", 400)
+            raise UserNotFoundException("The list is empty!", 400)
         return users
 
     def delete_user_by_id(self, user_id: str):
@@ -68,7 +68,7 @@ class UserRepository:
             self.db.commit()
             return True
         except Exception as e:
-            raise e
+            raise e from e
 
     def update_user_name(self, user_id: str, name: str):
         try:
@@ -87,7 +87,7 @@ class UserRepository:
             self.db.refresh(user)
             return user
         except Exception as e:
-            raise e
+            raise e from e
 
     def update_user_surname(self, user_id: str, surname: str):
         try:
@@ -106,7 +106,7 @@ class UserRepository:
             self.db.refresh(user)
             return user
         except Exception as e:
-            raise e
+            raise e from e
 
     def update_user_is_active(self, user_id: str, is_active: bool):
         try:
@@ -125,4 +125,4 @@ class UserRepository:
             self.db.refresh(user)
             return user
         except Exception as e:
-            raise e
+            raise e from e

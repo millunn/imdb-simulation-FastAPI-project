@@ -29,17 +29,17 @@ class TVShowServices:
         try:
             if len(str(episode_duration)) > 4:
                 raise TVShowEpisodeDurationException(
-                    message=f"Episode duration minutes must be between 1 and 999!",
+                    message="Episode duration minutes must be between 1 and 999!",
                     code=400,
                 )
             if not release_year.isdigit():
                 raise TVShowReleaseYearDigitException(
-                    message=f"Release year not an integer!",
+                    message="Release year not an integer!",
                     code=400,
                 )
             if len(release_year) > 4:
                 raise TVShowReleaseYearLenghtException(
-                    message=f"Release year must have 4 digits!",
+                    message="Release year must have 4 digits!",
                     code=400,
                 )
             with SessionLocal() as db:
@@ -70,7 +70,7 @@ class TVShowServices:
                     genre_category,
                 )
         except Exception as e:
-            raise e
+            raise e from e
 
     @staticmethod
     def get_tv_show_by_id(tv_show_id: str):
@@ -79,7 +79,7 @@ class TVShowServices:
                 tv_show_repository = TVShowRepository(db)
                 return tv_show_repository.get_tv_show_by_id(tv_show_id)
         except Exception as e:
-            raise e
+            raise e from e
 
     @staticmethod
     def get_tv_show_by_title(title: str):
@@ -88,7 +88,7 @@ class TVShowServices:
                 tv_show_repository = TVShowRepository(db)
                 return tv_show_repository.get_tv_show_by_title(title)
         except Exception as e:
-            raise e
+            raise e from e
 
     @staticmethod
     def get_tv_show_by_language(language: str):
@@ -97,7 +97,7 @@ class TVShowServices:
                 tv_show_repository = TVShowRepository(db)
                 return tv_show_repository.get_tv_show_by_language(language)
         except Exception as e:
-            raise e
+            raise e from e
 
     @staticmethod
     def get_tv_show_by_genre(genre: str):
@@ -106,7 +106,7 @@ class TVShowServices:
                 tv_show_repository = TVShowRepository(db)
                 return tv_show_repository.get_tv_show_by_genre(genre)
         except Exception as e:
-            raise e
+            raise e from e
 
     @staticmethod
     def get_tv_show_by_release_year(release_year: str):
@@ -115,7 +115,7 @@ class TVShowServices:
                 tv_show_repository = TVShowRepository(db)
                 return tv_show_repository.get_tv_show_by_release_year(release_year)
         except Exception as e:
-            raise e
+            raise e from e
 
     @staticmethod
     def get_all_tv_shows():
@@ -124,7 +124,7 @@ class TVShowServices:
                 tv_show_repository = TVShowRepository(db)
                 return tv_show_repository.get_all_tv_shows()
         except Exception as e:
-            raise e
+            raise e from e
 
     @staticmethod
     def delete_tv_show_by_id(tv_show_id: str):
@@ -133,7 +133,7 @@ class TVShowServices:
                 tv_show_repository = TVShowRepository(db)
                 return tv_show_repository.delete_tv_show_by_id(tv_show_id)
         except Exception as e:
-            raise e
+            raise e from e
 
     @staticmethod
     def order_tv_show_by_title_decs():
@@ -142,7 +142,7 @@ class TVShowServices:
                 tv_show_repository = TVShowRepository(db)
                 return tv_show_repository.order_tv_show_by_title_decs()
         except Exception as e:
-            raise e
+            raise e from e
 
     @staticmethod
     def order_tv_show_by_title_asc():
@@ -151,7 +151,7 @@ class TVShowServices:
                 tv_show_repository = TVShowRepository(db)
                 return tv_show_repository.order_tv_show_by_title_asc()
         except Exception as e:
-            raise e
+            raise e from e
 
     @staticmethod
     def get_top_five_tv_shows_by_ratings():
@@ -160,7 +160,7 @@ class TVShowServices:
                 tv_show_repository = TVShowRepository(db)
                 return tv_show_repository.get_top_five_tv_shows_by_ratings()
         except Exception as e:
-            raise e
+            raise e from e
 
     @staticmethod
     def get_five_most_rated_tv_shows():
@@ -169,7 +169,7 @@ class TVShowServices:
                 tv_show_repository = TVShowRepository(db)
                 return tv_show_repository.get_five_most_rated_tv_shows()
         except Exception as e:
-            raise e
+            raise e from e
 
     @staticmethod
     def get_genre_statistics():
@@ -178,7 +178,7 @@ class TVShowServices:
                 tv_show_repository = TVShowRepository(db)
                 return tv_show_repository.get_genre_statistics()
         except Exception as e:
-            raise e
+            raise e from e
 
     @staticmethod
     def get_language_statistics():
@@ -187,4 +187,4 @@ class TVShowServices:
                 tv_show_repository = TVShowRepository(db)
                 return tv_show_repository.get_language_statistics()
         except Exception as e:
-            raise e
+            raise e from e

@@ -9,7 +9,7 @@ class ActorActressServices:
         try:
             if (gender.lower() != "m") and (gender.lower() != "f"):
                 raise ActorActressGenderException(
-                    message=f"Gender must be M for male or F for female!",
+                    message="Gender must be M for male or F for female!",
                     code=400,
                 )
             with SessionLocal() as db:
@@ -18,7 +18,7 @@ class ActorActressServices:
                     name, surname, gender, about
                 )
         except Exception as e:
-            raise e
+            raise e from e
 
     @staticmethod
     def get_actor_actress_by_id(actor_actress_id: str):
@@ -29,7 +29,7 @@ class ActorActressServices:
                     actor_actress_id
                 )
         except Exception as e:
-            raise e
+            raise e from e
 
     @staticmethod
     def get_actor_actress_by_name(name: str):
@@ -38,21 +38,21 @@ class ActorActressServices:
                 actor_actress_repository = ActorActressRepository(db)
                 return actor_actress_repository.get_actor_actress_by_name(name)
         except Exception as e:
-            raise e
+            raise e from e
 
     @staticmethod
     def get_actor_actress_by_gender(gender: str):
         try:
             if (gender.lower() != "m") and (gender.lower() != "f"):
                 raise ActorActressGenderException(
-                    message=f"Gender must be M for male or F for female!",
+                    message="Gender must be M for male or F for female!",
                     code=400,
                 )
             with SessionLocal() as db:
                 actor_actress_repository = ActorActressRepository(db)
                 return actor_actress_repository.get_actor_actress_by_gender(gender)
         except Exception as e:
-            raise e
+            raise e from e
 
     @staticmethod
     def get_actor_actress_by_surname(surname: str):
@@ -61,7 +61,7 @@ class ActorActressServices:
                 actor_actress_repository = ActorActressRepository(db)
                 return actor_actress_repository.get_actor_actress_by_surname(surname)
         except Exception as e:
-            raise e
+            raise e from e
 
     @staticmethod
     def get_all_actors_actresses():
@@ -70,7 +70,7 @@ class ActorActressServices:
                 actor_actress_repository = ActorActressRepository(db)
                 return actor_actress_repository.get_all_actors_actresses()
         except Exception as e:
-            raise e
+            raise e from e
 
     @staticmethod
     def delete_actor_actress_by_id(actor_actress_id: str):
@@ -81,7 +81,7 @@ class ActorActressServices:
                     actor_actress_id
                 )
         except Exception as e:
-            raise e
+            raise e from e
 
     @staticmethod
     def order_actor_actress_by_name_decs():
@@ -90,7 +90,7 @@ class ActorActressServices:
                 actor_actress_repository = ActorActressRepository(db)
                 return actor_actress_repository.order_actor_actress_by_name_decs()
         except Exception as e:
-            raise e
+            raise e from e
 
     @staticmethod
     def order_actor_actress_by_name_asc():
@@ -99,7 +99,7 @@ class ActorActressServices:
                 actor_actress_repository = ActorActressRepository(db)
                 return actor_actress_repository.order_actor_actress_by_name_asc()
         except Exception as e:
-            raise e
+            raise e from e
 
     @staticmethod
     def get_gender_statistics():
@@ -108,7 +108,7 @@ class ActorActressServices:
                 actor_actress_repository = ActorActressRepository(db)
                 return actor_actress_repository.get_gender_statistics()
         except Exception as e:
-            raise e
+            raise e from e
 
     @staticmethod
     def update_actor_actress_about_section(actor_actress_id: str, about: str):
@@ -119,4 +119,4 @@ class ActorActressServices:
                     actor_actress_id, about
                 )
         except Exception as e:
-            raise e
+            raise e from e

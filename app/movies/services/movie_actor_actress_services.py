@@ -35,9 +35,9 @@ class MovieActorActressServices:
                     movie_id, actor_actress_id
                 )
         except IntegrityError as e:
-            raise e
+            raise e from e
         except Exception as e:
-            raise e
+            raise e from e
 
     @staticmethod
     def get_movie_by_actor_actress_id(actor_actress_id: str):
@@ -48,7 +48,7 @@ class MovieActorActressServices:
                     actor_actress_id
                 )
         except Exception as e:
-            raise e
+            raise e from e
 
     @staticmethod
     def get_actor_actress_by_movie_id(movie_id: str):
@@ -59,7 +59,7 @@ class MovieActorActressServices:
                     movie_id
                 )
         except Exception as e:
-            raise e
+            raise e from e
 
     @staticmethod
     def get_all_movies_with_all_actors_actresses():
@@ -70,7 +70,7 @@ class MovieActorActressServices:
                     movie_actor_actress_repository.get_all_movies_with_all_actors_actresses()
                 )
         except Exception as e:
-            raise e
+            raise e from e
 
     @staticmethod
     def get_actors_by_movie_id(movie_id: str):
@@ -79,7 +79,7 @@ class MovieActorActressServices:
                 actor_movie_repository = MovieActorActressRepository(db)
                 return actor_movie_repository.get_actors_by_movie_id(movie_id)
         except Exception as e:
-            raise e
+            raise e from e
 
     @staticmethod
     def get_actresses_by_movie_id(movie_id: str):
@@ -88,4 +88,4 @@ class MovieActorActressServices:
                 actress_movie_repository = MovieActorActressRepository(db)
                 return actress_movie_repository.get_actresses_by_movie_id(movie_id)
         except Exception as e:
-            raise e
+            raise e from e

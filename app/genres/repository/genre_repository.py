@@ -18,7 +18,7 @@ class GenreRepository:
             self.db.refresh(genre)
             return genre
         except IntegrityError as e:
-            raise e
+            raise e from e
 
     def get_genre_by_id(self, genre_id: str):
         genre = self.db.query(Genre).filter(Genre.id == genre_id).first()
@@ -54,4 +54,4 @@ class GenreRepository:
             self.db.commit()
             return True
         except Exception as e:
-            raise e
+            raise e from e

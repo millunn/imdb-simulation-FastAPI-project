@@ -21,9 +21,9 @@ class UserController:
             raise HTTPException(
                 status_code=400,
                 detail=f"User with provided email - {email} already exists.",
-            )
+            ) from e
         except Exception as e:
-            raise HTTPException(status_code=500, detail=str(e))
+            raise HTTPException(status_code=500, detail=str(e)) from e
 
     @staticmethod
     def create_super_user(name, surname, email, password):
@@ -35,9 +35,9 @@ class UserController:
             raise HTTPException(
                 status_code=400,
                 detail=f"User with provided email - {email} already exists.",
-            )
+            ) from e
         except Exception as e:
-            raise HTTPException(status_code=500, detail=str(e))
+            raise HTTPException(status_code=500, detail=str(e)) from e
 
     @staticmethod
     def login_user(email, password):
@@ -48,9 +48,9 @@ class UserController:
                 return signJWT(user.id, "super_user")
             return signJWT(user.id, "classic_user")
         except UserInvalidPasswordException as e:
-            raise HTTPException(status_code=e.code, detail=e.message)
+            raise HTTPException(status_code=e.code, detail=e.message) from e
         except Exception as e:
-            raise HTTPException(status_code=500, detail=str(e))
+            raise HTTPException(status_code=500, detail=str(e)) from e
 
     @staticmethod
     def get_user_by_id(user_id: str):
@@ -61,9 +61,9 @@ class UserController:
             raise HTTPException(
                 status_code=e.code,
                 detail=e.message,
-            )
+            ) from e
         except Exception as e:
-            raise HTTPException(status_code=500, detail=str(e))
+            raise HTTPException(status_code=500, detail=str(e)) from e
 
     @staticmethod
     def get_all_users():
@@ -74,9 +74,9 @@ class UserController:
             raise HTTPException(
                 status_code=e.code,
                 detail=e.message,
-            )
+            ) from e
         except Exception as e:
-            print(e)
+            raise HTTPException(status_code=400, detail=str(e)) from e
 
     @staticmethod
     def delete_user_by_id(user_id: str):
@@ -87,9 +87,9 @@ class UserController:
             raise HTTPException(
                 status_code=e.code,
                 detail=e.message,
-            )
+            ) from e
         except Exception as e:
-            raise HTTPException(status_code=400, detail=str(e))
+            raise HTTPException(status_code=400, detail=str(e)) from e
 
     @staticmethod
     def update_user_name(user_id: str, name: str):
@@ -100,9 +100,9 @@ class UserController:
             raise HTTPException(
                 status_code=e.code,
                 detail=e.message,
-            )
+            ) from e
         except Exception as e:
-            raise HTTPException(status_code=500, detail=str(e))
+            raise HTTPException(status_code=500, detail=str(e)) from e
 
     @staticmethod
     def update_user_surname(user_id: str, surname: str):
@@ -113,9 +113,9 @@ class UserController:
             raise HTTPException(
                 status_code=e.code,
                 detail=e.message,
-            )
+            ) from e
         except Exception as e:
-            raise HTTPException(status_code=500, detail=str(e))
+            raise HTTPException(status_code=500, detail=str(e)) from e
 
     @staticmethod
     def update_user_is_active(user_id: str, is_active: bool):
@@ -126,6 +126,6 @@ class UserController:
             raise HTTPException(
                 status_code=e.code,
                 detail=e.message,
-            )
+            ) from e
         except Exception as e:
-            raise HTTPException(status_code=500, detail=str(e))
+            raise HTTPException(status_code=500, detail=str(e)) from e

@@ -1,7 +1,7 @@
 from pydantic import UUID4, BaseModel
 
-from app.awards.schemas import AwardSchema
-from app.movies.schemas import MovieSchema
+from app.awards.schemas.award_schema import AwardSchema
+from app.movies.schemas.movie_schema import MovieSchema
 
 
 class MovieAwardSchema(BaseModel):

@@ -16,7 +16,7 @@ class UserServices:
                     name, surname, email, hashed_password
                 )
             except Exception as e:
-                raise e
+                raise e from e
 
     def create_super_user(name, surname, email, password: str):
         with SessionLocal() as db:
@@ -27,7 +27,7 @@ class UserServices:
                     name, surname, email, hashed_password
                 )
             except Exception as e:
-                raise e
+                raise e from e
 
     @staticmethod
     def get_user_by_id(user_id: str):
@@ -36,7 +36,7 @@ class UserServices:
                 user_repository = UserRepository(db)
                 return user_repository.get_user_by_id(user_id)
         except Exception as e:
-            raise e
+            raise e from e
 
     @staticmethod
     def get_all_users():
@@ -45,7 +45,7 @@ class UserServices:
                 user_repository = UserRepository(db)
                 return user_repository.get_all_users()
         except Exception as e:
-            raise e
+            raise e from e
 
     @staticmethod
     def delete_user_by_id(user_id: str):
@@ -54,7 +54,7 @@ class UserServices:
                 user_repository = UserRepository(db)
                 return user_repository.delete_user_by_id(user_id)
         except Exception as e:
-            raise e
+            raise e from e
 
     @staticmethod
     def update_user_name(user_id: str, name: str):
@@ -63,7 +63,7 @@ class UserServices:
                 user_repository = UserRepository(db)
                 return user_repository.update_user_name(user_id, name)
         except Exception as e:
-            raise e
+            raise e from e
 
     @staticmethod
     def update_user_surname(user_id: str, surname: str):
@@ -72,7 +72,7 @@ class UserServices:
                 user_repository = UserRepository(db)
                 return user_repository.update_user_surname(user_id, surname)
         except Exception as e:
-            raise e
+            raise e from e
 
     @staticmethod
     def update_user_is_active(user_id: str, is_active: bool):
@@ -81,7 +81,7 @@ class UserServices:
                 user_repository = UserRepository(db)
                 return user_repository.update_user_is_active(user_id, is_active)
         except Exception as e:
-            raise e
+            raise e from e
 
     @staticmethod
     def login_user(email: str, password: str):
@@ -98,4 +98,4 @@ class UserServices:
                     )
                 return user
         except Exception as e:
-            raise e
+            raise e from e

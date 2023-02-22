@@ -24,24 +24,24 @@ class MovieRatingAndReviewController:
             raise HTTPException(
                 status_code=e.code,
                 detail=e.message,
-            )
+            ) from e
         except MovieNotFoundException as e:
             raise HTTPException(
                 status_code=e.code,
                 detail=e.message,
-            )
+            ) from e
         except UserNotFoundException as e:
             raise HTTPException(
                 status_code=e.code,
                 detail=e.message,
-            )
+            ) from e
         except IntegrityError as e:
             raise HTTPException(
                 status_code=400,
                 detail=f"Failed! The user with id: {user_id} has already reviewed movie with id: {movie_id}.",
-            )
+            ) from e
         except Exception as e:
-            raise HTTPException(status_code=500, detail=str(e))
+            raise HTTPException(status_code=500, detail=str(e)) from e
 
     @staticmethod
     def get_movie_rating_and_review_by_id(movie_rating_and_review_id: str):
@@ -56,9 +56,9 @@ class MovieRatingAndReviewController:
             raise HTTPException(
                 status_code=e.code,
                 detail=e.message,
-            )
+            ) from e
         except Exception as e:
-            raise HTTPException(status_code=500, detail=str(e))
+            raise HTTPException(status_code=500, detail=str(e)) from e
 
     @staticmethod
     def get_movie_rating_and_review_by_grade(grade: int):
@@ -71,9 +71,9 @@ class MovieRatingAndReviewController:
             raise HTTPException(
                 status_code=e.code,
                 detail=e.message,
-            )
+            ) from e
         except Exception as e:
-            raise HTTPException(status_code=500, detail=str(e))
+            raise HTTPException(status_code=500, detail=str(e)) from e
 
     @staticmethod
     def get_movie_rating_and_review_by_movie_id(movie_id: str):
@@ -88,9 +88,9 @@ class MovieRatingAndReviewController:
             raise HTTPException(
                 status_code=e.code,
                 detail=e.message,
-            )
+            ) from e
         except Exception as e:
-            raise HTTPException(status_code=500, detail=str(e))
+            raise HTTPException(status_code=500, detail=str(e)) from e
 
     @staticmethod
     def get_movie_rating_and_review_by_user_id(user_id: str):
@@ -105,9 +105,9 @@ class MovieRatingAndReviewController:
             raise HTTPException(
                 status_code=e.code,
                 detail=e.message,
-            )
+            ) from e
         except Exception as e:
-            raise HTTPException(status_code=500, detail=str(e))
+            raise HTTPException(status_code=500, detail=str(e)) from e
 
     @staticmethod
     def get_all_movies_ratings_and_reviews():
@@ -120,9 +120,9 @@ class MovieRatingAndReviewController:
             raise HTTPException(
                 status_code=e.code,
                 detail=e.message,
-            )
+            ) from e
         except Exception as e:
-            raise HTTPException(status_code=500, detail=str(e))
+            raise HTTPException(status_code=500, detail=str(e)) from e
 
     @staticmethod
     def delete_movie_rating_and_review_by_id(movie_rating_and_review_id: str):
@@ -137,9 +137,9 @@ class MovieRatingAndReviewController:
             raise HTTPException(
                 status_code=e.code,
                 detail=e.message,
-            )
+            ) from e
         except Exception as e:
-            raise HTTPException(status_code=500, detail=str(e))
+            raise HTTPException(status_code=500, detail=str(e)) from e
 
     @staticmethod
     def update_movie_rating_and_review_comment(
@@ -156,6 +156,6 @@ class MovieRatingAndReviewController:
             raise HTTPException(
                 status_code=e.code,
                 detail=e.message,
-            )
+            ) from e
         except Exception as e:
-            raise HTTPException(status_code=500, detail=str(e))
+            raise HTTPException(status_code=500, detail=str(e)) from e

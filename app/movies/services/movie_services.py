@@ -28,17 +28,17 @@ class MovieServices:
         try:
             if len(str(duration)) > 4:
                 raise MovieDurationException(
-                    message=f"Duration minutes must be between 1 and 999!",
+                    message="Duration minutes must be between 1 and 999!",
                     code=400,
                 )
             if not release_year.isdigit():
                 raise MovieReleaseYearDigitException(
-                    message=f"Release year not an integer!",
+                    message="Release year not an integer!",
                     code=400,
                 )
             if len(release_year) > 4:
                 raise MovieReleaseYearLenghtException(
-                    message=f"Release year must have 4 digits!",
+                    message="Release year must have 4 digits!",
                     code=400,
                 )
             with SessionLocal() as db:
@@ -70,7 +70,7 @@ class MovieServices:
                     genre_category,
                 )
         except Exception as e:
-            raise e
+            raise e from e
 
     @staticmethod
     def get_movie_by_id(movie_id: str):
@@ -79,7 +79,7 @@ class MovieServices:
                 movie_repository = MovieRepository(db)
                 return movie_repository.get_movie_by_id(movie_id)
         except Exception as e:
-            raise e
+            raise e from e
 
     @staticmethod
     def get_movie_by_title(title: str):
@@ -88,7 +88,7 @@ class MovieServices:
                 movie_repository = MovieRepository(db)
                 return movie_repository.get_movie_by_title(title)
         except Exception as e:
-            raise e
+            raise e from e
 
     @staticmethod
     def get_movie_by_language(language: str):
@@ -97,7 +97,7 @@ class MovieServices:
                 movie_repository = MovieRepository(db)
                 return movie_repository.get_movie_by_language(language)
         except Exception as e:
-            raise e
+            raise e from e
 
     @staticmethod
     def get_movie_by_genre(genre: str):
@@ -106,7 +106,7 @@ class MovieServices:
                 movie_repository = MovieRepository(db)
                 return movie_repository.get_movie_by_genre(genre)
         except Exception as e:
-            raise e
+            raise e from e
 
     @staticmethod
     def get_movie_by_release_year(release_year: str):
@@ -115,7 +115,7 @@ class MovieServices:
                 movie_repository = MovieRepository(db)
                 return movie_repository.get_movie_by_release_year(release_year)
         except Exception as e:
-            raise e
+            raise e from e
 
     @staticmethod
     def get_all_movies():
@@ -124,7 +124,7 @@ class MovieServices:
                 movie_repository = MovieRepository(db)
                 return movie_repository.get_all_movies()
         except Exception as e:
-            raise e
+            raise e from e
 
     @staticmethod
     def delete_movie_by_id(movie_id: str):
@@ -133,7 +133,7 @@ class MovieServices:
                 movie_repository = MovieRepository(db)
                 return movie_repository.delete_movie_by_id(movie_id)
         except Exception as e:
-            raise e
+            raise e from e
 
     @staticmethod
     def order_movies_by_title_decs():
@@ -142,7 +142,7 @@ class MovieServices:
                 movie_repository = MovieRepository(db)
                 return movie_repository.order_movies_by_title_decs()
         except Exception as e:
-            raise e
+            raise e from e
 
     @staticmethod
     def order_movies_by_title_asc():
@@ -151,7 +151,7 @@ class MovieServices:
                 movie_repository = MovieRepository(db)
                 return movie_repository.order_movies_by_title_asc()
         except Exception as e:
-            raise e
+            raise e from e
 
     @staticmethod
     def get_top_five_movies_by_ratings():
@@ -160,7 +160,7 @@ class MovieServices:
                 movie_repository = MovieRepository(db)
                 return movie_repository.get_top_five_movies_by_ratings()
         except Exception as e:
-            raise e
+            raise e from e
 
     @staticmethod
     def get_top_five_most_rated_movies():
@@ -169,7 +169,7 @@ class MovieServices:
                 movie_repository = MovieRepository(db)
                 return movie_repository.get_top_five_most_rated_movies()
         except Exception as e:
-            raise e
+            raise e from e
 
     @staticmethod
     def get_genre_statistics():
@@ -178,7 +178,7 @@ class MovieServices:
                 movie_repository = MovieRepository(db)
                 return movie_repository.get_genre_statistics()
         except Exception as e:
-            raise e
+            raise e from e
 
     @staticmethod
     def get_language_statistics():
@@ -187,7 +187,7 @@ class MovieServices:
                 movie_repository = MovieRepository(db)
                 return movie_repository.get_language_statistics()
         except Exception as e:
-            raise e
+            raise e from e
 
     @staticmethod
     def order_movie_duration_by_release_year_desc():
@@ -196,4 +196,4 @@ class MovieServices:
                 movie_repository = MovieRepository(db)
                 return movie_repository.order_movie_duration_by_release_year_desc()
         except Exception as e:
-            raise e
+            raise e from e

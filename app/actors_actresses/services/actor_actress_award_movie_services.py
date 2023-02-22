@@ -51,9 +51,9 @@ class ActorActressAwardMovieServices:
                     movie_id,
                 )
         except IntegrityError as e:
-            raise e
+            raise e from e
         except Exception as e:
-            raise e
+            raise e from e
 
     @staticmethod
     def get_award_by_actor_actress_id(actor_actress_id: str):
@@ -64,7 +64,7 @@ class ActorActressAwardMovieServices:
                     actor_actress_id
                 )
         except Exception as e:
-            raise e
+            raise e from e
 
     @staticmethod
     def get_award_by_movie_id(movie_id: str):
@@ -73,7 +73,7 @@ class ActorActressAwardMovieServices:
                 award_movie_repository = ActorActressAwardMovieRepository(db)
                 return award_movie_repository.get_award_by_movie_id(movie_id)
         except Exception as e:
-            raise e
+            raise e from e
 
     @staticmethod
     def get_actor_actress_by_award_id(award_id: str):
@@ -88,7 +88,7 @@ class ActorActressAwardMovieServices:
                     )
                 )
         except Exception as e:
-            raise e
+            raise e from e
 
     @staticmethod
     def get_actor_actress_by_movie_id(movie_id: str):
@@ -99,7 +99,7 @@ class ActorActressAwardMovieServices:
                     movie_id
                 )
         except Exception as e:
-            raise e
+            raise e from e
 
     @staticmethod
     def get_all_actors_actresses_with_all_awards_all_movies():
@@ -112,7 +112,7 @@ class ActorActressAwardMovieServices:
                     actor_actress_award_movie_repository.get_all_actors_actresses_with_all_awards_all_movies()
                 )
         except Exception as e:
-            raise e
+            raise e from e
 
     @staticmethod
     def get_top_five_most_awarded_movie_actors_actresses():
@@ -125,4 +125,4 @@ class ActorActressAwardMovieServices:
                     actor_actress_award_movie_repository.get_top_five_most_awarded_movie_actors_actresses()
                 )
         except Exception as e:
-            raise e
+            raise e from e

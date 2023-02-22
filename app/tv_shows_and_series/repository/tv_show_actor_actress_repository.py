@@ -19,7 +19,7 @@ class TVShowActorActressRepository:
             self.db.refresh(tv_show_actor_actress)
             return tv_show_actor_actress
         except IntegrityError as e:
-            raise e
+            raise e from e
 
     def get_tv_show_by_actor_actress_id(self, actor_actress_id: str):
         tv_show_by_actor_actress_id = (
@@ -51,7 +51,7 @@ class TVShowActorActressRepository:
         tv_show_actor_actress = self.db.query(TVShowActorActress).all()
         if (tv_show_actor_actress is None) or (tv_show_actor_actress == []):
             raise ActorActressNotFoundException(
-                message=f"The list is empty!",
+                message="The list is empty!",
                 code=400,
             )
         return tv_show_actor_actress

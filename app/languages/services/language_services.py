@@ -12,7 +12,7 @@ class LanguageServices:
                 language_repository = LanguageRepository(db)
                 return language_repository.create_language(name, abbreviation)
         except Exception as e:
-            raise e
+            raise e from e
 
     @staticmethod
     def get_language_by_id(language_id: str):
@@ -21,7 +21,7 @@ class LanguageServices:
                 language_repository = LanguageRepository(db)
                 return language_repository.get_language_by_id(language_id)
         except Exception as e:
-            raise e
+            raise e from e
 
     @staticmethod
     def get_language_by_name(name: str):
@@ -30,7 +30,7 @@ class LanguageServices:
                 language_repository = LanguageRepository(db)
                 return language_repository.get_language_by_name(name)
         except Exception as e:
-            raise e
+            raise e from e
 
     @staticmethod
     def get_language_by_abbreviation(abbreviation: str):
@@ -39,7 +39,7 @@ class LanguageServices:
                 language_repository = LanguageRepository(db)
                 return language_repository.get_language_by_abbreviation(abbreviation)
         except Exception as e:
-            raise e
+            raise e from e
 
     @staticmethod
     def get_all_languages():
@@ -48,7 +48,7 @@ class LanguageServices:
                 language_repository = LanguageRepository(db)
                 return language_repository.get_all_languages()
         except Exception as e:
-            raise e
+            raise e from e
 
     @staticmethod
     def delete_language_by_id(language_id: str):
@@ -57,4 +57,4 @@ class LanguageServices:
                 language_repository = LanguageRepository(db)
                 return language_repository.delete_language_by_id(language_id)
         except Exception as e:
-            raise e
+            raise e from e

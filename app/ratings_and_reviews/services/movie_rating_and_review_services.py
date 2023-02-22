@@ -13,7 +13,7 @@ class MovieRatingAndReviewServices:
         try:
             if 1 > grade or grade > 5:
                 raise MovieRatingAndReviewGradeException(
-                    message=f"Grade must be in range of 1 to 5.",
+                    message="Grade must be in range of 1 to 5.",
                     code=400,
                 )
             with SessionLocal() as db:
@@ -38,7 +38,7 @@ class MovieRatingAndReviewServices:
                     )
                 )
         except Exception as e:
-            raise e
+            raise e from e
 
     @staticmethod
     def get_movie_rating_and_review_by_id(movie_rating_and_review_id: str):
@@ -49,7 +49,7 @@ class MovieRatingAndReviewServices:
                     movie_rating_and_review_id
                 )
         except Exception as e:
-            raise e
+            raise e from e
 
     @staticmethod
     def get_movie_rating_and_review_by_grade(grade: int):
@@ -60,7 +60,7 @@ class MovieRatingAndReviewServices:
                     grade
                 )
         except Exception as e:
-            raise e
+            raise e from e
 
     @staticmethod
     def get_movie_rating_and_review_by_movie_id(movie_id: str):
@@ -71,7 +71,7 @@ class MovieRatingAndReviewServices:
                     movie_id
                 )
         except Exception as e:
-            raise e
+            raise e from e
 
     @staticmethod
     def get_movie_rating_and_review_by_user_id(user_id: str):
@@ -82,7 +82,7 @@ class MovieRatingAndReviewServices:
                     user_id
                 )
         except Exception as e:
-            raise e
+            raise e from e
 
     @staticmethod
     def get_all_movies_ratings_and_reviews():
@@ -95,7 +95,7 @@ class MovieRatingAndReviewServices:
                     movies_ratings_and_reviews_repository.get_all_movies_ratings_and_reviews()
                 )
         except Exception as e:
-            raise e
+            raise e from e
 
     @staticmethod
     def delete_movie_rating_and_review_by_id(movie_rating_and_review_id: str):
@@ -106,7 +106,7 @@ class MovieRatingAndReviewServices:
                     movie_rating_and_review_id
                 )
         except Exception as e:
-            raise e
+            raise e from e
 
     @staticmethod
     def update_movie_rating_and_review_comment(
@@ -119,4 +119,4 @@ class MovieRatingAndReviewServices:
                     movie_rating_and_review_id, comment
                 )
         except Exception as e:
-            raise e
+            raise e from e

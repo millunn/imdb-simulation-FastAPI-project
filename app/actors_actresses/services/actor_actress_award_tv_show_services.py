@@ -51,9 +51,9 @@ class ActorActressAwardTvShowServices:
                     tv_show_id,
                 )
         except IntegrityError as e:
-            raise e
+            raise e from e
         except Exception as e:
-            raise e
+            raise e from e
 
     @staticmethod
     def get_award_by_actor_actress_id(actor_actress_id: str):
@@ -64,7 +64,7 @@ class ActorActressAwardTvShowServices:
                     actor_actress_id
                 )
         except Exception as e:
-            raise e
+            raise e from e
 
     @staticmethod
     def get_award_by_tv_show_id(tv_show_id: str):
@@ -73,7 +73,7 @@ class ActorActressAwardTvShowServices:
                 award_tv_show_repository = ActorActressAwardTvShowRepository(db)
                 return award_tv_show_repository.get_award_by_tv_show_id(tv_show_id)
         except Exception as e:
-            raise e
+            raise e from e
 
     @staticmethod
     def get_actor_actress_by_award_id(award_id: str):
@@ -86,7 +86,7 @@ class ActorActressAwardTvShowServices:
                     award_id
                 )
         except Exception as e:
-            raise e
+            raise e from e
 
     @staticmethod
     def get_actor_actress_by_tv_show_id(tv_show_id: str):
@@ -97,7 +97,7 @@ class ActorActressAwardTvShowServices:
                     tv_show_id
                 )
         except Exception as e:
-            raise e
+            raise e from e
 
     @staticmethod
     def get_all_actors_actresses_with_all_awards_all_tv_shows():
@@ -110,7 +110,7 @@ class ActorActressAwardTvShowServices:
                     actor_actress_award_tv_show_repository.get_all_actors_actresses_with_all_awards_all_tv_shows()
                 )
         except Exception as e:
-            raise e
+            raise e from e
 
     @staticmethod
     def get_top_five_most_awarded_tv_show_actors_actresses():
@@ -123,4 +123,4 @@ class ActorActressAwardTvShowServices:
                     actor_actress_award_tv_show_repository.get_top_five_most_awarded_tv_show_actors_actresses()
                 )
         except Exception as e:
-            raise e
+            raise e from e

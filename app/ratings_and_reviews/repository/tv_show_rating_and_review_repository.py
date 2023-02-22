@@ -22,7 +22,7 @@ class TVShowRatingAndReviewRepository:
             self.db.refresh(tv_show_rating_and_review)
             return tv_show_rating_and_review
         except IntegrityError as e:
-            raise e
+            raise e from e
 
     # superuser
     def get_tv_show_rating_and_review_by_id(self, tv_show_rating_and_review_id: str):
@@ -84,7 +84,7 @@ class TVShowRatingAndReviewRepository:
             tv_shows_ratings_and_reviews == []
         ):
             raise TVShowRatingAndReviewNotFoundException(
-                message=f"The list is empty!",
+                message="The list is empty!",
                 code=400,
             )
         return tv_shows_ratings_and_reviews
@@ -106,7 +106,7 @@ class TVShowRatingAndReviewRepository:
             self.db.commit()
             return True
         except Exception as e:
-            raise e
+            raise e from e
 
     def update_tv_show_rating_and_review_comment(
         self, tv_show_rating_and_review_id: str, comment: str
@@ -131,4 +131,4 @@ class TVShowRatingAndReviewRepository:
             self.db.refresh(tv_show_rating_and_review)
             return tv_show_rating_and_review
         except Exception as e:
-            raise e
+            raise e from e

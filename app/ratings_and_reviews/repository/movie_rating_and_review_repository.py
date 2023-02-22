@@ -22,7 +22,7 @@ class MovieRatingAndReviewRepository:
             self.db.refresh(movie_rating_and_review)
             return movie_rating_and_review
         except IntegrityError as e:
-            raise e
+            raise e from e
 
     # superuser
     def get_movie_rating_and_review_by_id(self, movie_rating_and_review_id: str):
@@ -82,7 +82,7 @@ class MovieRatingAndReviewRepository:
         movies_ratings_and_reviews = self.db.query(MovieRatingAndReview).all()
         if (movies_ratings_and_reviews is None) or (movies_ratings_and_reviews == []):
             raise MovieRatingAndReviewNotFoundException(
-                message=f"The list is empty!",
+                message="The list is empty!",
                 code=400,
             )
         return movies_ratings_and_reviews
@@ -104,7 +104,7 @@ class MovieRatingAndReviewRepository:
             self.db.commit()
             return True
         except Exception as e:
-            raise e
+            raise e from e
 
     def update_movie_rating_and_review_comment(
         self, movie_rating_and_review_id: str, comment: str
@@ -129,4 +129,4 @@ class MovieRatingAndReviewRepository:
             self.db.refresh(movie_rating_and_review)
             return movie_rating_and_review
         except Exception as e:
-            raise e
+            raise e from e

@@ -23,21 +23,21 @@ class ActorActressAwardTvShowController:
             raise HTTPException(
                 status_code=e.code,
                 detail=e.message,
-            )
+            ) from e
         except ActorActressNotFoundException as e:
             raise HTTPException(
                 status_code=e.code,
                 detail=e.message,
-            )
+            ) from e
         except TVShowNotFoundException as e:
             raise HTTPException(
                 status_code=e.code,
                 detail=e.message,
-            )
-        except IntegrityError:
-            raise HTTPException(status_code=400, detail="Already in database")
+            ) from e
+        except IntegrityError as e:
+            raise HTTPException(status_code=400, detail="Already in database") from e
         except Exception as e:
-            raise HTTPException(status_code=500, detail=str(e))
+            raise HTTPException(status_code=500, detail=str(e)) from e
 
     @staticmethod
     def get_award_by_actor_actress_id(actor_actress_id: str):
@@ -50,9 +50,9 @@ class ActorActressAwardTvShowController:
             raise HTTPException(
                 status_code=e.code,
                 detail=e.message,
-            )
+            ) from e
         except Exception as e:
-            raise HTTPException(status_code=500, detail=str(e))
+            raise HTTPException(status_code=500, detail=str(e)) from e
 
     @staticmethod
     def get_award_by_tv_show_id(tv_show_id: str):
@@ -63,9 +63,9 @@ class ActorActressAwardTvShowController:
             raise HTTPException(
                 status_code=e.code,
                 detail=e.message,
-            )
+            ) from e
         except Exception as e:
-            raise HTTPException(status_code=500, detail=str(e))
+            raise HTTPException(status_code=500, detail=str(e)) from e
 
     @staticmethod
     def get_actor_actress_by_award_id(award_id: str):
@@ -78,9 +78,9 @@ class ActorActressAwardTvShowController:
             raise HTTPException(
                 status_code=e.code,
                 detail=e.message,
-            )
+            ) from e
         except Exception as e:
-            raise HTTPException(status_code=500, detail=str(e))
+            raise HTTPException(status_code=500, detail=str(e)) from e
 
     @staticmethod
     def get_actor_actress_by_tv_show_id(tv_show_id: str):
@@ -95,9 +95,9 @@ class ActorActressAwardTvShowController:
             raise HTTPException(
                 status_code=e.code,
                 detail=e.message,
-            )
+            ) from e
         except Exception as e:
-            raise HTTPException(status_code=500, detail=str(e))
+            raise HTTPException(status_code=500, detail=str(e)) from e
 
     @staticmethod
     def get_all_actors_actresses_with_all_awards_all_tv_shows():
@@ -110,9 +110,9 @@ class ActorActressAwardTvShowController:
             raise HTTPException(
                 status_code=e.code,
                 detail=e.message,
-            )
+            ) from e
         except Exception as e:
-            raise HTTPException(status_code=500, detail=str(e))
+            raise HTTPException(status_code=500, detail=str(e)) from e
 
     @staticmethod
     def get_top_five_most_awarded_tv_show_actors_actresses():
@@ -122,4 +122,4 @@ class ActorActressAwardTvShowController:
             )
             return actor_actress_award_tv_show
         except Exception as e:
-            raise HTTPException(status_code=500, detail=str(e))
+            raise HTTPException(status_code=500, detail=str(e)) from e

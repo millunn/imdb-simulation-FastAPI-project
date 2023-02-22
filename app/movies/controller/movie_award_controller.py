@@ -17,17 +17,16 @@ class MovieAwardController:
             raise HTTPException(
                 status_code=e.code,
                 detail=e.message,
-            )
+            ) from e
         except AwardNotFoundException as e:
             raise HTTPException(
                 status_code=e.code,
                 detail=e.message,
-            )
-
+            ) from e
         except IntegrityError:
             raise HTTPException(status_code=400, detail="Already in database")
         except Exception as e:
-            raise HTTPException(status_code=500, detail=str(e))
+            raise HTTPException(status_code=500, detail=str(e)) from e
 
     @staticmethod
     def get_movie_by_award_id(award_id: str):
@@ -38,9 +37,9 @@ class MovieAwardController:
             raise HTTPException(
                 status_code=e.code,
                 detail=e.message,
-            )
+            ) from e
         except Exception as e:
-            raise HTTPException(status_code=500, detail=str(e))
+            raise HTTPException(status_code=500, detail=str(e)) from e
 
     @staticmethod
     def get_award_by_movie_id(movie_id: str):
@@ -51,9 +50,9 @@ class MovieAwardController:
             raise HTTPException(
                 status_code=e.code,
                 detail=e.message,
-            )
+            ) from e
         except Exception as e:
-            raise HTTPException(status_code=500, detail=str(e))
+            raise HTTPException(status_code=500, detail=str(e)) from e
 
     @staticmethod
     def get_all_movies_with_all_awards():
@@ -64,9 +63,9 @@ class MovieAwardController:
             raise HTTPException(
                 status_code=e.code,
                 detail=e.message,
-            )
+            ) from e
         except Exception as e:
-            raise HTTPException(status_code=500, detail=str(e))
+            raise HTTPException(status_code=500, detail=str(e)) from e
 
     @staticmethod
     def get_top_five_most_awarded_movies():
@@ -74,4 +73,4 @@ class MovieAwardController:
             movies = MovieAwardServices.get_top_five_most_awarded_movies()
             return movies
         except Exception as e:
-            raise HTTPException(status_code=500, detail=str(e))
+            raise HTTPException(status_code=500, detail=str(e)) from e

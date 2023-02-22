@@ -24,24 +24,24 @@ class TVShowRatingAndReviewController:
             raise HTTPException(
                 status_code=e.code,
                 detail=e.message,
-            )
+            ) from e
         except TVShowNotFoundException as e:
             raise HTTPException(
                 status_code=e.code,
                 detail=e.message,
-            )
+            ) from e
         except UserNotFoundException as e:
             raise HTTPException(
                 status_code=e.code,
                 detail=e.message,
-            )
+            ) from e
         except IntegrityError as e:
             raise HTTPException(
                 status_code=400,
                 detail=f"Failed! The user with id: {user_id} has already reviewed tv show with id: {tv_show_id}.",
-            )
+            ) from e
         except Exception as e:
-            raise HTTPException(status_code=500, detail=str(e))
+            raise HTTPException(status_code=500, detail=str(e)) from e
 
     @staticmethod
     def get_tv_show_rating_and_review_by_id(tv_show_rating_and_review_id: str):
@@ -56,9 +56,9 @@ class TVShowRatingAndReviewController:
             raise HTTPException(
                 status_code=e.code,
                 detail=e.message,
-            )
+            ) from e
         except Exception as e:
-            raise HTTPException(status_code=500, detail=str(e))
+            raise HTTPException(status_code=500, detail=str(e)) from e
 
     @staticmethod
     def get_tv_show_rating_and_review_by_grade(grade: int):
@@ -73,9 +73,9 @@ class TVShowRatingAndReviewController:
             raise HTTPException(
                 status_code=e.code,
                 detail=e.message,
-            )
+            ) from e
         except Exception as e:
-            raise HTTPException(status_code=500, detail=str(e))
+            raise HTTPException(status_code=500, detail=str(e)) from e
 
     @staticmethod
     def get_tv_show_rating_and_review_by_tv_show_id(tv_show_id: str):
@@ -88,9 +88,9 @@ class TVShowRatingAndReviewController:
             raise HTTPException(
                 status_code=e.code,
                 detail=e.message,
-            )
+            ) from e
         except Exception as e:
-            raise HTTPException(status_code=500, detail=str(e))
+            raise HTTPException(status_code=500, detail=str(e)) from e
 
     @staticmethod
     def get_tv_show_rating_and_review_by_user_id(user_id: str):
@@ -105,9 +105,9 @@ class TVShowRatingAndReviewController:
             raise HTTPException(
                 status_code=e.code,
                 detail=e.message,
-            )
+            ) from e
         except Exception as e:
-            raise HTTPException(status_code=500, detail=str(e))
+            raise HTTPException(status_code=500, detail=str(e)) from e
 
     @staticmethod
     def get_all_tv_shows_ratings_and_reviews():
@@ -120,9 +120,9 @@ class TVShowRatingAndReviewController:
             raise HTTPException(
                 status_code=e.code,
                 detail=e.message,
-            )
+            ) from e
         except Exception as e:
-            raise HTTPException(status_code=500, detail=str(e))
+            raise HTTPException(status_code=500, detail=str(e)) from e
 
     @staticmethod
     def delete_tv_show_rating_and_review_by_id(tv_show_rating_and_review_id: str):
@@ -137,9 +137,9 @@ class TVShowRatingAndReviewController:
             raise HTTPException(
                 status_code=e.code,
                 detail=e.message,
-            )
+            ) from e
         except Exception as e:
-            raise HTTPException(status_code=500, detail=str(e))
+            raise HTTPException(status_code=500, detail=str(e)) from e
 
     @staticmethod
     def update_tv_show_rating_and_review_comment(
@@ -156,6 +156,6 @@ class TVShowRatingAndReviewController:
             raise HTTPException(
                 status_code=e.code,
                 detail=e.message,
-            )
+            ) from e
         except Exception as e:
-            raise HTTPException(status_code=500, detail=str(e))
+            raise HTTPException(status_code=500, detail=str(e)) from e

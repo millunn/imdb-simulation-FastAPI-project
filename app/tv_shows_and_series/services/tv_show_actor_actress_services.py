@@ -36,9 +36,9 @@ class TVShowActorActressServices:
                     tv_show_id, actor_actress_id
                 )
         except IntegrityError as e:
-            raise e
+            raise e from e
         except Exception as e:
-            raise e
+            raise e from e
 
     @staticmethod
     def get_tv_show_by_actor_actress_id(actor_actress_id: str):
@@ -49,7 +49,7 @@ class TVShowActorActressServices:
                     actor_actress_id
                 )
         except Exception as e:
-            raise e
+            raise e from e
 
     @staticmethod
     def get_actor_actress_by_tv_show_id(tv_show_id: str):
@@ -60,7 +60,7 @@ class TVShowActorActressServices:
                     tv_show_id
                 )
         except Exception as e:
-            raise e
+            raise e from e
 
     @staticmethod
     def get_all_tv_shows_with_all_actors_actresses():
@@ -71,7 +71,7 @@ class TVShowActorActressServices:
                     tv_show_actor_actress_repository.get_all_tv_shows_with_all_actors_actresses()
                 )
         except Exception as e:
-            raise e
+            raise e from e
 
     @staticmethod
     def get_actors_by_tv_show_id(tv_show_id: str):
@@ -80,7 +80,7 @@ class TVShowActorActressServices:
                 actor_tv_show_repository = TVShowActorActressRepository(db)
                 return actor_tv_show_repository.get_actors_by_tv_show_id(tv_show_id)
         except Exception as e:
-            raise e
+            raise e from e
 
     @staticmethod
     def get_actresses_by_tv_show_id(tv_show_id: str):
@@ -91,4 +91,4 @@ class TVShowActorActressServices:
                     tv_show_id
                 )
         except Exception as e:
-            raise e
+            raise e from e

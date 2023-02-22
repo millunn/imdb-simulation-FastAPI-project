@@ -1,0 +1,48 @@
+from pydantic import UUID4, BaseModel, PositiveInt
+
+
+class TVShowSchema(BaseModel):
+    id: UUID4
+    title: str
+    plot: str
+    release_year: str
+    creator: str
+    seasons: int
+    episodes: int
+    episode_duration: int
+    language_name: str
+    genre_category: str
+
+    class Config:
+        orm_mode = True
+
+
+class TVShowSchemaSchemaIn(BaseModel):
+    title: str
+    plot: str
+    release_year: str
+    creator: str
+    seasons: PositiveInt
+    episodes: PositiveInt
+    episode_duration: PositiveInt
+    language_name: str
+    genre_category: str
+
+    class Config:
+        orm_mode = True
+
+
+class TVShowGenreStatisticsSchema(BaseModel):
+    genre_category: str
+    category_count: int
+
+    class Config:
+        orm_mode = True
+
+
+class TVShowLanguageStatisticsSchema(BaseModel):
+    language_name: str
+    language_count: int
+
+    class Config:
+        orm_mode = True

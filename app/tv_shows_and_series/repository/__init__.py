@@ -1,0 +1,3 @@
+from .tv_show_actor_actress_repository import TVShowActorActressRepository
+from .tv_show_award_repository import TVShowAwardRepository
+from .tv_show_repository import TVShowRepository

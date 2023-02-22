@@ -1,0 +1,30 @@
+[MASTER]
+init-hook=
+    import sys
+    sys.path.append("/usr/local/lib/python3.8/site-packages")
+    try: import pylint_venv
+    except ImportError: pass
+    else: pylint_venv.inithook(force_venv_activation=True)
+
+# missing-module-docstring
+disable=C0114,C0115,C0116
+
+[BASIC]
+good-names=db
+
+[DESIGN]
+min-public-methods=0
+
+[SIMILARITIES]
+
+# Minimum lines number of a similarity.
+min-similarity-lines=20
+
+# Ignore comments when computing similarities.
+ignore-comments=yes
+
+# Ignore docstrings when computing similarities.
+ignore-docstrings=yes
+
+# Ignore imports when computing similarities.
+ignore-imports=yes

@@ -1,0 +1,3 @@
+from .movie_actor_actress_repository import MovieActorActressRepository
+from .movie_award_repository import MovieAwardRepository
+from .movie_repository import MovieRepository

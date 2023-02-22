@@ -20,3 +20,9 @@ class MovieReleaseYearLenghtException(Exception):
     def __init__(self, message, code):
         self.message = message
         self.code = code
+
+
+class MovieDurationException(Exception):
+    def __init__(self, message, code):
+        self.message = message
+        self.code = code

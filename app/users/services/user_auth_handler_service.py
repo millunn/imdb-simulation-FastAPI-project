@@ -1,8 +1,9 @@
 import time
 from typing import Dict
-from app.config import settings
+
 import jwt
 
+from app.config import settings
 
 USER_SECRET = settings.USER_SECRET
 JWT_ALGORITHM = settings.ALGORITHM

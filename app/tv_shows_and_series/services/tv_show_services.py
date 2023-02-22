@@ -1,10 +1,12 @@
 import uuid
+
 from app.db.database import SessionLocal
 from app.genres.exceptions import GenreNotFoundException
 from app.genres.repository import GenreRepository
 from app.languages.exceptions import LanguageNotFoundException
 from app.languages.repository import LanguageRepository
 from app.tv_shows_and_series.exceptions import (
+    TVShowEpisodeDurationException,
     TVShowReleaseYearDigitException,
     TVShowReleaseYearLenghtException,
 )
@@ -25,6 +27,11 @@ class TVShowServices:
         genre_category,
     ):
         try:
+            if len(str(episode_duration)) > 4:
+                raise TVShowEpisodeDurationException(
+                    message=f"Episode duration minutes must be between 1 and 999!",
+                    code=400,
+                )
             if not release_year.isdigit():
                 raise TVShowReleaseYearDigitException(
                     message=f"Release year not an integer!",

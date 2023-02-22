@@ -1,4 +1,3 @@
-from datetime import time
 from pydantic import UUID4, BaseModel, PositiveInt
 
 
@@ -10,7 +9,7 @@ class TVShowSchema(BaseModel):
     creator: str
     seasons: int
     episodes: int
-    episode_duration: time
+    episode_duration: int
     language_name: str
     genre_category: str
 
@@ -25,7 +24,7 @@ class TVShowSchemaSchemaIn(BaseModel):
     creator: str
     seasons: PositiveInt
     episodes: PositiveInt
-    episode_duration: str
+    episode_duration: PositiveInt
     language_name: str
     genre_category: str
 

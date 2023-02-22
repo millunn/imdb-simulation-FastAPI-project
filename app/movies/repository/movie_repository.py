@@ -1,10 +1,10 @@
 from datetime import datetime
+
 from sqlalchemy import Time, desc, func
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
-from app.movies.exceptions import MovieNotFoundException
-from app.movies.exceptions import MovieIntegrityException
 
+from app.movies.exceptions import MovieIntegrityException, MovieNotFoundException
 from app.movies.models import Movie
 from app.ratings_and_reviews.models import MovieRatingAndReview
 
@@ -185,16 +185,14 @@ class MovieRepository:
         )
         return language_statistics
 
-    # def order_movie_duration_by_release_year_desc(self):
-    #     movie_duration_by_release_year = (
-    #         self.db.query(Movie)
-    #         .group_by(Movie.release_year)
-    #         .order_by(desc("average_duration"))
-    #         .values(
-    #             Movie.release_year.label("release_year"),
-    #             func.time(func.avg(func.strftime("%M", Movie.duration))).label(
-    #                 "average_duration"
-    #             ),
-    #         )
-    #     )
-    #     return movie_duration_by_release_year
+    def order_movie_duration_by_release_year_desc(self):
+        movie_duration_by_release_year = (
+            self.db.query(Movie)
+            .group_by(Movie.release_year)
+            .order_by(desc("average_duration"))
+            .values(
+                Movie.release_year.label("release_year"),
+                func.avg(Movie.duration).label("average_duration"),
+            )
+        )
+        return movie_duration_by_release_year

@@ -1,31 +1,28 @@
 from fastapi import APIRouter, Depends
+
 from app.actors_actresses.controller import (
-    ActorActressController,
     ActorActressAwardMovieController,
     ActorActressAwardTvShowController,
+    ActorActressController,
 )
 from app.actors_actresses.schemas import (
-    ActorActressSchema,
-    ActorActressSchemaIn,
     ActorActressAwardMovieSchema,
     ActorActressAwardMovieSchemaIn,
-    AwardByActorActressSchemaOut,
-    ActorActressByAwardSchemaOut,
-    ActorActressByMovieSchemaOut,
-    AwardByMovieSchemaOut,
     ActorActressAwardTVShowSchema,
     ActorActressAwardTVShowSchemaIn,
+    ActorActressByAwardSchemaOut,
+    ActorActressByMovieSchemaOut,
     ActorActressByTVShowSchemaOut,
-    AwardByTVShowSchemaOut,
-)
-from app.actors_actresses.schemas import (
-    MostAwardedTVShowActorsActressesSchema,
-    MostAwardedMovieActorsActressesSchema,
     ActorActressGenderStatisticsSchema,
+    ActorActressSchema,
+    ActorActressSchemaIn,
     ActorActressSchemaUpdateAboutSection,
+    AwardByActorActressSchemaOut,
+    AwardByMovieSchemaOut,
+    AwardByTVShowSchemaOut,
+    MostAwardedMovieActorsActressesSchema,
+    MostAwardedTVShowActorsActressesSchema,
 )
-
-
 from app.users.controller.user_auth_controller import JWTBearer
 
 actor_actress_router = APIRouter(tags=["actors_actresses"], prefix="/api/actor_actress")

@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends
+
 from app.genres.controller import GenreController
 from app.genres.schemas.genre_schema import GenreSchema, GenreSchemaIn
-
 from app.users.controller.user_auth_controller import JWTBearer
 
 genre_router = APIRouter(tags=["genres"], prefix="/api/genres")

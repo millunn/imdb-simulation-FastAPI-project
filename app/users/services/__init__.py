@@ -1,3 +1,3 @@
+from .email_verification import send_confirmation_email, send_email_login_alert
+from .user_auth_handler_service import decodeJWT, signJWT
 from .user_services import UserServices
-from .user_auth_handler_service import signJWT, decodeJWT
-from .email_verification import send_email_login_alert, send_confirmation_email

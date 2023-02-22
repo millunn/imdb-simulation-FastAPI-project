@@ -1,3 +1,3 @@
-from .actor_actress_controller import ActorActressController
 from .actor_actress_award_movie_controller import ActorActressAwardMovieController
 from .actor_actress_award_tv_show_controller import ActorActressAwardTvShowController
+from .actor_actress_controller import ActorActressController

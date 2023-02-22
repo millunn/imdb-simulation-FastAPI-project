@@ -1,9 +1,10 @@
 from sqlalchemy.exc import IntegrityError
+
 from app.awards.exceptions import AwardNotFoundException
 from app.awards.repository.award_repository import AwardRepository
 from app.db.database import SessionLocal
 from app.tv_shows_and_series.exceptions import TVShowNotFoundException
-from app.tv_shows_and_series.repository import TVShowRepository, TVShowAwardRepository
+from app.tv_shows_and_series.repository import TVShowAwardRepository, TVShowRepository
 
 
 class TVShowAwardServices:

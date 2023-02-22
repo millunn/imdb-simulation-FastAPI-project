@@ -1,7 +1,9 @@
-from xmlrpc.client import Boolean
-from app.db.database import Base
-from sqlalchemy import Column, String, Boolean
 from uuid import uuid4
+from xmlrpc.client import Boolean
+
+from sqlalchemy import Boolean, Column, String
+
+from app.db.database import Base
 
 
 class User(Base):

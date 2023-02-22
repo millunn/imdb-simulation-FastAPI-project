@@ -1,11 +1,7 @@
+from sqlalchemy import Column, ForeignKeyConstraint, PrimaryKeyConstraint, String
 from sqlalchemy.orm import relationship
+
 from app.db.database import Base
-from sqlalchemy import (
-    Column,
-    ForeignKeyConstraint,
-    PrimaryKeyConstraint,
-    String,
-)
 
 
 class ActorActressAwardMovie(Base):

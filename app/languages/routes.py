@@ -1,8 +1,7 @@
 from fastapi import APIRouter, Depends
+
 from app.languages.controller import LanguageController
 from app.languages.schemas import LanguageSchema, LanguageSchemaIn
-
-
 from app.users.controller.user_auth_controller import JWTBearer
 
 language_router = APIRouter(tags=["languages"], prefix="/api/languages")

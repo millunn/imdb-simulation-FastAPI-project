@@ -1,7 +1,8 @@
 from fastapi import HTTPException, Response
+from sqlalchemy.exc import IntegrityError
+
 from app.awards.exceptions import AwardNotFoundException
 from app.awards.services import AwardServices
-from sqlalchemy.exc import IntegrityError
 
 
 class AwardController:

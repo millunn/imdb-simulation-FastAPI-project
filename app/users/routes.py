@@ -1,7 +1,8 @@
 from fastapi import APIRouter, Depends
+
 from app.users.controller import UserController
-from app.users.schemas import *
 from app.users.controller.user_auth_controller import JWTBearer
+from app.users.schemas import *
 
 user_router = APIRouter(tags=["users"], prefix="/api/users")
 

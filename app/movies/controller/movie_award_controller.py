@@ -1,5 +1,6 @@
 from fastapi import HTTPException
 from sqlalchemy.exc import IntegrityError
+
 from app.awards.exceptions import AwardNotFoundException
 from app.movies.exceptions import MovieNotFoundException
 from app.movies.services import MovieAwardServices

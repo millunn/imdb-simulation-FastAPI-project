@@ -1,9 +1,9 @@
 from sqlalchemy import desc, func
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
+
 from app.awards.exceptions import AwardNotFoundException
 from app.movies.exceptions import MovieNotFoundException
-
 from app.movies.models import MovieAward
 
 

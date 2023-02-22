@@ -1,10 +1,10 @@
 from sqlalchemy.exc import IntegrityError
+
 from app.awards.exceptions import AwardNotFoundException
 from app.awards.repository.award_repository import AwardRepository
 from app.db.database import SessionLocal
 from app.movies.exceptions import MovieNotFoundException
-from app.movies.repository import MovieRepository
-from app.movies.repository import MovieAwardRepository
+from app.movies.repository import MovieAwardRepository, MovieRepository
 
 
 class MovieAwardServices:

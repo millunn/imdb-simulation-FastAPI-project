@@ -1,8 +1,10 @@
 from sqlite3 import Date
-from sqlalchemy.orm import relationship
-from app.db.database import Base
-from sqlalchemy import INT, Column, ForeignKey, String, Time, Date
 from uuid import uuid4
+
+from sqlalchemy import INT, Column, Date, ForeignKey, String, Time
+from sqlalchemy.orm import relationship
+
+from app.db.database import Base
 
 
 class TVShow(Base):
@@ -14,7 +16,7 @@ class TVShow(Base):
     creator = Column(String(50), nullable=False)
     seasons = Column(INT, nullable=False)
     episodes = Column(INT, nullable=False)
-    episode_duration = Column(Time, nullable=False)
+    episode_duration = Column(INT, nullable=False)
 
     language_name = Column(String(30), ForeignKey("languages.name"))
     language = relationship("Language", lazy="subquery")

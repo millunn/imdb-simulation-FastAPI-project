@@ -1,8 +1,10 @@
 from datetime import datetime
 from uuid import uuid4
-from sqlalchemy.orm import relationship
-from app.db.database import Base
+
 from sqlalchemy import INT, Column, ForeignKey, String, UniqueConstraint
+from sqlalchemy.orm import relationship
+
+from app.db.database import Base
 
 
 class MovieRatingAndReview(Base):

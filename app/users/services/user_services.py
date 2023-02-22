@@ -1,4 +1,5 @@
 import hashlib
+
 from app.db.database import SessionLocal
 from app.users.exceptions.exceptions import UserInvalidPasswordException
 from app.users.repository import UserRepository

@@ -1,12 +1,14 @@
 import datetime
+
 import pytest
 import sqlalchemy
 from sqlalchemy.exc import IntegrityError
+
 from app.genres.repository import GenreRepository
 from app.languages.repository import LanguageRepository
 from app.tests import TestClass, TestingSessionLocal
-from app.tv_shows_and_series.exceptions import TVShowNotFoundException
 from app.tv_shows_and_series.exceptions import (
+    TVShowNotFoundException,
     TVShowReleaseYearDigitException,
     TVShowReleaseYearLenghtException,
 )

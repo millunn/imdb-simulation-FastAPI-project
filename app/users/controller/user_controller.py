@@ -1,8 +1,13 @@
 from fastapi import HTTPException, Response
 from sqlalchemy.exc import IntegrityError
+
 from app.users.exceptions import UserInvalidPasswordException, UserNotFoundException
-from app.users.services import UserServices, signJWT
-from app.users.services import send_email_login_alert, send_confirmation_email
+from app.users.services import (
+    UserServices,
+    send_confirmation_email,
+    send_email_login_alert,
+    signJWT,
+)
 
 
 class UserController:

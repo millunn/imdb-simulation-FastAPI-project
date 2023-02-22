@@ -1,7 +1,7 @@
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
-from app.genres.exceptions import GenreNotFoundException
 
+from app.genres.exceptions import GenreNotFoundException
 from app.genres.models import Genre
 
 

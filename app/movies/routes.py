@@ -1,34 +1,27 @@
 from fastapi import APIRouter
 
 from app.movies.controller import (
-    MovieController,
     MovieActorActressController,
     MovieAwardController,
+    MovieController,
 )
-
 from app.movies.schemas import (
-    MovieSchema,
-    MovieSchemaIn,
-    MovieActorActressSchema,
-    MovieActorActressSchemaIn,
-    MovieByActorActressSchemaOut,
     ActorActressByMovieSchemaOut,
     AwardByMovieSchemaOut,
-    MovieByAwardSchemaOut,
+    MostAwardedMoviesSchema,
+    MovieActorActressSchema,
+    MovieActorActressSchemaIn,
     MovieAwardSchema,
     MovieAwardSchemaIn,
-    MostAwardedMoviesSchema,
-)
-from app.movies.schemas import (
+    MovieByActorActressSchemaOut,
+    MovieByAwardSchemaOut,
+    MovieDurationPerYearsSchema,
     MovieGenreStatisticsSchema,
     MovieLanguageStatisticsSchema,
-    MovieDurationPerYearsSchema,
+    MovieSchema,
+    MovieSchemaIn,
 )
-from app.ratings_and_reviews.schemas import (
-    MostRatedMoviesSchema,
-    TopFiveMovieSchema,
-)
-
+from app.ratings_and_reviews.schemas import MostRatedMoviesSchema, TopFiveMovieSchema
 
 movie_router = APIRouter(tags=["movies"], prefix="/api/movie")
 movie_actor_actress_router = APIRouter(

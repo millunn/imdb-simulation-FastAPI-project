@@ -1,34 +1,26 @@
 from fastapi import APIRouter, Depends
-from app.ratings_and_reviews.schemas import (
-    MostRatedTVShowSchema,
-    TopFiveTVShowSchema,
-)
+
+from app.ratings_and_reviews.schemas import MostRatedTVShowSchema, TopFiveTVShowSchema
 from app.tv_shows_and_series.controller import (
-    TVShowController,
     TVShowActorActressController,
     TVShowAwardController,
+    TVShowController,
 )
-
-
 from app.tv_shows_and_series.schemas import (
-    TVShowSchema,
-    TVShowSchemaSchemaIn,
-    TVShowActorActressSchema,
-    TVShowActorActressSchemaIn,
-    TVShowByActorActressSchemaOut,
     ActorActressByTVShowSchemaOut,
     AwardByTVShowSchemaOut,
-    TVShowByAwardSchemaOut,
+    MostAwardedTVShowsSchema,
+    TVShowActorActressSchema,
+    TVShowActorActressSchemaIn,
     TVShowAwardSchema,
     TVShowAwardSchemaIn,
-    MostAwardedTVShowsSchema,
-)
-from app.tv_shows_and_series.schemas import (
+    TVShowByActorActressSchemaOut,
+    TVShowByAwardSchemaOut,
     TVShowGenreStatisticsSchema,
     TVShowLanguageStatisticsSchema,
+    TVShowSchema,
+    TVShowSchemaSchemaIn,
 )
-
-
 from app.users.controller.user_auth_controller import JWTBearer
 
 tv_show_router = APIRouter(tags=["tv_shows_and_series"], prefix="/api/tv_show")

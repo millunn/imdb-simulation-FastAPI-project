@@ -1,9 +1,9 @@
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
+
 from app.actors_actresses.exceptions import ActorActressNotFoundException
 from app.actors_actresses.models.actor_actress import ActorActress
 from app.movies.exceptions import MovieNotFoundException
-
 from app.movies.models import MovieActorActress
 
 

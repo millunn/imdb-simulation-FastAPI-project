@@ -1,8 +1,9 @@
-from datetime import datetime
-from sqlalchemy.orm import relationship
-from app.db.database import Base
-from sqlalchemy import Column, ForeignKey, String, Date, Time, UniqueConstraint
 from uuid import uuid4
+
+from sqlalchemy import INT, Column, ForeignKey, String, UniqueConstraint
+from sqlalchemy.orm import relationship
+
+from app.db.database import Base
 
 
 class Movie(Base):
@@ -10,7 +11,7 @@ class Movie(Base):
     id = Column(String(50), primary_key=True, default=uuid4, autoincrement=False)
     title = Column(String(50), nullable=False)
     plot = Column(String(100), nullable=False)
-    duration = Column(Time, nullable=False)
+    duration = Column(INT, nullable=False)
     release_year = Column(String(4), nullable=False)
     director = Column(String(50), nullable=False)
     writer = Column(String(50), nullable=False)
@@ -42,7 +43,7 @@ class Movie(Base):
     ):
         self.title = title
         self.plot = plot
-        self.duration = datetime.strptime(duration, "%H:%M")
+        self.duration = duration
         self.release_year = release_year
         self.director = director
         self.writer = writer

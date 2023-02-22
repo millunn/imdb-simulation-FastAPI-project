@@ -1,8 +1,8 @@
 from sqlalchemy import desc, func
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
-from app.actors_actresses.exceptions import ActorActressNotFoundException
 
+from app.actors_actresses.exceptions import ActorActressNotFoundException
 from app.actors_actresses.models import ActorActress
 
 

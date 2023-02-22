@@ -1,12 +1,11 @@
-from datetime import time
-from pydantic import UUID4, BaseModel
+from pydantic import UUID4, BaseModel, PositiveInt
 
 
 class MovieSchema(BaseModel):
     id: UUID4
     title: str
     plot: str
-    duration: time
+    duration: int
     release_year: str
     director: str
     writer: str
@@ -22,7 +21,7 @@ class MovieSchema(BaseModel):
 class MovieSchemaIn(BaseModel):
     title: str
     plot: str
-    duration: str
+    duration: PositiveInt
     release_year: str
     director: str
     writer: str
@@ -53,7 +52,7 @@ class MovieLanguageStatisticsSchema(BaseModel):
 
 class MovieDurationPerYearsSchema(BaseModel):
     release_year: str
-    average_duration: time
+    average_duration: int
 
     class Config:
         orm_mode = True

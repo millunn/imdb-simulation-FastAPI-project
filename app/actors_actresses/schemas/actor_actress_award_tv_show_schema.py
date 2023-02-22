@@ -1,6 +1,7 @@
 from pydantic import UUID4, BaseModel
-from app.awards.schemas import AwardSchema
+
 from app.actors_actresses.schemas import ActorActressSchema
+from app.awards.schemas import AwardSchema
 from app.tv_shows_and_series.schemas import TVShowSchema
 
 

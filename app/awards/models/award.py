@@ -1,5 +1,6 @@
-from sqlalchemy import Column, String, UniqueConstraint
 from uuid import uuid4
+
+from sqlalchemy import Column, String, UniqueConstraint
 
 from app.db import Base
 

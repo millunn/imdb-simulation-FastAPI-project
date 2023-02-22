@@ -1,6 +1,7 @@
 from sqlalchemy import desc, func
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
+
 from app.ratings_and_reviews.models import TVShowRatingAndReview
 from app.tv_shows_and_series.exceptions import TVShowNotFoundException
 from app.tv_shows_and_series.models import TVShow

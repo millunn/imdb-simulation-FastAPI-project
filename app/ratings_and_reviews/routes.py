@@ -5,18 +5,15 @@ from app.ratings_and_reviews.controller import (
     TVShowRatingAndReviewController,
 )
 from app.ratings_and_reviews.schemas import (
+    MovieRatingAndReviewBySchemaOut,
     MovieRatingAndReviewSchema,
     MovieRatingAndReviewSchemaIn,
-    MovieRatingAndReviewBySchemaOut,
     MovieRatingAndReviewSchemaUpdateComment,
-)
-from app.ratings_and_reviews.schemas import (
+    TVShowRatingAndReviewBySchemaOut,
     TVShowRatingAndReviewSchema,
     TVShowRatingAndReviewSchemaIn,
-    TVShowRatingAndReviewBySchemaOut,
     TVShowRatingAndReviewSchemaUpdateComment,
 )
-
 
 movie_rating_and_review_router = APIRouter(
     tags=["movies_ratings_and_reviews"], prefix="/api/movies_ratings_and_reviews"

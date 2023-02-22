@@ -1,4 +1,5 @@
 import uuid
+
 from app.awards.exceptions import AwardNotFoundException
 from app.awards.repository import AwardRepository
 from app.db.database import SessionLocal

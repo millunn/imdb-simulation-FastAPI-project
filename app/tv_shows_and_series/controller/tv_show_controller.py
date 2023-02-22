@@ -1,9 +1,11 @@
 from fastapi import HTTPException, Response
 from sqlalchemy.exc import IntegrityError
+
 from app.genres.exceptions import GenreNotFoundException
 from app.languages.exceptions import LanguageNotFoundException
-from app.tv_shows_and_series.exceptions import TVShowNotFoundException
 from app.tv_shows_and_series.exceptions import (
+    TVShowEpisodeDurationException,
+    TVShowNotFoundException,
     TVShowReleaseYearDigitException,
     TVShowReleaseYearLenghtException,
 )
@@ -36,6 +38,11 @@ class TVShowController:
                 genre_category,
             )
             return tv_show
+        except TVShowEpisodeDurationException as e:
+            raise HTTPException(
+                status_code=e.code,
+                detail=e.message,
+            )
         except TVShowReleaseYearDigitException as e:
             raise HTTPException(
                 status_code=e.code,

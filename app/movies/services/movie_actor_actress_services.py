@@ -1,13 +1,12 @@
 import uuid
+
 from sqlalchemy.exc import IntegrityError
+
 from app.actors_actresses.exceptions import ActorActressNotFoundException
-from app.actors_actresses.repository import (
-    ActorActressRepository,
-)
+from app.actors_actresses.repository import ActorActressRepository
 from app.db.database import SessionLocal
 from app.movies.exceptions import MovieNotFoundException
-from app.movies.repository import MovieRepository
-from app.movies.repository import MovieActorActressRepository
+from app.movies.repository import MovieActorActressRepository, MovieRepository
 
 
 class MovieActorActressServices:

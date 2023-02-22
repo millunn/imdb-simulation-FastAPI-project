@@ -4,6 +4,7 @@ from app.genres.repository import GenreRepository
 from app.languages.exceptions import LanguageNotFoundException
 from app.languages.repository import LanguageRepository
 from app.movies.exceptions import (
+    MovieDurationException,
     MovieReleaseYearDigitException,
     MovieReleaseYearLenghtException,
 )
@@ -25,6 +26,11 @@ class MovieServices:
         genre_category,
     ):
         try:
+            if len(str(duration)) > 4:
+                raise MovieDurationException(
+                    message=f"Duration minutes must be between 1 and 999!",
+                    code=400,
+                )
             if not release_year.isdigit():
                 raise MovieReleaseYearDigitException(
                     message=f"Release year not an integer!",
@@ -183,11 +189,11 @@ class MovieServices:
         except Exception as e:
             raise e
 
-    # @staticmethod
-    # def order_movie_duration_by_release_year_desc():
-    #     try:
-    #         with SessionLocal() as db:
-    #             movie_repository = MovieRepository(db)
-    #             return movie_repository.order_movie_duration_by_release_year_desc()
-    #     except Exception as e:
-    #         raise e
+    @staticmethod
+    def order_movie_duration_by_release_year_desc():
+        try:
+            with SessionLocal() as db:
+                movie_repository = MovieRepository(db)
+                return movie_repository.order_movie_duration_by_release_year_desc()
+        except Exception as e:
+            raise e

@@ -1,10 +1,12 @@
 import uuid
+
 from sqlalchemy.exc import IntegrityError
+
 from app.actors_actresses.exceptions import ActorActressNotFoundException
 from app.actors_actresses.repository import (
+    ActorActressAwardMovieRepository,
     ActorActressRepository,
 )
-from app.actors_actresses.repository import ActorActressAwardMovieRepository
 from app.awards.exceptions.award_exceptions import AwardNotFoundException
 from app.awards.repository import AwardRepository
 from app.db.database import SessionLocal

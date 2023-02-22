@@ -1,14 +1,12 @@
-import uuid
 from sqlalchemy.exc import IntegrityError
+
 from app.actors_actresses.exceptions import ActorActressNotFoundException
-from app.actors_actresses.repository import (
-    ActorActressRepository,
-)
+from app.actors_actresses.repository import ActorActressRepository
 from app.db.database import SessionLocal
 from app.tv_shows_and_series.exceptions import TVShowNotFoundException
 from app.tv_shows_and_series.repository import (
-    TVShowRepository,
     TVShowActorActressRepository,
+    TVShowRepository,
 )
 
 

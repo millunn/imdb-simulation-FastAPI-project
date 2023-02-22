@@ -1,7 +1,5 @@
 from app.db.database import SessionLocal
-from app.movies.exceptions import (
-    MovieNotFoundException,
-)
+from app.movies.exceptions import MovieNotFoundException
 from app.movies.repository import MovieRepository
 from app.ratings_and_reviews.exceptions import MovieRatingAndReviewGradeException
 from app.ratings_and_reviews.repository import MovieRatingAndReviewRepository

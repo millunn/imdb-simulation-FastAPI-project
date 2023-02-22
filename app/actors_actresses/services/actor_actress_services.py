@@ -1,6 +1,4 @@
-from app.actors_actresses.exceptions import (
-    ActorActressGenderException,
-)
+from app.actors_actresses.exceptions import ActorActressGenderException
 from app.actors_actresses.repository import ActorActressRepository
 from app.db.database import SessionLocal
 

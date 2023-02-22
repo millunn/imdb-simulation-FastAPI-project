@@ -1,7 +1,7 @@
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
-from app.languages.exceptions import LanguageNotFoundException
 
+from app.languages.exceptions import LanguageNotFoundException
 from app.languages.models import Language
 
 

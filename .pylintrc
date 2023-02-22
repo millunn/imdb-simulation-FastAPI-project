@@ -10,7 +10,7 @@ init-hook=
 disable=C0114,C0115,C0116
 
 [BASIC]
-good-names=db
+good-names=db,e
 
 [DESIGN]
 min-public-methods=0

@@ -11,6 +11,8 @@ from app.db.database import Base
 
 
 class TVShowAward(Base):
+    """TVShowAward model"""
+
     __tablename__ = "tv_show_award"
     id = Column(String(50), primary_key=True, default=uuid4, autoincrement=False)
     tv_show_id = Column(

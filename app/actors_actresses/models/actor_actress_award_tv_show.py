@@ -1,3 +1,5 @@
+""" Actor/Actress-Award-TvShow Model module """
+
 from uuid import uuid4
 from sqlalchemy import (
     Column,
@@ -12,6 +14,8 @@ from app.db.database import Base
 
 
 class ActorActressAwardTvShow(Base):
+    """Actor/Actress-Award-TvShow model"""
+
     __tablename__ = "actor_actress_award_tv_show"
     id = Column(String(50), primary_key=True, default=uuid4, autoincrement=False)
     actor_actress_id = Column(

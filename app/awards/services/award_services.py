@@ -1,4 +1,4 @@
-import uuid
+""" Award Services module """
 
 from app.awards.exceptions import AwardNotFoundException
 from app.awards.repository import AwardRepository
@@ -6,8 +6,11 @@ from app.db.database import SessionLocal
 
 
 class AwardServices:
+    """Award model services"""
+
     @staticmethod
     def create_award(category, subcategory):
+        """Create new award"""
         try:
             with SessionLocal() as db:
                 award_repository = AwardRepository(db)
@@ -17,6 +20,7 @@ class AwardServices:
 
     @staticmethod
     def get_award_by_id(award_id: str):
+        """Get award by id"""
         try:
             with SessionLocal() as db:
                 award_repository = AwardRepository(db)
@@ -26,6 +30,7 @@ class AwardServices:
 
     @staticmethod
     def get_award_by_category(category: str):
+        """Get award by category"""
         try:
             with SessionLocal() as db:
                 award_repository = AwardRepository(db)
@@ -35,6 +40,7 @@ class AwardServices:
 
     @staticmethod
     def get_award_by_subcategory(subcategory: str):
+        """Get award by subcategory"""
         try:
             with SessionLocal() as db:
                 award_repository = AwardRepository(db)
@@ -44,6 +50,7 @@ class AwardServices:
 
     @staticmethod
     def get_all_awards():
+        """Get all awards"""
         try:
             with SessionLocal() as db:
                 award_repository = AwardRepository(db)
@@ -53,6 +60,7 @@ class AwardServices:
 
     @staticmethod
     def delete_award_by_id(award_id: str):
+        """Delete award by id"""
         try:
             with SessionLocal() as db:
                 award_repository = AwardRepository(db)
@@ -64,6 +72,7 @@ class AwardServices:
 
     @staticmethod
     def order_awards_by_category_decs():
+        """Order awards by category in decsending order"""
         try:
             with SessionLocal() as db:
                 award_repository = AwardRepository(db)
@@ -73,6 +82,7 @@ class AwardServices:
 
     @staticmethod
     def order_awards_by_category_asc():
+        """Order awards by category in acsending order"""
         try:
             with SessionLocal() as db:
                 award_repository = AwardRepository(db)

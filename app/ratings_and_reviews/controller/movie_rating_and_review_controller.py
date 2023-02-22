@@ -1,3 +1,5 @@
+""" MovieRatingAndReview Controller module """
+
 from fastapi import HTTPException, Response
 from sqlalchemy.exc import IntegrityError
 
@@ -11,8 +13,11 @@ from app.users.exceptions import UserNotFoundException
 
 
 class MovieRatingAndReviewController:
+    """MovieRatingAndReview model controller"""
+
     @staticmethod
     def create_movie_rating_and_review(grade, comment, movie_id, user_id):
+        """Create new movie_rating_and_review pair"""
         try:
             movie_rating_and_review = (
                 MovieRatingAndReviewServices.create_movie_rating_and_review(
@@ -45,6 +50,7 @@ class MovieRatingAndReviewController:
 
     @staticmethod
     def get_movie_rating_and_review_by_id(movie_rating_and_review_id: str):
+        """Get movie_rating_and_review by id"""
         try:
             movie_rating_and_review = (
                 MovieRatingAndReviewServices.get_movie_rating_and_review_by_id(
@@ -62,6 +68,7 @@ class MovieRatingAndReviewController:
 
     @staticmethod
     def get_movie_rating_and_review_by_grade(grade: int):
+        """Get movie_rating_and_review by grade"""
         try:
             movie_rating_and_review = (
                 MovieRatingAndReviewServices.get_movie_rating_and_review_by_grade(grade)
@@ -77,6 +84,7 @@ class MovieRatingAndReviewController:
 
     @staticmethod
     def get_movie_rating_and_review_by_movie_id(movie_id: str):
+        """Get movie_rating_and_review by movie_id"""
         try:
             movie_rating_and_review = (
                 MovieRatingAndReviewServices.get_movie_rating_and_review_by_movie_id(
@@ -94,6 +102,7 @@ class MovieRatingAndReviewController:
 
     @staticmethod
     def get_movie_rating_and_review_by_user_id(user_id: str):
+        """Get movie_rating_and_review by user_id"""
         try:
             movie_rating_and_review = (
                 MovieRatingAndReviewServices.get_movie_rating_and_review_by_user_id(
@@ -111,6 +120,7 @@ class MovieRatingAndReviewController:
 
     @staticmethod
     def get_all_movies_ratings_and_reviews():
+        """Get all movies_ratings_and_reviews"""
         try:
             movies_ratings_and_reviews = (
                 MovieRatingAndReviewServices.get_all_movies_ratings_and_reviews()
@@ -126,6 +136,7 @@ class MovieRatingAndReviewController:
 
     @staticmethod
     def delete_movie_rating_and_review_by_id(movie_rating_and_review_id: str):
+        """Delete movie_rating_and_review by id"""
         try:
             MovieRatingAndReviewServices.delete_movie_rating_and_review_by_id(
                 movie_rating_and_review_id
@@ -145,6 +156,7 @@ class MovieRatingAndReviewController:
     def update_movie_rating_and_review_comment(
         movie_rating_and_review_id: str, comment: str
     ):
+        """Update movie_rating_and_review comment section"""
         try:
             movie_rating_and_review = (
                 MovieRatingAndReviewServices.update_movie_rating_and_review_comment(

@@ -1,3 +1,5 @@
+""" Movie-ActorActress Repository module """
+
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 
@@ -11,10 +13,13 @@ from app.movies.models import MovieActorActress
 
 
 class MovieActorActressRepository:
+    """Movie-ActorActress model repository"""
+
     def __init__(self, db: Session):
         self.db = db
 
     def create_movie_actor_actress(self, movie_id, actor_actress_id):
+        """Create new movie_actor_actress pair"""
         try:
             movie_actor_actress = MovieActorActress(movie_id, actor_actress_id)
             self.db.add(movie_actor_actress)
@@ -25,6 +30,7 @@ class MovieActorActressRepository:
             raise e from e
 
     def get_movie_by_actor_actress_id(self, actor_actress_id: str):
+        """Get movie by actor_actress_id"""
         movie_by_actor_actress_id = (
             self.db.query(MovieActorActress)
             .filter(MovieActorActress.actor_actress_id == actor_actress_id)
@@ -38,6 +44,7 @@ class MovieActorActressRepository:
         return movie_by_actor_actress_id
 
     def get_actor_actress_by_movie_id(self, movie_id: str):
+        """Get actor_actress by movie_id"""
         actor_actress_by_movie_id = (
             self.db.query(MovieActorActress)
             .filter(MovieActorActress.movie_id == movie_id)
@@ -51,6 +58,7 @@ class MovieActorActressRepository:
         return actor_actress_by_movie_id
 
     def get_all_movies_with_all_actors_actresses(self):
+        """Get all movies with all actors_actresses"""
         movie_actor_actress = self.db.query(MovieActorActress).all()
         if (movie_actor_actress is None) or (movie_actor_actress == []):
             raise ActorActressNotFoundException(
@@ -60,6 +68,7 @@ class MovieActorActressRepository:
         return movie_actor_actress
 
     def get_actors_by_movie_id(self, movie_id: str):
+        """Get actors by movie_id"""
         actors_by_movie_id = (
             self.db.query(ActorActress)
             .join(
@@ -76,6 +85,7 @@ class MovieActorActressRepository:
         return actors_by_movie_id
 
     def get_actresses_by_movie_id(self, movie_id: str):
+        """Get actresses by movie_id"""
         actresses_by_movie_id = (
             self.db.query(ActorActress)
             .join(
@@ -92,6 +102,7 @@ class MovieActorActressRepository:
         return actresses_by_movie_id
 
     def delete_movie_actor_actress_by_id(self, movie_actor_actress_id: str):
+        """Delete a pair actor_actress_movie by id"""
         try:
             movie_actor_actress = (
                 self.db.query(MovieActorActress)

@@ -1,10 +1,15 @@
+""" Genre Services module """
+
 from app.db.database import SessionLocal
 from app.genres.repository import GenreRepository
 
 
 class GenreServices:
+    """Genre model services"""
+
     @staticmethod
     def create_genre(category, description):
+        """Create new genre"""
         try:
             with SessionLocal() as db:
                 genre_repository = GenreRepository(db)
@@ -14,6 +19,7 @@ class GenreServices:
 
     @staticmethod
     def get_genre_by_id(genre_id: str):
+        """Get genre by id"""
         try:
             with SessionLocal() as db:
                 genre_repository = GenreRepository(db)
@@ -23,6 +29,7 @@ class GenreServices:
 
     @staticmethod
     def get_genre_by_category(category: str):
+        """Get genre by category"""
         try:
             with SessionLocal() as db:
                 genre_repository = GenreRepository(db)
@@ -32,6 +39,7 @@ class GenreServices:
 
     @staticmethod
     def get_all_genres():
+        """Get all genres"""
         try:
             with SessionLocal() as db:
                 genre_repository = GenreRepository(db)
@@ -41,6 +49,7 @@ class GenreServices:
 
     @staticmethod
     def delete_genre_by_id(genre_id: str):
+        """Delete genre by id"""
         try:
             with SessionLocal() as db:
                 genre_repository = GenreRepository(db)

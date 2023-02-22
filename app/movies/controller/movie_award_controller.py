@@ -1,3 +1,5 @@
+""" MovieAward Controller module """
+
 from fastapi import HTTPException, Response
 from sqlalchemy.exc import IntegrityError
 
@@ -7,8 +9,11 @@ from app.movies.services import MovieAwardServices
 
 
 class MovieAwardController:
+    """MovieAward model controller"""
+
     @staticmethod
     def create_movie_award(movie_id, award_id):
+        """Create new movie_award"""
         try:
             movie_award = MovieAwardServices.create_movie_award(movie_id, award_id)
             return movie_award
@@ -30,6 +35,7 @@ class MovieAwardController:
 
     @staticmethod
     def get_movie_by_award_id(award_id: str):
+        """Get movie by award_id"""
         try:
             movie = MovieAwardServices.get_movie_by_award_id(award_id)
             return movie
@@ -43,6 +49,7 @@ class MovieAwardController:
 
     @staticmethod
     def get_award_by_movie_id(movie_id: str):
+        """Get award by movie_id"""
         try:
             award = MovieAwardServices.get_award_by_movie_id(movie_id)
             return award
@@ -56,6 +63,7 @@ class MovieAwardController:
 
     @staticmethod
     def get_all_movies_with_all_awards():
+        """Get all movies with all awards"""
         try:
             movie_award_repository = MovieAwardServices.get_all_movies_with_all_awards()
             return movie_award_repository
@@ -69,6 +77,7 @@ class MovieAwardController:
 
     @staticmethod
     def get_top_five_most_awarded_movies():
+        """Get top five most awarded movies"""
         try:
             movies = MovieAwardServices.get_top_five_most_awarded_movies()
             return movies
@@ -77,6 +86,7 @@ class MovieAwardController:
 
     @staticmethod
     def delete_movie_award_by_id(movie_award_id: str):
+        """Delete a pair movie_award by id"""
         try:
             MovieAwardServices.delete_movie_award_by_id(movie_award_id)
             return Response(

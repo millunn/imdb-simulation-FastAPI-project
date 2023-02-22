@@ -1,4 +1,4 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, Depends
 
 from app.movies.controller import (
     MovieActorActressController,
@@ -22,6 +22,7 @@ from app.movies.schemas import (
     MovieSchemaIn,
 )
 from app.ratings_and_reviews.schemas import MostRatedMoviesSchema, TopFiveMovieSchema
+from app.users.controller.user_auth_controller import JWTBearer
 
 movie_router = APIRouter(tags=["movies"], prefix="/api/movie")
 movie_actor_actress_router = APIRouter(
@@ -30,11 +31,10 @@ movie_actor_actress_router = APIRouter(
 movie_award_router = APIRouter(tags=["movie_award"], prefix="/api/movie_award")
 
 
-# superuser
 @movie_router.post(
     "/add-new-movie",
     response_model=MovieSchema,
-    # dependencies=[Depends(JWTBearer("super_user"))],
+    dependencies=[Depends(JWTBearer("super_user"))],
 )
 def create_movie(movie: MovieSchemaIn):
     return MovieController.create_movie(
@@ -54,7 +54,7 @@ def create_movie(movie: MovieSchemaIn):
 @movie_router.get(
     "/id",
     response_model=MovieSchema,
-    # dependencies=[Depends(JWTBearer("super_user"))],
+    dependencies=[Depends(JWTBearer("super_user"))],
 )
 def get_movie_by_id(movie_id: str):
     return MovieController.get_movie_by_id(movie_id)
@@ -85,10 +85,7 @@ def get_all_movies():
     return MovieController.get_all_movies()
 
 
-# superuser
-@movie_router.delete(
-    "/",
-)  # dependencies=[Depends(JWTBearer("super_user"))])
+@movie_router.delete("/", dependencies=[Depends(JWTBearer("super_user"))])
 def delete_movie_by_id(movie_id: str):
     return MovieController.delete_movie_by_id(movie_id)
 
@@ -133,11 +130,10 @@ def order_movie_duration_by_release_year_desc():
     return MovieController.order_movie_duration_by_release_year_desc()
 
 
-# superuser
 @movie_actor_actress_router.post(
     "/add-new-movie-actor-actress",
     response_model=MovieActorActressSchema,
-    # dependencies=[Depends(JWTBearer("super_user"))],
+    dependencies=[Depends(JWTBearer("super_user"))],
 )
 def create_movie_actor_actress(
     movie_actor_actress_award: MovieActorActressSchemaIn,
@@ -179,21 +175,17 @@ def get_actresses_by_movie_id(movie_id: str):
     return MovieActorActressController.get_actresses_by_movie_id(movie_id)
 
 
-# superuser
-@movie_actor_actress_router.delete(
-    "/",
-)  # dependencies=[Depends(JWTBearer("super_user"))])
+@movie_actor_actress_router.delete("/", dependencies=[Depends(JWTBearer("super_user"))])
 def delete_movie_actor_actress_by_id(movie_actor_actress_id: str):
     return MovieActorActressController.delete_movie_actor_actress_by_id(
         movie_actor_actress_id
     )
 
 
-# superuser
 @movie_award_router.post(
     "/add-new-movie-award",
     response_model=MovieAwardSchema,
-    # dependencies=[Depends(JWTBearer("super_user"))],
+    dependencies=[Depends(JWTBearer("super_user"))],
 )
 def create_movie_award(
     movie_award_award: MovieAwardSchemaIn,
@@ -228,9 +220,6 @@ def get_top_five_most_awarded_movies():
     return MovieAwardController.get_top_five_most_awarded_movies()
 
 
-# superuser
-@movie_award_router.delete(
-    "/",
-)  # dependencies=[Depends(JWTBearer("super_user"))])
+@movie_award_router.delete("/", dependencies=[Depends(JWTBearer("super_user"))])
 def delete_movie_award_by_id(movie_award_id: str):
     return MovieAwardController.delete_movie_award_by_id(movie_award_id)

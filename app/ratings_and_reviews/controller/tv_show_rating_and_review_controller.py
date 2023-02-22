@@ -1,3 +1,5 @@
+""" TVShowRatingAndReview Controller module """
+
 from fastapi import HTTPException, Response
 from sqlalchemy.exc import IntegrityError
 
@@ -11,8 +13,11 @@ from app.users.exceptions import UserNotFoundException
 
 
 class TVShowRatingAndReviewController:
+    """TVShowRatingAndReview model controller"""
+
     @staticmethod
     def create_tv_show_rating_and_review(grade, comment, tv_show_id, user_id):
+        """Create new tv_show_rating_and_review pair"""
         try:
             tv_show_rating_and_review = (
                 TVShowRatingAndReviewServices.create_tv_show_rating_and_review(
@@ -45,6 +50,7 @@ class TVShowRatingAndReviewController:
 
     @staticmethod
     def get_tv_show_rating_and_review_by_id(tv_show_rating_and_review_id: str):
+        """Get tv_show_rating_and_review by id"""
         try:
             tv_show_rating_and_review = (
                 TVShowRatingAndReviewServices.get_tv_show_rating_and_review_by_id(
@@ -62,6 +68,7 @@ class TVShowRatingAndReviewController:
 
     @staticmethod
     def get_tv_show_rating_and_review_by_grade(grade: int):
+        """Get tv_show_rating_and_review by grade"""
         try:
             tv_show_rating_and_review = (
                 TVShowRatingAndReviewServices.get_tv_show_rating_and_review_by_grade(
@@ -79,6 +86,7 @@ class TVShowRatingAndReviewController:
 
     @staticmethod
     def get_tv_show_rating_and_review_by_tv_show_id(tv_show_id: str):
+        """Get tv_show_rating_and_review by tv_show_id"""
         try:
             tv_show_rating_and_review = TVShowRatingAndReviewServices.get_tv_show_rating_and_review_by_tv_show_id(
                 tv_show_id
@@ -94,6 +102,7 @@ class TVShowRatingAndReviewController:
 
     @staticmethod
     def get_tv_show_rating_and_review_by_user_id(user_id: str):
+        """Get tv_show_rating_and_review by user_id"""
         try:
             tv_show_rating_and_review = (
                 TVShowRatingAndReviewServices.get_tv_show_rating_and_review_by_user_id(
@@ -111,6 +120,7 @@ class TVShowRatingAndReviewController:
 
     @staticmethod
     def get_all_tv_shows_ratings_and_reviews():
+        """Get all tv_shows_ratings_and_reviews"""
         try:
             tv_shows_ratings_and_reviews = (
                 TVShowRatingAndReviewServices.get_all_tv_shows_ratings_and_reviews()
@@ -126,6 +136,7 @@ class TVShowRatingAndReviewController:
 
     @staticmethod
     def delete_tv_show_rating_and_review_by_id(tv_show_rating_and_review_id: str):
+        """Delete tv_show_rating_and_review by id"""
         try:
             TVShowRatingAndReviewServices.delete_tv_show_rating_and_review_by_id(
                 tv_show_rating_and_review_id
@@ -145,6 +156,7 @@ class TVShowRatingAndReviewController:
     def update_tv_show_rating_and_review_comment(
         tv_show_rating_and_review_id: str, comment: str
     ):
+        """Update tv_show_rating_and_review comment section"""
         try:
             tv_show_rating_and_review = (
                 TVShowRatingAndReviewServices.update_tv_show_rating_and_review_comment(

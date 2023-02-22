@@ -1,3 +1,5 @@
+""" User Services module """
+
 import hashlib
 
 from app.db.database import SessionLocal
@@ -6,8 +8,11 @@ from app.users.repository import UserRepository
 
 
 class UserServices:
+    """User model services"""
+
     @staticmethod
     def create_user(name, surname, email, password: str):
+        """Create new user"""
         with SessionLocal() as db:
             try:
                 user_repository = UserRepository(db)
@@ -19,6 +24,7 @@ class UserServices:
                 raise e from e
 
     def create_super_user(name, surname, email, password: str):
+        """Create new superuser"""
         with SessionLocal() as db:
             try:
                 user_repository = UserRepository(db)
@@ -31,6 +37,7 @@ class UserServices:
 
     @staticmethod
     def get_user_by_id(user_id: str):
+        """Get user by id"""
         try:
             with SessionLocal() as db:
                 user_repository = UserRepository(db)
@@ -40,6 +47,7 @@ class UserServices:
 
     @staticmethod
     def get_all_users():
+        """Get all users"""
         try:
             with SessionLocal() as db:
                 user_repository = UserRepository(db)
@@ -49,6 +57,7 @@ class UserServices:
 
     @staticmethod
     def delete_user_by_id(user_id: str):
+        """Delete user by id"""
         try:
             with SessionLocal() as db:
                 user_repository = UserRepository(db)
@@ -58,6 +67,7 @@ class UserServices:
 
     @staticmethod
     def update_user_name(user_id: str, name: str):
+        """Update user name section"""
         try:
             with SessionLocal() as db:
                 user_repository = UserRepository(db)
@@ -67,6 +77,7 @@ class UserServices:
 
     @staticmethod
     def update_user_surname(user_id: str, surname: str):
+        """Update user surname section"""
         try:
             with SessionLocal() as db:
                 user_repository = UserRepository(db)
@@ -76,6 +87,7 @@ class UserServices:
 
     @staticmethod
     def update_user_is_active(user_id: str, is_active: bool):
+        """Update user is_active section"""
         try:
             with SessionLocal() as db:
                 user_repository = UserRepository(db)
@@ -85,6 +97,7 @@ class UserServices:
 
     @staticmethod
     def login_user(email: str, password: str):
+        """User log in"""
         try:
             with SessionLocal() as db:
                 user_repository = UserRepository(db)

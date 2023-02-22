@@ -1,3 +1,5 @@
+""" MovieAward Repository module """
+
 from sqlalchemy import desc, func
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
@@ -9,10 +11,13 @@ from app.movies.models import MovieAward
 
 
 class MovieAwardRepository:
+    """MovieAward model repository"""
+
     def __init__(self, db: Session):
         self.db = db
 
     def create_movie_award(self, movie_id, award_id):
+        """Create new movie_award"""
         try:
             movie_award = MovieAward(movie_id, award_id)
             self.db.add(movie_award)
@@ -23,6 +28,7 @@ class MovieAwardRepository:
             raise e from e
 
     def get_movie_by_award_id(self, award_id: str):
+        """Get movie by award_id"""
         movie_by_award_id = (
             self.db.query(MovieAward).filter(MovieAward.award_id == award_id).all()
         )
@@ -34,6 +40,7 @@ class MovieAwardRepository:
         return movie_by_award_id
 
     def get_award_by_movie_id(self, movie_id: str):
+        """Get award by movie_id"""
         award_by_movie_id = (
             self.db.query(MovieAward).filter(MovieAward.movie_id == movie_id).all()
         )
@@ -45,6 +52,7 @@ class MovieAwardRepository:
         return award_by_movie_id
 
     def get_all_movies_with_all_awards(self):
+        """Get all movies with all awards"""
         movie_award = self.db.query(MovieAward).all()
         if (movie_award is None) or (movie_award == []):
             raise AwardNotFoundException(
@@ -54,6 +62,7 @@ class MovieAwardRepository:
         return movie_award
 
     def get_top_five_most_awarded_movies(self):
+        """Get top five most awarded movies"""
         movie_rating_and_review = (
             self.db.query(MovieAward)
             .group_by(MovieAward.movie_id)
@@ -67,6 +76,7 @@ class MovieAwardRepository:
         return movie_rating_and_review
 
     def delete_movie_award_by_id(self, movie_award_id: str):
+        """Delete a pair movie_award by id"""
         try:
             movie_award = (
                 self.db.query(MovieAward)

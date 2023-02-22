@@ -1,11 +1,16 @@
+""" Actor/Actress Services module """
+
 from app.actors_actresses.exceptions import ActorActressGenderException
 from app.actors_actresses.repository import ActorActressRepository
 from app.db.database import SessionLocal
 
 
 class ActorActressServices:
+    """Actor/Actress model services"""
+
     @staticmethod
     def create_actor_actress(name, surname, gender, about):
+        """Create new actor_actress"""
         try:
             if (gender.lower() != "m") and (gender.lower() != "f"):
                 raise ActorActressGenderException(
@@ -22,6 +27,7 @@ class ActorActressServices:
 
     @staticmethod
     def get_actor_actress_by_id(actor_actress_id: str):
+        """Get actor_actress by id"""
         try:
             with SessionLocal() as db:
                 actor_actress_repository = ActorActressRepository(db)
@@ -33,6 +39,7 @@ class ActorActressServices:
 
     @staticmethod
     def get_actor_actress_by_name(name: str):
+        """Get actor_actress by name"""
         try:
             with SessionLocal() as db:
                 actor_actress_repository = ActorActressRepository(db)
@@ -42,6 +49,7 @@ class ActorActressServices:
 
     @staticmethod
     def get_actor_actress_by_gender(gender: str):
+        """Get actor_actress by surname"""
         try:
             if (gender.lower() != "m") and (gender.lower() != "f"):
                 raise ActorActressGenderException(
@@ -56,6 +64,7 @@ class ActorActressServices:
 
     @staticmethod
     def get_actor_actress_by_surname(surname: str):
+        """Get actor_actress by gender"""
         try:
             with SessionLocal() as db:
                 actor_actress_repository = ActorActressRepository(db)
@@ -65,6 +74,7 @@ class ActorActressServices:
 
     @staticmethod
     def get_all_actors_actresses():
+        """Get all actors_actresses"""
         try:
             with SessionLocal() as db:
                 actor_actress_repository = ActorActressRepository(db)
@@ -74,6 +84,7 @@ class ActorActressServices:
 
     @staticmethod
     def delete_actor_actress_by_id(actor_actress_id: str):
+        """Delete actor_actress by id"""
         try:
             with SessionLocal() as db:
                 actor_actress_repository = ActorActressRepository(db)
@@ -85,6 +96,7 @@ class ActorActressServices:
 
     @staticmethod
     def order_actor_actress_by_name_decs():
+        """Order actor_actress by name in decsending order"""
         try:
             with SessionLocal() as db:
                 actor_actress_repository = ActorActressRepository(db)
@@ -94,6 +106,7 @@ class ActorActressServices:
 
     @staticmethod
     def order_actor_actress_by_name_asc():
+        """Order actor_actress by name in acsending order"""
         try:
             with SessionLocal() as db:
                 actor_actress_repository = ActorActressRepository(db)
@@ -103,6 +116,7 @@ class ActorActressServices:
 
     @staticmethod
     def get_gender_statistics():
+        """Get gender statistics"""
         try:
             with SessionLocal() as db:
                 actor_actress_repository = ActorActressRepository(db)
@@ -112,6 +126,7 @@ class ActorActressServices:
 
     @staticmethod
     def update_actor_actress_about_section(actor_actress_id: str, about: str):
+        """Update actor_actress about section"""
         try:
             with SessionLocal() as db:
                 actor_actress_repository = ActorActressRepository(db)

@@ -8,6 +8,8 @@ from app.db.database import Base
 
 
 class TVShowRatingAndReview(Base):
+    """TVShowRatingAndReview model"""
+
     __tablename__ = "tv_shows_rating_and_review"
     id = Column(String(50), primary_key=True, default=uuid4, autoincrement=False)
     grade = Column(INT, nullable=False)

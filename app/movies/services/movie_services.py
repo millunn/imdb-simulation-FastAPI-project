@@ -1,3 +1,5 @@
+""" Movie Services module """
+
 from app.db.database import SessionLocal
 from app.genres.exceptions import GenreNotFoundException
 from app.genres.repository import GenreRepository
@@ -12,6 +14,8 @@ from app.movies.repository import MovieRepository
 
 
 class MovieServices:
+    """Movie model services"""
+
     @staticmethod
     def create_movie(
         title,
@@ -25,6 +29,7 @@ class MovieServices:
         language_name,
         genre_category,
     ):
+        """Create new movie"""
         try:
             if len(str(duration)) > 4:
                 raise MovieDurationException(
@@ -74,6 +79,7 @@ class MovieServices:
 
     @staticmethod
     def get_movie_by_id(movie_id: str):
+        """Get movie by id"""
         try:
             with SessionLocal() as db:
                 movie_repository = MovieRepository(db)
@@ -83,6 +89,7 @@ class MovieServices:
 
     @staticmethod
     def get_movie_by_title(title: str):
+        """Get movie by title"""
         try:
             with SessionLocal() as db:
                 movie_repository = MovieRepository(db)
@@ -92,6 +99,7 @@ class MovieServices:
 
     @staticmethod
     def get_movie_by_language(language: str):
+        """Get movie by language"""
         try:
             with SessionLocal() as db:
                 movie_repository = MovieRepository(db)
@@ -101,6 +109,7 @@ class MovieServices:
 
     @staticmethod
     def get_movie_by_genre(genre: str):
+        """Get movie by genre"""
         try:
             with SessionLocal() as db:
                 movie_repository = MovieRepository(db)
@@ -110,6 +119,7 @@ class MovieServices:
 
     @staticmethod
     def get_movie_by_release_year(release_year: str):
+        """Get movie by release_year"""
         try:
             with SessionLocal() as db:
                 movie_repository = MovieRepository(db)
@@ -119,6 +129,7 @@ class MovieServices:
 
     @staticmethod
     def get_all_movies():
+        """Get all movies"""
         try:
             with SessionLocal() as db:
                 movie_repository = MovieRepository(db)
@@ -128,6 +139,7 @@ class MovieServices:
 
     @staticmethod
     def delete_movie_by_id(movie_id: str):
+        """Delete movie by id"""
         try:
             with SessionLocal() as db:
                 movie_repository = MovieRepository(db)
@@ -137,6 +149,7 @@ class MovieServices:
 
     @staticmethod
     def order_movies_by_title_decs():
+        """Order movies by title in decsending order"""
         try:
             with SessionLocal() as db:
                 movie_repository = MovieRepository(db)
@@ -146,6 +159,7 @@ class MovieServices:
 
     @staticmethod
     def order_movies_by_title_asc():
+        """Order movies by title in acsending order"""
         try:
             with SessionLocal() as db:
                 movie_repository = MovieRepository(db)
@@ -155,6 +169,7 @@ class MovieServices:
 
     @staticmethod
     def get_top_five_movies_by_ratings():
+        """Get top five movies by ratings"""
         try:
             with SessionLocal() as db:
                 movie_repository = MovieRepository(db)
@@ -164,6 +179,7 @@ class MovieServices:
 
     @staticmethod
     def get_top_five_most_rated_movies():
+        """Get five most rated movies"""
         try:
             with SessionLocal() as db:
                 movie_repository = MovieRepository(db)
@@ -173,6 +189,7 @@ class MovieServices:
 
     @staticmethod
     def get_genre_statistics():
+        """Get genre statistics"""
         try:
             with SessionLocal() as db:
                 movie_repository = MovieRepository(db)
@@ -182,6 +199,7 @@ class MovieServices:
 
     @staticmethod
     def get_language_statistics():
+        """Get language statistics"""
         try:
             with SessionLocal() as db:
                 movie_repository = MovieRepository(db)
@@ -191,6 +209,7 @@ class MovieServices:
 
     @staticmethod
     def order_movie_duration_by_release_year_desc():
+        """Order movie duration by release year in decsending order"""
         try:
             with SessionLocal() as db:
                 movie_repository = MovieRepository(db)

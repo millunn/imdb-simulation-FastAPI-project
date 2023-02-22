@@ -1,3 +1,5 @@
+""" MovieAward Services module """
+
 from sqlalchemy.exc import IntegrityError
 
 from app.awards.exceptions import AwardNotFoundException
@@ -8,8 +10,11 @@ from app.movies.repository import MovieAwardRepository, MovieRepository
 
 
 class MovieAwardServices:
+    """MovieAward model services"""
+
     @staticmethod
     def create_movie_award(movie_id, award_id):
+        """Create new movie_award"""
         try:
             with SessionLocal() as db:
                 movie_repository = MovieRepository(db)
@@ -35,6 +40,7 @@ class MovieAwardServices:
 
     @staticmethod
     def get_movie_by_award_id(award_id: str):
+        """Get movie by award_id"""
         try:
             with SessionLocal() as db:
                 movie_award_repository = MovieAwardRepository(db)
@@ -44,6 +50,7 @@ class MovieAwardServices:
 
     @staticmethod
     def get_award_by_movie_id(movie_id: str):
+        """Get award by movie_id"""
         try:
             with SessionLocal() as db:
                 award_movie_repository = MovieAwardRepository(db)
@@ -53,6 +60,7 @@ class MovieAwardServices:
 
     @staticmethod
     def get_all_movies_with_all_awards():
+        """Get all movies with all awards"""
         try:
             with SessionLocal() as db:
                 movie_award_repository = MovieAwardRepository(db)
@@ -62,6 +70,7 @@ class MovieAwardServices:
 
     @staticmethod
     def get_top_five_most_awarded_movies():
+        """Get top five most awarded movies"""
         try:
             with SessionLocal() as db:
                 movie_repository = MovieAwardRepository(db)
@@ -71,6 +80,7 @@ class MovieAwardServices:
 
     @staticmethod
     def delete_movie_award_by_id(movie_award_id: str):
+        """Delete a pair movie_award by id"""
         try:
             with SessionLocal() as db:
                 movie_award_repository = MovieAwardRepository(db)

@@ -1,3 +1,5 @@
+""" MovieRatingAndReview Services module """
+
 from app.db.database import SessionLocal
 from app.movies.exceptions import MovieNotFoundException
 from app.movies.repository import MovieRepository
@@ -8,8 +10,11 @@ from app.users.repository import UserRepository
 
 
 class MovieRatingAndReviewServices:
+    """MovieRatingAndReview model services"""
+
     @staticmethod
     def create_movie_rating_and_review(grade, comment, movie_id, user_id):
+        """Create new movie_rating_and_review pair"""
         try:
             if 1 > grade or grade > 5:
                 raise MovieRatingAndReviewGradeException(
@@ -42,6 +47,7 @@ class MovieRatingAndReviewServices:
 
     @staticmethod
     def get_movie_rating_and_review_by_id(movie_rating_and_review_id: str):
+        """Get movie_rating_and_review by id"""
         try:
             with SessionLocal() as db:
                 movie_rating_and_review_repository = MovieRatingAndReviewRepository(db)
@@ -53,6 +59,7 @@ class MovieRatingAndReviewServices:
 
     @staticmethod
     def get_movie_rating_and_review_by_grade(grade: int):
+        """Get movie_rating_and_review by grade"""
         try:
             with SessionLocal() as db:
                 movie_rating_and_review_repository = MovieRatingAndReviewRepository(db)
@@ -64,6 +71,7 @@ class MovieRatingAndReviewServices:
 
     @staticmethod
     def get_movie_rating_and_review_by_movie_id(movie_id: str):
+        """Get movie_rating_and_review by movie_id"""
         try:
             with SessionLocal() as db:
                 movie_rating_and_review_repository = MovieRatingAndReviewRepository(db)
@@ -75,6 +83,7 @@ class MovieRatingAndReviewServices:
 
     @staticmethod
     def get_movie_rating_and_review_by_user_id(user_id: str):
+        """Get movie_rating_and_review by user_id"""
         try:
             with SessionLocal() as db:
                 movie_rating_and_review_repository = MovieRatingAndReviewRepository(db)
@@ -86,6 +95,7 @@ class MovieRatingAndReviewServices:
 
     @staticmethod
     def get_all_movies_ratings_and_reviews():
+        """Get all movies_ratings_and_reviews"""
         try:
             with SessionLocal() as db:
                 movies_ratings_and_reviews_repository = MovieRatingAndReviewRepository(
@@ -99,6 +109,7 @@ class MovieRatingAndReviewServices:
 
     @staticmethod
     def delete_movie_rating_and_review_by_id(movie_rating_and_review_id: str):
+        """Delete movie_rating_and_review by id"""
         try:
             with SessionLocal() as db:
                 movie_rating_and_review_repository = MovieRatingAndReviewRepository(db)
@@ -112,6 +123,7 @@ class MovieRatingAndReviewServices:
     def update_movie_rating_and_review_comment(
         movie_rating_and_review_id: str, comment: str
     ):
+        """Update movie_rating_and_review comment section"""
         try:
             with SessionLocal() as db:
                 movie_rating_and_review_repository = MovieRatingAndReviewRepository(db)

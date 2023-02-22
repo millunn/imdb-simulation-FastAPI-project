@@ -1,3 +1,5 @@
+""" Language Controller module """
+
 from fastapi import HTTPException, Response
 from sqlalchemy.exc import IntegrityError
 
@@ -6,8 +8,11 @@ from app.languages.services import LanguageServices
 
 
 class LanguageController:
+    """Language model controller"""
+
     @staticmethod
     def create_language(name, abbreviation):
+        """Create new language"""
         try:
             language = LanguageServices.create_language(name, abbreviation)
             return language
@@ -21,6 +26,7 @@ class LanguageController:
 
     @staticmethod
     def get_language_by_id(language_id: str):
+        """Get language by id"""
         try:
             language = LanguageServices.get_language_by_id(language_id)
             return language
@@ -34,6 +40,7 @@ class LanguageController:
 
     @staticmethod
     def get_language_by_name(name: str):
+        """Get language by category"""
         try:
             language = LanguageServices.get_language_by_name(name)
             return language
@@ -47,6 +54,7 @@ class LanguageController:
 
     @staticmethod
     def get_language_by_abbreviation(abbreviation: str):
+        """Get language by abbreviation"""
         try:
             language = LanguageServices.get_language_by_abbreviation(abbreviation)
             return language
@@ -60,6 +68,7 @@ class LanguageController:
 
     @staticmethod
     def get_all_languages():
+        """Get all languages"""
         try:
             languages = LanguageServices.get_all_languages()
             return languages
@@ -73,6 +82,7 @@ class LanguageController:
 
     @staticmethod
     def delete_language_by_id(language_id: str):
+        """Delete language by id"""
         try:
             LanguageServices.delete_language_by_id(language_id)
             return Response(

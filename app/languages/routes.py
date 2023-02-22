@@ -10,7 +10,7 @@ language_router = APIRouter(tags=["languages"], prefix="/api/languages")
 @language_router.post(
     "/add-new-language",
     response_model=LanguageSchema,
-    # dependencies=[Depends(JWTBearer("super_user"))],
+    dependencies=[Depends(JWTBearer("super_user"))],
 )
 def create_language(language: LanguageSchemaIn):
     return LanguageController.create_language(language.name, language.abbreviation)
@@ -19,7 +19,7 @@ def create_language(language: LanguageSchemaIn):
 @language_router.get(
     "/id",
     response_model=LanguageSchema,
-    # dependencies=[Depends(JWTBearer("super_user"))],
+    dependencies=[Depends(JWTBearer("super_user"))],
 )
 def get_language_by_id(language_id: str):
     return LanguageController.get_language_by_id(language_id)

@@ -7,6 +7,8 @@ from app.db.database import Base
 
 
 class User(Base):
+    """User model"""
+
     __tablename__ = "users"
     id = Column(String(50), primary_key=True, default=uuid4, autoincrement=False)
     name = Column(String(50), nullable=False)

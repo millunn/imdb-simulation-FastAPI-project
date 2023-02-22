@@ -1,3 +1,5 @@
+""" Award Controller module """
+
 from fastapi import HTTPException, Response
 from sqlalchemy.exc import IntegrityError
 
@@ -6,8 +8,11 @@ from app.awards.services import AwardServices
 
 
 class AwardController:
+    """Award model controller"""
+
     @staticmethod
     def create_award(category, subcategory):
+        """Create new award"""
         try:
             award = AwardServices.create_award(category, subcategory)
             return award
@@ -21,6 +26,7 @@ class AwardController:
 
     @staticmethod
     def get_award_by_id(award_id: str):
+        """Get award by id"""
         try:
             award = AwardServices.get_award_by_id(award_id)
             return award
@@ -34,6 +40,7 @@ class AwardController:
 
     @staticmethod
     def get_award_by_category(category: str):
+        """Get award by category"""
         try:
             award = AwardServices.get_award_by_category(category)
             return award
@@ -47,6 +54,7 @@ class AwardController:
 
     @staticmethod
     def get_award_by_subcategory(subcategory: str):
+        """Get award by subcategory"""
         try:
             award = AwardServices.get_award_by_subcategory(subcategory)
             return award
@@ -60,6 +68,7 @@ class AwardController:
 
     @staticmethod
     def get_all_awards():
+        """Get all awards"""
         try:
             awards = AwardServices.get_all_awards()
             return awards
@@ -73,6 +82,7 @@ class AwardController:
 
     @staticmethod
     def delete_award_by_id(award_id: str):
+        """Delete award by id"""
         try:
             if AwardServices.delete_award_by_id(award_id):
                 return Response(
@@ -86,6 +96,7 @@ class AwardController:
 
     @staticmethod
     def order_awards_by_category_decs():
+        """Order awards by category in decsending order"""
         try:
             order_by_title_desc = AwardServices.order_awards_by_category_decs()
             return order_by_title_desc
@@ -99,6 +110,7 @@ class AwardController:
 
     @staticmethod
     def order_awards_by_category_asc():
+        """Order awards by category in acsending order"""
         try:
             order_by_category_asc = AwardServices.order_awards_by_category_asc()
             return order_by_category_asc

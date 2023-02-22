@@ -6,6 +6,8 @@ from app.db import Base
 
 
 class Award(Base):
+    """Award model"""
+
     __tablename__ = "awards"
     id = Column(String(50), primary_key=True, default=uuid4, autoincrement=False)
     category = Column(String(50), nullable=False)

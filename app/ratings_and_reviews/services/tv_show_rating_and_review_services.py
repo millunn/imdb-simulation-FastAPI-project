@@ -1,3 +1,5 @@
+""" TVShowRatingAndReview Services module """
+
 from app.db.database import SessionLocal
 from app.ratings_and_reviews.exceptions import TVShowRatingAndReviewGradeException
 from app.ratings_and_reviews.repository import TVShowRatingAndReviewRepository
@@ -8,8 +10,11 @@ from app.users.repository import UserRepository
 
 
 class TVShowRatingAndReviewServices:
+    """TVShowRatingAndReview model services"""
+
     @staticmethod
     def create_tv_show_rating_and_review(grade, comment, tv_show_id, user_id):
+        """Create new tv_show_rating_and_review pair"""
         try:
             if 1 > grade or grade > 5:
                 raise TVShowRatingAndReviewGradeException(
@@ -42,6 +47,7 @@ class TVShowRatingAndReviewServices:
 
     @staticmethod
     def get_tv_show_rating_and_review_by_id(tv_show_rating_and_review_id: str):
+        """Get tv_show_rating_and_review by id"""
         try:
             with SessionLocal() as db:
                 tv_show_rating_and_review_repository = TVShowRatingAndReviewRepository(
@@ -55,6 +61,7 @@ class TVShowRatingAndReviewServices:
 
     @staticmethod
     def get_tv_show_rating_and_review_by_grade(grade: int):
+        """Get tv_show_rating_and_review by grade"""
         try:
             with SessionLocal() as db:
                 tv_show_rating_and_review_repository = TVShowRatingAndReviewRepository(
@@ -68,6 +75,7 @@ class TVShowRatingAndReviewServices:
 
     @staticmethod
     def get_tv_show_rating_and_review_by_tv_show_id(tv_show_id: str):
+        """Get tv_show_rating_and_review by tv_show_id"""
         try:
             with SessionLocal() as db:
                 tv_show_rating_and_review_repository = TVShowRatingAndReviewRepository(
@@ -81,6 +89,7 @@ class TVShowRatingAndReviewServices:
 
     @staticmethod
     def get_tv_show_rating_and_review_by_user_id(user_id: str):
+        """Get tv_show_rating_and_review by user_id"""
         try:
             with SessionLocal() as db:
                 tv_show_rating_and_review_repository = TVShowRatingAndReviewRepository(
@@ -94,6 +103,7 @@ class TVShowRatingAndReviewServices:
 
     @staticmethod
     def get_all_tv_shows_ratings_and_reviews():
+        """Get all tv_shows_ratings_and_reviews"""
         try:
             with SessionLocal() as db:
                 tv_shows_ratings_and_reviews_repository = (
@@ -107,6 +117,7 @@ class TVShowRatingAndReviewServices:
 
     @staticmethod
     def delete_tv_show_rating_and_review_by_id(tv_show_rating_and_review_id: str):
+        """Delete tv_show_rating_and_review by id"""
         try:
             with SessionLocal() as db:
                 tv_show_rating_and_review_repository = TVShowRatingAndReviewRepository(
@@ -122,6 +133,7 @@ class TVShowRatingAndReviewServices:
     def update_tv_show_rating_and_review_comment(
         tv_show_rating_and_review_id: str, comment: str
     ):
+        """Update tv_show_rating_and_review comment section"""
         try:
             with SessionLocal() as db:
                 tv_show_rating_and_review_repository = TVShowRatingAndReviewRepository(

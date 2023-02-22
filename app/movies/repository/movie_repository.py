@@ -1,3 +1,5 @@
+""" Movie Repository module """
+
 from sqlalchemy import desc, func
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
@@ -8,6 +10,8 @@ from app.ratings_and_reviews.models import MovieRatingAndReview
 
 
 class MovieRepository:
+    """Movie model repository"""
+
     def __init__(self, db: Session):
         self.db = db
 
@@ -25,6 +29,7 @@ class MovieRepository:
         language_name,
         genre_category,
     ):
+        """Create new movie"""
         try:
             movie = Movie(
                 title,
@@ -46,6 +51,7 @@ class MovieRepository:
             raise e from e
 
     def get_movie_by_id(self, movie_id: str):
+        """Get movie by id"""
         movie = self.db.query(Movie).filter(Movie.id == movie_id).first()
         if movie is None:
             raise MovieNotFoundException(
@@ -55,6 +61,7 @@ class MovieRepository:
         return movie
 
     def get_movie_by_title(self, title: str):
+        """Get movie by title"""
         movie = self.db.query(Movie).filter(Movie.title.ilike(f"%{title}%")).all()
         if (movie is None) or (movie == []):
             raise MovieNotFoundException(
@@ -64,6 +71,7 @@ class MovieRepository:
         return movie
 
     def get_movie_by_language(self, language: str):
+        """Get movie by language"""
         movie = (
             self.db.query(Movie)
             .filter(Movie.language_name.ilike(f"%{language}%"))
@@ -77,6 +85,7 @@ class MovieRepository:
         return movie
 
     def get_movie_by_genre(self, genre: str):
+        """Get movie by genre"""
         movie = (
             self.db.query(Movie).filter(Movie.genre_category.ilike(f"%{genre}%")).all()
         )
@@ -88,6 +97,7 @@ class MovieRepository:
         return movie
 
     def get_movie_by_release_year(self, release_year: str):
+        """Get movie by release_year"""
         movie = self.db.query(Movie).filter(Movie.release_year == release_year).all()
         if (movie is None) or (movie == []):
             raise MovieNotFoundException(
@@ -97,6 +107,7 @@ class MovieRepository:
         return movie
 
     def get_all_movies(self):
+        """Get all movies"""
         movies = self.db.query(Movie).all()
         if (movies is None) or (movies == []):
             raise MovieNotFoundException(
@@ -105,8 +116,8 @@ class MovieRepository:
             )
         return movies
 
-    ##superuser
     def delete_movie_by_id(self, movie_id: str):
+        """Delete movie by id"""
         try:
             movie = self.db.query(Movie).filter(Movie.id == movie_id).first()
             if movie is None:
@@ -126,14 +137,17 @@ class MovieRepository:
             raise e from e
 
     def order_movies_by_title_decs(self):
+        """Order movies by title in decsending order"""
         order_by_title_desc = self.db.query(Movie).order_by(Movie.title.desc()).all()
         return order_by_title_desc
 
     def order_movies_by_title_asc(self):
+        """Order movies by title in acsending order"""
         order_by_title_asc = self.db.query(Movie).order_by(Movie.title.asc()).all()
         return order_by_title_asc
 
     def get_top_five_movies_by_ratings(self):
+        """Get top five movies by ratings"""
         movie_rating_and_review = (
             self.db.query(MovieRatingAndReview)
             .group_by(MovieRatingAndReview.movie_id)
@@ -147,6 +161,7 @@ class MovieRepository:
         return movie_rating_and_review
 
     def get_top_five_most_rated_movies(self):
+        """Get five most rated movies"""
         movie_rating_and_review = (
             self.db.query(MovieRatingAndReview)
             .group_by(MovieRatingAndReview.movie_id)
@@ -160,6 +175,7 @@ class MovieRepository:
         return movie_rating_and_review
 
     def get_genre_statistics(self):
+        """Get genre statistics"""
         genre_statistics = (
             self.db.query(Movie)
             .group_by(Movie.genre_category)
@@ -172,6 +188,7 @@ class MovieRepository:
         return genre_statistics
 
     def get_language_statistics(self):
+        """Get language statistics"""
         language_statistics = (
             self.db.query(Movie)
             .group_by(Movie.language_name)
@@ -184,6 +201,7 @@ class MovieRepository:
         return language_statistics
 
     def order_movie_duration_by_release_year_desc(self):
+        """Order movie duration by release year in decsending order"""
         movie_duration_by_release_year = (
             self.db.query(Movie)
             .group_by(Movie.release_year)

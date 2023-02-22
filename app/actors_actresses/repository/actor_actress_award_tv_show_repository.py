@@ -1,3 +1,5 @@
+""" Actor/Actress-Award-TvShow Repository module """
+
 from sqlalchemy import desc, func
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
@@ -11,12 +13,15 @@ from app.awards.exceptions import AwardNotFoundException
 
 
 class ActorActressAwardTvShowRepository:
+    """Actor/Actress-Award-TvShow model repository"""
+
     def __init__(self, db: Session):
         self.db = db
 
     def create_actor_actress_award_tv_show(
         self, actor_actress_id, award_id, tv_show_id
     ):
+        """Create new actor_actress_award_tv_show"""
         try:
             actor_actress_award_tv_show = ActorActressAwardTvShow(
                 actor_actress_id, award_id, tv_show_id
@@ -29,6 +34,7 @@ class ActorActressAwardTvShowRepository:
             raise e from e
 
     def get_award_by_actor_actress_id(self, actor_actress_id: str):
+        """Get award by actor_actress_id"""
         award_by_actor_actress_id = (
             self.db.query(ActorActressAwardTvShow)
             .filter(ActorActressAwardTvShow.actor_actress_id == actor_actress_id)
@@ -42,6 +48,7 @@ class ActorActressAwardTvShowRepository:
         return award_by_actor_actress_id
 
     def get_award_by_tv_show_id(self, tv_show_id: str):
+        """Get award by tv_show_id"""
         award_by_tv_show_id = (
             self.db.query(ActorActressAwardTvShow)
             .filter(ActorActressAwardTvShow.tv_show_id == tv_show_id)
@@ -55,6 +62,7 @@ class ActorActressAwardTvShowRepository:
         return award_by_tv_show_id
 
     def get_actor_actress_by_award_id(self, award_id: str):
+        """Get actor_actress by award_id"""
         actor_actress_by_award_id = (
             self.db.query(ActorActressAwardTvShow)
             .filter(ActorActressAwardTvShow.award_id == award_id)
@@ -68,6 +76,7 @@ class ActorActressAwardTvShowRepository:
         return actor_actress_by_award_id
 
     def get_actor_actress_by_tv_show_id(self, tv_show_id: str):
+        """Get actor_actress by tv_show_id"""
         actor_actress_by_tv_show_id = (
             self.db.query(ActorActressAwardTvShow)
             .filter(ActorActressAwardTvShow.tv_show_id == tv_show_id)
@@ -81,6 +90,7 @@ class ActorActressAwardTvShowRepository:
         return actor_actress_by_tv_show_id
 
     def get_all_actors_actresses_with_all_awards_all_tv_shows(self):
+        """Get all actors_actresses with all awards and all tv_shows"""
         actor_actress_award_tv_show = self.db.query(ActorActressAwardTvShow).all()
         if (actor_actress_award_tv_show is None) or (actor_actress_award_tv_show == []):
             raise ActorActressNotFoundException(
@@ -90,6 +100,7 @@ class ActorActressAwardTvShowRepository:
         return actor_actress_award_tv_show
 
     def get_top_five_most_awarded_tv_show_actors_actresses(self):
+        """Get top five most awarded tv_show actors actresses"""
         actor_actress_award_tv_show = (
             self.db.query(ActorActressAwardTvShow)
             .group_by(ActorActressAwardTvShow.actor_actress_id)
@@ -105,6 +116,7 @@ class ActorActressAwardTvShowRepository:
     def delete_actor_actress_award_tv_show_by_id(
         self, actor_actress_award_tv_show_id: str
     ):
+        """Delete a pair actor_actress_award_tv_show by id"""
         try:
             actor_actress_award_tv_show = (
                 self.db.query(ActorActressAwardTvShow)

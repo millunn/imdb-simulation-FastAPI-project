@@ -1,11 +1,13 @@
+""" Actor/Actress-Award-TvShow Model module """
+
 from uuid import uuid4
-
 from sqlalchemy import Column, String, UniqueConstraint
-
 from app.db import Base
 
 
 class ActorActress(Base):
+    """Actor/Actress model"""
+
     __tablename__ = "actors_actresses"
     id = Column(String(50), primary_key=True, default=uuid4, autoincrement=False)
     name = Column(String(50), nullable=False)

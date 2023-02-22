@@ -1,3 +1,5 @@
+""" TVShowRatingAndReview Repository module """
+
 from datetime import datetime
 
 from sqlalchemy.exc import IntegrityError
@@ -8,11 +10,14 @@ from app.ratings_and_reviews.models import TVShowRatingAndReview
 
 
 class TVShowRatingAndReviewRepository:
+    """TVShowRatingAndReview model repository"""
+
     def __init__(self, db: Session):
         self.db = db
 
     # superuser
     def create_tv_show_rating_and_review(self, grade, comment, tv_show_id, user_id):
+        """Create new tv_show_rating_and_review pair"""
         try:
             tv_show_rating_and_review = TVShowRatingAndReview(
                 grade, comment, tv_show_id, user_id
@@ -26,6 +31,7 @@ class TVShowRatingAndReviewRepository:
 
     # superuser
     def get_tv_show_rating_and_review_by_id(self, tv_show_rating_and_review_id: str):
+        """Get tv_show_rating_and_review by id"""
         tv_show_rating_and_review = (
             self.db.query(TVShowRatingAndReview)
             .filter(TVShowRatingAndReview.id == tv_show_rating_and_review_id)
@@ -39,6 +45,7 @@ class TVShowRatingAndReviewRepository:
         return tv_show_rating_and_review
 
     def get_tv_show_rating_and_review_by_grade(self, grade: int):
+        """Get tv_show_rating_and_review by grade"""
         tv_show_rating_and_review = (
             self.db.query(TVShowRatingAndReview)
             .filter(TVShowRatingAndReview.grade == grade)
@@ -52,6 +59,7 @@ class TVShowRatingAndReviewRepository:
         return tv_show_rating_and_review
 
     def get_tv_show_rating_and_review_by_tv_show_id(self, tv_show_id: str):
+        """Get tv_show_rating_and_review by tv_show_id"""
         tv_show_rating_and_review = (
             self.db.query(TVShowRatingAndReview)
             .filter(TVShowRatingAndReview.tv_show_id == tv_show_id)
@@ -66,6 +74,7 @@ class TVShowRatingAndReviewRepository:
 
     # superuser
     def get_tv_show_rating_and_review_by_user_id(self, user_id: str):
+        """Get tv_show_rating_and_review by user_id"""
         tv_show_rating_and_review = (
             self.db.query(TVShowRatingAndReview)
             .filter(TVShowRatingAndReview.user_id == user_id)
@@ -79,6 +88,7 @@ class TVShowRatingAndReviewRepository:
         return tv_show_rating_and_review
 
     def get_all_tv_shows_ratings_and_reviews(self):
+        """Get all tv_shows_ratings_and_reviews"""
         tv_shows_ratings_and_reviews = self.db.query(TVShowRatingAndReview).all()
         if (tv_shows_ratings_and_reviews is None) or (
             tv_shows_ratings_and_reviews == []
@@ -91,6 +101,7 @@ class TVShowRatingAndReviewRepository:
 
     # superuser
     def delete_tv_show_rating_and_review_by_id(self, tv_show_rating_and_review_id: str):
+        """Delete tv_show_rating_and_review by id"""
         try:
             tv_show_rating_and_review = (
                 self.db.query(TVShowRatingAndReview)
@@ -111,6 +122,7 @@ class TVShowRatingAndReviewRepository:
     def update_tv_show_rating_and_review_comment(
         self, tv_show_rating_and_review_id: str, comment: str
     ):
+        """Update tv_show_rating_and_review comment section"""
         try:
             tv_show_rating_and_review = (
                 self.db.query(TVShowRatingAndReview)

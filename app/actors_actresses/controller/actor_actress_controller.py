@@ -1,3 +1,5 @@
+""" Actor/Actress Controller module """
+
 from fastapi import HTTPException, Response
 from sqlalchemy.exc import IntegrityError
 
@@ -9,8 +11,11 @@ from app.actors_actresses.services import ActorActressServices
 
 
 class ActorActressController:
+    """Actor/Actress model controller"""
+
     @staticmethod
     def create_actor_actress(name, surname, gender, about):
+        """Create new actor_actress"""
         try:
             actor_actress = ActorActressServices.create_actor_actress(
                 name, surname, gender, about
@@ -31,6 +36,7 @@ class ActorActressController:
 
     @staticmethod
     def get_actor_actress_by_id(actor_actress_id: str):
+        """Get actor_actress by id"""
         try:
             actor_actress = ActorActressServices.get_actor_actress_by_id(
                 actor_actress_id
@@ -46,6 +52,7 @@ class ActorActressController:
 
     @staticmethod
     def get_actor_actress_by_name(name: str):
+        """Get actor_actress by name"""
         try:
             actor_actress = ActorActressServices.get_actor_actress_by_name(name)
             return actor_actress
@@ -59,6 +66,7 @@ class ActorActressController:
 
     @staticmethod
     def get_actor_actress_by_surname(surname: str):
+        """Get actor_actress by surname"""
         try:
             actor_actress = ActorActressServices.get_actor_actress_by_surname(surname)
             return actor_actress
@@ -72,6 +80,7 @@ class ActorActressController:
 
     @staticmethod
     def get_actor_actress_by_gender(gender: str):
+        """Get actor_actress by gender"""
         try:
             actor_actress = ActorActressServices.get_actor_actress_by_gender(gender)
             return actor_actress
@@ -90,6 +99,7 @@ class ActorActressController:
 
     @staticmethod
     def get_all_actors_actresses():
+        """Get all actors_actresses"""
         try:
             actor_actresss = ActorActressServices.get_all_actors_actresses()
             return actor_actresss
@@ -103,6 +113,7 @@ class ActorActressController:
 
     @staticmethod
     def delete_actor_actress_by_id(actor_actress_id: str):
+        """Delete actor_actress by id"""
         try:
             ActorActressServices.delete_actor_actress_by_id(actor_actress_id)
             return Response(
@@ -118,6 +129,7 @@ class ActorActressController:
 
     @staticmethod
     def order_actor_actress_by_name_decs():
+        """Order actor_actress by name in decsending order"""
         try:
             order_by_name_desc = ActorActressServices.order_actor_actress_by_name_decs()
             return order_by_name_desc
@@ -131,6 +143,7 @@ class ActorActressController:
 
     @staticmethod
     def order_actor_actress_by_name_asc():
+        """Order actor_actress by name in acsending order"""
         try:
             order_by_title_asc = ActorActressServices.order_actor_actress_by_name_asc()
             return order_by_title_asc
@@ -144,6 +157,7 @@ class ActorActressController:
 
     @staticmethod
     def get_gender_statistics():
+        """Get gender statistics"""
         try:
             gender_statistics = ActorActressServices.get_gender_statistics()
             return gender_statistics
@@ -152,6 +166,7 @@ class ActorActressController:
 
     @staticmethod
     def update_actor_actress_about_section(actor_actress_id: str, about: str):
+        """Update actor_actress about section"""
         try:
             actor_actress = ActorActressServices.update_actor_actress_about_section(
                 actor_actress_id, about

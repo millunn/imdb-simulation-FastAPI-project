@@ -1,4 +1,4 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, Depends
 
 from app.ratings_and_reviews.controller import (
     MovieRatingAndReviewController,
@@ -14,6 +14,7 @@ from app.ratings_and_reviews.schemas import (
     TVShowRatingAndReviewSchemaIn,
     TVShowRatingAndReviewSchemaUpdateComment,
 )
+from app.users.controller.user_auth_controller import JWTBearer
 
 movie_rating_and_review_router = APIRouter(
     tags=["movies_ratings_and_reviews"], prefix="/api/movies_ratings_and_reviews"
@@ -23,11 +24,10 @@ tv_show_rating_and_review_router = APIRouter(
 )
 
 
-# superuser
 @movie_rating_and_review_router.post(
     "/add-new-movie-rating-and-review",
     response_model=MovieRatingAndReviewSchema,
-    # dependencies=[Depends(JWTBearer("super_user"))],
+    dependencies=[Depends(JWTBearer("super_user"))],
 )
 def create_movie_rating_and_review(movie: MovieRatingAndReviewSchemaIn):
     return MovieRatingAndReviewController.create_movie_rating_and_review(
@@ -39,8 +39,10 @@ def create_movie_rating_and_review(movie: MovieRatingAndReviewSchemaIn):
 
 
 @movie_rating_and_review_router.get(
-    "/movie-rating-and-review-id", response_model=MovieRatingAndReviewSchema
-)  # dependencies=[Depends(JWTBearer("super_user"))])
+    "/movie-rating-and-review-id",
+    response_model=MovieRatingAndReviewSchema,
+    dependencies=[Depends(JWTBearer("super_user"))],
+)
 def get_movie_rating_and_review_by_id(movie_rating_and_review_id: str):
     return MovieRatingAndReviewController.get_movie_rating_and_review_by_id(
         movie_rating_and_review_id
@@ -64,8 +66,10 @@ def get_movie_rating_and_review_by_movie_id(movie_id: str):
 
 
 @movie_rating_and_review_router.get(
-    "/user-id", response_model=list[MovieRatingAndReviewSchema]
-)  # dependencies=[Depends(JWTBearer("super_user"))])
+    "/user-id",
+    response_model=list[MovieRatingAndReviewSchema],
+    dependencies=[Depends(JWTBearer("super_user"))],
+)
 def get_movie_rating_and_review_by_user_id(user_id: str):
     return MovieRatingAndReviewController.get_movie_rating_and_review_by_user_id(
         user_id
@@ -81,8 +85,8 @@ def get_all_movies_ratings_and_reviews():
 
 # superuser
 @movie_rating_and_review_router.delete(
-    "/",
-)  # dependencies=[Depends(JWTBearer("super_user"))])
+    "/", dependencies=[Depends(JWTBearer("super_user"))]
+)
 def delete_movie_rating_and_review_by_id(movie_id: str):
     return MovieRatingAndReviewController.delete_movie_rating_and_review_by_id(movie_id)
 
@@ -99,11 +103,10 @@ def update_movie_rating_and_review_comment(
     )
 
 
-# superuser
 @tv_show_rating_and_review_router.post(
     "/add-new-tv-show-rating-and-review",
     response_model=TVShowRatingAndReviewSchema,
-    # dependencies=[Depends(JWTBearer("super_user"))],
+    dependencies=[Depends(JWTBearer("super_user"))],
 )
 def create_tv_show_rating_and_review(tv_show: TVShowRatingAndReviewSchemaIn):
     return TVShowRatingAndReviewController.create_tv_show_rating_and_review(
@@ -115,8 +118,10 @@ def create_tv_show_rating_and_review(tv_show: TVShowRatingAndReviewSchemaIn):
 
 
 @tv_show_rating_and_review_router.get(
-    "/tv-show-rating-and-review-id", response_model=TVShowRatingAndReviewSchema
-)  # dependencies=[Depends(JWTBearer("super_user"))])
+    "/tv-show-rating-and-review-id",
+    response_model=TVShowRatingAndReviewSchema,
+    dependencies=[Depends(JWTBearer("super_user"))],
+)
 def get_tv_show_rating_and_review_by_id(tv_show_rating_and_review_id: str):
     return TVShowRatingAndReviewController.get_tv_show_rating_and_review_by_id(
         tv_show_rating_and_review_id
@@ -140,8 +145,10 @@ def get_tv_show_rating_and_review_by_tv_show_id(tv_show_id: str):
 
 
 @tv_show_rating_and_review_router.get(
-    "/user-id", response_model=list[TVShowRatingAndReviewSchema]
-)  # dependencies=[Depends(JWTBearer("super_user"))])
+    "/user-id",
+    response_model=list[TVShowRatingAndReviewSchema],
+    dependencies=[Depends(JWTBearer("super_user"))],
+)
 def get_tv_show_rating_and_review_by_user_id(user_id: str):
     return TVShowRatingAndReviewController.get_tv_show_rating_and_review_by_user_id(
         user_id
@@ -155,10 +162,9 @@ def get_all_tv_shows_ratings_and_reviews():
     return TVShowRatingAndReviewController.get_all_tv_shows_ratings_and_reviews()
 
 
-# superuser
 @tv_show_rating_and_review_router.delete(
-    "/",
-)  # dependencies=[Depends(JWTBearer("super_user"))])
+    "/", dependencies=[Depends(JWTBearer("super_user"))]
+)
 def delete_tv_show_rating_and_review_by_id(tv_show_id: str):
     return TVShowRatingAndReviewController.delete_tv_show_rating_and_review_by_id(
         tv_show_id

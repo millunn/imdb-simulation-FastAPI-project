@@ -6,6 +6,8 @@ from app.db.database import Base
 
 
 class TVShowActorActress(Base):
+    """TVShowActorActress model"""
+
     __tablename__ = "tv_show_actor_actress"
     id = Column(String(50), primary_key=True, default=uuid4, autoincrement=False)
     tv_show_id = Column(

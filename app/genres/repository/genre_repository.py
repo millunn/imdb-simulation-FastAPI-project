@@ -1,3 +1,5 @@
+""" Genre Repository module """
+
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 
@@ -6,11 +8,14 @@ from app.genres.models import Genre
 
 
 class GenreRepository:
+    """Genre model repository"""
+
     def __init__(self, db: Session):
         self.db = db
 
     ##superuser
     def create_genre(self, category, description):
+        """Create new genre"""
         try:
             genre = Genre(category, description)
             self.db.add(genre)
@@ -21,6 +26,7 @@ class GenreRepository:
             raise e from e
 
     def get_genre_by_id(self, genre_id: str):
+        """Get genre by id"""
         genre = self.db.query(Genre).filter(Genre.id == genre_id).first()
         if genre is None:
             raise GenreNotFoundException(
@@ -29,6 +35,7 @@ class GenreRepository:
         return genre
 
     def get_genre_by_category(self, category: str):
+        """Get genre by category"""
         genre = self.db.query(Genre).filter(Genre.category.ilike(f"%{category}%")).all()
         if (genre is None) or (genre == []):
             raise GenreNotFoundException(
@@ -37,6 +44,7 @@ class GenreRepository:
         return genre
 
     def get_all_genres(self):
+        """Get all genres"""
         genres = self.db.query(Genre).all()
         if (genres is None) or (genres == []):
             raise GenreNotFoundException(f"The list is empty!", 400)
@@ -44,6 +52,7 @@ class GenreRepository:
 
     ##superuser
     def delete_genre_by_id(self, genre_id: str):
+        """Delete genre by id"""
         try:
             genre = self.db.query(Genre).filter(Genre.id == genre_id).first()
             if genre is None:

@@ -1,3 +1,5 @@
+""" TvShow-Award Services module """
+
 from sqlalchemy.exc import IntegrityError
 
 from app.actors_actresses.exceptions import ActorActressNotFoundException
@@ -11,8 +13,11 @@ from app.tv_shows_and_series.repository import (
 
 
 class TVShowActorActressServices:
+    """TvShow-Award model services"""
+
     @staticmethod
     def create_tv_show_actor_actress(tv_show_id, actor_actress_id):
+        """Create new tv_show_actor_actress pair"""
         try:
             with SessionLocal() as db:
                 tv_show_repository = TVShowRepository(db)
@@ -42,6 +47,7 @@ class TVShowActorActressServices:
 
     @staticmethod
     def get_tv_show_by_actor_actress_id(actor_actress_id: str):
+        """Get tv_show by actor_actress_id"""
         try:
             with SessionLocal() as db:
                 award_actor_actress_repository = TVShowActorActressRepository(db)
@@ -53,6 +59,7 @@ class TVShowActorActressServices:
 
     @staticmethod
     def get_actor_actress_by_tv_show_id(tv_show_id: str):
+        """Get actor_actress by tv_show_id"""
         try:
             with SessionLocal() as db:
                 actor_actress_tv_show_repository = TVShowActorActressRepository(db)
@@ -64,6 +71,7 @@ class TVShowActorActressServices:
 
     @staticmethod
     def get_all_tv_shows_with_all_actors_actresses():
+        """Get all tv_shows with all actors_actresses"""
         try:
             with SessionLocal() as db:
                 tv_show_actor_actress_repository = TVShowActorActressRepository(db)
@@ -75,6 +83,7 @@ class TVShowActorActressServices:
 
     @staticmethod
     def get_actors_by_tv_show_id(tv_show_id: str):
+        """Get actors by tv_show_id"""
         try:
             with SessionLocal() as db:
                 actor_tv_show_repository = TVShowActorActressRepository(db)
@@ -84,6 +93,7 @@ class TVShowActorActressServices:
 
     @staticmethod
     def get_actresses_by_tv_show_id(tv_show_id: str):
+        """Get actresses by tv_show_id"""
         try:
             with SessionLocal() as db:
                 actress_tv_show_repository = TVShowActorActressRepository(db)
@@ -95,6 +105,7 @@ class TVShowActorActressServices:
 
     @staticmethod
     def delete_tv_show_actor_actress_by_id(tv_show_actor_actress_id: str):
+        """Delete a pair actor_actress_tv_show by id"""
         try:
             with SessionLocal() as db:
                 tv_show_actor_actress_repository = TVShowActorActressRepository(db)

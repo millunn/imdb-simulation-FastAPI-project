@@ -6,6 +6,8 @@ from app.db import Base
 
 
 class Language(Base):
+    """Language model"""
+
     __tablename__ = "languages"
     id = Column(String(50), primary_key=True, default=uuid4, autoincrement=False)
     name = Column(String(50), unique=True, nullable=False)

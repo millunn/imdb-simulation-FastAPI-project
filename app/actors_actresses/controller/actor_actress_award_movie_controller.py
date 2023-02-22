@@ -1,3 +1,5 @@
+""" Actor/Actress-Award-Movie Controller module """
+
 from fastapi import HTTPException, Response
 from sqlalchemy.exc import IntegrityError
 
@@ -12,8 +14,11 @@ from app.movies.exceptions import MovieNotFoundException
 
 
 class ActorActressAwardMovieController:
+    """Actor/Actress-Award-Movie model controller"""
+
     @staticmethod
     def create_actor_actress_award_movie(actor_actress_id, award_id, movie_id):
+        """Create new actor_actress_award_movie"""
         try:
             actor_actress_award_movie = (
                 ActorActressAwardMovieServices.create_actor_actress_award_movie(
@@ -45,6 +50,7 @@ class ActorActressAwardMovieController:
 
     @staticmethod
     def get_award_by_actor_actress_id(actor_actress_id: str):
+        """Get award by actor_actress_id"""
         try:
             award = ActorActressAwardMovieServices.get_award_by_actor_actress_id(
                 actor_actress_id
@@ -60,6 +66,7 @@ class ActorActressAwardMovieController:
 
     @staticmethod
     def get_award_by_movie_id(movie_id: str):
+        """Get award by movie_id"""
         try:
             award = ActorActressAwardMovieServices.get_award_by_movie_id(movie_id)
             return award
@@ -73,6 +80,7 @@ class ActorActressAwardMovieController:
 
     @staticmethod
     def get_actor_actress_by_award_id(award_id: str):
+        """Get actor_actress by award_id"""
         try:
             actor_actress = (
                 ActorActressAwardMovieServices.get_actor_actress_by_award_id(award_id)
@@ -88,6 +96,7 @@ class ActorActressAwardMovieController:
 
     @staticmethod
     def get_actor_actress_by_movie_id(movie_id: str):
+        """Get actor_actress by movie_id"""
         try:
             actor_actress = (
                 ActorActressAwardMovieServices.get_actor_actress_by_movie_id(movie_id)
@@ -103,6 +112,7 @@ class ActorActressAwardMovieController:
 
     @staticmethod
     def get_all_actors_actresses_with_all_awards_all_movies():
+        """Get all actors_actresses with all awards and all movies"""
         try:
             actor_actress_award_movie = (
                 ActorActressAwardMovieServices.get_all_actors_actresses_with_all_awards_all_movies()
@@ -118,6 +128,7 @@ class ActorActressAwardMovieController:
 
     @staticmethod
     def get_top_five_most_awarded_movie_actors_actresses():
+        """Get top five most awarded movie actors actresses"""
         try:
             actor_actress_award_movie = (
                 ActorActressAwardMovieServices.get_top_five_most_awarded_movie_actors_actresses()
@@ -128,6 +139,7 @@ class ActorActressAwardMovieController:
 
     @staticmethod
     def delete_actor_actress_award_movie_by_id(actor_actress_award_movie_id: str):
+        """Delete a pair actor_actress_award_movie by id"""
         try:
             ActorActressAwardMovieServices.delete_actor_actress_award_movie_by_id(
                 actor_actress_award_movie_id

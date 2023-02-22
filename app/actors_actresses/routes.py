@@ -1,3 +1,5 @@
+""" Routes module """
+
 from fastapi import APIRouter, Depends
 
 from app.actors_actresses.controller import (
@@ -34,11 +36,10 @@ actor_actress_award_tv_show_router = APIRouter(
 )
 
 
-# superuser
 @actor_actress_router.post(
     "/add-new-actor-actress",
     response_model=ActorActressSchema,
-    # dependencies=[Depends(JWTBearer("super_user"))],
+    dependencies=[Depends(JWTBearer("super_user"))],
 )
 def create_actor_actress(actor_actress: ActorActressSchemaIn):
     return ActorActressController.create_actor_actress(
@@ -76,7 +77,6 @@ def get_all_actors_actresses():
     return ActorActressController.get_all_actors_actresses()
 
 
-# superuser
 @actor_actress_router.delete("/", dependencies=[Depends(JWTBearer("super_user"))])
 def delete_actor_actress_by_id(actor_actress_id: str):
     return ActorActressController.delete_actor_actress_by_id(actor_actress_id)
@@ -111,11 +111,10 @@ def update_actor_actress_about_section(
     )
 
 
-# superuser
 @actor_actress_award_movie_router.post(
     "/add-new-actor-actress-award-movie",
     response_model=ActorActressAwardMovieSchema,
-    # dependencies=[Depends(JWTBearer("super_user"))],
+    dependencies=[Depends(JWTBearer("super_user"))],
 )
 def create_actor_actress_award_movie(
     actor_actress_award_movie: ActorActressAwardMovieSchemaIn,
@@ -178,7 +177,7 @@ def get_top_five_most_awarded_movie_actors_actresses():
 
 
 @actor_actress_award_movie_router.delete(
-    "/",  # dependencies=[Depends(JWTBearer("super_user"))]
+    "/", dependencies=[Depends(JWTBearer("super_user"))]
 )
 def delete_actor_actress_award_movie_by_id(actor_actress_award_movie_id: str):
     return ActorActressAwardMovieController.delete_actor_actress_award_movie_by_id(
@@ -186,11 +185,10 @@ def delete_actor_actress_award_movie_by_id(actor_actress_award_movie_id: str):
     )
 
 
-# superuser
 @actor_actress_award_tv_show_router.post(
     "/add-new-actor-actress-award-tv-show",
     response_model=ActorActressAwardTVShowSchema,
-    # dependencies=[Depends(JWTBearer("super_user"))],
+    dependencies=[Depends(JWTBearer("super_user"))],
 )
 def create_actor_actress_award_tv_show(
     actor_actress_award_tv_show: ActorActressAwardTVShowSchemaIn,
@@ -253,7 +251,7 @@ def get_top_five_most_awarded_tv_show_actors_actresses():
 
 
 @actor_actress_award_tv_show_router.delete(
-    "/",  # dependencies=[Depends(JWTBearer("super_user"))]
+    "/", dependencies=[Depends(JWTBearer("super_user"))]
 )
 def delete_actor_actress_award_tv_show_by_id(actor_actress_award_tv_show_id: str):
     return ActorActressAwardTvShowController.delete_actor_actress_award_tv_show_by_id(

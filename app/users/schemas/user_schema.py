@@ -1,7 +1,11 @@
+""" Award Schema module """
+
 from pydantic import UUID4, BaseModel, EmailStr
 
 
 class UserSchema(BaseModel):
+    """User Schema for output"""
+
     id: UUID4
     name: str
     surname: str
@@ -15,6 +19,8 @@ class UserSchema(BaseModel):
 
 
 class UserSchemaIn(BaseModel):
+    """User Schema for input"""
+
     name: str
     surname: str
     email: EmailStr
@@ -25,6 +31,8 @@ class UserSchemaIn(BaseModel):
 
 
 class UserSchemaLogIn(BaseModel):
+    """User Schema for Log In"""
+
     email: EmailStr
     password: str
 
@@ -33,6 +41,8 @@ class UserSchemaLogIn(BaseModel):
 
 
 class UserSchemaUpdateName(BaseModel):
+    """User update Schema for Name"""
+
     name: str
 
     class Config:
@@ -40,6 +50,8 @@ class UserSchemaUpdateName(BaseModel):
 
 
 class UserSchemaUpdateSurname(BaseModel):
+    """User update Schema for Surname"""
+
     surname: str
 
     class Config:
@@ -47,6 +59,8 @@ class UserSchemaUpdateSurname(BaseModel):
 
 
 class UserSchemaUpdateActivity(BaseModel):
+    """User update Schema for Activity"""
+
     is_active: bool
 
     class Config:

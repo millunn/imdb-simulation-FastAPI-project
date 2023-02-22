@@ -1,3 +1,4 @@
+""" TVShowAward Services module """
 from sqlalchemy.exc import IntegrityError
 
 from app.awards.exceptions import AwardNotFoundException
@@ -8,8 +9,11 @@ from app.tv_shows_and_series.repository import TVShowAwardRepository, TVShowRepo
 
 
 class TVShowAwardServices:
+    """TVShowAward model services"""
+
     @staticmethod
     def create_tv_show_award(tv_show_id, award_id):
+        """Create new tv_show_award"""
         try:
             with SessionLocal() as db:
                 tv_show_repository = TVShowRepository(db)
@@ -37,6 +41,7 @@ class TVShowAwardServices:
 
     @staticmethod
     def get_tv_show_by_award_id(award_id: str):
+        """Get tv_show by award_id"""
         try:
             with SessionLocal() as db:
                 tv_show_award_repository = TVShowAwardRepository(db)
@@ -46,6 +51,7 @@ class TVShowAwardServices:
 
     @staticmethod
     def get_award_by_tv_show_id(tv_show_id: str):
+        """Get award by tv_show_id"""
         try:
             with SessionLocal() as db:
                 award_tv_show_repository = TVShowAwardRepository(db)
@@ -55,6 +61,7 @@ class TVShowAwardServices:
 
     @staticmethod
     def get_all_tv_shows_with_all_awards():
+        """Get all tv_shows with all awards"""
         try:
             with SessionLocal() as db:
                 tv_show_award_repository = TVShowAwardRepository(db)
@@ -64,6 +71,7 @@ class TVShowAwardServices:
 
     @staticmethod
     def get_top_five_most_awarded_tv_shows():
+        """Get top five most awarded tv_shows"""
         try:
             with SessionLocal() as db:
                 tv_show_award_repository = TVShowAwardRepository(db)
@@ -73,6 +81,7 @@ class TVShowAwardServices:
 
     @staticmethod
     def delete_tv_show_award_by_id(tv_show_award_id: str):
+        """Delete a pair tv_show_award by id"""
         try:
             with SessionLocal() as db:
                 tv_show_award_repository = TVShowAwardRepository(db)

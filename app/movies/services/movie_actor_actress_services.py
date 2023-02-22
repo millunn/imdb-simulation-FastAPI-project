@@ -1,4 +1,4 @@
-import uuid
+""" Movie-ActorActress Services module """
 
 from sqlalchemy.exc import IntegrityError
 
@@ -10,8 +10,11 @@ from app.movies.repository import MovieActorActressRepository, MovieRepository
 
 
 class MovieActorActressServices:
+    """Movie-ActorActress model services"""
+
     @staticmethod
     def create_movie_actor_actress(movie_id, actor_actress_id):
+        """Create new movie_actor_actress pair"""
         try:
             with SessionLocal() as db:
                 movie_repository = MovieRepository(db)
@@ -41,6 +44,7 @@ class MovieActorActressServices:
 
     @staticmethod
     def get_movie_by_actor_actress_id(actor_actress_id: str):
+        """Get movie by actor_actress_id"""
         try:
             with SessionLocal() as db:
                 award_actor_actress_repository = MovieActorActressRepository(db)
@@ -52,6 +56,7 @@ class MovieActorActressServices:
 
     @staticmethod
     def get_actor_actress_by_movie_id(movie_id: str):
+        """Get actor_actress by movie_id"""
         try:
             with SessionLocal() as db:
                 actor_actress_movie_repository = MovieActorActressRepository(db)
@@ -63,6 +68,7 @@ class MovieActorActressServices:
 
     @staticmethod
     def get_all_movies_with_all_actors_actresses():
+        """Get all movies with all actors_actresses"""
         try:
             with SessionLocal() as db:
                 movie_actor_actress_repository = MovieActorActressRepository(db)
@@ -74,6 +80,7 @@ class MovieActorActressServices:
 
     @staticmethod
     def get_actors_by_movie_id(movie_id: str):
+        """Get actors by movie_id"""
         try:
             with SessionLocal() as db:
                 actor_movie_repository = MovieActorActressRepository(db)
@@ -83,6 +90,7 @@ class MovieActorActressServices:
 
     @staticmethod
     def get_actresses_by_movie_id(movie_id: str):
+        """Get actresses by movie_id"""
         try:
             with SessionLocal() as db:
                 actress_movie_repository = MovieActorActressRepository(db)
@@ -92,6 +100,7 @@ class MovieActorActressServices:
 
     @staticmethod
     def delete_movie_actor_actress_by_id(movie_actor_actress_id: str):
+        """Delete a pair actor_actress_movie by id"""
         try:
             with SessionLocal() as db:
                 movie_actor_actress_repository = MovieActorActressRepository(db)

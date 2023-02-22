@@ -1,3 +1,5 @@
+""" Movie-ActorActress Controller module """
+
 from fastapi import HTTPException, Response
 from sqlalchemy.exc import IntegrityError
 
@@ -10,8 +12,11 @@ from app.movies.services import MovieActorActressServices
 
 
 class MovieActorActressController:
+    """Movie-ActorActress model controller"""
+
     @staticmethod
     def create_movie_actor_actress(movie_id, actor_actress_id):
+        """Create new movie_actor_actress pair"""
         try:
             movie_actor_actress_award = (
                 MovieActorActressServices.create_movie_actor_actress(
@@ -37,6 +42,7 @@ class MovieActorActressController:
 
     @staticmethod
     def get_movie_by_actor_actress_id(actor_actress_id: str):
+        """Get movie by actor_actress_id"""
         try:
             movie = MovieActorActressServices.get_movie_by_actor_actress_id(
                 actor_actress_id
@@ -52,6 +58,7 @@ class MovieActorActressController:
 
     @staticmethod
     def get_actor_actress_by_movie_id(movie_id: str):
+        """Get actor_actress by movie_id"""
         try:
             actor_actress = MovieActorActressServices.get_actor_actress_by_movie_id(
                 movie_id
@@ -67,6 +74,7 @@ class MovieActorActressController:
 
     @staticmethod
     def get_all_movies_with_all_actors_actresses():
+        """Get all movies with all actors_actresses"""
         try:
             movie_actor_actress_repository = (
                 MovieActorActressServices.get_all_movies_with_all_actors_actresses()
@@ -82,6 +90,7 @@ class MovieActorActressController:
 
     @staticmethod
     def get_actors_by_movie_id(movie_id: str):
+        """Get actors by movie_id"""
         try:
             actor_actress = MovieActorActressServices.get_actors_by_movie_id(movie_id)
             return actor_actress
@@ -95,6 +104,7 @@ class MovieActorActressController:
 
     @staticmethod
     def get_actresses_by_movie_id(movie_id: str):
+        """Get actresses by movie_id"""
         try:
             actresses_by_movie_id = MovieActorActressServices.get_actresses_by_movie_id(
                 movie_id
@@ -110,6 +120,7 @@ class MovieActorActressController:
 
     @staticmethod
     def delete_movie_actor_actress_by_id(movie_actor_actress_id: str):
+        """Delete a pair actor_actress_movie by id"""
         try:
             MovieActorActressServices.delete_movie_actor_actress_by_id(
                 movie_actor_actress_id

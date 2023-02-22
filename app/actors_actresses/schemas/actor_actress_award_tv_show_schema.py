@@ -1,3 +1,5 @@
+""" Actor/Actress-Award-TvShow Schema module """
+
 from pydantic import UUID4, BaseModel
 
 from app.actors_actresses.schemas.actor_actress_schema import ActorActressSchema
@@ -6,6 +8,8 @@ from app.tv_shows_and_series.schemas.tv_show_schema import TVShowSchema
 
 
 class ActorActressAwardTVShowSchema(BaseModel):
+    """ActorActressAwardTVShow Schema for input"""
+
     id: UUID4
     actor_actress_id: UUID4
     award_id: UUID4
@@ -16,6 +20,8 @@ class ActorActressAwardTVShowSchema(BaseModel):
 
 
 class ActorActressAwardTVShowSchemaIn(BaseModel):
+    """AwardByActorActress Schema for output"""
+
     actor_actress_id: str
     award_id: str
     tv_show_id: str
@@ -25,6 +31,8 @@ class ActorActressAwardTVShowSchemaIn(BaseModel):
 
 
 class AwardByActorActressSchemaOut(BaseModel):
+    """AwardByTVShow Schema for output"""
+
     award: AwardSchema
     tv_show: TVShowSchema
     actor_actress_id: UUID4
@@ -34,6 +42,8 @@ class AwardByActorActressSchemaOut(BaseModel):
 
 
 class AwardByTVShowSchemaOut(BaseModel):
+    """ActorActressByAward Schema for output"""
+
     actor_actress: ActorActressSchema
     award: AwardSchema
     tv_show_id: UUID4
@@ -43,6 +53,8 @@ class AwardByTVShowSchemaOut(BaseModel):
 
 
 class ActorActressByAwardSchemaOut(BaseModel):
+    """ActorActressByTVShow Schema for output"""
+
     actor_actress: ActorActressSchema
     tv_show: TVShowSchema
     award_id: UUID4
@@ -52,6 +64,8 @@ class ActorActressByAwardSchemaOut(BaseModel):
 
 
 class ActorActressByTVShowSchemaOut(BaseModel):
+    """ActorActressByTVShow Schema for output"""
+
     award: AwardSchema
     actor_actress: ActorActressSchema
     tv_show_id: UUID4
@@ -61,6 +75,8 @@ class ActorActressByTVShowSchemaOut(BaseModel):
 
 
 class MostAwardedTVShowActorsActressesSchema(BaseModel):
+    """MostAwardedTVShowActorsActresses Schema for output"""
+
     actor_actress_id: str
     number_of_awards: int
 

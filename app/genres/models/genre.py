@@ -6,6 +6,8 @@ from app.db import Base
 
 
 class Genre(Base):
+    """Genre model"""
+
     __tablename__ = "genres"
     id = Column(String(50), primary_key=True, default=uuid4, autoincrement=False)
     category = Column(String(50), unique=True, nullable=False)

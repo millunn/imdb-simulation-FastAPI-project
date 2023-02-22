@@ -1,3 +1,5 @@
+""" TvShow-Award Repository module """
+
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 
@@ -11,10 +13,13 @@ from app.tv_shows_and_series.models import TVShowActorActress
 
 
 class TVShowActorActressRepository:
+    """TvShow-Award model repository"""
+
     def __init__(self, db: Session):
         self.db = db
 
     def create_tv_show_actor_actress(self, tv_show_id, actor_actress_id):
+        """Create new tv_show_actor_actress pair"""
         try:
             tv_show_actor_actress = TVShowActorActress(tv_show_id, actor_actress_id)
             self.db.add(tv_show_actor_actress)
@@ -25,6 +30,7 @@ class TVShowActorActressRepository:
             raise e from e
 
     def get_tv_show_by_actor_actress_id(self, actor_actress_id: str):
+        """Get tv_show by actor_actress_id"""
         tv_show_by_actor_actress_id = (
             self.db.query(TVShowActorActress)
             .filter(TVShowActorActress.actor_actress_id == actor_actress_id)
@@ -38,6 +44,7 @@ class TVShowActorActressRepository:
         return tv_show_by_actor_actress_id
 
     def get_actor_actress_by_tv_show_id(self, tv_show_id: str):
+        """Get actor_actress by tv_show_id"""
         actor_actress_by_tv_show_id = (
             self.db.query(TVShowActorActress)
             .filter(TVShowActorActress.tv_show_id == tv_show_id)
@@ -51,6 +58,7 @@ class TVShowActorActressRepository:
         return actor_actress_by_tv_show_id
 
     def get_all_tv_shows_with_all_actors_actresses(self):
+        """Get all tv_shows with all actors_actresses"""
         tv_show_actor_actress = self.db.query(TVShowActorActress).all()
         if (tv_show_actor_actress is None) or (tv_show_actor_actress == []):
             raise ActorActressNotFoundException(
@@ -60,6 +68,7 @@ class TVShowActorActressRepository:
         return tv_show_actor_actress
 
     def get_actors_by_tv_show_id(self, tv_show_id: str):
+        """Get actors by tv_show_id"""
         actors_by_tv_show_id = (
             self.db.query(ActorActress)
             .join(
@@ -79,6 +88,7 @@ class TVShowActorActressRepository:
         return actors_by_tv_show_id
 
     def get_actresses_by_tv_show_id(self, tv_show_id: str):
+        """Get actors by tv_show_id"""
         actresses_by_tv_show_id = (
             self.db.query(ActorActress)
             .join(
@@ -98,6 +108,7 @@ class TVShowActorActressRepository:
         return actresses_by_tv_show_id
 
     def delete_tv_show_actor_actress_by_id(self, tv_show_actor_actress_id: str):
+        """Delete a pair actor_actress_tv_show by id"""
         try:
             tv_show_actor_actress = (
                 self.db.query(TVShowActorActress)

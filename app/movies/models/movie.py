@@ -7,6 +7,8 @@ from app.db.database import Base
 
 
 class Movie(Base):
+    """Movie model"""
+
     __tablename__ = "movies"
     id = Column(String(50), primary_key=True, default=uuid4, autoincrement=False)
     title = Column(String(50), nullable=False)

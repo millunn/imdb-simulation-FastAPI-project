@@ -1,13 +1,14 @@
-from sqlite3 import Date
 from uuid import uuid4
 
-from sqlalchemy import INT, Column, Date, ForeignKey, String, Time
+from sqlalchemy import INT, Column, ForeignKey, String
 from sqlalchemy.orm import relationship
 
 from app.db.database import Base
 
 
 class TVShow(Base):
+    """TVShow model"""
+
     __tablename__ = "tv_shows_and_series"
     id = Column(String(50), primary_key=True, default=uuid4, autoincrement=False)
     title = Column(String(50), unique=True, nullable=False)

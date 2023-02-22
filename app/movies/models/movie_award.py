@@ -6,6 +6,8 @@ from app.db.database import Base
 
 
 class MovieAward(Base):
+    """MovieAward model"""
+
     __tablename__ = "movie_award"
     id = Column(String(50), primary_key=True, default=uuid4, autoincrement=False)
     movie_id = Column(String(50), ForeignKey("movies.id"), nullable=False)

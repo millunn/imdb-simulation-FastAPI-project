@@ -1,4 +1,4 @@
-import uuid
+""" Actor/Actress-Award-Movie Services module """
 
 from sqlalchemy.exc import IntegrityError
 
@@ -15,8 +15,11 @@ from app.movies.repository import MovieRepository
 
 
 class ActorActressAwardMovieServices:
+    """Actor/Actress-Award-Movie model services"""
+
     @staticmethod
     def create_actor_actress_award_movie(actor_actress_id, award_id, movie_id):
+        """Create new actor_actress_award_movie"""
         try:
             with SessionLocal() as db:
                 actor_actress_repository = ActorActressRepository(db)
@@ -57,6 +60,7 @@ class ActorActressAwardMovieServices:
 
     @staticmethod
     def get_award_by_actor_actress_id(actor_actress_id: str):
+        """Get award by actor_actress_id"""
         try:
             with SessionLocal() as db:
                 award_actor_actress_repository = ActorActressAwardMovieRepository(db)
@@ -68,6 +72,7 @@ class ActorActressAwardMovieServices:
 
     @staticmethod
     def get_award_by_movie_id(movie_id: str):
+        """Get award by movie_id"""
         try:
             with SessionLocal() as db:
                 award_movie_repository = ActorActressAwardMovieRepository(db)
@@ -77,6 +82,7 @@ class ActorActressAwardMovieServices:
 
     @staticmethod
     def get_actor_actress_by_award_id(award_id: str):
+        """Get actor_actress by award_id"""
         try:
             with SessionLocal() as db:
                 actor_actress_award_movie_repository = ActorActressAwardMovieRepository(
@@ -92,6 +98,7 @@ class ActorActressAwardMovieServices:
 
     @staticmethod
     def get_actor_actress_by_movie_id(movie_id: str):
+        """Get actor_actress by movie_id"""
         try:
             with SessionLocal() as db:
                 actor_actress_movie_repository = ActorActressAwardMovieRepository(db)
@@ -103,6 +110,7 @@ class ActorActressAwardMovieServices:
 
     @staticmethod
     def get_all_actors_actresses_with_all_awards_all_movies():
+        """Get all actors_actresses with all awards and all movies"""
         try:
             with SessionLocal() as db:
                 actor_actress_award_movie_repository = ActorActressAwardMovieRepository(
@@ -116,6 +124,7 @@ class ActorActressAwardMovieServices:
 
     @staticmethod
     def get_top_five_most_awarded_movie_actors_actresses():
+        """Get top five most awarded movie actors actresses"""
         try:
             with SessionLocal() as db:
                 actor_actress_award_movie_repository = ActorActressAwardMovieRepository(
@@ -129,6 +138,7 @@ class ActorActressAwardMovieServices:
 
     @staticmethod
     def delete_actor_actress_award_movie_by_id(actor_actress_award_movie_id: str):
+        """Delete a pair actor_actress_award_movie by id"""
         try:
             with SessionLocal() as db:
                 actor_actress_award_movie_repository = ActorActressAwardMovieRepository(

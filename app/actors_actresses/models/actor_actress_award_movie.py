@@ -1,3 +1,5 @@
+""" Actor/Actress-Award-Movie Model module """
+
 from uuid import uuid4
 from sqlalchemy import Column, ForeignKeyConstraint, String, UniqueConstraint
 from sqlalchemy.orm import relationship
@@ -6,6 +8,8 @@ from app.db.database import Base
 
 
 class ActorActressAwardMovie(Base):
+    """Actor/Actress-Award-Movie model"""
+
     __tablename__ = "actor_actress_award_movie"
     id = Column(String(50), primary_key=True, default=uuid4, autoincrement=False)
     actor_actress_id = Column(String(50), nullable=False)

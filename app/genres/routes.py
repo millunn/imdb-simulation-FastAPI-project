@@ -10,7 +10,7 @@ genre_router = APIRouter(tags=["genres"], prefix="/api/genres")
 @genre_router.post(
     "/add-new-genre",
     response_model=GenreSchema,
-    # dependencies=[Depends(JWTBearer("super_user"))],
+    dependencies=[Depends(JWTBearer("super_user"))],
 )
 def create_genre(genre: GenreSchemaIn):
     return GenreController.create_genre(genre.category, genre.description)
@@ -19,7 +19,7 @@ def create_genre(genre: GenreSchemaIn):
 @genre_router.get(
     "/id",
     response_model=GenreSchema,
-    # dependencies=[Depends(JWTBearer("super_user"))],
+    dependencies=[Depends(JWTBearer("super_user"))],
 )
 def get_genre_by_id(genre_id: str):
     return GenreController.get_genre_by_id(genre_id)

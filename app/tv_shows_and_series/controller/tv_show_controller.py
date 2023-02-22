@@ -1,3 +1,5 @@
+""" TVShow Controller module """
+
 from fastapi import HTTPException, Response
 from sqlalchemy.exc import IntegrityError
 
@@ -13,6 +15,8 @@ from app.tv_shows_and_series.services import TVShowServices
 
 
 class TVShowController:
+    """TVShow model controller"""
+
     @staticmethod
     def create_tv_show(
         title,
@@ -25,6 +29,7 @@ class TVShowController:
         language_name,
         genre_category,
     ):
+        """Create new tv_show"""
         try:
             tv_show = TVShowServices.create_tv_show(
                 title,
@@ -73,6 +78,7 @@ class TVShowController:
 
     @staticmethod
     def get_tv_show_by_id(tv_show_id: str):
+        """Get tv_show by id"""
         try:
             tv_show = TVShowServices.get_tv_show_by_id(tv_show_id)
             return tv_show
@@ -86,6 +92,7 @@ class TVShowController:
 
     @staticmethod
     def get_tv_show_by_title(title: str):
+        """Get tv_show by title"""
         try:
             tv_show = TVShowServices.get_tv_show_by_title(title)
             return tv_show
@@ -99,6 +106,7 @@ class TVShowController:
 
     @staticmethod
     def get_tv_show_by_language(language: str):
+        """Get tv_show by language"""
         try:
             tv_show = TVShowServices.get_tv_show_by_language(language)
             return tv_show
@@ -112,6 +120,7 @@ class TVShowController:
 
     @staticmethod
     def get_tv_show_by_genre(genre: str):
+        """Get tv_show by genre"""
         try:
             tv_show = TVShowServices.get_tv_show_by_genre(genre)
             return tv_show
@@ -125,6 +134,7 @@ class TVShowController:
 
     @staticmethod
     def get_tv_show_by_release_year(release_year: str):
+        """Get tv_show by release_year"""
         try:
             tv_show = TVShowServices.get_tv_show_by_release_year(release_year)
             return tv_show
@@ -138,6 +148,7 @@ class TVShowController:
 
     @staticmethod
     def get_all_tv_shows():
+        """Get all tv_shows"""
         try:
             tv_shows = TVShowServices.get_all_tv_shows()
             return tv_shows
@@ -151,6 +162,7 @@ class TVShowController:
 
     @staticmethod
     def delete_tv_show_by_id(tv_show_id: str):
+        """Delete tv_show by id"""
         try:
             TVShowServices.delete_tv_show_by_id(tv_show_id)
             return Response(
@@ -166,6 +178,7 @@ class TVShowController:
 
     @staticmethod
     def order_tv_show_by_title_decs():
+        """Order tv_show by title in a decsending order"""
         try:
             order_by_title_desc = TVShowServices.order_tv_show_by_title_decs()
             return order_by_title_desc
@@ -179,6 +192,7 @@ class TVShowController:
 
     @staticmethod
     def order_tv_show_by_title_asc():
+        """Order tv_show by title in a acsending order"""
         try:
             order_by_title_asc = TVShowServices.order_tv_show_by_title_asc()
             return order_by_title_asc
@@ -192,6 +206,7 @@ class TVShowController:
 
     @staticmethod
     def get_top_five_tv_shows_by_ratings():
+        """Get top five tv_shows by ratings"""
         try:
             tv_shows = TVShowServices.get_top_five_tv_shows_by_ratings()
             return tv_shows
@@ -200,6 +215,7 @@ class TVShowController:
 
     @staticmethod
     def get_five_most_rated_tv_shows():
+        """Get five most rated tv_shows"""
         try:
             tv_shows = TVShowServices.get_five_most_rated_tv_shows()
             return tv_shows
@@ -208,6 +224,7 @@ class TVShowController:
 
     @staticmethod
     def get_genre_statistics():
+        """Get genre statistics"""
         try:
             tv_shows = TVShowServices.get_genre_statistics()
             return tv_shows
@@ -216,6 +233,7 @@ class TVShowController:
 
     @staticmethod
     def get_language_statistics():
+        """Get language statistics"""
         try:
             tv_shows = TVShowServices.get_language_statistics()
             return tv_shows

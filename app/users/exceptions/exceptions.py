@@ -1,4 +1,4 @@
-""" Award Exceptions module """
+""" User Exceptions module """
 
 
 class UserInvalidPasswordException(Exception):

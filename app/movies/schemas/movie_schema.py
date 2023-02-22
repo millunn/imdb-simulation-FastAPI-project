@@ -1,7 +1,11 @@
+""" Movie Schema module """
+
 from pydantic import UUID4, BaseModel, PositiveInt
 
 
 class MovieSchema(BaseModel):
+    """Movie Schema for output"""
+
     id: UUID4
     title: str
     plot: str
@@ -19,6 +23,8 @@ class MovieSchema(BaseModel):
 
 
 class MovieSchemaIn(BaseModel):
+    """Movie Schema for input"""
+
     title: str
     plot: str
     duration: PositiveInt
@@ -35,6 +41,8 @@ class MovieSchemaIn(BaseModel):
 
 
 class MovieGenreStatisticsSchema(BaseModel):
+    """Movie genre statistics Schema for output"""
+
     genre_category: str
     category_count: int
 
@@ -43,6 +51,8 @@ class MovieGenreStatisticsSchema(BaseModel):
 
 
 class MovieLanguageStatisticsSchema(BaseModel):
+    """Movie language statistics Schema for output"""
+
     language_name: str
     language_count: int
 
@@ -51,6 +61,8 @@ class MovieLanguageStatisticsSchema(BaseModel):
 
 
 class MovieDurationPerYearsSchema(BaseModel):
+    """Movie duration breach Schema for output"""
+
     release_year: str
     average_duration: int
 

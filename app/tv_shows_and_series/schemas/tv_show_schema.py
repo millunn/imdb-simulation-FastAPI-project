@@ -1,7 +1,11 @@
+""" TVShow Schema module """
+
 from pydantic import UUID4, BaseModel, PositiveInt
 
 
 class TVShowSchema(BaseModel):
+    """TVShow Schema for output"""
+
     id: UUID4
     title: str
     plot: str
@@ -18,6 +22,8 @@ class TVShowSchema(BaseModel):
 
 
 class TVShowSchemaSchemaIn(BaseModel):
+    """TVShow Schema for input"""
+
     title: str
     plot: str
     release_year: str
@@ -33,6 +39,8 @@ class TVShowSchemaSchemaIn(BaseModel):
 
 
 class TVShowGenreStatisticsSchema(BaseModel):
+    """TVShow genre statistics Schema for output"""
+
     genre_category: str
     category_count: int
 
@@ -41,6 +49,8 @@ class TVShowGenreStatisticsSchema(BaseModel):
 
 
 class TVShowLanguageStatisticsSchema(BaseModel):
+    """TVShow language statistics Schema for output"""
+
     language_name: str
     language_count: int
 

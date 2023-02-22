@@ -1,7 +1,11 @@
+""" MovieRatingAndReview Schema module """
+
 from pydantic import UUID4, BaseModel
 
 
 class MovieRatingAndReviewSchema(BaseModel):
+    """MovieRatingAndReview Schema for output"""
+
     id: UUID4
     grade: int
     comment: str
@@ -14,6 +18,8 @@ class MovieRatingAndReviewSchema(BaseModel):
 
 
 class MovieRatingAndReviewSchemaIn(BaseModel):
+    """MovieRatingAndReview Schema for input"""
+
     grade: int
     comment: str
     movie_id: str
@@ -24,6 +30,8 @@ class MovieRatingAndReviewSchemaIn(BaseModel):
 
 
 class MovieRatingAndReviewBySchemaOut(BaseModel):
+    """MovieRatingAndReview by attribute Schema for output"""
+
     grade: int
     comment: str
     comment_date: str
@@ -34,6 +42,8 @@ class MovieRatingAndReviewBySchemaOut(BaseModel):
 
 
 class MovieRatingAndReviewSchemaUpdateComment(BaseModel):
+    """MovieRatingAndReview Schema for update"""
+
     comment: str
 
     class Config:
@@ -41,6 +51,8 @@ class MovieRatingAndReviewSchemaUpdateComment(BaseModel):
 
 
 class TopFiveMovieSchema(BaseModel):
+    """Top five movies Schema for output"""
+
     movie_id: str
     average_rating: float
 
@@ -49,6 +61,8 @@ class TopFiveMovieSchema(BaseModel):
 
 
 class MostRatedMoviesSchema(BaseModel):
+    """Most rated movies Schema for output"""
+
     movie_id: str
     number_of_ratings: int
 

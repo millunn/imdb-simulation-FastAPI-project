@@ -1,3 +1,5 @@
+""" MovieAward Schema module """
+
 from pydantic import UUID4, BaseModel
 
 from app.awards.schemas.award_schema import AwardSchema
@@ -5,6 +7,8 @@ from app.movies.schemas.movie_schema import MovieSchema
 
 
 class MovieAwardSchema(BaseModel):
+    """MovieAward Schema for output"""
+
     id: UUID4
     movie_id: UUID4
     award_id: UUID4
@@ -14,6 +18,8 @@ class MovieAwardSchema(BaseModel):
 
 
 class MovieAwardSchemaIn(BaseModel):
+    """MovieAward Schema for input"""
+
     movie_id: str
     award_id: str
 
@@ -22,6 +28,8 @@ class MovieAwardSchemaIn(BaseModel):
 
 
 class AwardByMovieSchemaOut(BaseModel):
+    """Award by Movie Schema for output"""
+
     award: AwardSchema
     movie_id: UUID4
 
@@ -30,6 +38,8 @@ class AwardByMovieSchemaOut(BaseModel):
 
 
 class MovieByAwardSchemaOut(BaseModel):
+    """Movie by Award Schema for output"""
+
     movie: MovieSchema
     award_id: UUID4
 
@@ -38,6 +48,8 @@ class MovieByAwardSchemaOut(BaseModel):
 
 
 class MostAwardedMoviesSchema(BaseModel):
+    """Most awarded Movies Schema for output"""
+
     movie_id: str
     number_of_awards: int
 

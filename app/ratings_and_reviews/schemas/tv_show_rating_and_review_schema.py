@@ -1,7 +1,11 @@
+""" TVShowRatingAndReview Schema module """
+
 from pydantic import UUID4, BaseModel
 
 
 class TVShowRatingAndReviewSchema(BaseModel):
+    """TVShowRatingAndReview Schema for output"""
+
     id: UUID4
     grade: int
     comment: str
@@ -14,6 +18,8 @@ class TVShowRatingAndReviewSchema(BaseModel):
 
 
 class TVShowRatingAndReviewSchemaIn(BaseModel):
+    """TVShowRatingAndReview Schema for input"""
+
     grade: int
     comment: str
     tv_show_id: str
@@ -24,6 +30,8 @@ class TVShowRatingAndReviewSchemaIn(BaseModel):
 
 
 class TVShowRatingAndReviewBySchemaOut(BaseModel):
+    """TVShowRatingAndReview by attribute Schema for output"""
+
     grade: int
     comment: str
     comment_date: str
@@ -34,6 +42,8 @@ class TVShowRatingAndReviewBySchemaOut(BaseModel):
 
 
 class TVShowRatingAndReviewSchemaUpdateComment(BaseModel):
+    """TVShowRatingAndReview Schema for update"""
+
     comment: str
 
     class Config:
@@ -41,6 +51,8 @@ class TVShowRatingAndReviewSchemaUpdateComment(BaseModel):
 
 
 class TopFiveTVShowSchema(BaseModel):
+    """Top five tv shows Schema for output"""
+
     tv_show_id: str
     average_rating: float
 
@@ -49,6 +61,8 @@ class TopFiveTVShowSchema(BaseModel):
 
 
 class MostRatedTVShowSchema(BaseModel):
+    """Most rated tv shows Schema for output"""
+
     tv_show_id: str
     number_of_ratings: int
 

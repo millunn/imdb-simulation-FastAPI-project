@@ -79,3 +79,8 @@ to discuss what you would like to change.
 ## License
 
 [GNU](https://www.gnu.org/licenses/gpl-3.0.en.html)
+
+## Important Notice
+
+superuser email - jdoe@example.com
+superuser password - 123
